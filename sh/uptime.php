@@ -1,0 +1,1 @@
+<?php echo (int) (shell_exec('cat /proc/uptime')/(60*60));
