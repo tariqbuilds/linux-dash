@@ -16,41 +16,12 @@
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <style>
-        .widget-content{ padding:0px; }
-        .dataTables_length{display:none;}
-        .dataTable{ margin-bottom:0px;}
-       .pulse{
-           background:#19bc9c;
-           border:1px solid #19bc9c;
-           color:white;
-       }
-       .pulse-border{
-           border-color:#19bc9c;
-       }
-       .navbar{
-           position:fixed;
-           top:0;
-           z-index:9999999;
-           width:100%;
-       }
-       .subnavbar{
-           position:fixed;
-           top:50px;
-           z-index:9999999;
-           width:100%;
-       }
-       .main{
-           margin-top:130px;
-       }
-       .dataTables_paginate{ width:100%; text-align:center; margin-top:10px; margin-left:-30px;}
-        .dataTables_paginate a{ margin-left:8px;}
-        .dataTables_paginate a:hover{ pointer:pointer;}
-        .navbar-fixed-top{  margin-left:0px;}
-    </style>
-    
 </head>
 <body>
+
+<!-- Github Fork Image-->
+<a href="https://github.com/afaqurk/linux-dash"><img style="position: absolute; top: 0; right: 0; border: 0;z-index:99999999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
 <div class="navbar navbar-fixed-top" style="">
   <div class="navbar-inner">
     <div class="container"> 
@@ -93,10 +64,6 @@
             
             A simple web dashboard to monitor your server.
             
-            <div class="">Data refresh in 
-                <span style="color:#19bc9c" id="page_data_refresh">20</span>...
-                
-            </div>
         </div>
         
      <div class="row">
@@ -186,7 +153,7 @@
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
-                
+                <div class="btn btn-error">Test</div>
               <table id="df_dashboard" class="table table-hover table-condensed table-bordered" >
               </table>
             </div>
@@ -335,7 +302,6 @@
 <script src="js/bootstrap.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
 <script src="js/odometer.js"></script>
-<script src="js/effects.js"></script>
 <script src="js/magic_happens_here.js"></script>
 
 </body>

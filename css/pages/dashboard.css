@@ -321,3 +321,35 @@ margin-bottom: 26px;}
 		width: 48%;
 	}
 }
+
+/* ADDED BY AFAQ */
+.widget-content{ padding:0px; }
+.dataTables_length{display:none;}
+.dataTable{ margin-bottom:0px;}
+.pulse{
+   background:#19bc9c;
+   border:1px solid #19bc9c;
+   color:white;
+}
+.pulse-border{
+   border-color:#19bc9c;
+}
+.navbar{
+   position:fixed;
+   top:0;
+   z-index:9999999;
+   width:100%;
+}
+.subnavbar{
+   position:fixed;
+   top:50px;
+   z-index:9999999;
+   width:100%;
+}
+.main{
+   margin-top:130px;
+}
+.dataTables_paginate{ width:100%; text-align:center; margin-top:10px; margin-left:-30px;}
+.dataTables_paginate a{ margin-left:8px;}
+.dataTables_paginate a:hover{ pointer:pointer;}
+.navbar-fixed-top{  margin-left:0px;}

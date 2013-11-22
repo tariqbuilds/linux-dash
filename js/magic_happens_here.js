@@ -1,7 +1,8 @@
    
     /*******************************
-            Library Functions
+            Abstracted Functions
     *******************************/
+    
     // Gets data from provided url 
     // and updates DOM element (element variable)
     function generate_os_data(url, element){
@@ -47,6 +48,7 @@
     /*******************************
             Data Call Functions
     *******************************/
+    
     function get_ps(){
         
         $.get( "sh/ps.php", function( data ) {
@@ -74,7 +76,6 @@
                 "bAutoWidth": false,
                 "bInfo": false
             }).fadeIn();
-        
         }, "json" );
         
     }
@@ -150,7 +151,7 @@
                 "bAutoWidth": true,
                 "bInfo": false
             }).fadeIn();
-        
+          
         }, "json" );
     }
     
@@ -258,4 +259,5 @@
     
     // Initialize Page function calls
     refresh_all();
-    page_data_refresh_tick();
+    //page_data_refresh_tick();
+    
