@@ -107,6 +107,34 @@
      $('select[name="users_dashboard_length"]').val('5');
     }
     
+    function get_online(){
+        
+        $.get( "sh/online.php", function( data ) {
+          
+            destroy_dataTable('online_dashboard');
+            
+            $('#online_dashboard').dataTable({
+                "aaData": data,
+                "aoColumns": [
+                    { "sTitle":"Who","mDataProp":null },
+                    { "sTitle":"From","mDataProp":null },
+                    { "sTitle":"Login At","mDataProp":null },
+                    { "sTitle":"Idle","mDataProp":null }
+                ],
+                 "aaSorting": [[ 0, "desc" ]],
+                "iDisplayLength": 5,
+                "bPaginate": true,
+                "sPaginationType": "full_numbers",
+                "bFilter": false,
+                "bAutoWidth": false,
+                "bInfo": false
+            }).fadeIn();
+        
+        }, "json" );
+        
+     $('select[name="online_dashboard_length"]').val('5');
+    }
+    
     function get_ram(){
         $.get( "sh/mem.php", function( data ) {
           var ram_total = data[1];
@@ -252,6 +280,7 @@
         get_df();
         get_os_info();
         get_users();
+        get_online();
         get_whereis();
         get_ip();
         get_ispeed();
