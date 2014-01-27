@@ -195,15 +195,15 @@ textarea {
 
     
 .subnavbar .dropdown .dropdown-menu {
-    	text-align: left;
+    text-align: left;
     	
-		-webkit-border-top-left-radius: 0;
-		-webkit-border-top-right-radius: 0;
-		-moz-border-radius-topleft: 0;
-		-moz-border-radius-topright: 0;
-		border-top-left-radius: 0;
-		border-top-right-radius: 0;
-    }
+	-webkit-border-top-left-radius: 0;
+	-webkit-border-top-right-radius: 0;
+	-moz-border-radius-topleft: 0;
+	-moz-border-radius-topright: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
     
     
     
@@ -347,7 +347,6 @@ textarea {
 }
 	
 .widget-header {
-	
 	position: relative;
 	
 	height: 40px;
@@ -370,39 +369,32 @@ textarea {
 	-webkit-background-clip: padding-box;
 }	
 	
-	.widget-header h3 {
-		
-		position: relative;
-		top: 2px;
-		left: 10px;
-		
-		display: inline-block;
-		margin-right: 3em;
-		
-		font-size: 14px;
-		font-weight: 800;
-		color: #525252;
-		line-height: 18px;
-		
-		text-shadow: 1px 1px 2px rgba(255,255,255,.5);
-	}
+.widget-header h3 {
+	position: relative;
+	top: 2px;
+	left: 10px;
 	
-		.widget-header [class^="icon-"], .widget-header [class*=" icon-"] {
+	display: inline-block;
+	margin-right: 3em;
+		
+	font-size: 14px;
+	font-weight: 800;
+	color: #525252;
+	line-height: 18px;
+	
+	text-shadow: 1px 1px 2px rgba(255,255,255,.5);
+}
+	
+.widget-header [class^="icon-"], .widget-header [class*=" icon-"] {
+		
+	display: inline-block;
+	margin-left: 13px;
+	margin-right: -2px;
 			
-			display: inline-block;
-			margin-left: 13px;
-			margin-right: -2px;
-			
-			font-size: 16px;
-			color: #555;
-			vertical-align: middle;
-			
-			
-			
-		}
-
-
-
+	font-size: 16px;
+	color: #555;
+	vertical-align: middle;
+}
 
 .widget-content {
 	padding: 20px 15px 15px;
@@ -1107,22 +1099,22 @@ width: 11px;}
 .accordion-heading a { color:#545454; text-decoration:none; font-weight:bold; }
 
 .btn-facebook-alt i {
-color: #23386a;
+	color: #23386a;
 }
 .btn-twitter-alt i {
-color: #0098d0;
+	color: #0098d0;
 }
 .btn-google-alt i {
-color: #b6362d;
+	color: #b6362d;
 }
 .btn-linkedin-alt i {
-color: #0073b2;
+	color: #0073b2;
 }
 .btn-pinterest-alt i {
-color: #ab171e;
+	color: #ab171e;
 }
 .btn-github-alt i {
-color: #333;
+	color: #333;
 }
 
 .all-icons li { list-style:none;}
