@@ -1130,6 +1130,8 @@ color: #333;
 .ML0 { margin-left:0}
 .MR0 { margin-right:0;}
 
+.paginate_active { text-decoration: underline; }
+
 
 
 /*------------------------------------------------------------------
