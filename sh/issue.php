@@ -1,1 +1,1 @@
-<?php echo shell_exec('cat /etc/issue') ;
+<?php echo shell_exec('lsb_release -ds;uname -r') ;
