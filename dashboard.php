@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(!isset($_SESSION['user']))
+	exit();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

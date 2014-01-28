@@ -1,1 +1,6 @@
-<?php echo shell_exec('cat /etc/issue') ;
+<?php
+    session_start();
+    if(!isset($_SESSION['user']))
+        exit();
+
+    echo shell_exec('cat /etc/issue') ;
