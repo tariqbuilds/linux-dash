@@ -6,10 +6,11 @@
     $x = 0;
     $max = count($result)-1;
     foreach ($result as $a)
-    {    
-        echo json_encode( explode(',',$result[$x]) );
-        echo ($x==$max)?'':',';
-        unset($result[$x],$a);
-        $x++;
+    {   
+        $x++; 
+        $line = explode(',', $a);
+        if($line[1][0] == '#') continue;
+        echo json_encode( $line );
+        echo ($x-1==$max)?'':',';
     }
     echo ']';
