@@ -1,4 +1,7 @@
 <?php 
+    session_start();
+    if(!isset($_SESSION['user']))
+        exit();
 
     exec('df -h|awk \'{print $1","$2","$3","$4","$5","$6}\'',$result);
     

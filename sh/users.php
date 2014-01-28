@@ -1,5 +1,9 @@
 <?php 
 
+    session_start();
+    if(!isset($_SESSION['user']))
+        exit();
+
     exec('awk -F: \'{ if ($3<=499) print "system,"$1","$6; else print "user,"$1","$6; }\' < /etc/passwd',$result);
     
     echo "[";
