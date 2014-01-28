@@ -1,4 +1,9 @@
 <?php
+
+    session_start();
+    if(!isset($_SESSION['user']))
+        exit();
+
     // Execute top command on server to get results of ps aux
     // each row (including header) is in csv format
     exec('ps -aux|awk '."'{print ".'$1","$2","$3","$4","$5","$6","$7","$8","$9","$10","$11'."}'", $result);

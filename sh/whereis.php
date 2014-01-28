@@ -1,5 +1,9 @@
 <?php 
 
+    session_start();
+    if(!isset($_SESSION['user']))
+        exit();
+
     exec('whereis php mysql vim python ruby java apache2 nginx openssl vsftpd make'.
           '|awk \'{ split($1, a, ":");if (length($2)==0) print a[1]",Not Installed"; else print a[1]","$2;}\'',$result);
     
