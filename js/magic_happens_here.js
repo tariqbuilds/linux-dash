@@ -237,39 +237,23 @@
         }, 'json' );
     }
 
-    var ispeedMbps;
-    function get_ispeed_execute(){
-        var imageAddr = "https://www.google.com/images/srpr/logo11w.png" + "?n=" + Math.random()+'5'+Math.random();
-        var startTime, endT
-        var downloadSize = 112230.4;
-        var download = new Image();
-        
-        startTime = (new Date()).getTime();
-        download.src = imageAddr;
-        
-        download.onload = function () {
-            endTime = (new Date()).getTime();
-            var duration = (endTime - startTime) / 1000;
-            var bitsLoaded = downloadSize * 8;
-            var speedBps = (bitsLoaded / duration).toFixed(2);
-            var speedKbps = (speedBps / 1024).toFixed(2);
-            var speedMbps = (speedKbps / 1024).toFixed(0);
-            ispeedMbps = speedMbps;
-            return( speedMbps );
-        }
-
-    }
-    
     function get_ispeed(){
-        setTimeout(function(){ 
-            get_ispeed_execute(); 
-        },700);
-        setTimeout(function(){ 
-            $('#ispeed-rate').text(ispeedMbps);
-        },1000);
-        
-        
+        var rate = $('#ispeed-rate');
+
+        // 0 = MB
+        // 1 = KB
+        var AS = 1;
+
+        $.get("sh/speed.php?as=" + AS, function (data) {
+          rate.text(data);
+        });
+
+        var lead = rate.next(".lead");
+
+        if (AS == 0) lead.text("MB/s");
+        if (AS == 1) lead.text("KB/s");
     }
+
     /* 
         Function that calls all the other functions which refresh
         each individual widget
