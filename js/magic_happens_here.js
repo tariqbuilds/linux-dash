@@ -48,9 +48,9 @@
     //Sort file size data.
     jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         "file-size-pre": function (a) {
-            var x = a.substring(0, a.length - 2);
-            var x_unit = (a.substring(a.length - 2, a.length) == "M" ?
-                1000 : (a.substring(a.length - 2, a.length) == "G" ? 1000000 : 1));
+            var x = a.substring(0, a.length - 1);
+            var x_unit = (a.substring(a.length - 1, a.length) == "M" ?
+                1000 : (a.substring(a.length - 1, a.length) == "G" ? 1000000 : 1));
     
             return parseInt(x * x_unit, 10);
         },
