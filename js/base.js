@@ -1,11 +1,4 @@
 $(function() {
-    $('.subnavbar').find('li').each(function(i) {
-        var mod = i % 3;
-        if (mod === 2) {
-            $(this).addClass('subnavbar-open-right');
-        }
-    });
-
     var pulse_counter;  // Number of times the element should pulsate.
     var pulse_interval; // Interval (in milliseconds) of pulsating.
 

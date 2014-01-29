@@ -15,25 +15,6 @@ function destroy_dataTable(table_id) {
     }
 }
 
-// Function and variables to refresh page data &
-// counter on top right of page.
-var page_refresh_counter = $('#page_data_refresh');
-function page_data_refresh_tick() {
-    if (Number(page_refresh_counter.text()) === 0) {
-        refresh_all();
-        page_refresh_counter.fadeOut().text(20).fadeIn();
-        setTimeout(function() {
-            page_data_refresh_tick();
-        }, 1000);
-        return false;
-    } else {
-        setTimeout(function() {
-            page_refresh_counter.text(Number(page_refresh_counter.text()) - 1);
-            page_data_refresh_tick();
-        }, 1000);
-    }
-}
-
 //DataTables
 //Sort file size data.
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
