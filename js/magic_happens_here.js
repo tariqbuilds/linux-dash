@@ -160,8 +160,8 @@ function get_online() {
 function get_ram() {
     $.get("sh/mem.php", function(data) {
         var ram_total = data[1];
-        var ram_used = parseInt((data[2] / ram_total) * 100);
-        var ram_free = parseInt((data[3] / ram_total) * 100);
+        var ram_used = parseInt((data[2] / ram_total) * 100, 10);
+        var ram_free = parseInt((data[3] / ram_total) * 100, 10);
 
         $('#ram-total').text(ram_total);
         $('#ram-used').text(data[2]);
