@@ -5,6 +5,8 @@
     
     exec('curl http://ipecho.net/plain; echo',$result2);
     
+    header('Content-Type: application/json; charset=UTF-8');
+
     echo '[[','"external ip","',$result2[0],'"]';
     $x = 0;
     $max = count($result)-1;
@@ -16,4 +18,3 @@
         $x++;
     }
     echo ']';
-    //echo json_encode($r);

@@ -17,6 +17,8 @@
     
     */
     
+    header('Content-Type: application/json; charset=UTF-8');
+
     $final = '[';
     
     // Extract the first row of results
@@ -56,6 +58,4 @@
     
     $final .= ']';  
     
-    echo($final);  
-  
-  
+    echo($final); 

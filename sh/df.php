@@ -1,7 +1,8 @@
 <?php 
 
     exec('df -h|awk \'{print $1","$2","$3","$4","$5","$6}\'',$result);
-    
+    header('Content-Type: application/json; charset=UTF-8');
+
     echo "[";
     $x = 0;
     $max = count($result)-1;
