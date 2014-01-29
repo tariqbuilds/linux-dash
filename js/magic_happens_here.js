@@ -19,7 +19,7 @@ function destroy_dataTable(table_id) {
 // counter on top right of page.
 var page_refresh_counter = $('#page_data_refresh');
 function page_data_refresh_tick() {
-    if (Number(page_refresh_counter.text()) == 0) {
+    if (Number(page_refresh_counter.text()) === 0) {
         refresh_all();
         page_refresh_counter.fadeOut().text(20).fadeIn();
         setTimeout(function() {
@@ -39,8 +39,8 @@ function page_data_refresh_tick() {
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
     "file-size-pre": function(a) {
         var x = a.substring(0, a.length - 1);
-        var x_unit = (a.substring(a.length - 1, a.length) == "M" ?
-                      1000 : (a.substring(a.length - 1, a.length) == "G" ?
+        var x_unit = (a.substring(a.length - 1, a.length) === "M" ?
+                      1000 : (a.substring(a.length - 1, a.length) === "G" ?
                               1000000 : 1));
 
         return parseInt(x * x_unit, 10);
@@ -59,7 +59,7 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 //Sort numeric data which has a percent sign with it.
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
     "percent-pre": function(a) {
-        var x = (a == "-") ? 0 : a.replace(/%/, "");
+        var x = (a === "-") ? 0 : a.replace(/%/, "");
         return parseFloat(x);
     },
 
@@ -258,9 +258,7 @@ function get_ispeed() {
     });
 
     var lead = rate.next(".lead");
-
-    if (AS == 0) lead.text("MB/s");
-    if (AS == 1) lead.text("KB/s");
+    lead.text(AS ? "KB/s" : "MB/s");
 }
 
 // Function that calls all the other functions which refresh
