@@ -185,31 +185,27 @@ Bootstrap Admin Template by EGrappler.com
 	text-align: center; 
 }
 
-	.action-table .td-actions .btn { 
-		margin-right: .5em;		
-	}
+.action-table .td-actions .btn { 
+	margin-right: .5em;		
+}
 	
-	.action-table .td-actions .btn:last-child { 
-		margin-rigth: 0; 		
-	}
+.action-table .td-actions .btn:last-child { 
+	margin-rigth: 0; 		
+}
 	
 	
 	
-#big_stats 
-{ 
+#big_stats  {
 	width: 100%; 
 	display: table;
 	margin-top: 1.5em;
-	
-	
 }
 
 .big-stats-container .widget-content {
 	border:0;
 }
 
-#big_stats .stat
-{
+#big_stats .stat {
 	width: 35%;
 	height: 90px;
 	text-align: center;
@@ -221,13 +217,15 @@ Bootstrap Admin Template by EGrappler.com
 	border-left: 1px solid #FFF;
 }
 
-#big_stats  i { font-size:20px; display:block; line-height: 30px; color:#b2afaa;}
-#big_stats .stat i {color:#19bc9c;}
+#big_stats  i { font-size:20px; display:block; line-height: 30px; color:#b2afaa; }
+#big_stats .stat i { color:#19bc9c; }
 
-h6.bigstats{margin: 20px;
-border-bottom: 1px solid #eee;
-padding-bottom: 20px;
-margin-bottom: 26px;}
+h6.bigstats {
+	margin: 20px;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 20px;
+	margin-bottom: 26px;
+}
 
 #big_stats .stat:first-child {
 	border-left: none;
@@ -239,16 +237,14 @@ margin-bottom: 26px;}
 	width:35%;
 }
 
-#big_stats .stat h4
-{
+#big_stats .stat h4 {
 	font-size: 11px;
 	font-weight: bold;
 	color: #777;
 	margin-bottom: 1.5em;
 }
 
-#big_stats .stat .value
-{
+#big_stats .stat .value {
 	font-size: 20px;
 	font-weight: bold;
 	color: #545454;
@@ -323,30 +319,35 @@ margin-bottom: 26px;}
 }
 
 /* ADDED BY AFAQ */
-.widget-content{ padding:0px; }
-.dataTables_length{display:none;}
-.dataTable{ margin-bottom:0px;}
-.pulse{
+.widget-content { padding:0px; }
+.dataTables_length { display:none; }
+.dataTable { margin-bottom:0px; }
+
+.pulse {
    background:#19bc9c;
    border:1px solid #19bc9c;
    color:white;
 }
-.pulse-border{
+
+.pulse-border {
    border-color:#19bc9c;
 }
-.navbar{
+
+.navbar {
    position:fixed;
    top:0;
    z-index:9999999;
    width:100%;
 }
-.subnavbar{
+
+.subnavbar {
    position:fixed;
    top:50px;
    z-index:9999999;
    width:100%;
 }
-.main{
+
+.main {
    margin-top:130px;
 }
 .dataTables_paginate{ width:100%; text-align:center; margin-top:10px; margin-left:-30px;}
