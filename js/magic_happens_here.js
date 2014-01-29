@@ -8,7 +8,7 @@
     function generate_os_data(url, element){
         $.get( url, function( data ) {
           $(element).text(data);
-        } );
+        }, "json" );
     }
     
     // If dataTable with proved ID (table_id)
