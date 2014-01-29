@@ -353,3 +353,4 @@ margin-bottom: 26px;}
 .dataTables_paginate a{ margin-left:8px;}
 .dataTables_paginate a:hover{ pointer:pointer;}
 .navbar-fixed-top{  margin-left:0px;}
+.widget-search{display: inline-block; vertical-align: middle; margin: 0 6px; width: 200px;}

@@ -54,8 +54,9 @@
         $.get( "sh/ps.php", function( data ) {
            
         	destroy_dataTable('ps_dashboard');
+			$('#filter-ps').val('').off('keyup');
         	
-            $('#ps_dashboard').dataTable({
+            var psTable = $('#ps_dashboard').dataTable({
                 "aaData": data,
                 "aoColumns": [
                     { "sTitle":"USER","mDataProp":null },
@@ -72,10 +73,15 @@
                 ],
                 "bPaginate": true,
                 "sPaginationType": "full_numbers",
-                "bFilter": false,
+                "bFilter": true,
+                "sDom": "lrtip",
                 "bAutoWidth": false,
                 "bInfo": false
             }).fadeIn();
+			
+			$('#filter-ps').on('keyup',function(){
+                psTable.fnFilter(this.value);
+            });
         }, "json" );
         
     }
