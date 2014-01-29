@@ -1,44 +1,30 @@
-$(function() {
-    var pulse_counter;  // Number of times the element should pulsate.
-    var pulse_interval; // Interval (in milliseconds) of pulsating.
-
-    function pulsate_element(element) {
-        while (pulse_counter > 0) {
-            pulse_counter--;
-            setTimeout(function() {
-                element.parent().toggleClass('pulse');
-            }, pulse_interval * pulse_counter);
-            setTimeout(function() {
-                element.parent().parent().toggleClass('pulse-boder');
-            }, pulse_interval * pulse_counter);
-            pulsate_element(element);
-        }
-    }
-
+$(document).ready(function() {
     // Smooth scrolling for links.
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') ===
-                                          this.pathname.replace(/^\//, '')
-                || location.hostname === this.hostname) {
+    $('.mainnav').on('click', '.js-smoothscroll', function(event) {
+        event.preventDefault();
+        var target = $(this.hash).parent();
+        pulseElement(target, 8, 400);
 
-                var target = $(this.hash);
-
-                // Number of times the element should pulsate.
-                pulse_counter = 8;
-                // Interval (in milliseconds) of pulsating.
-                pulse_interval = 400;
-                pulsate_element(target);
-
-                target = target.length ? target :
-                    $('[name=' + this.hash.slice(1) +']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.parent().offset().top - 130
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
+        $('html').animate({
+            scrollTop: target.offset().top - 130
+        }, 1000);
     });
 });
+
+/**
+ * Applies a pulse effect to the specified element.
+ *
+ * @param {HTMLElement} element The element to apply the effect to.
+ * @param {Number} times How many pulses.
+ * @param {Number} interval Milliseconds between pulses.
+ */
+function pulseElement(element, times, interval) {
+    var parent = element.parent();
+    var f = function() {
+        element.toggleClass('pulse');
+        parent.toggleClass('pulse-border');
+    };
+    for (; times > 0; --times) {
+        setTimeout(f, times * interval);
+    }
+}
