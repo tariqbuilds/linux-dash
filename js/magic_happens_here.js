@@ -193,7 +193,7 @@
         $.get( 'sh/ip.php', function( data ) {
             
             destroy_dataTable('ip_dashboard');
-            
+
             $('#ip_dashboard').dataTable({
                 "aaData": data,
                 "aoColumns": [
