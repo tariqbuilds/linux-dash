@@ -57,7 +57,9 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
   Data Call Functions
  *******************************/
 
-function get_ps() {
+var dashboard = {};
+
+dashboard.getPs = function() {
     $.get("sh/ps.php", function(data) {
         destroy_dataTable("ps_dashboard");
         $("#filter-ps").val("").off("keyup");
@@ -91,7 +93,7 @@ function get_ps() {
     }, "json");
 }
 
-function get_users() {
+dashboard.getUsers = function() {
     $.get("sh/users.php", function(data) {
         destroy_dataTable("users_dashboard");
 
@@ -114,7 +116,7 @@ function get_users() {
     $("select[name='users_dashboard_length']").val("5");
 }
 
-function get_online() {
+dashboard.getOnline = function() {
     $.get("sh/online.php", function(data) {
         destroy_dataTable("online_dashboard");
 
@@ -138,7 +140,7 @@ function get_online() {
     $("select[name='online_dashboard_length']").val("5");
 }
 
-function get_ram() {
+dashboard.getRam = function() {
     $.get("sh/mem.php", function(data) {
         var ram_total = data[1];
         var ram_used = parseInt((data[2] / ram_total) * 100, 10);
@@ -153,7 +155,7 @@ function get_ram() {
     }, "json");
 }
 
-function get_df() {
+dashboard.getDf = function() {
     $.get("sh/df.php", function(data) {
         var table = $("#df_dashboard");
         var ex = document.getElementById("df_dashboard");
@@ -180,7 +182,7 @@ function get_df() {
     }, "json");
 }
 
-function get_whereis() {
+dashboard.getWhereIs = function() {
     $.get("sh/whereis.php", function(data) {
         var table = $("#whereis_dashboard");
         var ex = document.getElementById("whereis_dashboard");
@@ -204,13 +206,13 @@ function get_whereis() {
     }, "json");
 }
 
-function get_os_info() {
+dashboard.getOs = function() {
     generate_os_data("sh/issue.php", "#os-info");
     generate_os_data("sh/hostname.php", "#os-hostname");
     generate_os_data("sh/uptime.php", "#os-uptime");
 }
 
-function get_ip() {
+dashboard.getIp = function() {
     $.get("sh/ip.php", function(data) {
         destroy_dataTable("ip_dashboard");
         $("#ip_dashboard").dataTable({
@@ -227,7 +229,7 @@ function get_ip() {
     }, "json");
 }
 
-function get_ispeed() {
+dashboard.getIspeed = function() {
     var rate = $("#ispeed-rate");
 
     // 0 = MB
@@ -244,17 +246,27 @@ function get_ispeed() {
 
 // Function that calls all the other functions which refresh
 // each individual widget.
-function refresh_all() {
-    get_ram();
-    get_ps();
-    get_df();
-    get_os_info();
-    get_users();
-    get_online();
-    get_whereis();
-    get_ip();
-    get_ispeed();
+dashboard.getAll = function() {
+    dashboard.getRam();
+    dashboard.getPs();
+    dashboard.getDf();
+    dashboard.getOs();
+    dashboard.getUsers();
+    dashboard.getOnline();
+    dashboard.getWhereIs();
+    dashboard.getIp();
+    dashboard.getIspeed();
 }
 
-// Initialize Page function calls
-refresh_all();
+dashboard.fnMap = {
+    all: dashboard.getAll,
+    ram: dashboard.getRam,
+    ps: dashboard.getPs,
+    df: dashboard.getDf,
+    os: dashboard.getOs,
+    users: dashboard.getUsers,
+    online: dashboard.getOnline,
+    whereis: dashboard.getWhereIs,
+    ip: dashboard.getIp,
+    ispeed: dashboard.getIspeed,
+};

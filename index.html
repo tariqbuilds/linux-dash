@@ -60,10 +60,9 @@
     
         <div align="center" class="lead">
             
-            <div class="btn"><i class="icon-refresh"></i></div><br>
-            
+            <div id="refresh-all" class="btn js-refresh-info">
+                <i class="icon-refresh"></i></div><br>
             A simple web dashboard to monitor your server.
-            
         </div>
         
      <div class="row">
@@ -73,7 +72,7 @@
             <div class="widget-header"> <i class="icon-info-sign"></i>
               <h3>General Info</h3>
               
-              <div class="btn btn-mini" onClick="javascript:get_os_info();spin_icon(this);" id="refresh-os"> 
+              <div id="refresh-os" class="btn btn-mini js-refresh-info">
                 <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
             
               </div>
@@ -99,7 +98,7 @@
             <div class="widget-header"> 
                 <i class="icon-list-alt"></i>
                 <h3>RAM</h3>
-                <div id="refresh-ram" onClick="javascript:get_ram();" class="btn btn-mini">
+                <div id="refresh-ram" class="btn btn-mini js-refresh-info">
                      <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
                 </div>
             </div>
@@ -147,7 +146,7 @@
            <div class="widget">
             <div class="widget-header"> <i class="icon-list"></i>
               <h3>Disk Usage</h3>
-              <div id="refresh-df" onClick="javascript:get_df();" class="btn btn-mini">
+              <div id="refresh-df" class="btn btn-mini js-refresh-info">
                 <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
               </div>
             </div>
@@ -165,7 +164,7 @@
             <div class="widget widget-table action-table">
             <div class="widget-header"> <i class="icon-group"></i>
               <h3>Users</h3>
-              <div id="refresh-users" onClick="javascript:get_users();" class="btn btn-mini">
+              <div id="refresh-users" class="btn btn-mini js-refresh-info">
                 <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
               </div>
             </div>
@@ -193,7 +192,7 @@
            <div class="widget">
             <div class="widget-header"> <i class="icon-list"></i>
               <h3>Software</h3>
-              <div id="refresh-whereis" onClick="javascript:get_whereis();" class="btn btn-mini">
+              <div id="refresh-whereis" class="btn btn-mini js-refresh-info">
                 <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
               </div>
             </div>
@@ -212,7 +211,7 @@
            <div class="widget">
             <div class="widget-header"> <i class="icon-monitor"></i>
               <h3>IP</h3>
-              <div id="refresh-whereis" onClick="javascript:get_ip();" class="btn btn-mini">
+              <div id="refresh-ip" class="btn btn-mini js-refresh-info">
                 <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
               </div>
             </div>
@@ -230,7 +229,7 @@
            <div class="widget">
             <div class="widget-header"> <i class="icon-monitor"></i>
               <h3>Internet Speed</h3>
-              <div id="refresh-ispeed" onClick="javascript:get_ispeed();" class="btn btn-mini">
+              <div id="refresh-ispeed" class="btn btn-mini js-refresh-info">
                 <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
               </div>
             </div>
@@ -251,7 +250,7 @@
 			 <div class="widget widget-table action-table">
             <div class="widget-header"> <i class="icon-group"></i>
               <h3>Online</h3>
-              <div id="refresh-online" onClick="javascript:get_online();" class="btn btn-mini">
+              <div id="refresh-online" class="btn btn-mini js-refresh-info">
                 <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
               </div>
             </div>
@@ -276,7 +275,7 @@
           <div class="widget">
             <div class="widget-header"> <i class="icon-dashboard"></i>
               <h3> Processes </h3>
-              <div id="refresh-ps" onClick="javascript:get_ps();" class="btn btn-mini">
+              <div id="refresh-ps" class="btn btn-mini js-refresh-info">
                 <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
               </div>
 			  <div class="pull-right">
@@ -326,10 +325,10 @@
 <!-- Placed at the end of the document so the pages load faster --> 
 <script src="js/jquery.js"></script> 
 <script src="js/bootstrap.js"></script>
-<script src="js/base.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js"></script>
 <script src="js/odometer.js"></script>
-<script src="js/magic_happens_here.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/base.js"></script>
 
 </body>
 </html>

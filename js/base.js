@@ -9,6 +9,11 @@ $(document).ready(function() {
             scrollTop: target.offset().top - 130
         }, 1000);
     });
+    dashboard.getAll();
+}).on("click", ".js-refresh-info", function(event) {
+    event.preventDefault();
+    var item = event.target.id.split("-").splice(-1)[0];
+    dashboard.fnMap[item]();
 });
 
 // Handle for cancelling active effect.
