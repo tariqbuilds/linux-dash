@@ -7,7 +7,7 @@ function generate_os_data(url, element) {
 
 // If dataTable with provided ID exists, destroy it.
 function destroy_dataTable(table_id) {
-    var table = $('#' + table_id);
+    var table = $("#" + table_id);
     var ex = document.getElementById(table_id);
     if ($.fn.DataTable.fnIsDataTable(ex)) {
         table.hide().dataTable().fnClearTable();
@@ -59,33 +59,33 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 
 function get_ps() {
     $.get("sh/ps.php", function(data) {
-        destroy_dataTable('ps_dashboard');
-        $('#filter-ps').val('').off('keyup');
+        destroy_dataTable("ps_dashboard");
+        $("#filter-ps").val("").off("keyup");
 
-        var psTable = $('#ps_dashboard').dataTable({
-            "aaData": data,
-            "aoColumns": [
-                { "sTitle": "USER" },
-                { "sTitle": "PID" },
-                { "sTitle": "%CPU" },
-                { "sTitle": "%MEM" },
-                { "sTitle": "VSZ" },
-                { "sTitle": "RSS" },
-                { "sTitle": "TTY" },
-                { "sTitle": "STAT" },
-                { "sTitle": "START" },
-                { "sTitle": "TIME" },
-                { "sTitle": "COMMAND" }
+        var psTable = $("#ps_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "USER" },
+                { sTitle: "PID" },
+                { sTitle: "%CPU" },
+                { sTitle: "%MEM" },
+                { sTitle: "VSZ" },
+                { sTitle: "RSS" },
+                { sTitle: "TTY" },
+                { sTitle: "STAT" },
+                { sTitle: "START" },
+                { sTitle: "TIME" },
+                { sTitle: "COMMAND" }
             ],
-            "bPaginate": true,
-            "sPaginationType": "full_numbers",
-            "bFilter": true,
-            "sDom": "lrtip",
-            "bAutoWidth": false,
-            "bInfo": false
+            bPaginate: true,
+            sPaginationType: "full_numbers",
+            bFilter: true,
+            sDom: "lrtip",
+            bAutoWidth: false,
+            bInfo: false
         }).fadeIn();
 
-        $('#filter-ps').on('keyup', function() {
+        $("#filter-ps").on("keyup", function() {
             psTable.fnFilter(this.value);
         });
     }, "json");
@@ -93,49 +93,49 @@ function get_ps() {
 
 function get_users() {
     $.get("sh/users.php", function(data) {
-        destroy_dataTable('users_dashboard');
+        destroy_dataTable("users_dashboard");
 
-        $('#users_dashboard').dataTable({
-            "aaData": data,
-            "aoColumns": [
-                { "sTitle": "Type" },
-                { "sTitle": "User" },
-                { "sTitle": "Home" }
+        $("#users_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Type" },
+                { sTitle: "User" },
+                { sTitle: "Home" }
             ],
-            "aaSorting": [[0, "desc"]],
-            "iDisplayLength": 5,
-            "bPaginate": true,
-            "sPaginationType": "full_numbers",
-            "bFilter": false,
-            "bAutoWidth": false,
-            "bInfo": false
+            aaSorting: [[0, "desc"]],
+            iDisplayLength: 5,
+            bPaginate: true,
+            sPaginationType: "full_numbers",
+            bFilter: false,
+            bAutoWidth: false,
+            bInfo: false
         }).fadeIn();
     }, "json");
-    $('select[name="users_dashboard_length"]').val('5');
+    $("select[name='users_dashboard_length']").val("5");
 }
 
 function get_online() {
     $.get("sh/online.php", function(data) {
-        destroy_dataTable('online_dashboard');
+        destroy_dataTable("online_dashboard");
 
-        $('#online_dashboard').dataTable({
-            "aaData": data,
-            "aoColumns": [
-                { "sTitle": "Who" },
-                { "sTitle": "From" },
-                { "sTitle": "Login At" },
-                { "sTitle": "Idle" }
+        $("#online_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Who" },
+                { sTitle: "From" },
+                { sTitle: "Login At" },
+                { sTitle: "Idle" }
             ],
-            "aaSorting": [[0, "desc"]],
-            "iDisplayLength": 5,
-            "bPaginate": true,
-            "sPaginationType": "full_numbers",
-            "bFilter": false,
-            "bAutoWidth": false,
-            "bInfo": false
+            aaSorting: [[0, "desc"]],
+            iDisplayLength: 5,
+            bPaginate: true,
+            sPaginationType: "full_numbers",
+            bFilter: false,
+            bAutoWidth: false,
+            bInfo: false
         }).fadeIn();
     }, "json");
-    $('select[name="online_dashboard_length"]').val('5');
+    $("select[name='online_dashboard_length']").val("5");
 }
 
 function get_ram() {
@@ -144,91 +144,91 @@ function get_ram() {
         var ram_used = parseInt((data[2] / ram_total) * 100, 10);
         var ram_free = parseInt((data[3] / ram_total) * 100, 10);
 
-        $('#ram-total').text(ram_total);
-        $('#ram-used').text(data[2]);
-        $('#ram-free').text(data[3]);
+        $("#ram-total").text(ram_total);
+        $("#ram-used").text(data[2]);
+        $("#ram-free").text(data[3]);
 
-        $('#ram-free-per').text(ram_free);
-        $('#ram-used-per').text(ram_used);
+        $("#ram-free-per").text(ram_free);
+        $("#ram-used-per").text(ram_used);
     }, "json");
 }
 
 function get_df() {
     $.get("sh/df.php", function(data) {
-        var table = $('#df_dashboard');
-        var ex = document.getElementById('df_dashboard');
+        var table = $("#df_dashboard");
+        var ex = document.getElementById("df_dashboard");
         if ($.fn.DataTable.fnIsDataTable(ex)) {
             table.hide().dataTable().fnClearTable();
             table.dataTable().fnDestroy();
         }
 
         table.dataTable({
-            "aaData": data,
-            "aoColumns": [
-                { "sTitle": "Filesystem" },
-                { "sTitle": "Size", "sType": "file-size" },
-                { "sTitle": "Used", "sType": "file-size" },
-                { "sTitle": "Avail", "sType": "file-size" },
-                { "sTitle": "Use%", "sType": "percent" },
-                { "sTitle": "Mounted" }
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Filesystem" },
+                { sTitle: "Size", sType: "file-size" },
+                { sTitle: "Used", sType: "file-size" },
+                { sTitle: "Avail", sType: "file-size" },
+                { sTitle: "Use%", sType: "percent" },
+                { sTitle: "Mounted" }
             ],
-            "bPaginate": false,
-            "bFilter": false,
-            "bAutoWidth": true,
-            "bInfo": false
+            bPaginate: false,
+            bFilter: false,
+            bAutoWidth: true,
+            bInfo: false
         }).fadeIn();
     }, "json");
 }
 
 function get_whereis() {
     $.get("sh/whereis.php", function(data) {
-        var table = $('#whereis_dashboard');
-        var ex = document.getElementById('whereis_dashboard');
+        var table = $("#whereis_dashboard");
+        var ex = document.getElementById("whereis_dashboard");
         if ($.fn.DataTable.fnIsDataTable(ex)) {
             table.hide().dataTable().fnClearTable();
             table.dataTable().fnDestroy();
         }
 
         table.dataTable({
-            "aaData": data,
-            "aoColumns": [
-                { "sTitle": "Software" },
-                { "sTitle":" Installation" }
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Software" },
+                { sTitle: "Installation" }
             ],
-            "bPaginate": false,
-            "bFilter": false,
-            "aaSorting": [[1, "desc"]],
-            "bAutoWidth": false,
-            "bInfo": false
+            bPaginate: false,
+            bFilter: false,
+            aaSorting: [[1, "desc"]],
+            bAutoWidth: false,
+            bInfo: false
         }).fadeIn();
     }, "json");
 }
 
 function get_os_info() {
-    generate_os_data('sh/issue.php', '#os-info');
-    generate_os_data('sh/hostname.php', '#os-hostname');
-    generate_os_data('sh/uptime.php', '#os-uptime');
+    generate_os_data("sh/issue.php", "#os-info");
+    generate_os_data("sh/hostname.php", "#os-hostname");
+    generate_os_data("sh/uptime.php", "#os-uptime");
 }
 
 function get_ip() {
-    $.get('sh/ip.php', function(data) {
-        destroy_dataTable('ip_dashboard');
-        $('#ip_dashboard').dataTable({
-            "aaData": data,
-            "aoColumns": [
-                { "sTitle": "Interface" },
-                { "sTitle": "IP" }
+    $.get("sh/ip.php", function(data) {
+        destroy_dataTable("ip_dashboard");
+        $("#ip_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Interface" },
+                { sTitle: "IP" }
             ],
-            "bPaginate": false,
-            "bFilter": false,
-            "bAutoWidth": true,
-            "bInfo": false
+            bPaginate: false,
+            bFilter: false,
+            bAutoWidth: true,
+            bInfo: false
         }).fadeIn();
-    }, 'json');
+    }, "json");
 }
 
 function get_ispeed() {
-    var rate = $('#ispeed-rate');
+    var rate = $("#ispeed-rate");
 
     // 0 = MB
     // 1 = KB

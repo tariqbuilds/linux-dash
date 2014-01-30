@@ -1,11 +1,11 @@
 $(document).ready(function() {
     // Smooth scrolling for links.
-    $('.mainnav').on('click', '.js-smoothscroll', function(event) {
+    $(".mainnav").on("click", ".js-smoothscroll", function(event) {
         event.preventDefault();
         var target = $(this.hash).parent();
         pulseElement(target, 8, 400);
 
-        $('html').animate({
+        $("html").animate({
             scrollTop: target.offset().top - 130
         }, 1000);
     });
@@ -31,8 +31,8 @@ var pulsing = {
  */
 function pulseElement(element, times, interval) {
     if (pulsing.element) {
-        pulsing.element.removeClass('pulse').
-            parent().removeClass('pulse-border');
+        pulsing.element.removeClass("pulse").
+            parent().removeClass("pulse-border");
         pulsing.timeoutIDs.forEach(function(ID) {
             clearTimeout(ID);
         });
@@ -41,8 +41,8 @@ function pulseElement(element, times, interval) {
     pulsing.element = element;
     var parent = element.parent();
     var f = function() {
-        element.toggleClass('pulse');
-        parent.toggleClass('pulse-border');
+        element.toggleClass("pulse");
+        parent.toggleClass("pulse-border");
     };
 
     pulsing.timeoutIDs.push(setTimeout(pulsing.resetfn,
