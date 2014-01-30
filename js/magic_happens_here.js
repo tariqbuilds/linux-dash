@@ -65,17 +65,17 @@ function get_ps() {
         var psTable = $('#ps_dashboard').dataTable({
             "aaData": data,
             "aoColumns": [
-                { "sTitle": "USER", "mDataProp": null },
-                { "sTitle": "PID", "mDataProp": null },
-                { "sTitle": "%CPU", "mDataProp": null },
-                { "sTitle": "%MEM", "mDataProp": null },
-                { "sTitle": "VSZ", "mDataProp": null },
-                { "sTitle": "RSS", "mDataProp": null },
-                { "sTitle": "TTY", "mDataProp": null },
-                { "sTitle": "STAT", "mDataProp": null },
-                { "sTitle": "START", "mDataProp": null },
-                { "sTitle": "TIME", "mDataProp": null },
-                { "sTitle": "COMMAND", "mDataProp": null }
+                { "sTitle": "USER" },
+                { "sTitle": "PID" },
+                { "sTitle": "%CPU" },
+                { "sTitle": "%MEM" },
+                { "sTitle": "VSZ" },
+                { "sTitle": "RSS" },
+                { "sTitle": "TTY" },
+                { "sTitle": "STAT" },
+                { "sTitle": "START" },
+                { "sTitle": "TIME" },
+                { "sTitle": "COMMAND" }
             ],
             "bPaginate": true,
             "sPaginationType": "full_numbers",
@@ -98,9 +98,9 @@ function get_users() {
         $('#users_dashboard').dataTable({
             "aaData": data,
             "aoColumns": [
-                { "sTitle": "Type", "mDataProp": null },
-                { "sTitle": "User", "mDataProp": null },
-                { "sTitle": "Home", "mDataProp": null }
+                { "sTitle": "Type" },
+                { "sTitle": "User" },
+                { "sTitle": "Home" }
             ],
             "aaSorting": [[0, "desc"]],
             "iDisplayLength": 5,
@@ -121,10 +121,10 @@ function get_online() {
         $('#online_dashboard').dataTable({
             "aaData": data,
             "aoColumns": [
-                { "sTitle": "Who", "mDataProp": null },
-                { "sTitle": "From", "mDataProp": null },
-                { "sTitle": "Login At", "mDataProp": null },
-                { "sTitle": "Idle", "mDataProp": null }
+                { "sTitle": "Who" },
+                { "sTitle": "From" },
+                { "sTitle": "Login At" },
+                { "sTitle": "Idle" }
             ],
             "aaSorting": [[0, "desc"]],
             "iDisplayLength": 5,
@@ -165,12 +165,12 @@ function get_df() {
         table.dataTable({
             "aaData": data,
             "aoColumns": [
-                { "sTitle": "Filesystem", "mDataProp": null },
-                { "sTitle": "Size", "mDataProp": null, "sType": "file-size" },
-                { "sTitle": "Used", "mDataProp": null, "sType": "file-size" },
-                { "sTitle": "Avail", "mDataProp": null, "sType": "file-size" },
-                { "sTitle": "Use%", "mDataProp": null, "sType": "percent" },
-                { "sTitle": "Mounted", "mDataProp": null }
+                { "sTitle": "Filesystem" },
+                { "sTitle": "Size", "sType": "file-size" },
+                { "sTitle": "Used", "sType": "file-size" },
+                { "sTitle": "Avail", "sType": "file-size" },
+                { "sTitle": "Use%", "sType": "percent" },
+                { "sTitle": "Mounted" }
             ],
             "bPaginate": false,
             "bFilter": false,
@@ -192,8 +192,8 @@ function get_whereis() {
         table.dataTable({
             "aaData": data,
             "aoColumns": [
-                { "sTitle": "Software", "mDataProp": null },
-                { "sTitle":" Installation", "mDataProp": null }
+                { "sTitle": "Software" },
+                { "sTitle":" Installation" }
             ],
             "bPaginate": false,
             "bFilter": false,
@@ -216,8 +216,8 @@ function get_ip() {
         $('#ip_dashboard').dataTable({
             "aaData": data,
             "aoColumns": [
-                { "sTitle": "Interface", "mDataProp": null },
-                { "sTitle": "IP", "mDataProp": null }
+                { "sTitle": "Interface" },
+                { "sTitle": "IP" }
             ],
             "bPaginate": false,
             "bFilter": false,
