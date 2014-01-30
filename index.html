@@ -179,23 +179,7 @@
             <!-- /widget-content --> 
           </div>
           <!-- /widget -->
-            <div class="widget widget-table action-table">
-            <div class="widget-header"> <i class="icon-group"></i>
-              <h3>Online</h3>
-              <div id="refresh-online" onClick="javascript:get_online();" class="btn btn-mini">
-                <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
-              </div>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-                
-              <table id="online_dashboard" class="table table-hover table-bordered table-condensed" >
-              </table>
-              
-            </div>
-            <!-- /widget-content --> 
-          </div>
-          <!-- /widget -->
+           
           </div>
         <!-- /span6 --> 
        
@@ -264,6 +248,28 @@
          
       </div>
       <!-- /row -->
+
+		<!-- online users widget (breaks DOM pattern) -->
+		<div class="span6 pull-right">
+			 <div class="widget widget-table action-table">
+            <div class="widget-header"> <i class="icon-group"></i>
+              <h3>Online</h3>
+              <div id="refresh-online" onClick="javascript:get_online();" class="btn btn-mini">
+                <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
+              </div>
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+                
+              <table id="online_dashboard" class="table table-hover table-bordered table-condensed" >
+              </table>
+              
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget -->
+		</div><!-- /span6 -->
+	  
       <div class="row">
         <div class="span12">
           <div class="widget">
