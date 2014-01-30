@@ -44,6 +44,44 @@
     }
     
     
+    //DataTables
+    //Sort file size data.
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+        "file-size-pre": function (a) {
+            var x = a.substring(0, a.length - 1);
+            var x_unit = (a.substring(a.length - 1, a.length) == "M" ?
+                1000 : (a.substring(a.length - 1, a.length) == "G" ? 1000000 : 1));
+    
+            return parseInt(x * x_unit, 10);
+        },
+    
+        "file-size-asc": function (a, b) {
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+        },
+    
+        "file-size-desc": function (a, b) {
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+        }
+    });
+    
+
+    //DataTables
+    //Sort numeric data which has a percent sign with it.
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+        "percent-pre": function (a) {
+            var x = (a == "-") ? 0 : a.replace(/%/, "");
+            return parseFloat(x);
+        },
+    
+        "percent-asc": function (a, b) {
+            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+        },
+    
+        "percent-desc": function (a, b) {
+            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+        }
+    });
+    
     
     /*******************************
             Data Call Functions
@@ -174,10 +212,10 @@
                 "aaData": data,
                 "aoColumns": [
                     { "sTitle":"Filesystem","mDataProp":null },
-                    { "sTitle":"Size","mDataProp":null },
-                    { "sTitle":"Used","mDataProp":null },
-                    { "sTitle":"%Avail","mDataProp":null },
-                    { "sTitle":"Use%","mDataProp":null },
+                    { "sTitle":"Size","mDataProp":null,"sType":"file-size" },
+                    { "sTitle":"Used","mDataProp":null ,"sType":"file-size"},
+                    { "sTitle":"Avail","mDataProp":null,"sType":"file-size" },
+                    { "sTitle":"Use%","mDataProp":null,"sType":"percent" },
                     { "sTitle":"Mounted","mDataProp":null }
                 ],
                 "bPaginate": false,
