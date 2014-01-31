@@ -33,13 +33,10 @@ A low-overhead monitoring web dashboard for a linux machine. Simply drop-in the 
  
  <li>Apache 2</li>
  <li>PHP 5</li>
- <li>
+ <li>Browsers
   <ul>
-    <li>Browsers
-        <ul>
           <li>Modern Browsers (Not IE)</li>
-        </ul>
-    </li>
+        
   </ul>
  </li>
 </ul>
