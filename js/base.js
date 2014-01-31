@@ -1,57 +1,58 @@
-$(function () {
-	
-	
-	$('.subnavbar').find ('li').each (function (i) {
-	
-		var mod = i % 3;
-		
-		if (mod === 2) {
-			$(this).addClass ('subnavbar-open-right');
-		}
-		
-	});
-	
+$(document).ready(function() {
+    // Smooth scrolling for links.
+    $(".mainnav").on("click", ".js-smoothscroll", function(event) {
+        event.preventDefault();
+        var target = $(this.hash).parent();
+        pulseElement(target, 8, 400);
 
-/* ADDED BY AFAQ */	
-	
-var pulse_counter; // number of times the element should pulsate
-var pulse_interval; // interval (in milliseconds) of pulsating
-
-
-function pulsate_element(element){
-    
-    while ( pulse_counter>0){
-        pulse_counter--;
-        setTimeout(function(){ element.parent().toggleClass('pulse'); },pulse_interval*pulse_counter);
-        setTimeout(function(){ element.parent().parent().toggleClass('pulse-boder'); },pulse_interval*pulse_counter);
-        pulsate_element(element);
-    }
-    
-    //if (pulse_counter==0){ pulse_counter=8;}
-}
-
-// smooth scrolling for links
-$(function() {
-  $('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
-        || location.hostname == this.hostname) {
-
-      var target = $(this.hash);
-      
-      pulse_counter=8; // number of times the element should pulsate
-      pulse_interval=400; // interval (in milliseconds) of pulsating
-      pulsate_element(target);
-      
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.parent().offset().top-130
+        $("html").animate({
+            scrollTop: target.offset().top - 130
         }, 1000);
-        return false;
-      }
+    });
+    dashboard.getAll();
+}).on("click", ".js-refresh-info", function(event) {
+    event.preventDefault();
+    var item = event.target.id.split("-").splice(-1)[0];
+    dashboard.fnMap[item]();
+});
+
+// Handle for cancelling active effect.
+var pulsing = {
+    element: null,
+    timeoutIDs: [],
+    resetfn: function() {
+        pulsing.element = null;
+        pulsing.timeoutIDs = [];
     }
-  });
-});
-	
-	
-});
+};
+
+/**
+ * Applies a pulse effect to the specified element. If triggered while already
+ * active the ongoing effect is cancelled immediately.
+ *
+ * @param {HTMLElement} element The element to apply the effect to.
+ * @param {Number} times How many pulses.
+ * @param {Number} interval Milliseconds between pulses.
+ */
+function pulseElement(element, times, interval) {
+    if (pulsing.element) {
+        pulsing.element.removeClass("pulse").
+            parent().removeClass("pulse-border");
+        pulsing.timeoutIDs.forEach(function(ID) {
+            clearTimeout(ID);
+        });
+        pulsing.timeoutIDs = [];
+    }
+    pulsing.element = element;
+    var parent = element.parent();
+    var f = function() {
+        element.toggleClass("pulse");
+        parent.toggleClass("pulse-border");
+    };
+
+    pulsing.timeoutIDs.push(setTimeout(pulsing.resetfn,
+                                       (times + 1) * interval));
+    for (; times > 0; --times) {
+        pulsing.timeoutIDs.push(setTimeout(f, times * interval));
+    }
+}
