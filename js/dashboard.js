@@ -256,7 +256,7 @@ dashboard.getLoadAverage = function() {
 }
 
 dashboard.getNumberOfCores = function() {
-    generate_os_data("sh/numberofcores.php", "#cpu-number");
+    generate_os_data("sh/numberofcores.php", "#core-number");
 }
 
 
