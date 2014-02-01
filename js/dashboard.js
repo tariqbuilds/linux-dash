@@ -244,6 +244,23 @@ dashboard.getIspeed = function() {
     lead.text(AS ? "KB/s" : "MB/s");
 }
 
+dashboard.getLoadAverage = function() {
+    $.get("sh/loadavg.php", function(data) {
+        $("#cpu-1min").text(data[0][0]);
+        $("#cpu-5min").text(data[1][0]);
+        $("#cpu-15min").text(data[2][0]);
+        $("#cpu-1min-per").text(data[0][1]);
+        $("#cpu-5min-per").text(data[1][1]);
+        $("#cpu-15min-per").text(data[2][1]);
+    }, "json");
+}
+
+dashboard.getNumberOfCores = function() {
+    generate_os_data("sh/numberofcores.php", "#core-number");
+}
+
+
+
 // Function that calls all the other functions which refresh
 // each individual widget.
 dashboard.getAll = function() {
@@ -256,6 +273,8 @@ dashboard.getAll = function() {
     dashboard.getWhereIs();
     dashboard.getIp();
     dashboard.getIspeed();
+    dashboard.getLoadAverage();
+    dashboard.getNumberOfCores();
 }
 
 dashboard.fnMap = {
@@ -269,4 +288,5 @@ dashboard.fnMap = {
     whereis: dashboard.getWhereIs,
     ip: dashboard.getIp,
     ispeed: dashboard.getIspeed,
+    cpu: dashboard.getLoadAverage,
 };
