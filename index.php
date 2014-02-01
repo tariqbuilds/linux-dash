@@ -1,3 +1,6 @@
+<?php
+include_once('compressor.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
