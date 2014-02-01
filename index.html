@@ -67,7 +67,7 @@
         
      <div class="row">
         
-        <div class="span6">
+        <div class="span3">
          <div class="widget widget-table action-table">
             <div class="widget-header"> <i class="icon-info-sign"></i>
               <h3>General Info</h3>
@@ -86,6 +86,53 @@
               <b>Uptime:</b> <span class="odometer" id="os-uptime"></span> Hours<br>
               <b>Hostname:</b> <span class="" id="os-hostname"></span><br>
               <br><br>
+              </div>
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget -->
+        </div>
+
+        <div class="span3">
+         <div class="widget">
+            <div class="widget-header"> <i class="icon-laptop"></i>
+              <h3>Load average</h3>
+              
+              <div id="refresh-cpu" class="btn btn-mini js-refresh-info">
+                <i class="icon-refresh"></i> &nbsp;&nbsp;Refresh
+            
+              </div>
+                
+            </div>
+            <!-- /widget-header -->
+            <div class="widget-content">
+               <div class="widget-content">
+               <div style="text-align:center;">
+                  <b>Number of CPUs:</b> <span class="lead" id="cpu-number">0</span>
+                </div>
+                <div id="big_stats" class="cf">
+                  
+                  <div class="stat"> 
+                      <i class="icon-#">1 min</i>
+                      <span class="value odometer" id="cpu-1min-per"></span> %<br/>
+                      <span class="value" id="cpu-1min"></span>
+                  </div>
+                  <!-- .stat -->
+                  
+                  <div class="stat"> 
+                      <i class="icon-#">5 min</i>
+                      <span class="value odometer" id="cpu-5min-per"></span> %<br/>
+                      <span class="value" id="cpu-5min"></span>
+                  </div>
+                  <!-- .stat --> 
+                  
+                  <div class="stat"> 
+                      <i class="icon-#">15 min</i>
+                      <span class="value odometer" id="cpu-15min-per"></span> %<br/>
+                      <span class="value" id="cpu-15min"></span>
+                  </div>
+                  <!-- .stat --> 
+                </div>
               </div>
             </div>
             <!-- /widget-content --> 
