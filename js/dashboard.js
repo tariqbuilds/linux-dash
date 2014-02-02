@@ -221,7 +221,9 @@ dashboard.getIp = function() {
                 { sTitle: "Interface" },
                 { sTitle: "IP" }
             ],
-            bPaginate: false,
+			iDisplayLength: 5,
+			bPaginate: true,
+            sPaginationType: "two_button",
             bFilter: false,
             bAutoWidth: true,
             bInfo: false
