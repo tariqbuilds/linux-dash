@@ -234,16 +234,23 @@ dashboard.getIp = function() {
 dashboard.getIspeed = function() {
     var rate = $("#ispeed-rate");
 
-    // 0 = MB
-    // 1 = KB
-    var AS = 1;
+    // 0 = KB
+    // 1 = MB
+    var AS = 0;
+    var power = AS+1;
+    var result = 0;
 
-    $.get("sh/speed.php?as=" + AS, function(data) {
-        rate.text(data);
+    $.get("sh/speed.php", function(data) {
+        // round the speed (float to int);
+        // dependent on value of AS, calculate speed in MB or KB ps
+        result = Math.floor((data/(Math.pow(1024,power))));
+        // update rate of speed on widget
+        rate.text(result);
+
     });
-
+    // update unit value in widget
     var lead = rate.next(".lead");
-    lead.text(AS ? "KB/s" : "MB/s");
+    lead.text(AS ? "MB/s" : "KB/s");
 }
 
 dashboard.getLoadAverage = function() {
