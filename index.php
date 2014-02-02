@@ -29,7 +29,7 @@ include_once('compressor.php');
   <div class="navbar-inner">
     <div class="container"> 
         
-        <a class="brand" href="index.html">Linux Bootstrap Dashboard </a>
+        <a class="brand" href="index.php">Linux Bootstrap Dashboard </a>
       <div class="nav-collapse">
             
       </div>
