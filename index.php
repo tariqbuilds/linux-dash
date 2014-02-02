@@ -62,12 +62,16 @@ include_once('compressor.php');
     <div class="container">
     
         <div align="center" class="lead">
-            
-            <div id="refresh-all" class="btn js-refresh-info">
-                <i class="icon-refresh"></i></div><br>
+            <br>
+            <div class="btn js-refresh-info" id="refresh-all">
+				<i class="icon-refresh pop" rel="popover" 
+					data-content="Click here to refresh all widgets on the page" 
+					data-original-title="Refresh All Widgets"></i>
+			</div>
+			<br>
             A simple web dashboard to monitor your server.
         </div>
-        
+		
      <div class="row">
         
         <div class="span3">

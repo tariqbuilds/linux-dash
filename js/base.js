@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	
+	// enable popovers
+	$(".pop").popover(); 
+	
     // Smooth scrolling for links.
     $(".mainnav").on("click", ".js-smoothscroll", function(event) {
         event.preventDefault();
@@ -9,6 +13,12 @@ $(document).ready(function() {
             scrollTop: target.offset().top - 130
         }, 1000);
     });
+	
+	// refresh all widgets
+	$('#refresh-all').on('click',function(){
+		dashboard.getAll();
+	});
+	
     dashboard.getAll();
 }).on("click", ".js-refresh-info", function(event) {
     event.preventDefault();
