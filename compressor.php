@@ -65,7 +65,7 @@ if (!is_dir($cacheDir)) {
 
 // JS file cache dir
 if (!is_dir($cacheDir . '/js')) {
-    mkdir($cacheDir . '/js', 0777) or die('Unable to create css cache folder');
+    mkdir($cacheDir . '/js', 0777) or die('Unable to create js cache folder');
 }
 
 // CSS file cache dir
