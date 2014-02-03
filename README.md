@@ -7,7 +7,7 @@ A low-overhead monitoring web dashboard for a linux machine. Simply drop-in the 
 
 
 
-<img width="700px" src="http://afaq.dreamhosters.com/linux-dash/linux-dash.PNG">
+<img width="700px" src="http://afaq.dreamhosters.com/linux-dash.PNG">
 
 <h2>Installation</h2>
 <ol>
