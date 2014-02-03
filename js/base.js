@@ -18,6 +18,15 @@ $(document).ready(function() {
 	$('#refresh-all').on('click',function(){
 		dashboard.getAll();
 	});
+
+	$('.js-refresh-info').not('#refresh-all').hide();
+	$('.widget').hover(
+		function() {
+			$(this).find('.js-refresh-info').show();
+		}, function() {
+			$(this).find('.js-refresh-info').hide();
+		}
+	);
 	
     dashboard.getAll();
 }).on("click", ".js-refresh-info", function(event) {
