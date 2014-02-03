@@ -195,7 +195,7 @@ Bootstrap Admin Template by EGrappler.com
 	
 	
 	
-#big_stats  {
+.big_stats  {
 	width: 100%; 
 	display: table;
 	margin-top: 1.5em;
@@ -205,7 +205,7 @@ Bootstrap Admin Template by EGrappler.com
 	border:0;
 }
 
-#big_stats .stat {
+.big_stats .stat {
 	width: 35%;
 	height: 90px;
 	text-align: center;
@@ -217,8 +217,8 @@ Bootstrap Admin Template by EGrappler.com
 	border-left: 1px solid #FFF;
 }
 
-#big_stats  i { font-size:20px; display:block; line-height: 30px; color:#b2afaa; }
-#big_stats .stat i { color:#19bc9c; }
+.big_stats  i { font-size:20px; display:block; line-height: 30px; color:#b2afaa; }
+.big_stats .stat i { color:#19bc9c; }
 
 h6.bigstats {
 	margin: 20px;
@@ -227,24 +227,24 @@ h6.bigstats {
 	margin-bottom: 26px;
 }
 
-#big_stats .stat:first-child {
+.big_stats .stat:first-child {
 	border-left: none;
 	width:35%;
 }
 
-#big_stats .stat:last-child {
+.big_stats .stat:last-child {
 	border-right: none;
 	width:35%;
 }
 
-#big_stats .stat h4 {
+.big_stats .stat h4 {
 	font-size: 11px;
 	font-weight: bold;
 	color: #777;
 	margin-bottom: 1.5em;
 }
 
-#big_stats .stat .value {
+.big_stats .stat .value {
 	font-size: 20px;
 	font-weight: bold;
 	color: #545454;
@@ -255,12 +255,12 @@ h6.bigstats {
 
 @media all and (max-width: 950px) and (min-width: 1px) {
 	
-	#big_stats {
+	.big_stats {
 		display: block;
 		margin-bottom: -10px;
 	}
 	
-	#big_stats .stat {
+	.big_stats .stat {
 		width: 25%;
 		display: block;
 		margin-bottom: 1em;
@@ -272,7 +272,7 @@ h6.bigstats {
 }
 
 @media (max-width: 767px) {
-	#big_stats .stat .value {
+	.big_stats .stat .value {
 		font-size: 25px;
 	}
 }
