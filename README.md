@@ -28,5 +28,4 @@ the app and go!
 * Apache 2
 * Nginx
 * PHP 5
-* Browsers
-    * Modern browsers (not IE)
+* Modern browsers
