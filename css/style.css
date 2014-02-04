@@ -1268,7 +1268,10 @@ width: 11px;}
 	.widget-header {
 		height: 100%;
 	}
-
+	
+	.js-refresh-info {
+		margin-left: 25px;
+	}
 }
 
 
@@ -1287,5 +1290,9 @@ width: 11px;}
 
 	.widget-header {
 		height: 100%;
+	}
+
+	.js-refresh-info {
+		margin-left: 25px;
 	}	
 }
