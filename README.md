@@ -25,14 +25,16 @@ A low-overhead monitoring web dashboard for a linux machine. Simply drop-in the 
 <ul>
  <li>OS
     <ul>
-      <li>Debian 6  </li>
-      <li>Debian 7 </li>
+      <li>Debian 6</li>
+      <li>Debian 7</li>
       <li>Ubuntu 11.04 +</li>
+      <li>Linux Mint 16 +</li>
     </ul>
  </li>
  
  <li>Apache 2</li>
- <li>PHP 5</li>
+ <li>Nginx</li>
+ <li>PHP 5 (curl)</li>
  <li>Browsers
   <ul>
           <li>Modern Browsers (Not IE)</li>
