@@ -1268,7 +1268,11 @@ width: 11px;}
 	.widget-header {
 		height: 100%;
 	}
-	
+
+	.widget-header h3 {
+		margin-right: 1em;
+	}
+
 	.js-refresh-info {
 		margin-left: 25px;
 	}
