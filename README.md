@@ -11,6 +11,7 @@ A low-overhead monitoring web dashboard for a linux machine. Simply drop-in the 
 
 <h2>Installation</h2>
 <ol>
+  <li>Make sure you have php-curl enabled</li>
   <li>Download the zip/repo/package</li>
   <li>Place it in /var/www/ (for Apache)</li>
   <li>Secure access to the page via .htaccess or method of your choice</li>
