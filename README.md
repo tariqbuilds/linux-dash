@@ -25,6 +25,7 @@ A low-overhead monitoring web dashboard for a linux machine. Simply drop-in the 
 <ul>
  <li>OS
     <ul>
+      <li>Arch</li>
       <li>Debian 6  </li>
       <li>Debian 7 </li>
       <li>Ubuntu 11.04 +</li>
