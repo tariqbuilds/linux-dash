@@ -1,7 +1,7 @@
 <?php
     // Execute top command on server
     // Store the result in $result (1 line = 1 array element)
-    exec('/usr/bin/top -b -n1|awk \'{print $2}\'', $result);
+    exec('/usr/bin/top -b -n1 | /usr/bin/awk \'{print $2}\'', $result);
     
     /*
     // Extract the headers from resultset

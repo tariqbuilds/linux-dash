@@ -1,6 +1,6 @@
 <pre><?php 
 
-$milli = shell_exec('awk \'{print $1*1000}\' /proc/uptime');
+$milli = shell_exec('/usr/bin/awk \'{print $1*1000}\' /proc/uptime');
 
 header('Content-Type: application/json; charset=UTF-8');
 
