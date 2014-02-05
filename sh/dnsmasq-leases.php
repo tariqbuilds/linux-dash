@@ -3,7 +3,6 @@
     // define the path to the DNSMasq Lease file
     //
     $dnsmasq_lease_file = "/var/lib/misc/dnsmasq.leases";
-    $dnsmasq_lease_file = "../leases.txt";
 
     // get the contents of the lease file
     //
