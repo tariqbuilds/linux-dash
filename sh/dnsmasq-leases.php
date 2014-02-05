@@ -30,7 +30,7 @@
         $l = explode(" ", $l);
 
         // remove the last field (I don't know what it is - for most of the
-        // lines it's simply "*")
+        // lines it's simply "*", in other cases it's the host MAC address)
         //
         unset($l[4]);
 
