@@ -46,3 +46,4 @@
     // output the results
     //
     echo json_encode($results);
+
