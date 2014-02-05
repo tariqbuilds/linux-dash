@@ -10,8 +10,9 @@ $days  = floor($totalHours / 24);
 $hours = floor($totalHours - ($days * 24));
 $min   = floor($totalMin - ($days * 60 * 24) - ($hours * 60));
 
+$formatUptime = '';
 if ($days != 0) {
-	$formatUptime = "$days days ";
+	$formatUptime .= "$days days ";
 }
 
 if ($hours != 0) {
