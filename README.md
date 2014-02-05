@@ -21,6 +21,7 @@ the app and go!
 
 *The information listed here is currently limited and will expand shortly.*
 
+<<<<<<< HEAD
 * OS
     * Debian 6, 7
     * Ubuntu 11.04+
@@ -29,3 +30,26 @@ the app and go!
 * Nginx
 * PHP 5
 * Modern browsers
+=======
+<em>The information listed here is currently limited and will expand shortly.</em>
+
+<ul>
+ <li>OS
+    <ul>
+      <li>Arch</li>
+      <li>Debian 6  </li>
+      <li>Debian 7 </li>
+      <li>Ubuntu 11.04 +</li>
+    </ul>
+ </li>
+ 
+ <li>Apache 2</li>
+ <li>PHP 5</li>
+ <li>Browsers
+  <ul>
+          <li>Modern Browsers (Not IE)</li>
+        
+  </ul>
+ </li>
+</ul>
+>>>>>>> b992d6b60f891e26a805944b74c36c8dc7a7e3a8
