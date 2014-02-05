@@ -269,6 +269,31 @@ dashboard.getNumberOfCores = function() {
 }
 
 
+dashboard.getDnsmasqLeases = function() {
+    $.get("sh/dnsmasq-leases.php", function(data) {
+        var table = $("#dnsmasqleases_dashboard");
+        var ex = document.getElementById("dnsmasqleases_dashboard");
+        if ($.fn.DataTable.fnIsDataTable(ex)) {
+            table.hide().dataTable().fnClearTable();
+            table.dataTable().fnDestroy();
+        }
+
+        table.dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Expires At" },
+                { sTitle: "MAC Address" },
+                { sTitle: "IP Address" },
+                { sTitle: "Hostname" }
+            ],
+            bPaginate: false,
+            bFilter: false,
+            bAutoWidth: true,
+            bInfo: false
+        }).fadeIn();
+    }, "json");
+}
+
 
 // Function that calls all the other functions which refresh
 // each individual widget.
@@ -284,6 +309,7 @@ dashboard.getAll = function() {
     dashboard.getIspeed();
     dashboard.getLoadAverage();
     dashboard.getNumberOfCores();
+    dashboard.getDnsmasqLeases();
 }
 
 dashboard.fnMap = {
@@ -298,4 +324,5 @@ dashboard.fnMap = {
     ip: dashboard.getIp,
     ispeed: dashboard.getIspeed,
     cpu: dashboard.getLoadAverage,
+    dnsmasqleases: dashboard.getDnsmasqLeases,
 };
