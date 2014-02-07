@@ -101,11 +101,11 @@ dashboard.getNetStat = function() {
         var psTable = $("#netstat_dashboard").dataTable({
             aaData: data,
             aoColumns: [
-                { sTitle: "Protocole" },
+                { sTitle: "Protocol" },
                 { sTitle: "Recv-Q" },
                 { sTitle: "Send-Q" },
-                { sTitle: "Adresse locale" },
-                { sTitle: "Adresse distante" },
+                { sTitle: "local adress" },
+                { sTitle: "remote adress" },
                 { sTitle: "State" },
                 { sTitle: "PID" }
             ],
