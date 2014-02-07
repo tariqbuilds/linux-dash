@@ -66,3 +66,20 @@ function pulseElement(element, times, interval) {
         pulsing.timeoutIDs.push(setTimeout(f, times * interval));
     }
 }
+
+/**
+ * Adds jQuery UI sortable portlet functionality to widgets
+ *
+ *
+ */
+
+$( ".row" ).sortable({
+      connectWith: ".row",
+      handle: ".widget-header",
+      cancel: "",
+      cursor: "move",
+      opacity: 0.7,
+      scrollSensitivity:10,
+      tolerance: 'pointer'
+ });
+

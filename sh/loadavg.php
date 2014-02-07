@@ -1,10 +1,10 @@
 <?php 
     
-    exec('grep -c ^processor /proc/cpuinfo',$resultNumberOfCores);
+    exec('/bin/grep -c ^processor /proc/cpuinfo',$resultNumberOfCores);
     header('Content-Type: application/json; charset=UTF-8');
     $numberOfCores = $resultNumberOfCores[0];
 
-    exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\'',$resultLoadAvg);
+    exec('/bin/cat /proc/loadavg | /usr/bin/awk \'{print $1","$2","$3}\'',$resultLoadAvg);
     header('Content-Type: application/json; charset=UTF-8');
 
     $loadAvg = explode(',',$resultLoadAvg[0]);

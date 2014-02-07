@@ -22,6 +22,7 @@ the app and go!
 *The information listed here is currently limited and will expand shortly.*
 
 * OS
+    * Arch
     * Debian 6, 7
     * Ubuntu 11.04+
     * Linux Mint 16+
@@ -29,3 +30,7 @@ the app and go!
 * Nginx
 * PHP 5
 * Modern browsers
+
+## Credits:
+* [Dashboard Template](http://www.egrappler.com/templatevamp-free-twitter-bootstrap-admin-template/)
+* [Bootstrap](http://getbootstrap.com)

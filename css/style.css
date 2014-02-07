@@ -400,6 +400,10 @@ textarea {
 	vertical-align: middle;
 }
 
+.widget-header [class^="icon-refresh"]{
+	margin:4px;
+}
+
 .widget-content {
 	padding: 20px 15px 15px;
 	
@@ -1300,3 +1304,4 @@ width: 11px;}
 		margin-left: 25px;
 	}	
 }
+
