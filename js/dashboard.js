@@ -93,6 +93,33 @@ dashboard.getPs = function() {
     }, "json");
 }
 
+dashboard.getNetStat = function() {
+    $.get("sh/netstat.php", function(data) {
+        destroy_dataTable("netstat_dashboard");
+        $("#filter-ps").val("").off("keyup");
+
+        var psTable = $("#netstat_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Protocole" },
+                { sTitle: "Recv-Q" },
+                { sTitle: "Send-Q" },
+                { sTitle: "Adresse locale" },
+                { sTitle: "Adresse distante" },
+                { sTitle: "State" },
+                { sTitle: "PID" }
+            ],
+            bPaginate: true,
+            sPaginationType: "full_numbers",
+            bFilter: true,
+            sDom: "lrtip",
+            bAutoWidth: false,
+            bInfo: false
+        }).fadeIn();
+    }, "json");
+}
+
+
 dashboard.getUsers = function() {
     $.get("sh/users.php", function(data) {
         destroy_dataTable("users_dashboard");
@@ -284,6 +311,7 @@ dashboard.getAll = function() {
     dashboard.getIspeed();
     dashboard.getLoadAverage();
     dashboard.getNumberOfCores();
+    dashboard.getNetStat();
 }
 
 dashboard.fnMap = {
@@ -298,4 +326,5 @@ dashboard.fnMap = {
     ip: dashboard.getIp,
     ispeed: dashboard.getIspeed,
     cpu: dashboard.getLoadAverage,
+    netstat: dashboard.getNetStat
 };
