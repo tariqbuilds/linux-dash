@@ -143,8 +143,8 @@ dashboard.getOnline = function() {
 dashboard.getRam = function() {
     $.get("sh/mem.php", function(data) {
         var ram_total = data[1];
-        var ram_used = parseInt((data[2] / ram_total) * 100, 10);
-        var ram_free = parseInt((data[3] / ram_total) * 100, 10);
+        var ram_used = Math.round((data[2] / ram_total) * 100);
+        var ram_free = Math.round((data[3] / ram_total) * 100);
 
         $("#ram-total").text(ram_total);
         $("#ram-used").text(data[2]);
