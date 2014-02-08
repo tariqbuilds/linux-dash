@@ -14,11 +14,6 @@ $(document).ready(function() {
         }, 1000);
     });
 	
-	// refresh all widgets
-	$('#refresh-all').on('click',function(){
-		dashboard.getAll();
-	});
-	
     dashboard.getAll();
 }).on("click", ".js-refresh-info", function(event) {
     event.preventDefault();
