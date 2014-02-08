@@ -3,9 +3,16 @@
 A low-overhead monitoring web dashboard for a GNU/Linux machine. Simply drop-in
 the app and go!
 
-[View Demo](http://afaq.dreamhosters.com/linux-dash/)
+[**View Demo**](http://afaq.dreamhosters.com/linux-dash/) | [**View Features**](#features) | [**Installtion Instructions**](#installation)
 
 ![Demonstration](http://afaq.dreamhosters.com/linux-dash.PNG)
+
+## Features
+* A beautiful web-based dashboard for monitoring server info
+* Live, on-demand monitoring of RAM, Load, Uptime, Disk Allocation, Users and many more system stats
+* Drop-in install for servers with Apache2/nginx + PHP
+* Click and drag to re-arrange widgets
+* Support for wide range of linux server flavors [(See Support section)](#support)
 
 ## Installation
 
