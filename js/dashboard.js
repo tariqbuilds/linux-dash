@@ -268,22 +268,15 @@ dashboard.getNumberOfCores = function() {
     generate_os_data("sh/numberofcores.php", "#core-number");
 }
 
-
-
-// Function that calls all the other functions which refresh
-// each individual widget.
+/**
+ * Refreshes all widgets. Does not call itself recursively.
+ */
 dashboard.getAll = function() {
-    dashboard.getRam();
-    dashboard.getPs();
-    dashboard.getDf();
-    dashboard.getOs();
-    dashboard.getUsers();
-    dashboard.getOnline();
-    dashboard.getWhereIs();
-    dashboard.getIp();
-    dashboard.getIspeed();
-    dashboard.getLoadAverage();
-    dashboard.getNumberOfCores();
+    for (var item in dashboard.fnMap) {
+        if (dashboard.fnMap.hasOwnProperty(item) && item !== "all") {
+            dashboard.fnMap[item]();
+        }
+    }
 }
 
 dashboard.fnMap = {
