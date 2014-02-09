@@ -1,5 +1,5 @@
 <?php 
-    exec('netstat -tunp', $result);
+    exec('/bin/netstat -tunp', $result);
 
     header('Content-Type: application/json; charset=UTF-8');
     echo "[";
