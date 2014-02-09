@@ -210,7 +210,7 @@ dashboard.getDf = function() {
 }
 
 dashboard.getWhereIs = function() {
-    $.get("sh/whereis.php", function(data) {
+    $.get("sh/where.php", function(data) {
         var table = $("#whereis_dashboard");
         var ex = document.getElementById("whereis_dashboard");
         if ($.fn.DataTable.fnIsDataTable(ex)) {
