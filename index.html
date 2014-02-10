@@ -283,9 +283,32 @@
           <!-- /widget -->
          </div><!-- /span -->
          
-		 <!-- online users widget (breaks DOM pattern) -->
-		<div class="span6 pull-right">
-			 <div class="widget widget-table action-table">
+      </div>
+      <!-- /row -->
+
+    <div class="row">
+
+      <div class="span6">
+
+        <div class="widget widget-table">
+
+          <div class="widget-header"> <i class="icon-list"></i>
+            <h3>DNS Leases</h3>
+            <div id="refresh-dnsmasqleases" class="btn btn-mini icon-refresh js-refresh-info">
+            </div>
+          </div> <!-- /widget-header -->
+
+          <div class="widget-content">
+            <table id="dnsmasqleases_dashboard" class="table table-hover table-condensed table-bordered" >
+            </table>
+          </div> <!-- /widget-content -->
+
+        </div> <!-- /widget -->
+
+      </div> <!-- /span8 -->
+
+         <div class="span6">
+           <div class="widget widget-table action-table">
             <div class="widget-header"> <i class="icon-group"></i>
               <h3>Online</h3>
               <div id="refresh-online" class="btn icon-refresh js-refresh-info">
@@ -293,18 +316,17 @@
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
-                
+
               <table id="online_dashboard" class="table table-hover table-bordered table-condensed" >
               </table>
-              
+
             </div>
-            <!-- /widget-content --> 
+            <!-- /widget-content -->
           </div>
           <!-- /widget -->
-		</div><!-- /span6 -->
-      </div>
-      <!-- /row -->
+         </div><!-- /span6 -->
 
+    </div> <!-- /row -->
 		
 	  
       <div class="row">
