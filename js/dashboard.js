@@ -289,9 +289,6 @@ dashboard.getLoadAverage = function() {
         $("#cpu-5min-per").text(data[1][1]);
         $("#cpu-15min-per").text(data[2][1]);
     }, "json");
-}
-
-dashboard.getNumberOfCores = function() {
     generate_os_data("sh/numberofcores.php", "#core-number");
 }
 
