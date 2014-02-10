@@ -18,8 +18,10 @@ the app and go!
 
 1. Make sure you have `php5-curl` installed and enabled
 2. Download the zip/repo/package
-3. Place it in `/var/www/` (for Apache)
-4. Secure access to the page via `.htaccess` or method of your choice
+3. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
+4. Optional: Secure access to the page via `.htaccess` or method of your choice
+ 
+
 
 **Please note: If you would like to limit access to the webpage, please add
 `.htaccess` or other security measure.**
