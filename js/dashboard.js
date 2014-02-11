@@ -53,6 +53,40 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
     }
 });
 
+//DataTables
+//Sort IP addresses
+jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+    "ip-address-pre": function(a) {
+        // split the address into octets
+        //
+        var x = a.split('.');
+
+        // pad each of the octets to three digits in length
+        //
+        function zeroPad(num, places) {
+            var zero = places - num.toString().length + 1;
+            return Array(+(zero > 0 && zero)).join("0") + num;
+        }
+
+        // build the resulting IP
+        var r = '';
+        for(var i=0; i<x.length; i++)
+            r = r + zeroPad(x[i],3);
+
+        // return the formatted IP address
+        //
+        return r;
+    },
+
+    "ip-address-asc": function(a, b) {
+        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+    },
+
+    "ip-address-desc": function(a, b) {
+        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+    }
+});
+
 /*******************************
   Data Call Functions
  *******************************/
@@ -289,10 +323,33 @@ dashboard.getLoadAverage = function() {
         $("#cpu-5min-per").text(data[1][1]);
         $("#cpu-15min-per").text(data[2][1]);
     }, "json");
+    generate_os_data("sh/numberofcores.php", "#core-number");
 }
 
-dashboard.getNumberOfCores = function() {
-    generate_os_data("sh/numberofcores.php", "#core-number");
+dashboard.getDnsmasqLeases = function() {
+    $.get("sh/dnsmasq-leases.php", function(data) {
+        var table = $("#dnsmasqleases_dashboard");
+        var ex = document.getElementById("dnsmasqleases_dashboard");
+        if ($.fn.DataTable.fnIsDataTable(ex)) {
+            table.hide().dataTable().fnClearTable();
+            table.dataTable().fnDestroy();
+        }
+
+        table.dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Expires At" },
+                { sTitle: "MAC Address" },
+                { sTitle: "IP Address", sType: "ip-address" },
+                { sTitle: "Hostname" }
+            ],
+            bPaginate: false,
+            bFilter: false,
+            bAutoWidth: true,
+            bInfo: false
+        }).fadeIn();
+    }, "json");
+  console.log('get DNSMASQ');
 }
 
 /**
@@ -318,5 +375,6 @@ dashboard.fnMap = {
     ip: dashboard.getIp,
     ispeed: dashboard.getIspeed,
     cpu: dashboard.getLoadAverage,
-    netstat: dashboard.getNetStat
+    netstat: dashboard.getNetStat,
+    dnsmasqleases: dashboard.getDnsmasqLeases
 };

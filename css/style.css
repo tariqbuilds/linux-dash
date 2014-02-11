@@ -352,7 +352,7 @@ textarea {
 	
 .widget-header {
 	position: relative;
-	
+        cursor: move;	
 	height: 40px;
 	line-height: 40px;
 	

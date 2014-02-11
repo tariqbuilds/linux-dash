@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Server Monitoring Dashboard</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="css/google-fonts.css" rel="stylesheet">
-<link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<link href="css/pages/dashboard.css" rel="stylesheet">
-<link href="css/odometer.css" rel="stylesheet">
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <title>Server Monitoring Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="css/google-fonts.css" rel="stylesheet">
+    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/pages/dashboard.css" rel="stylesheet">
+    <link href="css/odometer.css" rel="stylesheet">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+          <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+  </head>
+  <body>
 
 <!-- Github Fork Image-->
 <a href="https://github.com/afaqurk/linux-dash"><img style="position: absolute; top: 0; right: 0; border: 0;z-index:99999999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
@@ -283,9 +285,32 @@
           <!-- /widget -->
          </div><!-- /span -->
          
-		 <!-- online users widget (breaks DOM pattern) -->
-		<div class="span6 pull-right">
-			 <div class="widget widget-table action-table">
+      </div>
+      <!-- /row -->
+
+    <div class="row">
+
+      <div class="span6">
+
+        <div class="widget widget-table">
+
+          <div class="widget-header"> <i class="icon-list"></i>
+            <h3>DNS Leases</h3>
+            <div id="refresh-dnsmasqleases" class="btn btn-mini icon-refresh js-refresh-info">
+            </div>
+          </div> <!-- /widget-header -->
+
+          <div class="widget-content">
+            <table id="dnsmasqleases_dashboard" class="table table-hover table-condensed table-bordered" >
+            </table>
+          </div> <!-- /widget-content -->
+
+        </div> <!-- /widget -->
+
+      </div> <!-- /span8 -->
+
+         <div class="span6">
+           <div class="widget widget-table action-table">
             <div class="widget-header"> <i class="icon-group"></i>
               <h3>Online</h3>
               <div id="refresh-online" class="btn icon-refresh js-refresh-info">
@@ -293,18 +318,17 @@
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
-                
+
               <table id="online_dashboard" class="table table-hover table-bordered table-condensed" >
               </table>
-              
+
             </div>
-            <!-- /widget-content --> 
+            <!-- /widget-content -->
           </div>
           <!-- /widget -->
-		</div><!-- /span6 -->
-      </div>
-      <!-- /row -->
+         </div><!-- /span6 -->
 
+    </div> <!-- /row -->
 		
 	  
       <div class="row">
@@ -360,7 +384,7 @@
   <div class="footer-inner">
     <div class="container">
       <div class="row">
-        <div class="span12"> &copy; 2013 <a href="http://github.com/afaqurk">Afaq Tariq</a>. </div>
+        <div class="span12"> &copy; 2014 <a href="http://github.com/afaqurk">Afaq Tariq</a>. </div>
         <!-- /span12 --> 
       </div>
       <!-- /row --> 
