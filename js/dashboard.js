@@ -135,8 +135,8 @@ dashboard.getNetStat = function() {
         $("#netstat_dashboard").dataTable({
             aaData: data,
             aoColumns: [
-                { sTitle: "Number of connection" },
-                { sTitle: "IP Adress" }
+                { sTitle: "Number of Connections" },
+                { sTitle: "IP Address" }
             ],
             aaSorting: [[0, "desc"]],
             bPaginate: true,
