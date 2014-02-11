@@ -132,17 +132,13 @@ dashboard.getNetStat = function() {
         destroy_dataTable("netstat_dashboard");
         $("#filter-ps").val("").off("keyup");
 
-        var psTable = $("#netstat_dashboard").dataTable({
+        $("#netstat_dashboard").dataTable({
             aaData: data,
             aoColumns: [
-                { sTitle: "Protocol" },
-                { sTitle: "Recv-Q" },
-                { sTitle: "Send-Q" },
-                { sTitle: "local adress" },
-                { sTitle: "remote adress" },
-                { sTitle: "State" },
-                { sTitle: "PID" }
+                { sTitle: "Number of connection" },
+                { sTitle: "IP Adress" }
             ],
+            aaSorting: [[0, "desc"]],
             bPaginate: true,
             sPaginationType: "full_numbers",
             bFilter: true,
