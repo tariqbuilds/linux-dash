@@ -8,7 +8,7 @@
     foreach($binaries as $b)
     { 
         $which = array();
-        exec('/usr/bin/which ' . escapeshellarg($b), $which, $return_var);
+        exec('command -v ' . escapeshellarg($b), $which, $return_var);
         $data[] = array($b, $return_var ? "Not Installed" : $which[0]);
     }
     
