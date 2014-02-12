@@ -1,8 +1,7 @@
 $(document).ready(function() {
-	
-	// enable popovers
-	$(".pop").popover(); 
-	
+    // enable popovers
+    $(".pop").popover();
+
     // Smooth scrolling for links.
     $(".mainnav").on("click", ".js-smoothscroll", function(event) {
         event.preventDefault();
