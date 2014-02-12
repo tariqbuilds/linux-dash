@@ -9,7 +9,7 @@ $(document).ready(function() {
         var target = $(this.hash).parent();
         pulseElement(target, 8, 400);
 
-        $("html").animate({
+        $("html,body").animate({
             scrollTop: target.offset().top - 130
         }, 1000);
     });
