@@ -71,7 +71,7 @@ function pulseElement(element, times, interval) {
 $( ".row" ).sortable({
       connectWith: ".row",
       handle: ".widget-header",
-      cancel: "",
+      cancel: "#filter-ps",
       cursor: "move",
       opacity: 0.7,
       scrollSensitivity:10,
