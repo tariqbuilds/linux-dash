@@ -2,18 +2,15 @@ $(document).ready(function() {
     // enable popovers
     $(".pop").popover();
 
-    // Smooth scrolling for links.
-    $(".mainnav").on("click", ".js-smoothscroll", function(event) {
-        event.preventDefault();
-        var target = $(this.hash).parent();
-        pulseElement(target, 8, 400);
-
-        $("html,body").animate({
-            scrollTop: target.offset().top - 130
-        }, 1000);
-    });
-	
     dashboard.getAll();
+}).on("click", ".js-smoothscroll", function(event) {
+    event.preventDefault();
+    var target = $(this.hash).parent();
+    pulseElement(target, 8, 400);
+
+    $("html,body").animate({
+        scrollTop: target.offset().top - 130
+    }, 1000);
 }).on("click", ".js-refresh-info", function(event) {
     event.preventDefault();
     var item = event.target.id.split("-").splice(-1)[0];
