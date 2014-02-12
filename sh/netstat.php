@@ -1,5 +1,5 @@
 <?php 
-    exec("/bin/netstat -ntu | awk 'NR>2{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr", $result);
+    exec("/bin/netstat -ntu | awk 'NR>2 {sub(/:[^:]+?$/, \"\"); print $5}' | sort | uniq -c | sort -nrk 1", $result);
 
     header('Content-Type: application/json; charset=UTF-8');
     echo "[";
