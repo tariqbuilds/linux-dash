@@ -130,7 +130,6 @@ dashboard.getPs = function() {
 dashboard.getNetStat = function() {
     $.get("sh/netstat.php", function(data) {
         destroy_dataTable("netstat_dashboard");
-        $("#filter-ps").val("").off("keyup");
 
         $("#netstat_dashboard").dataTable({
             aaData: data,
