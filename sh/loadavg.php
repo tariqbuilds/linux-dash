@@ -1,7 +1,6 @@
 <?php 
     
     exec('/bin/grep -c ^processor /proc/cpuinfo',$resultNumberOfCores);
-    header('Content-Type: application/json; charset=UTF-8');
     $numberOfCores = $resultNumberOfCores[0];
 
     exec('/bin/cat /proc/loadavg | /usr/bin/awk \'{print $1","$2","$3}\'',$resultLoadAvg);
