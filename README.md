@@ -1,4 +1,4 @@
-# linux-dash
+# linux-dash (Beta)
 
 A low-overhead monitoring web dashboard for a GNU/Linux machine. Simply drop-in
 the app and go!
@@ -43,3 +43,4 @@ the app and go!
 ## Credits:
 * [Dashboard Template](http://www.egrappler.com/templatevamp-free-twitter-bootstrap-admin-template/)
 * [Bootstrap](http://getbootstrap.com)
+* [Font Awesome](http://fontawesome.io/)
