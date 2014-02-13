@@ -2,6 +2,9 @@ $(document).ready(function() {
     // enable popovers
     $(".pop").popover();
 
+   // activate tooltips on hover
+   $("[data-toggle='tooltip']").tooltip({trigger: 'hover', placement:'right'});  
+
     dashboard.getAll();
 }).on("click", ".js-smoothscroll", function(event) {
     event.preventDefault();
