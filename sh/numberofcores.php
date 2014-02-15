@@ -13,7 +13,7 @@
 
     // If number of cores is not found, run fallback
     if( $numOfCores === false ){
-        $numOfCores = filter_var(shell_exec('nproc'),
+        $numOfCores = filter_var(shell_exec('/usr/bin/nproc'),
             FILTER_VALIDATE_INT,
             $intOpts);
     }
