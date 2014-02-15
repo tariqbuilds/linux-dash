@@ -1,16 +1,25 @@
 <?php 
-    // Initialize cores to 0
-    $numOfCores = 0;
+    $intOpts = array(
+        'options' => array(
+            'min' => 1,
+        ),
+    );
 
     // get value via /proc/cpuinfo
     $numOfCores = shell_exec('/bin/grep -c ^processor /proc/cpuinfo');
-    $numOfCores = $numOfCores[0];
+    $numOfCores = filter_var($numOfCores[0],
+        FILTER_VALIDATE_INT,
+        $intOpts);
 
     // If number of cores is not found, run fallback
-    if( $numOfCores == 0 ){
+    if( $numOfCores === false ){
+        $numOfCores = filter_var(shell_exec('/usr/bin/nproc'),
+            FILTER_VALIDATE_INT,
+            $intOpts);
+    }
 
-       // run nproc fallback command
-       $numOfCores = shell_exec('nproc');
+    if( $numOfCores === false ){
+        $numOfCores = 'unknown';
     }
 
     header('Content-Type: application/json; charset=UTF-8');
