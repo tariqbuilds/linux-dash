@@ -16,7 +16,7 @@ the app and go!
 
 ## Installation
 
-1. Make sure you have `php5-json` and `php5-curl` installed and enabled
+1. Make sure you have `php5-json` installed and enabled
 2. Download the zip/repo/package
 3. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
 4. Optional: Secure access to the page via `.htaccess` or method of your choice
