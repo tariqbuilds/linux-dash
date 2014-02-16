@@ -8,5 +8,6 @@
     {
         $result[] = explode(",", $user);
     }
-	header('Content-Type: application/json; charset=UTF-8');
+
+    header('Content-Type: application/json; charset=UTF-8');
     echo json_encode($result);
