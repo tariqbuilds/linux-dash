@@ -77,3 +77,54 @@ $( ".row" ).sortable({
       tolerance: 'pointer'
  });
 
+/**
+ *
+ * Widget hide functionality
+ *
+**/
+// general cached DOM objects
+closedWidgetCount = $('#closed-widget-count'),
+closedWidgets = $('#closed-widget-list');
+
+// attach a close button to all widget headers
+$('.widget-header').append('<div class="btn icon-remove hide-widget"></div>');
+
+// hide / close widget function
+$('.hide-widget').live('click',function hideWidget(){
+ 
+  // cache DOM objects/data used in this function
+  var widget = $(this).parent().parent(),
+  widgetName = widget.find('.widget-header h3').text(),
+  widgetIdentifier = $(this).parent().find('.js-refresh-info').attr('id'); 
+
+  // update count
+  closedWidgetCount.text( Number(closedWidgetCount.text()) + 1);
+
+  // hide widget from DOM
+  widget.hide(300);
+  
+  // add to hidden list
+  closedWidgets.append('<li><a class="open-widget" data-id="#'+widgetIdentifier+'"><i class="icon-plus-sign"></i>  '+widgetName+'</a></li>');
+
+});
+
+// unhide closed widget
+$('.open-widget').live('click',function(){
+
+ // cache DOM objects/data used in this function
+ var widget = $( $(this).data('id') ).parent().parent(),
+ navItem = $(this).parent();
+
+ // unhide widget
+ widget.show(500);
+
+ // remove item from closed-widget-list
+ navItem.remove();
+
+ // decrement closed-widget-count 
+ closedWidgetCount.text( Number(closedWidgetCount.text()) - 1);
+
+
+});
+
+
