@@ -344,8 +344,16 @@ dashboard.getDnsmasqLeases = function() {
             bInfo: false
         }).fadeIn();
     }, "json");
-  console.log('get DNSMASQ');
 }
+
+dashboard.getBandwidth = function() {
+    $.get("sh/bandwidth.php", function(data) {
+      $('#bw-tx').text(data.tx);
+      $('#bw-rx').text(data.rx);
+    },'json');
+
+}
+
 
 /**
  * Refreshes all widgets. Does not call itself recursively.
@@ -371,5 +379,6 @@ dashboard.fnMap = {
     ispeed: dashboard.getIspeed,
     cpu: dashboard.getLoadAverage,
     netstat: dashboard.getNetStat,
-    dnsmasqleases: dashboard.getDnsmasqLeases
+    dnsmasqleases: dashboard.getDnsmasqLeases,
+    bandwidth: dashboard.getBandwidth
 };
