@@ -1,4 +1,5 @@
 <?php 
+
     $intOpts = array(
         'options' => array(
             'min' => 1,

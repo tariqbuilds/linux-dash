@@ -4,7 +4,6 @@
     $numberOfCores = $resultNumberOfCores[0];
 
     exec('/bin/cat /proc/loadavg | /usr/bin/awk \'{print $1","$2","$3}\'',$resultLoadAvg);
-
     $loadAvg = explode(',',$resultLoadAvg[0]);
 
     echo json_encode(
