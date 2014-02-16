@@ -267,6 +267,7 @@ dashboard.getOs = function() {
     generate_os_data("sh/issue.php", "#os-info");
     generate_os_data("sh/hostname.php", "#os-hostname");
     generate_os_data("sh/uptime.php", "#os-uptime");
+    generate_os_data("sh/temp.php", "#os-temp");
 }
 
 dashboard.getIp = function() {
