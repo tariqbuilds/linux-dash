@@ -8,7 +8,7 @@
     $max = count($hosts);
     for ($i = 0; $i < $max; $i++) {
         $result = array();
-        exec("ping -qc ". $pingCount ." " . $hosts[$i] . " | awk -F/ '/^rtt/ { print $5 }'", $result);
+        exec("/bin/ping -qc ". $pingCount ." " . $hosts[$i] . " | awk -F/ '/^rtt/ { print $5 }'", $result);
         echo json_encode(array($hosts[$i], $result[0]));
         echo ($i + 1 == $max)?'':',';
     }
