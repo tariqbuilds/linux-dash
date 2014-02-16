@@ -1,0 +1,3 @@
+Options -Indexes +FollowSymLinks +ExecCGI
+RewriteEngine On
+RewriteRule ^sh/([A-Za-z\-\+]*).php*$ xhr.php?sh=$1 [L]

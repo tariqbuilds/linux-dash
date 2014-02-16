@@ -17,8 +17,6 @@
     // Get external adress
     $result2 = file_get_contents('http://ipecho.net/plain');
 
-    // Create JSON header
-    header('Content-Type: application/json; charset=UTF-8');
     // Return info as JSON
     echo '[[','"external ip","',$result2,'"]';
     $x = 0;

@@ -8,8 +8,8 @@
     }
     // If file doesn't exist then use hard coded list
     else
-    {	
-    	$binaries = explode(" ", "php node mysql vim python ruby java apache2 nginx openssl vsftpd make");
+    {
+        $binaries = explode(" ", "php node mysql vim python ruby java apache2 nginx openssl vsftpd make");
     }
 
     $data = array();
