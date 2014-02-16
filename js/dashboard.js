@@ -287,6 +287,27 @@ dashboard.getIp = function() {
     }, "json");
 }
 
+dashboard.getPing = function() {
+    $.get("sh/ping.php", function(data) {
+        destroy_dataTable("ping_dashboard");
+
+        $("#ping_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Host" },
+                { sTitle: "Time (in ms)" }
+            ],
+            aaSorting: [[0, "desc"]],
+            bPaginate: true,
+            sPaginationType: "full_numbers",
+            bFilter: true,
+            sDom: "lrtip",
+            bAutoWidth: false,
+            bInfo: false
+        }).fadeIn();
+    }, "json");
+}
+
 dashboard.getIspeed = function() {
     var rate = $("#ispeed-rate");
 
@@ -380,5 +401,6 @@ dashboard.fnMap = {
     cpu: dashboard.getLoadAverage,
     netstat: dashboard.getNetStat,
     dnsmasqleases: dashboard.getDnsmasqLeases,
-    bandwidth: dashboard.getBandwidth
+    bandwidth: dashboard.getBandwidth,
+    ping: dashboard.getPing
 };
