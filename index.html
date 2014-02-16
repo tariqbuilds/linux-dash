@@ -211,34 +211,7 @@
           <!-- /widget -->
          </div>
          
-          <div class="span6">
-            <div class="widget widget-table action-table">
-            <div class="widget-header"> <i class="icon-group"></i>
-              <h3>Users</h3>
-              <div id="refresh-users" class="btn icon-refresh js-refresh-info">
-              </div>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-                
-              <table id="users_dashboard" class="table table-hover table-bordered table-condensed" >
-              </table>
-              
-            </div>
-            <!-- /widget-content --> 
-          </div>
-          <!-- /widget -->
-           
-          </div>
-        <!-- /span6 --> 
-       
-         
-        </div>
-    <!-- /row -->
-    
-    
-      <div class="row">
-         <div class="span6">
+		  <div class="span6">
            <div class="widget widget-table">
             <div class="widget-header"> <i class="icon-list"></i>
               <h3>Software</h3>
@@ -255,6 +228,32 @@
           </div>
           <!-- /widget -->
          </div><!-- /span -->
+		 
+        </div>
+    <!-- /row -->
+    
+    
+      <div class="row">
+         
+          
+		  <div class="span6">
+
+			<div class="widget widget-table">
+
+			  <div class="widget-header"> <i class="icon-list"></i>
+				<h3>DNS Leases</h3>
+				<div id="refresh-dnsmasqleases" class="btn btn-mini icon-refresh js-refresh-info">
+				</div>
+			  </div> <!-- /widget-header -->
+
+			  <div class="widget-content">
+				<table id="dnsmasqleases_dashboard" class="table table-hover table-condensed table-bordered" >
+				</table>
+			  </div> <!-- /widget-content -->
+
+			</div> <!-- /widget -->
+
+		  </div> <!-- /span6 -->
          
          <div class="span3">
            <div class="widget widget-table">
@@ -291,8 +290,40 @@
           </div>
           <!-- /widget -->
          </div><!-- /span -->
+ 
+      </div>
+      <!-- /row -->
+	   <div class="row">
 
-         <div class="span3">
+        <div class="span4">
+          <div class="widget widget-table">
+            <div class="widget-header"> <i class="icon-dashboard"></i>
+              <h3> Network Statistics </h3>
+              <div id="refresh-netstat" class="btn btn-mini icon-refresh js-refresh-info">
+            </div> 
+          </div>
+          <div class="widget-content">
+            <table id="netstat_dashboard" class="table table-hover table-condensed table-bordered" >
+            </table>
+          </div>
+          </div>
+        </div>
+
+        <div class="span4">
+            <div class="widget widget-table">
+                <div class="widget-header"> <i class="icon-exchange"></i>
+                    <h3>Ping</h3>
+                    <div id="refresh-ping" class="btn btn-mini icon-refresh js-refresh-info">
+                    </div> 
+                </div>
+                <div class="widget-content">
+                    <table id="ping_dashboard" class="table table-hover table-condensed table-bordered" >
+                    </table>
+                </div>
+            </div>
+        </div>
+
+		 <div class="span3">
            <div class="widget widget-table">
             <div class="widget-header"> <i class="icon-exchange"></i>
               <h3>Bandwidth</h3>
@@ -310,31 +341,33 @@
           </div>
           <!-- /widget -->
          </div><!-- /span -->
-         
+		 
       </div>
-      <!-- /row -->
-
+	  
     <div class="row">
-
-      <div class="span6">
-
-        <div class="widget widget-table">
-
-          <div class="widget-header"> <i class="icon-list"></i>
-            <h3>DNS Leases</h3>
-            <div id="refresh-dnsmasqleases" class="btn btn-mini icon-refresh js-refresh-info">
+	
+	
+	  <div class="span6">
+            <div class="widget widget-table action-table">
+            <div class="widget-header"> <i class="icon-group"></i>
+              <h3>Users</h3>
+              <div id="refresh-users" class="btn icon-refresh js-refresh-info">
+              </div>
             </div>
-          </div> <!-- /widget-header -->
-
-          <div class="widget-content">
-            <table id="dnsmasqleases_dashboard" class="table table-hover table-condensed table-bordered" >
-            </table>
-          </div> <!-- /widget-content -->
-
-        </div> <!-- /widget -->
-
-      </div> <!-- /span8 -->
-
+            <!-- /widget-header -->
+            <div class="widget-content">
+                
+              <table id="users_dashboard" class="table table-hover table-bordered table-condensed" >
+              </table>
+              
+            </div>
+            <!-- /widget-content --> 
+          </div>
+          <!-- /widget -->
+           
+          </div>
+        <!-- /span6 --> 
+		
          <div class="span6">
            <div class="widget widget-table action-table">
             <div class="widget-header"> <i class="icon-group"></i>
@@ -382,39 +415,6 @@
           
       </div>
       <!-- /row -->
-      
-      <div class="row">
-
-        <div class="span4">
-          <div class="widget widget-table">
-            <div class="widget-header"> <i class="icon-dashboard"></i>
-              <h3> Network Statistics </h3>
-              <div id="refresh-netstat" class="btn btn-mini icon-refresh js-refresh-info">
-            </div> 
-          </div>
-          <div class="widget-content">
-            <table id="netstat_dashboard" class="table table-hover table-condensed table-bordered" >
-            </table>
-          </div>
-          </div>
-        </div>
-
-        <div class="span4">
-            <div class="widget widget-table">
-                <div class="widget-header"> <i class="icon-exchange"></i>
-                    <h3>Ping</h3>
-                    <div id="refresh-ping" class="btn btn-mini icon-refresh js-refresh-info">
-                    </div> 
-                </div>
-                <div class="widget-content">
-                    <table id="ping_dashboard" class="table table-hover table-condensed table-bordered" >
-                    </table>
-                </div>
-            </div>
-        </div>
-
-      </div>
-
 
     </div>
   </div>

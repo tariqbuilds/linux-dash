@@ -253,7 +253,8 @@ dashboard.getWhereIs = function() {
                 { sTitle: "Software" },
                 { sTitle: "Installation" }
             ],
-            bPaginate: false,
+            bPaginate: true,
+			iDisplayLength: 6,
             bFilter: false,
             aaSorting: [[1, "desc"]],
             bAutoWidth: false,
