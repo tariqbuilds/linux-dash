@@ -8,15 +8,21 @@ Bootstrap Admin Template by EGrappler.com
 [1. Global]
 */
 
-body {
-	background: #f9f6f1;
-	font: 15px 'Times';
-}
-    
-p { 
-	font: 15px 'Times'; 	
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  src: url("font/OpenSans-Regular-webfont.eot") format("embedded-opentype"),
+  url("font/OpenSans-Regular-webfont.woff") format("woff"),
+  url("font/OpenSans-Regular-webfont.ttf") format("truetype"),
+  url("font/OpenSans-Regular-webfont.svg#OpenSansRegular") format("svg");
 }
 
+body {
+	background: #f9f6f1;
+        font: 12px/1.5em "Open Sans", sans-serif;
+}
+    
 a {
     cursor: pointer;
 }
