@@ -22,7 +22,8 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         var x = a.substring(0, a.length - 1);
         var x_unit = (a.substring(a.length - 1, a.length) === "M" ?
                       1000 : (a.substring(a.length - 1, a.length) === "G" ?
-                              1000000 : 1));
+                              1000000 : (a.substring(a.length - 1, a.length) === "T" ?
+                                  1000000000 : 1)));
 
         return parseInt(x * x_unit, 10);
     },
