@@ -90,7 +90,7 @@ closedWidgetCount = $('#closed-widget-count'),
 closedWidgets = $('#closed-widget-list');
 
 // attach a close button to all widget headers
-$('.widget-header').append('<div class="btn icon-remove hide-widget"></div>');
+$('.widget-header').append('<div class="btn btn-icon-only icon-remove hide-widget"></div>');
 
 // hide / close widget function
 $('.hide-widget').live('click',function(){
