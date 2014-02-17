@@ -1,7 +1,17 @@
 <?php
     header('Content-Type: application/json; charset=UTF-8');
 
+    // Read list of hosts to ping from csv file ping_hosts
+    if (file_exists("ping_hosts"))
+    {
+        $data = file_get_contents("ping_hosts");
+        $hosts = explode(",", $data);
+    }
+    // If file doesn't exist then use hard coded list
+    else
+    {	
     $hosts = array("gnu.org", "github.com", "wikipedia.org");
+    }
     $pingCount = 2;
 
     echo "[";
