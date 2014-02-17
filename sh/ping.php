@@ -7,7 +7,7 @@
     }
     // If file doesn't exist then use hard coded list
     else {
-        hosts = array("gnu.org", "github.com", "wikipedia.org");
+        $hosts = array("gnu.org", "github.com", "wikipedia.org");
     }
 
     $pingCount = 2;
