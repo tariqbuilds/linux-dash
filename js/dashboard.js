@@ -18,14 +18,24 @@ function destroy_dataTable(table_id) {
 //DataTables
 //Sort file size data.
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+    "file-size-units": {
+        'K':1024,
+        'M':Math.pow(1024, 2),
+        'G':Math.pow(1024, 3),
+        'T':Math.pow(1024, 4),
+        'P':Math.pow(1024, 5),
+        'E':Math.pow(1024, 6)
+    },
+
     "file-size-pre": function(a) {
         var x = a.substring(0, a.length - 1);
-        var x_unit = (a.substring(a.length - 1, a.length) === "M" ?
-                      1000 : (a.substring(a.length - 1, a.length) === "G" ?
-                              1000000 : (a.substring(a.length - 1, a.length) === "T" ?
-                                  1000000000 : 1)));
-
-        return parseInt(x * x_unit, 10);
+        var x_unit = a.substring(a.length - 1, a.length);
+        if(jQuery.fn.dataTableExt.oSort['file-size-units'][x_unit]) {
+		    return parseInt(x * jQuery.fn.dataTableExt.oSort['file-size-units'][x_unit], 10);
+        }
+        else {
+            return parseInt(x + x_unit, 10);
+        }
     },
 
     "file-size-asc": function(a, b) {
