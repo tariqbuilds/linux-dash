@@ -19,12 +19,12 @@ function destroy_dataTable(table_id) {
 //Sort file size data.
 jQuery.extend(jQuery.fn.dataTableExt.oSort, {
     "file-size-units": {
-        'K':1024,
-        'M':Math.pow(1024, 2),
-        'G':Math.pow(1024, 3),
-        'T':Math.pow(1024, 4),
-        'P':Math.pow(1024, 5),
-        'E':Math.pow(1024, 6)
+        K : 1024,
+        M : Math.pow(1024, 2),
+        G : Math.pow(1024, 3),
+        T : Math.pow(1024, 4),
+        P : Math.pow(1024, 5),
+        E : Math.pow(1024, 6)
     },
 
     "file-size-pre": function(a) {
