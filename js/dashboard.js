@@ -31,7 +31,7 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         var x = a.substring(0, a.length - 1);
         var x_unit = a.substring(a.length - 1, a.length);
         if(jQuery.fn.dataTableExt.oSort['file-size-units'][x_unit]) {
-		    return parseInt(x * jQuery.fn.dataTableExt.oSort['file-size-units'][x_unit], 10);
+            return parseInt(x * jQuery.fn.dataTableExt.oSort['file-size-units'][x_unit], 10);
         }
         else {
             return parseInt(x + x_unit, 10);
