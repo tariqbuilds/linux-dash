@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+    keepWidgetOrdered();
     // hide localstored hidden widgets
     keepWidgetHidden();
 
@@ -70,14 +72,23 @@ function pulseElement(element, times, interval) {
  *
  */
 
-$( ".row" ).sortable({
-      connectWith: ".row",
+$( "#widgets" ).sortable({
+      connectWith: "#widgets",
       handle: ".widget-header",
       cancel: "#filter-ps",
       cursor: "move",
       opacity: 0.7,
       scrollSensitivity:10,
-      tolerance: 'pointer'
+      tolerance: 'pointer',
+      stop: function(event, ui) {
+            // save widget order in localstorage
+            var newOrder = new Array();
+            $('.widget').each(function() {
+                newOrder.push($(this).attr("id"));
+            });
+            console.log( newOrder );
+            localStorage.setItem('positions', JSON.stringify(newOrder));
+        }
  });
 
 /**
@@ -114,8 +125,14 @@ $('.open-widget').live('click',function(){
     // decrement closed-widget-count 
     closedWidgetCount.text( Number(closedWidgetCount.text()) - 1);
 
-    // remove widget from localstorage
-    window.localStorage.removeItem( widgetIdentifier );
+     // remove widget from localstorage
+    var localData = JSON.parse(window.localStorage.getItem('hidden'));
+    for(var i = localData.length; i--;){
+        if (localData[i] == widgetIdentifier) {
+            localData.splice(i, 1);
+        } 
+    }
+    localStorage.setItem('hidden', JSON.stringify(localData));
 });
 
 
@@ -133,12 +150,41 @@ function hideWidget(widget, speed){
     // add to hidden list
     closedWidgets.append('<li><a class="open-widget" data-id="'+widgetIdentifier+'"><i class="icon-plus-sign"></i>  '+widgetName+'</a></li>');
 
-    // add widget to localstorage
-    window.localStorage.setItem(widgetIdentifier, null);
+    // add widget to localstorage (and create item if needed)
+    var localData = JSON.parse(window.localStorage.getItem('hidden'));
+    if(localData == null) {
+        hidden = new Array();
+        hidden.push(widgetIdentifier);
+        localStorage.setItem('hidden', JSON.stringify(hidden));
+    }
+    else{
+        if (!isInArray(localData, widgetIdentifier)) {
+            localData.push(widgetIdentifier);
+            localStorage.setItem('hidden', JSON.stringify(localData));
+        }
+    }
 }
 
 function keepWidgetHidden(){
-    for(var i in window.localStorage){
-        hideWidget( $("#" + i), 0 );
+    var localData = JSON.parse(window.localStorage.getItem('hidden'));
+    if(localData!=null) {
+        $.each(localData, function(i,value){
+             hideWidget( $("#" + value), 0 );
+        });
     }
+}
+
+function keepWidgetOrdered(){
+    var localData = JSON.parse(window.localStorage.getItem('positions'));
+    if(localData!=null) {
+        $.each(localData, function(i,value){
+            var widgetId ="#" + value;
+            $("#widgets").append($(widgetId).parent());
+        });
+    }
+}
+
+function isInArray(array, search)
+{
+    return (array.indexOf(search) >= 0) ? true : false; 
 }
