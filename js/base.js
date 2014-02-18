@@ -1,6 +1,7 @@
 $(document).ready(function() {
-
+    // keep widgets ordered
     keepWidgetOrdered();
+
     // hide localstored hidden widgets
     keepWidgetHidden();
 
@@ -73,7 +74,6 @@ function pulseElement(element, times, interval) {
  */
 
 $( "#widgets" ).sortable({
-      connectWith: "#widgets",
       handle: ".widget-header",
       cancel: "#filter-ps",
       cursor: "move",
@@ -86,7 +86,6 @@ $( "#widgets" ).sortable({
             $('.widget').each(function() {
                 newOrder.push($(this).attr("id"));
             });
-            console.log( newOrder );
             localStorage.setItem('positions', JSON.stringify(newOrder));
         }
  });
