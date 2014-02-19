@@ -9,7 +9,7 @@
     sleep(2);
 
     $tx_end = shell_exec($tx_path);
-    $rx_end = shell_exec($rx_path); 
+    $rx_end = shell_exec($rx_path);
 
     $result['tx'] = ($tx_end - $tx_start)/2;
     $result['rx'] = ($rx_end - $rx_start)/2;
