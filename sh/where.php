@@ -4,7 +4,7 @@
     if (file_exists("monitor"))
     {
         $data = file_get_contents("monitor");
-        $binaries = explode(" ", $data);
+        $binaries = preg_split('~ ~', $data, NULL, PREG_SPLIT_NO_EMPTY);
     }
     // If file doesn't exist then use hard coded list
     else
