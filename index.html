@@ -50,6 +50,18 @@
                             <a class="js-smoothscroll" href="#refresh-ispeed"><i class="icon-exchange"></i><span>Network</span></a>
                         </li>
                         <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i id="phpinfo-widget-what" class="icon-info-sign"></i><span>PhpInfo <i class="icon-caret-down"></i></span></a>
+                            <ul class="dropdown-menu" id="phpinfo-widget-opt">
+                                <li><a href="sh/phpinfo.php?what=-1" target="_blank"><i class="icon-info"></i> - INFO_ALL</a></li>
+                                <li><a href="sh/phpinfo.php?what=1" target="_blank"><i class="icon-info"></i> - INFO_GENERAL</a></li>
+                                <li><a href="sh/phpinfo.php?what=4" target="_blank"><i class="icon-info"></i> - INFO_CONFIGURATION</a></li>
+                                <li><a href="sh/phpinfo.php?what=8" target="_blank"><i class="icon-info"></i> - INFO_MODULES</a></li>
+                                <li><a href="sh/phpinfo.php?what=16" target="_blank"><i class="icon-info"></i> - INFO_ENVIRONMENT</a></li>
+                                <li><a href="sh/phpinfo.php?what=32" target="_blank"><i class="icon-info"></i> - INFO_VARIABLES</a></li>
+                                <li><a href="sh/phpinfo.php?what=2" target="_blank"><i class="icon-info"></i> - INFO_CREDITS</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i id="closed-widget-count">0</i> <span>Closed Widgets <i class="icon-caret-down"></i></span></a>
                             <ul class="dropdown-menu" id="closed-widget-list"></ul>
                         </li>
