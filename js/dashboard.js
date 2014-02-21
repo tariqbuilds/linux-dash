@@ -277,6 +277,7 @@ dashboard.getWhereIs = function() {
 dashboard.getOs = function() {
     generate_os_data("sh/issue.php", "#os-info");
     generate_os_data("sh/hostname.php", "#os-hostname");
+    generate_os_data("sh/time.php", "#os-time");
     generate_os_data("sh/uptime.php", "#os-uptime");
 }
 
