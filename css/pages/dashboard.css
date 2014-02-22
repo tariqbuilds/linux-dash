@@ -218,7 +218,7 @@ Bootstrap Admin Template by EGrappler.com
 }
 
 .big_stats  i { font-size:20px; display:block; line-height: 30px; color:#b2afaa; }
-.big_stats .stat i { color:#19bc9c; }
+.big_stats .stat i { font: 20px/2em "Open Sans", sans-serif; color:#19bc9c; }
 
 h6.bigstats {
 	margin: 20px;
