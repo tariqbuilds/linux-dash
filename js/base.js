@@ -98,6 +98,24 @@ $( "#widgets" ).sortable({
 // general cached DOM objects
 closedWidgetCount = $('#closed-widget-count'),
 closedWidgets = $('#closed-widget-list');
+allWidgets = $('.widget');
+
+// Close all widgets
+$('#close-all-widgets').click(function(){
+
+    allWidgets.each(function(index){
+	hideWidget($(this), 400);
+    });
+
+});
+
+// Open all widgets
+$('#open-all-widgets').click(function(){
+
+    allWidgets.each(function(index){
+	openWidget($(this), $(this).attr('id'), 500);
+    });
+});
 
 // attach a close button to all widget headers
 $('.widget-header').append('<div class="btn btn-icon-only icon-remove hide-widget"></div>');
@@ -115,11 +133,17 @@ $('.open-widget').live('click',function(){
     var widget = $( "#" + widgetIdentifier );
     var navItem = $(this).parent();
 
-    // unhide widget
-    widget.show(500);
+    openWidget(widget,widgetIdentifier,500);
 
     // remove item from closed-widget-list
     navItem.remove();
+
+});
+
+function openWidget(widget, widgetIdentifier, speed){
+
+    // unhide widget
+    widget.show(500);
 
     // decrement closed-widget-count 
     closedWidgetCount.text( Number(closedWidgetCount.text()) - 1);
@@ -129,10 +153,10 @@ $('.open-widget').live('click',function(){
     for(var i = localData.length; i--;){
         if (localData[i] == widgetIdentifier) {
             localData.splice(i, 1);
-        } 
+        }
     }
     localStorage.setItem('hidden', JSON.stringify(localData));
-});
+}
 
 
 function hideWidget(widget, speed){

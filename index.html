@@ -60,8 +60,19 @@
                             <a class="js-smoothscroll" href="#refresh-ispeed"><i class="icon-exchange"></i><span>Network</span></a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i id="closed-widget-count">0</i> <span>Closed Widgets <i class="icon-caret-down"></i></span></a>
-                            <ul class="dropdown-menu" id="closed-widget-list"></ul>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			        <i id="closed-widget-count">0</i> 
+				<span> Closed Widgets <i class="icon-caret-down"></i></span>
+			    </a>
+                            <ul class="dropdown-menu" id="closed-widget-list">
+			        <li id="close-all-widgets">
+				    <a> <i class="icon-remove lead pull-left"></i> Close All Widgets</a>
+				</li>
+				<li id="open-all-widgets">
+				    <a> <i class="icon-plus lead pull-left"></i> Open All Widgets</a>
+				</li>
+				<li class=""><hr></li>
+			    </ul>
                         </li>
                     </ul>
                 </div><!-- /container -->
