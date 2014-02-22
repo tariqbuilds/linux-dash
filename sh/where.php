@@ -1,12 +1,16 @@
 <?php
 
-// Read list of programs to check from a list
-if (file_exists("monitor")) {
-    $data = file_get_contents("monitor");
-    $binaries = explode(" ", $data);
-} else { // If file doesn't exist then use hard coded list
-    $binaries = explode(" ", "php node mysql vim python ruby java apache2 nginx openssl vsftpd make");
-}
+    // Read list of programs to check from a list
+    if (file_exists("monitor"))
+    {
+        $data = file_get_contents("monitor");
+        $binaries = preg_split('~ ~', $data, NULL, PREG_SPLIT_NO_EMPTY);
+    }
+    // If file doesn't exist then use hard coded list
+    else
+    {	
+    	$binaries = explode(" ", "php node mysql vim python ruby java apache2 nginx openssl vsftpd make");
+    }
 
 putenv('PATH=/usr/local/sbin:/usr/sbin:/sbin:' . getenv('PATH'));
 $data = array();
