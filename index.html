@@ -76,7 +76,10 @@
                             A simple web dashboard to monitor your server.
                         </div>
                     </div>
-                    <div id="widgets" class="row">
+                    <div id="widgets" class="">
+
+		      <div class="row">
+
                         <div class="span3">
                             <div id="general-info-widget" class="widget widget-table action-table">
                                 <div class="widget-header">
@@ -99,6 +102,7 @@
                                 </div><!-- /widget-content -->
                             </div><!-- /widget -->
                         </div>
+
                         <div class="span3">
                             <div id="load-average-widget" class="widget">
                                 <div class="widget-header">
@@ -129,6 +133,7 @@
                                 </div><!-- /widget-content -->
                             </div><!-- /widget -->
                         </div>
+
                         <div class="span6">
                             <div id="ram-widget" class="widget widget-nopad">
                                 <div class="widget-header">
@@ -159,8 +164,9 @@
                                 </div>
                             </div>
                         </div>
-                    
+                      </div><!-- ./row -->
 
+		      <div class="row">			
                         <div class="span6">
                             <div id="disk-usage-widget" class="widget widget-table">
                                 <div class="widget-header">
@@ -189,7 +195,9 @@
                                 </div><!-- /widget-content -->
                             </div><!-- /widget -->
                         </div><!-- /span -->
-                    
+                      </div><!--./row -->
+    
+                      <div class="row">
                         <div class="span6">
                             <div id="dns-lease-widget" class="widget widget-table">
                                 <div class="widget-header">
@@ -229,12 +237,15 @@
                                 </div><!-- /widget-header -->
                                 <div class="widget-content">
                                     <div style="padding:10px; text-align: center;">
-                                        <span class="lead value odometer" style="margin-top:11px;" id="ispeed-rate">0</span> <span class="lead">Mbps</span>
+                                        <span class="lead value odometer" style="margin-top:11px;" id="ispeed-rate">0</span> 
+					<span class="lead">Mbps</span>
                                     </div>
                                 </div><!-- /widget-content -->
                             </div><!-- /widget -->
                         </div><!-- /span -->
-                    
+                      </div> <!-- ./row -->
+
+                      <div class="row">
                         <div class="span4">
                             <div id="netstat-widget" class="widget widget-table">
                                 <div class="widget-header">
@@ -279,7 +290,9 @@
                                 </div><!-- /widget-content -->
                             </div><!-- /widget -->
                         </div><!-- /span -->
-                    
+                       </div><!--./row -->
+
+                      <div class="row">
                         <div class="span6">
                             <div id="users-widget" class="widget widget-table action-table">
                                 <div class="widget-header">
@@ -308,7 +321,9 @@
                                 </div><!-- /widget-content -->
                             </div><!-- /widget -->
                         </div><!-- /span6 -->
-                    
+                       </div><!--./row -->
+
+                      <div class="row">
                         <div class="span12">
                             <div id="process-widget" class="widget widget-table">
                                 <div class="widget-header">
@@ -326,7 +341,9 @@
                                 </div><!-- /widget-content -->
                             </div><!-- /widget -->
                         </div><!-- /span -->
-                    </div><!-- /row -->
+		       </div><!-- ./row -->
+
+                    </div><!-- #/widgets -->
                 </div>
             </div><!-- /main-inner -->
         </div><!-- /main -->
