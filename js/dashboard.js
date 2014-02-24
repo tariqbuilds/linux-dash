@@ -332,25 +332,30 @@ dashboard.getPing = function () {
 }
 
 dashboard.getIspeed = function () {
-    var rate = $("#ispeed-rate");
+    var rateUpstream = $("#ispeed-rate-upstream");
+    var rateDownstream = $("#ispeed-rate-downstream");
 
     // 0 = KB
     // 1 = MB
     var AS = 0;
     var power = AS + 1;
-    var result = 0;
+    var result = { 'upstream' :0, 'downstream':0};
 
     $.get("sh/speed.php", function (data) {
         // round the speed (float to int);
         // dependent on value of AS, calculate speed in MB or KB ps
-        result = Math.floor((data / (Math.pow(1024, power))));
+        result['upstream'] = Math.floor((data['upstream'] / (Math.pow(1024, power))));
+        result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
         // update rate of speed on widget
-        rate.text(result);
+        rateUpstream.text(result['upstream']);
+        rateDownstream.text(result['downstream']);
 
     });
     // update unit value in widget
-    var lead = rate.next(".lead");
-    lead.text(AS ? "MB/s" : "KB/s");
+    var leadUpstream = rateUpstream.next(".lead");
+    var leadDownstream = rateDownstream.next(".lead");
+    leadUpstream.text(AS ? "MB/s" : "KB/s");
+    leadDownstream.text(AS ? "MB/s" : "KB/s");
 }
 
 dashboard.getLoadAverage = function () {
