@@ -23,7 +23,7 @@ if ($error) { // It didn't work with "ip" , so we do it with ifconfig
     exec($command, $result, $return_value);
 }
 // Get external adress
-$result2 = file_get_contents('http://ipecho.net/plain');
+exec('curl http://ipecho.net/plain -f 2>/dev/null || curl http://icanhazip.com',$result2);
 
 // Create JSON header
 header('Content-Type: application/json; charset=UTF-8');
