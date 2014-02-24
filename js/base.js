@@ -142,11 +142,13 @@ $('.open-widget').live('click',function(){
 
 function openWidget(widget, widgetIdentifier, speed){
 
+    // decrement closed-widget-count 
+    if(widget.is(":hidden")) {
+        closedWidgetCount.text( Number(closedWidgetCount.text()) - 1);
+    }
+
     // unhide widget
     widget.show(500);
-
-    // decrement closed-widget-count 
-    closedWidgetCount.text( Number(closedWidgetCount.text()) - 1);
 
      // remove widget from localstorage
     var localData = JSON.parse(window.localStorage.getItem('hidden'));
@@ -165,7 +167,9 @@ function hideWidget(widget, speed){
     var widgetIdentifier = widget.attr('id'); 
 
     // update count
-    closedWidgetCount.text( Number(closedWidgetCount.text()) + 1);
+    if(!widget.is(":hidden")) {
+        closedWidgetCount.text( Number(closedWidgetCount.text()) + 1);
+    }
 
     // hide widget from DOM
     widget.hide(speed);
