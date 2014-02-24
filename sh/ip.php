@@ -28,7 +28,7 @@ exec('curl http://ipecho.net/plain -f 2>/dev/null || curl http://icanhazip.com',
 // Create JSON header
 header('Content-Type: application/json; charset=UTF-8');
 // Return info as JSON
-echo '[[','"external ip","',$result2,'"]';
+echo '[[','"external ip","',$result2[0],'"]';
 $x = 0;
 $max = count($result)-1;
 foreach ($result as $a) {
