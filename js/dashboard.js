@@ -334,6 +334,7 @@ dashboard.getPing = function () {
 dashboard.getIspeed = function () {
     var rateUpstream = $("#ispeed-rate-upstream");
     var rateDownstream = $("#ispeed-rate-downstream");
+    var refreshIcon = $("#refresh-ispeed .icon-refresh");
 
     // 0 = KB
     // 1 = MB
@@ -341,16 +342,25 @@ dashboard.getIspeed = function () {
     var power = AS + 1;
     var result = { 'upstream' :0, 'downstream':0};
 
-    $.get("sh/speed.php", function (data) {
-        // round the speed (float to int);
-        // dependent on value of AS, calculate speed in MB or KB ps
-        result['upstream'] = Math.floor((data['upstream'] / (Math.pow(1024, power))));
-        result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
-        // update rate of speed on widget
-        rateUpstream.text(result['upstream']);
-        rateDownstream.text(result['downstream']);
+    refreshIcon.addClass('loading');
 
+    $.ajax({
+        url: 'sh/speed.php',
+        cache: false,
+        success: function(data) {
+            // round the speed (float to int);
+            // dependent on value of AS, calculate speed in MB or KB ps
+            result['upstream'] = Math.floor((data['upstream'] / (Math.pow(1024, power))));
+            result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
+            // update rate of speed on widget
+            rateUpstream.text(result['upstream']);
+            rateDownstream.text(result['downstream']);
+        },
+        complete: function() {
+            refreshIcon.removeClass('loading');
+        }
     });
+
     // update unit value in widget
     var leadUpstream = rateUpstream.next(".lead");
     var leadDownstream = rateDownstream.next(".lead");
