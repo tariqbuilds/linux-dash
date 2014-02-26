@@ -2,7 +2,7 @@
 
 $intOpts = array(
     'options' => array(
-        'min' => 1,
+        'min_range' => 1,
     ),
 );
 
