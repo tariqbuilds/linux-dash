@@ -1306,3 +1306,13 @@ width: 11px;}
 	}	
 }
 
+/* ----------------------------------------
+	Subnavbar CSS fix/work-around
+*/
+
+.container.nav-collapse.in {
+    overflow:visible;
+}
+.btn-navbar {
+    margin-top:-38px;
+}
