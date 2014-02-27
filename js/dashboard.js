@@ -336,7 +336,7 @@ dashboard.getPing = function () {
             }).fadeIn();
         },
         complete: function() {
-            refreshIcon.removeClass('loading');
+            refreshIcon.removeClass('icon-spin');
         }
     });
 }
@@ -367,7 +367,7 @@ dashboard.getIspeed = function () {
             rateDownstream.text(result['downstream']);
         },
         complete: function() {
-            refreshIcon.removeClass('loading');
+            refreshIcon.removeClass('icon-spin');
         }
     });
 
@@ -427,7 +427,7 @@ dashboard.getBandwidth = function () {
             $('#bw-rx').text(data.rx);
         },
         complete: function() {
-            refreshIcon.removeClass('loading');
+            refreshIcon.removeClass('icon-spin');
         }
     });
 
