@@ -1138,7 +1138,7 @@ width: 11px;}
 
 .paginate_active { text-decoration: underline; }
 
-#refresh-ispeed .icon-refresh {
+#refresh-ispeed .icon-refresh, #refresh-ping .icon-refresh, #refresh-bandwidth .icon-refresh {
 	margin: 0;
 }
 

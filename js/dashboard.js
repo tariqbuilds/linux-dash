@@ -309,26 +309,36 @@ dashboard.getIp = function () {
 }
 
 dashboard.getPing = function () {
-    $.get("sh/ping.php", function (data) {
-        destroy_dataTable("ping_dashboard");
+    var refreshIcon = $('#refresh-ping .icon-refresh');
+    refreshIcon.addClass('loading');
 
-        $("#ping_dashboard").dataTable({
-            aaData: data,
-            aoColumns: [
-                { sTitle: "Host" },
-                { sTitle: "Time (in ms)" }
-            ],
-            aaSorting: [
-                [0, "desc"]
-            ],
-            bPaginate: true,
-            sPaginationType: "full_numbers",
-            bFilter: true,
-            sDom: "lrtip",
-            bAutoWidth: false,
-            bInfo: false
-        }).fadeIn();
-    }, "json");
+    $.ajax({
+        url: 'sh/ping.php',
+        cache: false,
+        success: function (data) {
+            destroy_dataTable("ping_dashboard");
+
+            $("#ping_dashboard").dataTable({
+                aaData: data,
+                aoColumns: [
+                    { sTitle: "Host" },
+                    { sTitle: "Time (in ms)" }
+                ],
+                aaSorting: [
+                    [0, "desc"]
+                ],
+                bPaginate: true,
+                sPaginationType: "full_numbers",
+                bFilter: true,
+                sDom: "lrtip",
+                bAutoWidth: false,
+                bInfo: false
+            }).fadeIn();
+        },
+        complete: function() {
+            refreshIcon.removeClass('loading');
+        }
+    });
 }
 
 dashboard.getIspeed = function () {
@@ -406,10 +416,20 @@ dashboard.getDnsmasqLeases = function () {
 }
 
 dashboard.getBandwidth = function () {
-    $.get("sh/bandwidth.php", function (data) {
-        $('#bw-tx').text(data.tx);
-        $('#bw-rx').text(data.rx);
-    }, 'json');
+    var refreshIcon = $('#refresh-bandwidth .icon-refresh');
+    refreshIcon.addClass('loading');
+
+    $.ajax({
+        url: 'sh/bandwidth.php',
+        cache: false,
+        success: function (data) {
+            $('#bw-tx').text(data.tx);
+            $('#bw-rx').text(data.rx);
+        },
+        complete: function() {
+            refreshIcon.removeClass('loading');
+        }
+    });
 
 }
 
