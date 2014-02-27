@@ -310,7 +310,7 @@ dashboard.getIp = function () {
 
 dashboard.getPing = function () {
     var refreshIcon = $('#refresh-ping .icon-refresh');
-    refreshIcon.addClass('loading');
+    refreshIcon.addClass('icon-spin');
 
     $.ajax({
         url: 'sh/ping.php',
@@ -352,7 +352,7 @@ dashboard.getIspeed = function () {
     var power = AS + 1;
     var result = { 'upstream' :0, 'downstream':0};
 
-    refreshIcon.addClass('loading');
+    refreshIcon.addClass('icon-spin');
 
     $.ajax({
         url: 'sh/speed.php',
@@ -417,7 +417,7 @@ dashboard.getDnsmasqLeases = function () {
 
 dashboard.getBandwidth = function () {
     var refreshIcon = $('#refresh-bandwidth .icon-refresh');
-    refreshIcon.addClass('loading');
+    refreshIcon.addClass('icon-spin');
 
     $.ajax({
         url: 'sh/bandwidth.php',
