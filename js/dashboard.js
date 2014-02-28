@@ -222,7 +222,7 @@ dashboard.getLastLog = function () {
             aoColumns: [
                 { sTitle: "Who" },
                 { sTitle: "From" },
-                { sTitle: "Last Login" },
+                { sTitle: "When" },
             ],
             aaSorting: [
                 [2, "desc"]
