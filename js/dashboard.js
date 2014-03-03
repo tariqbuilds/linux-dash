@@ -213,6 +213,31 @@ dashboard.getOnline = function () {
     $("select[name='online_dashboard_length']").val("5");
 }
 
+dashboard.getLastLog = function () {
+    $.get("sh/lastlog.php", function (data) {
+        destroy_dataTable("lastlog_dashboard");
+
+        $("#lastlog_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Who" },
+                { sTitle: "From" },
+                { sTitle: "When" },
+            ],
+            aaSorting: [
+                [2, "desc"]
+            ],
+            iDisplayLength: 5,
+            bPaginate: true,
+            sPaginationType: "full_numbers",
+            bFilter: false,
+            bAutoWidth: false,
+            bInfo: false
+        }).fadeIn();
+    }, "json");
+    $("select[name='lastlog_dashboard_length']").val("5");
+}
+
 dashboard.getRam = function () {
     $.get("sh/mem.php", function (data) {
         var ram_total = data[1];
@@ -423,6 +448,7 @@ dashboard.fnMap = {
     os: dashboard.getOs,
     users: dashboard.getUsers,
     online: dashboard.getOnline,
+    lastlog: dashboard.getLastLog,
     whereis: dashboard.getWhereIs,
     ip: dashboard.getIp,
     ispeed: dashboard.getIspeed,
