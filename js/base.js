@@ -120,7 +120,7 @@ $('#close-all-widgets').click(function(){
 // Open all widgets
 $('#open-all-widgets').click(function(){
     allWidgets.each(function(index){
-	openWidget($(this), $(this).attr('id'), 500);
+	   openWidget($(this), $(this).attr('id'), 500);
     });
 });
 
