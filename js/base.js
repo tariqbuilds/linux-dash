@@ -22,7 +22,15 @@ $(document).ready(function() {
     }, 1000);
 }).on("click", ".js-refresh-info", function(event) {
     event.preventDefault();
-    var item = event.target.id.split("-").splice(-1)[0];
+    var target = event.target;
+    var item = target.id.split("-").splice(-1)[0];
+
+    // if the refresh icon is click (where in a <span>) target will not have an id, so grab its parent instead
+    if(target.id == "") {
+        var parent = $(target).parent()[0];
+        item = parent.id.split("-").splice(-1)[0];
+    }
+
     dashboard.fnMap[item]();
 });
 
