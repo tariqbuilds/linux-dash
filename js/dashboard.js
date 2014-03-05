@@ -151,6 +151,7 @@ dashboard.getNetStat = function () {
             aaSorting: [
                 [0, "desc"]
             ],
+            iDisplayLength: 5,
             bPaginate: true,
             sPaginationType: "full_numbers",
             bFilter: true,
