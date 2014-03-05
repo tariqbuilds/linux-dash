@@ -110,16 +110,15 @@ allWidgets = $('.widget');
 
 // Close all widgets
 $('#close-all-widgets').click(function(){
-
     allWidgets.each(function(index){
-	hideWidget($(this), 400);
+        if ($(this).is(":visible")){
+	       hideWidget($(this), 400);
+        }
     });
-
 });
 
 // Open all widgets
 $('#open-all-widgets').click(function(){
-
     allWidgets.each(function(index){
 	openWidget($(this), $(this).attr('id'), 500);
     });
