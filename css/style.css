@@ -496,7 +496,6 @@ textarea {
 
 
 
-
 /*------------------------------------------------------------------
 [7. Error / .error-container]
 */
@@ -1313,3 +1312,24 @@ width: 11px;}
 .btn-navbar {
     margin-top:-38px;
 }
+
+/*------------------------------------------------------------------
+	general-info widget specific style
+*/
+
+#general-info-widget .general-title {
+	font-weight: bold;
+}
+
+#general-info-widget .general-title:after {
+	content:":";
+}
+
+#general-info-widget .widget-content {
+	padding:5px;
+}
+
+#general-info-widget .widget-content div {
+	margin-bottom:5px;
+}
+
