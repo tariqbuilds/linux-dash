@@ -1,14 +1,9 @@
 <?php
 header('Content-Type: application/json; charset=UTF-8');
+require_once '../inc/load_parameters.php';
 
-// Read list of hosts to ping from csv file ping_hosts
-if (file_exists("ping_hosts")) {
-    $hosts = file('ping_hosts', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-} else {
-    $hosts = array("gnu.org", "github.com", "wikipedia.org");
-}
-
-$pingCount = 2;
+$hosts = $parameters["ping_website"];
+$pingCount = $parameters["ping_count"];
 
 echo "[";
 $max = count($hosts);
