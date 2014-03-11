@@ -3,7 +3,7 @@
 /**
  * Load user parameters if they exists. If not, load default value
  *
- * @return parameters
+ * @return param
  */
 function load_parameters()
 {
@@ -11,11 +11,12 @@ function load_parameters()
     $pathUser = "../config/user/";
     $fileName = basename($_SERVER['SCRIPT_FILENAME'], '.php').".ini";
 
-    if (!$parameters = parse_ini_file($pathUser.$fileName)) {
-        $parameters = parse_ini_file($pathDefault.$fileName);
+    // load user or defaut paremeters for the widget
+    if (!$param = parse_ini_file($pathUser.$fileName)) {
+        $param = parse_ini_file($pathDefault.$fileName);
     }
 
-    return $parameters;
+    return $param;
 }
 
-$parameters = load_parameters();
+$param = load_parameters();
