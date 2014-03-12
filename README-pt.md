@@ -1,7 +1,11 @@
 # linux-dash (Beta)
 
+<!--
 A low-overhead monitoring web dashboard for a GNU/Linux machine. Simply drop-in
-the app and go!
+the app and go!*/
+-->
+
+Um painel web de monitorização com baixa sobrecarga. Basta colocar no servidor e funciona!
 
 [**Ver Demo**](http://afaq.dreamhosters.com/linux-dash/) | [**Ver Funcionalidades**](#features) | [**Instalação Instruções**](#installation) | [**Novidades**](https://github.com/afaqurk/linux-dash/news) | [**Documentação**](https://github.com/afaqurk/linux-dash/wiki)
 
