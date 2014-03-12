@@ -1,6 +1,6 @@
 # linux-dash (Beta)
 
-Um painel de monitorização com baixa sobrecarga. Basta colocar no servidor e utilizar!
+Um painel de monitorização com baixa sobrecarga para máquinas GNU/Linux. Basta colocar no servidor e utilizar!
 
 **Esta documentação está em Português mas o software está integralmente em Inglês.**
 
