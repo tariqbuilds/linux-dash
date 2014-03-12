@@ -1,34 +1,29 @@
 # linux-dash (Beta)
 
-<!--
-A low-overhead monitoring web dashboard for a GNU/Linux machine. Simply drop-in
-the app and go!*/
--->
-
-Um painel web de monitorização com baixa sobrecarga. Basta colocar no servidor e funciona!
+Um painel de monitorização com baixa sobrecarga. Basta colocar no servidor e utilizar!
 
 [**Ver Demo**](http://afaq.dreamhosters.com/linux-dash/) | [**Ver Funcionalidades**](#features) | [**Instalação Instruções**](#installation) | [**Novidades**](https://github.com/afaqurk/linux-dash/news) | [**Documentação**](https://github.com/afaqurk/linux-dash/wiki)
 
 ![Demonstração](http://afaq.dreamhosters.com/linux-dash.PNG)
 
 ## Funcionalidades
-* A beautiful web-based dashboard for monitoring server info
-* Live, on-demand monitoring of RAM, Load, Uptime, Disk Allocation, Users and many more system stats
-* Drop-in install for servers with Apache2/nginx + PHP
-* Click and drag to re-arrange widgets
-* Support for wide range of linux server flavors [(See Support section)](#support)
+* Um painel *web-based* para monitorizar informação do servidor
+* Monitorização em tempo real de RAM, carga, *uptime*, alocação em disco, utilizadores e muito mais estatísticas do servidor
+* Instalação *drop-in* em servidores Apache2/nginx + PHP
+* Clicar e arrastar para reorganizar *widgets* 
+* Suporte para uma vasta variada de distribuições linux [(See Support section)](#support)
 
 ## Instalação
 
-1. Make sure you have `php5-json` installed and enabled
-2. Download the zip/repo/package
-3. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
-4. Optional: Secure access to the page via `.htaccess` or method of your choice
+1. Garantir que o `php5-json` está instalado e activo
+2. Transferir a pasta zip/repo/package
+3. Colocá-la em `/var/wwww/` (para Apache); Para nginx, ver [this gist](https://gist.github.com/sergeifilippov/8909839) por [@sergeifilippov](https://github.com/sergeifilippov)
+4. Opcional: garantir segurança no acesso através de `.htaccess` ou outro método à escolha
  
 
 
-**Please note: If you would like to limit access to the webpage, please add
-`.htaccess` or other security measure.**
+**Nota: Se desejar limitar o acesso à página, adicionar `.htaccess`
+ou outra método à escolha**
 
 ## Suporte
 
