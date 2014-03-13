@@ -29,7 +29,7 @@ ou outra método à escolha**
 
 ## Suporte
 
-*A informação listada em baixo é limitada e vai ser expandida em breve.*
+*A informação listada em baixo é limitada e vai ser expandida os mais rapidamente possível.*
 
 * SO
     * Arch
