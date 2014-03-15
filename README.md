@@ -22,12 +22,13 @@ the app and go!
 3. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
 4. Optional: Secure access to the page via `.htaccess` or method of your choice
  
-## Customize
-
-Many widget are customable or will be. Just copy the defaut ini config file you want from config/default to config/user and modify it.
-
 **Please note: If you would like to limit access to the webpage, please add
 `.htaccess` or other security measure.**
+
+## Customize
+
+Many widget are customable or will be. Just copy the defaut .php config file you want from config/default to config/user and modify it.
+
 
 ## Support
 
