@@ -1,2 +1,2 @@
 # prevent user parameters to be gitted
-config/user/*.ini
+config/user/*.php
