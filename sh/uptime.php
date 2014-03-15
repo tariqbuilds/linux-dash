@@ -1,7 +1,8 @@
 <?php
+
 require_once '../inc/load_parameters.php';
 
-if ($param["enabled"]) {
+if ($param["isEnabled"]) {
     $totalSeconds = shell_exec("/usr/bin/cut -d. -f1 /proc/uptime");
     $totalMin   = $totalSeconds / 60;
     $totalHours = $totalMin / 60;
@@ -12,15 +13,15 @@ if ($param["enabled"]) {
 
     $formatUptime = '';
     if ($days != 0) {
-        $formatUptime .= "$days $param[days] ";
+        $formatUptime .= $days." ".$param["translate"]["days"]." ";
     }
 
     if ($hours != 0) {
-        $formatUptime .= "$hours $param[hours] ";
+        $formatUptime .= $hours." ".$param["translate"]["hours"]." ";
     }
 
     if ($min != 0) {
-        $formatUptime .= "$min $param[minutes]";
+        $formatUptime .= $min." ".$param["translate"]["minutes"];
     }
 
     header('Content-Type: application/json; charset=UTF-8');

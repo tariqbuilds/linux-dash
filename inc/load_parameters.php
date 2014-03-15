@@ -9,11 +9,13 @@ function load_parameters()
 {
     $pathDefault = "../config/default/";
     $pathUser = "../config/user/";
-    $fileName = basename($_SERVER['SCRIPT_FILENAME'], '.php').".ini";
+    $fileName = basename($_SERVER['SCRIPT_FILENAME']);
+    $param = array();
 
-    // load user or defaut paremeters for the widget
-    if (!$param = parse_ini_file($pathUser.$fileName)) {
-        $param = parse_ini_file($pathDefault.$fileName);
+    if (file_exists($pathUser.$fileName)) {
+        require_once $pathUser.$fileName;
+    } else {
+        require_once $pathDefault.$fileName;
     }
 
     return $param;

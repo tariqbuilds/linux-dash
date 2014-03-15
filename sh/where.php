@@ -2,13 +2,10 @@
 
 require_once '../inc/load_parameters.php';
 
-if ($param["enabled"]) {
-
-    $binaries = $param["binaries"];
-
+if ($param["isEnabled"]) {
     putenv('PATH=/usr/local/sbin:/usr/sbin:/sbin:' . getenv('PATH'));
     $data = array();
-    foreach ($binaries as $b) {
+    foreach ($param["binaries"] as $b) {
         $which = array();
         exec('command -v ' . escapeshellarg($b), $which, $return_var);
         $data[] = array($b, $return_var ? "Not Installed" : $which[0]);
