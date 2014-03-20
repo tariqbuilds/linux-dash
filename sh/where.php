@@ -12,7 +12,7 @@
     	$binaries = explode(" ", "php node mysql vim python ruby java apache2 nginx openssl vsftpd make");
     }
 
-putenv('PATH=/usr/local/sbin:/usr/sbin:/sbin:' . getenv('PATH'));
+putenv('PATH=/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:' . getenv('PATH'));
 $data = array();
 foreach ($binaries as $b) {
     $which = array();
