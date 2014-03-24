@@ -7,7 +7,7 @@ $intOpts = array(
 );
 
 // get value via /proc/cpuinfo
-$numOfCores = shell_exec('/bin/grep -c ^processor /proc/cpuinfo');
+$numOfCores = shell_exec('LC_ALL=C /bin/grep -c ^processor /proc/cpuinfo');
 $numOfCores = filter_var(
     $numOfCores[0],
     FILTER_VALIDATE_INT,

@@ -417,7 +417,7 @@ dashboard.getLoadAverage = function () {
 }
 
 dashboard.getDnsmasqLeases = function () {
-    $.get("sh/dnsmasq-leases.php", function (data) {
+    $.get("sh/dhcp-leases.php", function (data) {
         var table = $("#dnsmasqleases_dashboard");
         var ex = document.getElementById("dnsmasqleases_dashboard");
         if ($.fn.DataTable.fnIsDataTable(ex)) {
@@ -448,6 +448,7 @@ dashboard.getBandwidth = function () {
     $.ajax({
         url: 'sh/bandwidth.php',
         cache: false,
+        dataType: 'json',
         success: function (data) {
             $('#bw-tx').text(data.tx);
             $('#bw-rx').text(data.rx);
