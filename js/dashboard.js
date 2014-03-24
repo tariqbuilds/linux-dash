@@ -448,6 +448,7 @@ dashboard.getBandwidth = function () {
     $.ajax({
         url: 'sh/bandwidth.php',
         cache: false,
+        dataType: 'json',
         success: function (data) {
             $('#bw-tx').text(data.tx);
             $('#bw-rx').text(data.rx);
