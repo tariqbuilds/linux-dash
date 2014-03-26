@@ -12,11 +12,11 @@
     	$binaries = explode(" ", "php node mysql vim python ruby java apache2 nginx openssl vsftpd make");
     }
 
-putenv('PATH=/usr/local/sbin:/usr/sbin:/sbin:' . getenv('PATH'));
+$path = 'PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:' . getenv('PATH');
 $data = array();
 foreach ($binaries as $b) {
     $which = array();
-    exec('command -v ' . escapeshellarg($b), $which, $return_var);
+    exec($path . ' command -v ' . escapeshellarg($b), $which, $return_var);
     $data[] = array($b, $return_var ? "Not Installed" : $which[0]);
 }
 
