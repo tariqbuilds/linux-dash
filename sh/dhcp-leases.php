@@ -36,7 +36,12 @@ if (file_exists($dnsmasq_lease_file)) {
         $results[] = $l;
     }
 } else {
-    $fh=fopen("/var/lib/dhcp/dhcpd.leases","r");
+
+    $dhcp_file = "/var/lib/dhcp/dhcpd.leases";
+
+if ( file_exists($dhcp_file) ) {
+
+    $fh = fopen($dhcp_file,"r");
 
     while ($dat=fgets($fh)) {
         if (preg_match("/lease.+{/",$dat)) {
@@ -76,7 +81,9 @@ if (file_exists($dnsmasq_lease_file)) {
     }
     sort($results);
     $results = array_values($results);
-
+} else {
+ $results = array();
+}
 }
 
 // output the results
