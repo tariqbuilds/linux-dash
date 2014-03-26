@@ -13,6 +13,7 @@
     }
 
 $path = 'PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:' . getenv('PATH');
+
 $data = array();
 foreach ($binaries as $b) {
     $which = array();
