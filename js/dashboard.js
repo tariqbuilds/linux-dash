@@ -273,7 +273,8 @@ dashboard.getDf = function () {
                 { sTitle: "Use%", sType: "percent" },
                 { sTitle: "Mounted" }
             ],
-            bPaginate: false,
+	    iDisplayLength: 5,
+            bPaginate: true,
             bFilter: false,
             bAutoWidth: true,
             bInfo: false
