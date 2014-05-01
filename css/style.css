@@ -1164,11 +1164,7 @@ width: 11px;}
 		margin-left: -20px;
 		margin-right: -20px;	
 	}
-	
-	
-	.subnavbar-inner {
-		height: auto;
-	}
+
 	
 	.subnavbar .container > ul {
 		width: 100%;
@@ -1264,6 +1260,10 @@ width: 11px;}
 	
 	.subnavbar .container {		
 		width: auto;
+	}
+
+	.subnavbar-inner {
+		height: auto;
 	}
 
 	.widget-header {
