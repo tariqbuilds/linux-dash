@@ -3,7 +3,9 @@
 A low-overhead monitoring web dashboard for a GNU/Linux machine. Simply drop-in
 the app and go!
 
-[**View Features**](#features) | [**Installation Instructions**](#installation) | [**News**](https://github.com/afaqurk/linux-dash/news) | [**Documentation**](https://github.com/afaqurk/linux-dash/wiki)
+[**View DEMO**](http://ec2-54-187-89-182.us-west-2.compute.amazonaws.com/linux-dash/) | [**View Features**](#features) | [**Installation Instructions**](#installation) | [**News**](https://github.com/afaqurk/linux-dash/news) | [**Documentation**](https://github.com/afaqurk/linux-dash/wiki)
+
+<img src="https://raw.githubusercontent.com/afaqurk/linux-dash/master/linux-dash.PNG">
 
 ## Features
 * A beautiful web-based dashboard for monitoring server info
@@ -15,13 +17,10 @@ the app and go!
 ## Installation
 
 1. Make sure you have `php5-json` installed and enabled
-2. Download the zip/repo/package
+2. [Download the source](https://github.com/afaqurk/linux-dash/archive/master.zip) or clone the repo 
 3. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
-4. Optional: Secure access to the page via `.htaccess` or method of your choice
- 
 
-
-**Please note: If you would like to limit access to the webpage, please add
+**Please note: If you would like to limit access to linux-dash, please add
 `.htaccess` or other security measure.**
 
 ## Support
