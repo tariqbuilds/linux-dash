@@ -405,6 +405,38 @@ dashboard.getIspeed = function () {
     leadDownstream.text(AS ? "MB/s" : "KB/s");
 }
 
+dashboard.getSabspeed = function () {
+    var rateDownstream = $("#sabspeed-rate-downstream");
+    var refreshIcon = $("#refresh-sabspeed .icon-refresh");
+
+    // 0 = KB
+    // 1 = MB
+    var AS = 0;
+    var power = AS;
+    var result = { 'downstream' :0};
+
+    refreshIcon.addClass('icon-spin');
+
+    $.ajax({
+        url: 'sh/sabnzbd.php',
+        cache: false,
+        success: function(data) {
+            // round the speed (float to int);
+            // dependent on value of AS, calculate speed in MB or KB ps
+            result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
+            // update rate of speed on widget
+            rateDownstream.text(result['downstream']);
+        },
+        complete: function() {
+            refreshIcon.removeClass('icon-spin');
+        }
+    });
+
+    // update unit value in widget
+    var leadDownstream = rateDownstream.next(".lead");
+    leadDownstream.text(AS ? "MB/s" : "KB/s");
+}
+
 dashboard.getLoadAverage = function () {
     $.get("sh/loadavg.php", function (data) {
         $("#cpu-1min").text(data[0][0]);
@@ -514,6 +546,7 @@ dashboard.fnMap = {
     whereis: dashboard.getWhereIs,
     ip: dashboard.getIp,
     ispeed: dashboard.getIspeed,
+    sabspeed: dashboard.getSabspeed,
     cpu: dashboard.getLoadAverage,
     netstat: dashboard.getNetStat,
     dnsmasqleases: dashboard.getDnsmasqLeases,
