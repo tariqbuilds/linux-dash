@@ -34,6 +34,7 @@ $(document).ready(function() {
     dashboard.fnMap[item]();
 });
 
+
 // Handle for cancelling active effect.
 var pulsing = {
     element: null,

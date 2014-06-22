@@ -298,7 +298,7 @@ dashboard.getWhereIs = function () {
                 { sTitle: "Installation" }
             ],
             bPaginate: true,
-            iDisplayLength: 6,
+            iDisplayLength: 5,
             bFilter: false,
             aaSorting: [
                 [1, "desc"]

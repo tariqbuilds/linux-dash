@@ -345,7 +345,7 @@ textarea {
 	clear: both;
 	
 	width: auto;
-	
+	min-height: 240px;	
 	margin-bottom: 2em;
 		
 	overflow: hidden;
