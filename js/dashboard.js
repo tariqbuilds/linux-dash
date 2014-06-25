@@ -483,8 +483,9 @@ dashboard.getBandwidth = function () {
         cache: false,
         dataType: 'json',
         success: function (data) {
-            $('#bw-tx').text(data.tx);
-            $('#bw-rx').text(data.rx);
+            $('#bw-int').text(data['0'].interface + ":");
+            $('#bw-tx').text(data['0'].tx);
+            $('#bw-rx').text(data['0'].rx);
         },
         complete: function() {
             refreshIcon.removeClass('icon-spin');
