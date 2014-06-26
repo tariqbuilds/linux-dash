@@ -34,6 +34,7 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
     * Debian 6, 7
     * Ubuntu 11.04+
     * Linux Mint 16+
+    * CentOS 5, 6
 * Apache 2
 * Nginx
 * PHP 5
