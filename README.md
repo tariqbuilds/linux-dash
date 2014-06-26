@@ -18,9 +18,13 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
 
 ## Installation
 
+### From source
 1. Make sure you have `php5-json` installed and enabled
 2. [Download the source](https://github.com/afaqurk/linux-dash/archive/master.zip) or clone the repo 
 3. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
+
+### Arch Linux
+1. Install from the AUR: [stable](https://aur.archlinux.org/packages/linux-dash/) or [git](https://aur.archlinux.org/packages/linux-dash-git/)
 
 **Please note: If you would like to limit access to linux-dash, please add
 `.htaccess` or other security measure.**
