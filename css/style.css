@@ -1152,7 +1152,10 @@ width: 11px;}
 */
 
 @media (max-width: 767px) {
-    	
+    	.widget{
+		min-height: 150px;		
+	}	
+
 	#main {
 		padding: 0 10px;
 		margin-right: -20px;
@@ -1333,6 +1336,3 @@ width: 11px;}
 	margin-bottom:5px;
 }
 
-.container{
-	width:1270px;
-}
