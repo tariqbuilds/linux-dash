@@ -1,10 +1,3 @@
-// Gets data from provided url and updates DOM element.
-function generate_os_data(url, element) {
-    $.get(url, function (data) {
-        $(element).text(data);
-    }, "json");
-}
-
 // If dataTable with provided ID exists, destroy it.
 function destroy_dataTable(table_id) {
     var table = $("#" + table_id);
@@ -104,8 +97,27 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
 
 var dashboard = {};
 
+function moduleData(module, onData) {
+    var module_url = 'module.php?module=';
+
+    $.getJSON(module_url + module)
+    .done(function(data) {
+        if (data.error) {
+            console.log('Module error [' + module + ']', data.error);
+        } else {
+            onData(data.data);
+        }
+    });
+}
+
+dashboard.fillElement = function(module, $el){
+    moduleData(module, function(data) {
+        $el.text(data);
+    });
+}
+
 dashboard.getPs = function () {
-    $.get("sh/ps.php", function (data) {
+    moduleData("ps", function (data) {
         destroy_dataTable("ps_dashboard");
         $("#filter-ps").val("").off("keyup");
 
@@ -135,11 +147,11 @@ dashboard.getPs = function () {
         $("#filter-ps").on("keyup", function () {
             psTable.fnFilter(this.value);
         });
-    }, "json");
+    });
 }
 
 dashboard.getNetStat = function () {
-    $.get("sh/netstat.php", function (data) {
+    moduleData("netstat", function (data) {
         destroy_dataTable("netstat_dashboard");
 
         $("#netstat_dashboard").dataTable({
@@ -159,12 +171,12 @@ dashboard.getNetStat = function () {
             bAutoWidth: false,
             bInfo: false
         }).fadeIn();
-    }, "json");
+    });
 }
 
 
 dashboard.getUsers = function () {
-    $.get("sh/users.php", function (data) {
+    moduleData("users", function (data) {
         destroy_dataTable("users_dashboard");
 
         $("#users_dashboard").dataTable({
@@ -184,12 +196,12 @@ dashboard.getUsers = function () {
             bAutoWidth: false,
             bInfo: false
         }).fadeIn();
-    }, "json");
+    });
     $("select[name='users_dashboard_length']").val("5");
 }
 
 dashboard.getOnline = function () {
-    $.get("sh/online.php", function (data) {
+    moduleData("online", function (data) {
         destroy_dataTable("online_dashboard");
 
         $("#online_dashboard").dataTable({
@@ -210,12 +222,12 @@ dashboard.getOnline = function () {
             bAutoWidth: false,
             bInfo: false
         }).fadeIn();
-    }, "json");
+    });
     $("select[name='online_dashboard_length']").val("5");
 }
 
 dashboard.getLastLog = function () {
-    $.get("sh/lastlog.php", function (data) {
+    moduleData("lastlog", function (data) {
         destroy_dataTable("lastlog_dashboard");
 
         $("#lastlog_dashboard").dataTable({
@@ -235,12 +247,12 @@ dashboard.getLastLog = function () {
             bAutoWidth: false,
             bInfo: false
         }).fadeIn();
-    }, "json");
+    });
     $("select[name='lastlog_dashboard_length']").val("5");
 }
 
 dashboard.getRam = function () {
-    $.get("sh/mem.php", function (data) {
+    moduleData("mem", function (data) {
         var ram_total = data[1];
         var ram_used = Math.round((data[2] / ram_total) * 100);
         var ram_free = Math.round((data[3] / ram_total) * 100);
@@ -251,11 +263,11 @@ dashboard.getRam = function () {
 
         $("#ram-free-per").text(ram_free);
         $("#ram-used-per").text(ram_used);
-    }, "json");
+    });
 }
 
 dashboard.getDf = function () {
-    $.get("sh/df.php", function (data) {
+    moduleData("df", function (data) {
         var table = $("#df_dashboard");
         var ex = document.getElementById("df_dashboard");
         if ($.fn.DataTable.fnIsDataTable(ex)) {
@@ -279,11 +291,11 @@ dashboard.getDf = function () {
             bAutoWidth: true,
             bInfo: false
         }).fadeIn();
-    }, "json");
+    });
 }
 
 dashboard.getWhereIs = function () {
-    $.get("sh/where.php", function (data) {
+    moduleData("where", function (data) {
         var table = $("#whereis_dashboard");
         var ex = document.getElementById("whereis_dashboard");
         if ($.fn.DataTable.fnIsDataTable(ex)) {
@@ -306,18 +318,18 @@ dashboard.getWhereIs = function () {
             bAutoWidth: false,
             bInfo: false
         }).fadeIn();
-    }, "json");
+    });
 }
 
 dashboard.getOs = function () {
-    generate_os_data("sh/issue.php", "#os-info");
-    generate_os_data("sh/hostname.php", "#os-hostname");
-    generate_os_data("sh/time.php", "#os-time");
-    generate_os_data("sh/uptime.php", "#os-uptime");
+    this.fillElement("issue", $("#os-info"));
+    this.fillElement("hostname", $("#os-hostname"));
+    this.fillElement("time", $("#os-time"));
+    this.fillElement("uptime", $("#os-uptime"));
 }
 
 dashboard.getIp = function () {
-    $.get("sh/ip.php", function (data) {
+    moduleData("ip", function (data) {
         destroy_dataTable("ip_dashboard");
         $("#ip_dashboard").dataTable({
             aaData: data,
@@ -332,39 +344,34 @@ dashboard.getIp = function () {
             bAutoWidth: true,
             bInfo: false
         }).fadeIn();
-    }, "json");
+    });
 }
 
 dashboard.getPing = function () {
     var refreshIcon = $('#refresh-ping .icon-refresh');
     refreshIcon.addClass('icon-spin');
 
-    $.ajax({
-        url: 'sh/ping.php',
-        cache: false,
-        success: function (data) {
-            destroy_dataTable("ping_dashboard");
+    moduleData("ping", function (data) {
+        destroy_dataTable("ping_dashboard");
 
-            $("#ping_dashboard").dataTable({
-                aaData: data,
-                aoColumns: [
-                    { sTitle: "Host" },
-                    { sTitle: "Time (in ms)" }
-                ],
-                aaSorting: [
-                    [0, "desc"]
-                ],
-                bPaginate: true,
-                sPaginationType: "full_numbers",
-                bFilter: true,
-                sDom: "lrtip",
-                bAutoWidth: false,
-                bInfo: false
-            }).fadeIn();
-        },
-        complete: function() {
-            refreshIcon.removeClass('icon-spin');
-        }
+        $("#ping_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Host" },
+                { sTitle: "Time (in ms)" }
+            ],
+            aaSorting: [
+                [0, "desc"]
+            ],
+            bPaginate: true,
+            sPaginationType: "full_numbers",
+            bFilter: true,
+            sDom: "lrtip",
+            bAutoWidth: false,
+            bInfo: false
+        }).fadeIn();
+
+        refreshIcon.removeClass('icon-spin');
     });
 }
 
@@ -381,21 +388,16 @@ dashboard.getIspeed = function () {
 
     refreshIcon.addClass('icon-spin');
 
-    $.ajax({
-        url: 'sh/speed.php',
-        cache: false,
-        success: function(data) {
-            // round the speed (float to int);
-            // dependent on value of AS, calculate speed in MB or KB ps
-            result['upstream'] = Math.floor((data['upstream'] / (Math.pow(1024, power))));
-            result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
-            // update rate of speed on widget
-            rateUpstream.text(result['upstream']);
-            rateDownstream.text(result['downstream']);
-        },
-        complete: function() {
-            refreshIcon.removeClass('icon-spin');
-        }
+    moduleData("speed", function(data) {
+        // round the speed (float to int);
+        // dependent on value of AS, calculate speed in MB or KB ps
+        result['upstream'] = Math.floor((data['upstream'] / (Math.pow(1024, power))));
+        result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
+        // update rate of speed on widget
+        rateUpstream.text(result['upstream']);
+        rateDownstream.text(result['downstream']);
+
+        refreshIcon.removeClass('icon-spin');
     });
 
     // update unit value in widget
@@ -417,19 +419,14 @@ dashboard.getSabspeed = function () {
 
     refreshIcon.addClass('icon-spin');
 
-    $.ajax({
-        url: 'sh/sabnzbd.php',
-        cache: false,
-        success: function(data) {
-            // round the speed (float to int);
-            // dependent on value of AS, calculate speed in MB or KB ps
-            result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
-            // update rate of speed on widget
-            rateDownstream.text(result['downstream']);
-        },
-        complete: function() {
-            refreshIcon.removeClass('icon-spin');
-        }
+    moduleData('sabnzbd', function(data) {
+        // round the speed (float to int);
+        // dependent on value of AS, calculate speed in MB or KB ps
+        result['downstream'] = Math.floor((data['downstream'] / (Math.pow(1024, power))));
+        // update rate of speed on widget
+        rateDownstream.text(result['downstream']);
+
+        refreshIcon.removeClass('icon-spin');
     });
 
     // update unit value in widget
@@ -438,19 +435,19 @@ dashboard.getSabspeed = function () {
 }
 
 dashboard.getLoadAverage = function () {
-    $.get("sh/loadavg.php", function (data) {
+    moduleData("loadavg", function (data) {
         $("#cpu-1min").text(data[0][0]);
         $("#cpu-5min").text(data[1][0]);
         $("#cpu-15min").text(data[2][0]);
         $("#cpu-1min-per").text(data[0][1]);
         $("#cpu-5min-per").text(data[1][1]);
         $("#cpu-15min-per").text(data[2][1]);
-    }, "json");
-    generate_os_data("sh/numberofcores.php", "#core-number");
+    });
+    this.fillElement("numberofcores", $("#core-number"));
 }
 
 dashboard.getDnsmasqLeases = function () {
-    $.get("sh/dhcp-leases.php", function (data) {
+    moduleData("dhcpleases", function (data) {
         var table = $("#dnsmasqleases_dashboard");
         var ex = document.getElementById("dnsmasqleases_dashboard");
         if ($.fn.DataTable.fnIsDataTable(ex)) {
@@ -471,31 +468,25 @@ dashboard.getDnsmasqLeases = function () {
             bAutoWidth: true,
             bInfo: false
         }).fadeIn();
-    }, "json");
+    });
 }
 
 dashboard.getBandwidth = function () {
     var refreshIcon = $('#refresh-bandwidth .icon-refresh');
     refreshIcon.addClass('icon-spin');
 
-    $.ajax({
-        url: 'sh/bandwidth.php',
-        cache: false,
-        dataType: 'json',
-        success: function (data) {
-            $('#bw-int').text(data['0'].interface + ":");
-            $('#bw-tx').text(data['0'].tx);
-            $('#bw-rx').text(data['0'].rx);
-        },
-        complete: function() {
-            refreshIcon.removeClass('icon-spin');
-        }
+    moduleData('bandwidth', function (data) {
+        $('#bw-int').text(data['0'].interface + ":");
+        $('#bw-tx').text(data['0'].tx);
+        $('#bw-rx').text(data['0'].rx);
+
+        refreshIcon.removeClass('icon-spin');
     });
 
 }
 
 dashboard.getSwaps = function () {
-    $.get("sh/swap.php", function (data) {
+    moduleData("swap", function (data) {
         var table = $("#swap_dashboard");
         var ex = document.getElementById("swap_dashboard");
         if ($.fn.DataTable.fnIsDataTable(ex)) {
@@ -519,7 +510,7 @@ dashboard.getSwaps = function () {
             bInfo: false
         }).fadeIn();
 
-    }, "json");
+    });
 
 }
 
@@ -530,7 +521,10 @@ dashboard.getSwaps = function () {
 dashboard.getAll = function () {
     for (var item in dashboard.fnMap) {
         if (dashboard.fnMap.hasOwnProperty(item) && item !== "all") {
-            dashboard.fnMap[item]();
+            try {
+                dashboard.fnMap[item].call(dashboard);
+            } catch (err) {
+            }
         }
     }
 }
