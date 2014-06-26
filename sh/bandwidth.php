@@ -1,17 +1,33 @@
 <?php
+    $interface_path = 'ls /sys/class/net'; 
 
-    $tx_path = 'cat /sys/class/net/eth0/statistics/tx_bytes';
-    $rx_path = 'cat /sys/class/net/eth0/statistics/rx_bytes';
+    $interfaces = explode("\n", shell_exec($interface_path));
+    array_pop($interfaces);
+    $key = array_search("lo", $interfaces);
+    unset($interfaces[$key]);
 
-    $tx_start = intval(shell_exec($tx_path));
-    $rx_start = intval(shell_exec($rx_path));
+    $results = array();
 
-    sleep(2);
+    sleep(5);
 
-    $tx_end = intval(shell_exec($tx_path));
-    $rx_end = intval(shell_exec($rx_path));
+    foreach ($interfaces as $interface) {
 
-    $result['tx'] = ($tx_end - $tx_start);
-    $result['rx'] = ($rx_end - $rx_start);
+        $tx_path = "cat /sys/class/net/{$interface}/statistics/tx_bytes";
+        $rx_path = "cat /sys/class/net/{$interface}/statistics/rx_bytes";
 
-    echo json_encode($result);
+        $tx_start = intval(shell_exec($tx_path));
+        $rx_start = intval(shell_exec($rx_path));
+
+        sleep(2);
+
+        $tx_end = intval(shell_exec($tx_path));
+        $rx_end = intval(shell_exec($rx_path));
+
+        $result['interface'] = $interface;
+        $result['tx'] = ($tx_end - $tx_start);
+        $result['rx'] = ($rx_end - $rx_start);
+
+        $results[] = $result;
+    }
+
+    echo json_encode($results);
