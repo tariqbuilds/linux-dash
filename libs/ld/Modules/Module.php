@@ -1,11 +1,11 @@
 <?php
 
-	namespace ld\Modules;
+    namespace ld\Modules;
 
-	class Module {
-		protected $name = '';
+    class Module {
+        protected $name = '';
 
-		public function getData($args=array()) {
-			return array();
-		}
-	}
+        public function getData($args=array()) {
+            return array();
+        }
+    }

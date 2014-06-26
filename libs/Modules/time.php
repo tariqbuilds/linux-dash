@@ -6,6 +6,6 @@
         protected $name = 'time';
 
         public function getData($args=array()) {
-			return shell_exec('/bin/date');
-		}
-	}
+            return shell_exec('/bin/date');
+        }
+    }

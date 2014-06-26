@@ -16,7 +16,7 @@
             // If file doesn't exist then use hard coded list
             else
             {
-            	$binaries = explode(" ", "php node mysql vim python ruby java apache2 nginx openssl vsftpd make");
+                $binaries = explode(" ", "php node mysql vim python ruby java apache2 nginx openssl vsftpd make");
             }
 
             $path = 'PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:' . getenv('PATH');

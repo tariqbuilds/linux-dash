@@ -8,11 +8,11 @@
 
         public function getData($args=array()) {
 
-			if(isset($args["what"])){
-			    phpinfo((int)$args["what"]);
-			}
-			else{
-			    phpinfo();
-			}
-		}
-	}
+            if(isset($args["what"])){
+                phpinfo((int)$args["what"]);
+            }
+            else{
+                phpinfo();
+            }
+        }
+    }

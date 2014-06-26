@@ -1,24 +1,24 @@
 <?php
 
-	namespace Modules;
+    namespace Modules;
 
-	class sabnzbd extends \ld\Modules\Module {
-		protected $name = 'sabnzbd';
+    class sabnzbd extends \ld\Modules\Module {
+        protected $name = 'sabnzbd';
 
-		public function getData($args=array()) {
+        public function getData($args=array()) {
 
-			$HOST = "http://localhost:8080";
-			$API = getenv("SABNZBD_API");
-			$URL = $HOST."/sabnzbd/api?mode=qstatus&output=json&apikey=".$API;
+            $HOST = "http://localhost:8080";
+            $API = getenv("SABNZBD_API");
+            $URL = $HOST."/sabnzbd/api?mode=qstatus&output=json&apikey=".$API;
 
-			$json = file_get_contents($URL,0,null,null);
-			$json_output = json_decode($json);
-			$speedDownstream = preg_replace("/[^\.0-9]+/", "", $json_output->{'speed'});
-			$speedDownstream = $speedDownstream * 1024;
-			$speed = array(
-			    'downstream' => (string) $speedDownstream,
-			);
+            $json = file_get_contents($URL,0,null,null);
+            $json_output = json_decode($json);
+            $speedDownstream = preg_replace("/[^\.0-9]+/", "", $json_output->{'speed'});
+            $speedDownstream = $speedDownstream * 1024;
+            $speed = array(
+                'downstream' => (string) $speedDownstream,
+            );
 
-			return $speed;
-		}
-	}
+            return $speed;
+        }
+    }
