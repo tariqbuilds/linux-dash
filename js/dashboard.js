@@ -294,6 +294,33 @@ dashboard.getDf = function () {
     });
 }
 
+dashboard.getArp = function () {
+    moduleData("arp", function (data) {
+        var table = $("#arp_dashboard");
+        var ex = document.getElementById("arp_dashboard");
+        if ($.fn.DataTable.fnIsDataTable(ex)) {
+            table.hide().dataTable().fnClearTable();
+            table.dataTable().fnDestroy();
+        }
+
+        table.dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Address" },
+                { sTitle: "HWtype" },
+                { sTitle: "HWaddress"},
+                { sTitle: "Flags Mask" },
+                { sTitle: "Iface"},
+            ],
+            iDisplayLength: 5,
+            bPaginate: true,
+            bFilter: false,
+            bAutoWidth: false,
+            bInfo: false
+        }).fadeIn();
+    });
+}
+
 dashboard.getWhereIs = function () {
     moduleData("where", function (data) {
         var table = $("#whereis_dashboard");
@@ -547,5 +574,6 @@ dashboard.fnMap = {
     dnsmasqleases: dashboard.getDnsmasqLeases,
     bandwidth: dashboard.getBandwidth,
     ping: dashboard.getPing,
-    swap: dashboard.getSwaps
+    swap: dashboard.getSwaps,
+    arp: dashboard.getArp,
 };

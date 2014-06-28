@@ -26,6 +26,7 @@
         'uptime',
         'users',
         'where',
+	'arp',
     );
 
 
