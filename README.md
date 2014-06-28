@@ -49,6 +49,7 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
 * [https://www.youtube.com/watch?v=3gb3z-a7XfA](https://www.youtube.com/watch?v=3gb3z-a7XfA)
 * [http://www.ubuntugeek.com/linux-dash-a-low-overhead-monitoring-web-dashboard-for-a-gnulinux-machine.html](http://www.ubuntugeek.com/linux-dash-a-low-overhead-monitoring-web-dashboard-for-a-gnulinux-machine.html)
 * [http://www.oschina.net/p/linux-dash](http://www.oschina.net/p/linux-dash)
+* [t3n - Schickes Dashboard: Mit linux-dash den Server überwachen (DE)](http://t3n.de/news/dashboard-linux-dash-553038/?utm_content=buffer4aec9&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer)
 
 ## Credits:
 * [Dashboard Template](http://www.egrappler.com/templatevamp-free-twitter-bootstrap-admin-template/)
