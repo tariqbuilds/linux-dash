@@ -24,13 +24,18 @@
                 );
 
             } elseif ( !empty($result) ) {
-                $result = implode(' ', $result);
+
+                $resultCommand = implode(' ', $result);
+
                 // Now use that list to get the ip-adresses
-                $command = "for interface in {$result}; do" .
+                $command = "for interface in {$resultCommand}; do" .
                    ' for family in inet inet6; do'.
                    ' /bin/ip -oneline -family $family addr show $interface |' .
                    ' /bin/grep -v fe80 | /usr/bin/awk \'{print $2","$4}\';' .
                    ' done; done';
+
+		$result = array();
+
                 exec($command, $result, $return_value);
             }
 
