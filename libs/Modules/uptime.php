@@ -13,19 +13,19 @@ class uptime extends \ld\Modules\Module
 		$hours = floor( $totalHours - ( $days * 24 ) );
 		$minutes = floor( $totalMinutes - ( $days * 60 * 24 ) - ( $hours * 60 ) );
 		$formatUptime = '';
-		if( 0 != $days )
-		{
+
+		if( 0 != $days ){
 			$formatUptime .= $days . ' day' . ( ( 1 < $days ) ? 's' : '' ) . ' ';
 		}
-		if( 0 != $hours )
-		{
+
+		if( 0 != $hours ){
 			$formatUptime .= $hours . ' hour' . ( ( 1 < $hours ) ? 's' : '' ) . ' ';
 		}
-		if( 0 != $minutes )
-		{
+
+		if( 0 != $minutes ){
 			$formatUptime .= $minutes . ' minute' . ( ( 1 < $minutes ) ? 's' : '' ) . ' ';
 		}
+
 		return $formatUptime;
 	}
 }
-?>
