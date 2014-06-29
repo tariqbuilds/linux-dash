@@ -1,3 +1,4 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/afaqurk/linux-dash/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/afaqurk/linux-dash/?branch=master)
 # linux-dash (Beta)
 
 A low-overhead monitoring web dashboard for a GNU/Linux machine. Simply drop-in
