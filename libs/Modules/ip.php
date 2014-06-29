@@ -9,7 +9,11 @@
             // First try to get the IPs using "ip"
             // First get list of links
             $command='/bin/ip -oneline link show | /usr/bin/awk \'{print $2}\' | /bin/sed "s/://"';
+
+	    $result = array();
+
             exec($command, $result, $error);
+
             if ($error) { // It didn't work with "ip" , so we do it with ifconfig
                 exec(
                     '/sbin/ifconfig | /bin/grep -B1 "inet addr" | /usr/bin/awk \'' .
@@ -18,6 +22,7 @@
                     ' -F: \'{ print $1","$3 }\'',
                     $result
                 );
+
             } elseif ( !empty($result) ) {
                 $result = implode(' ', $result);
                 // Now use that list to get the ip-adresses
@@ -28,6 +33,7 @@
                    ' done; done';
                 exec($command, $result, $return_value);
             }
+
 	    else {
 		$result = "N/A";
 	    }
@@ -39,10 +45,13 @@
             $data[] = array('external ip', $result2);
 
             $x = 0;
+
             foreach ($result as $a) {
+
                 $data[] = explode(',', $result[$x]);
 
                 unset($result[$x],$a);
+
                 $x++;
             }
 

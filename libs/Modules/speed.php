@@ -72,6 +72,7 @@
             $chunkSize = 1024;
 
             $speedDownstream = 0;
+	    $speedUpstream = 0;
 
             $strFile = '';
             $realDownloadSize = 0;
