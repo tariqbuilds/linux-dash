@@ -13,6 +13,7 @@
         'lastlog',
         'loadavg',
         'mem',
+        'memcached',
         'netstat',
         'numberofcores',
         'online',

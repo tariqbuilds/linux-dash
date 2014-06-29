@@ -29,7 +29,7 @@
                 <ul class="nav pull-right">
                             <li>
                                 <a target="_blank" href="http://github.com/afaqurk/linux-dash">
-                      <i class="lead icon-github-sign"></i> 
+                      <i class="lead icon-github-sign"></i>
                     <span class="lead">Contribute on GitHub</span>
                     </a>
                             </li>
@@ -70,7 +70,7 @@
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i id="closed-widget-count">0</i> 
+                    <i id="closed-widget-count">0</i>
                 <span> Closed Widgets <i class="icon-caret-down"></i></span>
                 </a>
                             <ul class="dropdown-menu" id="closed-widget-list">
@@ -142,7 +142,7 @@
                                     </div>
                                 </div><!-- /widget -->
                             </div> <!-- /span3 -->
-    
+
                         <div class="span4">
                             <div id="load-average-widget" class="widget">
                                 <div class="widget-header">
@@ -204,7 +204,38 @@
                                     </div>
                                 </div>
                             </div> <!-- /span5 -->
-                        
+
+                        <div class="span5">
+                            <div id="memcached-widget" class="widget widget-nopad">
+                                <div class="widget-header">
+                                    <i class="icon-list-alt"></i>
+                                    <h3>
+                                        Memcached
+                                    </h3>
+                                    <div id="refresh-memcached" class="btn icon-refresh js-refresh-info"></div>
+                                </div><!-- /widget-header -->
+                                <div class="widget-content">
+                                    <div class="big-stats-container">
+                                        <div class="widget-content">
+                                            <div class="cf big_stats">
+                                                <div class="stat">
+                                                    <i class="icon-#">Total&nbsp;</i> <span class="value odometer" id="memcached-total"></span> MB
+                                                </div><!-- .stat -->
+                                                <div class="stat">
+                                                    <i class="icon-#">Used&nbsp;</i> <span class="value odometer" id="memcached-used"></span> MB<br>
+                                                    <span class="value odometer" id="memcached-used-per"></span> %
+                                                </div><!-- .stat -->
+                                                <div class="stat">
+                                                    <i class="icon-#">Free&nbsp;</i> <span class="value odometer" id="memcached-free"></span> MB<br>
+                                                    <span class="value odometer" id="memcached-free-per"></span> %
+                                                </div><!-- .stat -->
+                                            </div>
+                                        </div><!-- /widget-content -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- /span5 -->
+
                         <div class="span6">
                                 <div id="disk-usage-widget" class="widget widget-table">
                                     <div class="widget-header">
@@ -233,7 +264,7 @@
                                     </div><!-- /widget-content -->
                                 </div><!-- /widget -->
                             </div><!-- /span6 -->
-                        
+
                         <div class="span6">
                                 <div id="dns-lease-widget" class="widget widget-table">
                                     <div class="widget-header">
@@ -272,7 +303,7 @@
                                     <div id="refresh-ispeed" class="btn js-refresh-info"><span class="icon-refresh"></span></div>
                                 </div><!-- /widget-header -->
                                 <div class="widget-content">
-                        
+
                                     <div style="padding:0px; text-align: center;">
                                         <i class="icon-download" style="font-size:18px;"></i>
                                         <span class="lead value odometer" style="margin-top:11px;" id="ispeed-rate-downstream">0</span>
@@ -283,11 +314,11 @@
                                         <span class="lead value odometer" style="margin-top:11px;" id="ispeed-rate-upstream">0</span>
                                         <span class="lead">Mbps</span>
                                     </div>
-                        
+
                                 </div><!-- /widget-content -->
                             </div><!-- /widget -->
                         </div><!-- /span3 -->
-                        
+
                         <div class="span4">
                                 <div id="netstat-widget" class="widget widget-table">
                                     <div class="widget-header">
@@ -332,7 +363,7 @@
                                     </div><!-- /widget-content -->
                                 </div><!-- /widget -->
                             </div><!-- /span4 -->
-                        
+
                         <div class="span4">
                                 <div id="users-widget" class="widget widget-table action-table">
                                     <div class="widget-header">
@@ -375,7 +406,7 @@
                                     </div><!-- /widget-content -->
                                 </div><!-- /widget -->
                             </div><!-- /span4 -->
-                        
+
                         <div class="span12">
                                 <div id="process-widget" class="widget widget-table">
                                     <div class="widget-header">
@@ -393,7 +424,7 @@
                                     </div><!-- /widget-content -->
                                 </div><!-- /widget -->
                             </div><!-- /span12 -->
-                        
+
                             <div class="span3">
                                 <div id="sabnzbd-widget" class="widget widget-table">
                                     <div class="widget-header">
@@ -404,17 +435,17 @@
                                         <div id="refresh-sabspeed" class="btn icon-refresh js-refresh-info"></div>
                                     </div><!-- /widget-header -->
                                     <div class="widget-content">
-    
+
                                         <div style="padding:0px; text-align: center;">
                                             <i class="icon-download" style="font-size:18px;"></i>
                                             <span class="lead value odometer" style="margin-top:11px;" id="sabspeed-rate-downstream">0</span>
                                             <span class="lead">Mbps</span>
                                         </div>
-    
+
                                     </div><!-- /widget-content -->
                                 </div><!-- /widget -->
                             </div><!-- /span3 -->
-                        
+
                             <div class="span9">
                                 <div id="swap-widget" class="widget widget-table">
                                     <div class="widget-header">
@@ -443,8 +474,8 @@
                                         <table id="arp_dashboard" class="table table-hover table-condensed table-bordered"></table>
                                     </div><!-- /widget-content -->
                                 </div><!-- /widget -->
-                            </div><!-- /span6 -->                    
-    
+                            </div><!-- /span6 -->
+
                     </div><!-- #/widgets -->
                 </div>
             </div><!-- /main-inner -->

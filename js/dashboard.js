@@ -266,6 +266,39 @@ dashboard.getRam = function () {
     });
 }
 
+dashboard.getMemcached = function () {
+    moduleData("memcached", function (data) {
+
+        var i;
+        var max = 0, read = 0, written = 0, used = 0;
+        for(i=0;i<data.length;i++) {
+            parts = data[i].split(":") ;
+            if (parts[0] == 'limit_maxbytes') {
+                max = parts[1]/1024/1024;
+            } else if (parts[0] == 'bytes_read') {
+                read = parts[1]/1024/1024;
+            } else if (parts[0] == 'bytes_written') {
+                written = parts[1]/1024/1024;
+            } else {
+                used = parts[1]/1024/1024;
+            }
+        }
+        used = Math.round(1.0*used);
+        max = Math.round(1.0*max);
+
+        var free = Math.round(1.0*max - 1.0*used);
+        var per_used = Math.round((used / max) * 100);
+        var per_free = Math.round((free / max) * 100);
+
+        $("#memcached-total").text(max);
+        $("#memcached-used").text(used);
+        $("#memcached-free").text(free);
+
+        $("#memcached-free-per").text(per_free);
+        $("#memcached-used-per").text(per_used);
+    });
+}
+
 dashboard.getDf = function () {
     moduleData("df", function (data) {
         var table = $("#df_dashboard");
@@ -559,6 +592,7 @@ dashboard.getAll = function () {
 dashboard.fnMap = {
     all: dashboard.getAll,
     ram: dashboard.getRam,
+    memcached: dashboard.getMemcached,
     ps: dashboard.getPs,
     df: dashboard.getDf,
     os: dashboard.getOs,
