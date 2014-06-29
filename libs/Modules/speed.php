@@ -63,7 +63,6 @@
             $dChosenHost = 1;
             $dHostname = $hosts['download'][$dChosenHost]['hostname'];
             $dResource = $hosts['download'][$dChosenHost]['resource'];
-            $dSize = $hosts['download'][$dChosenHost]['size'] * $mb;
             $dTimeout = $hosts['download'][$dChosenHost]['timeout'];
             $dPort = 80;
 
@@ -72,7 +71,6 @@
             $outDownload .= "Connection: Close\r\n\r\n";
             $chunkSize = 1024;
 
-            $endDownload = null;
             $speedDownstream = 0;
 
             $strFile = '';
@@ -121,9 +119,6 @@
                 $outUpload .= "Content-length: " . $realDownloadSize . "\r\n";
                 $outUpload .= "Accept: */*\r\n\r\n";
                 $data = urlencode($strFile);
-
-                $endUpload = null;
-                $speedUpstream = 0;
 
                 $startUpload = microtime(true);
 

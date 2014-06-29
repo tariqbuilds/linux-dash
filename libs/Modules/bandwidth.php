@@ -29,7 +29,8 @@
 
                 $tx_end = intval(shell_exec($tx_path));
                 $rx_end = intval(shell_exec($rx_path));
-
+	
+		$result = array();
                 $result['interface'] = $interface;
                 $result['tx'] = ($tx_end - $tx_start);
                 $result['rx'] = ($rx_end - $rx_start);

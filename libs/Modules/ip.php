@@ -18,7 +18,7 @@
                     ' -F: \'{ print $1","$3 }\'',
                     $result
                 );
-            } else {
+            } elseif ( !empty($result) ) {
                 $result = implode(' ', $result);
                 // Now use that list to get the ip-adresses
                 $command = "for interface in {$result}; do" .
@@ -28,6 +28,10 @@
                    ' done; done';
                 exec($command, $result, $return_value);
             }
+	    else {
+		$result = "N/A";
+	    }
+
             // Get external adress
             $result2 = file_get_contents('http://ipecho.net/plain');
 
