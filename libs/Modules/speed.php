@@ -125,6 +125,7 @@
                 $fpUpload = fsockopen($uHostname, $uPort, $errno, $errstr, $uTimeout);
                 if (!$fpUpload) {
                     echo "$errstr ($errno)<br />\n";
+		    $speedUpstream = "n/a";
                 } else {
                     fwrite($fpUpload, $outUpload);
                     stream_set_timeout($fpUpload, $uTimeout);

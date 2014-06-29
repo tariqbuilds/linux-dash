@@ -10,6 +10,7 @@
 	    exec('/usr/sbin/arp | awk \'BEGIN {OFS=","} {print $1,$2,$3,$4,$5}\'', $result);
 
 	    $data = [];
+	    $x = 0;
 
 	    foreach ($result as $a) {
                 if ($x==0) {
