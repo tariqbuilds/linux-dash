@@ -16,7 +16,7 @@
             // get value via /proc/cpuinfo
             $numOfCores = shell_exec('LC_ALL=C /bin/grep -c ^processor /proc/cpuinfo');
             $numOfCores = filter_var(
-                $numOfCores[0],
+                $numOfCores,
                 FILTER_VALIDATE_INT,
                 $intOpts
             );
