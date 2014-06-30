@@ -1,65 +1,70 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class ip extends \ld\Modules\Module {
-        protected $name = 'ip';
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
-            // First try to get the IPs using "ip"
-            // First get list of links
-            $command='/bin/ip -oneline link show | /usr/bin/awk \'{print $2}\' | /bin/sed "s/://"';
+class ip extends Module
+{
+    protected $name = 'ip';
 
-	    $result = array();
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
+        // First try to get the IPs using "ip"
+        // First get list of links
+        $command = '/bin/ip -oneline link show | /usr/bin/awk \'{print $2}\' | /bin/sed "s/://"';
 
-            exec($command, $result, $error);
+        $result = array();
 
-            if ($error) { // It didn't work with "ip" , so we do it with ifconfig
-                exec(
-                    '/sbin/ifconfig | /bin/grep -B1 "inet addr" | /usr/bin/awk \'' .
-                    '{ if ( $1 == "inet" ) { print $2 }' .
-                    'else if ( $2 == "Link" ) { printf "%s:",$1 } }\' | /usr/bin/awk' .
-                    ' -F: \'{ print $1","$3 }\'',
-                    $result
-                );
+        exec($command, $result, $error);
 
-            } elseif ( !empty($result) ) {
+        if ($error) { // It didn't work with "ip" , so we do it with ifconfig
+            exec(
+                '/sbin/ifconfig | /bin/grep -B1 "inet addr" | /usr/bin/awk \'' .
+                '{ if ( $1 == "inet" ) { print $2 }' .
+                'else if ( $2 == "Link" ) { printf "%s:",$1 } }\' | /usr/bin/awk' .
+                ' -F: \'{ print $1","$3 }\'',
+                $result
+            );
 
-                $resultCommand = implode(' ', $result);
+        } elseif (!empty($result)) {
 
-                // Now use that list to get the ip-adresses
-                $command = "for interface in {$resultCommand}; do" .
-                   ' for family in inet inet6; do'.
-                   ' /bin/ip -oneline -family $family addr show $interface |' .
-                   ' /bin/grep -v fe80 | /usr/bin/awk \'{print $2","$4}\';' .
-                   ' done; done';
+            $resultCommand = implode(' ', $result);
 
-		$result = array();
+            // Now use that list to get the ip-adresses
+            $command = "for interface in {$resultCommand}; do" .
+                ' for family in inet inet6; do' .
+                ' /bin/ip -oneline -family $family addr show $interface |' .
+                ' /bin/grep -v fe80 | /usr/bin/awk \'{print $2","$4}\';' .
+                ' done; done';
 
-                exec($command, $result, $return_value);
-            }
+            $result = array();
 
-	    else {
-		$result = "N/A";
-	    }
-
-            // Get external adress
-            $result2 = file_get_contents('http://ipecho.net/plain');
-
-            $data = array();
-            $data[] = array('external ip', $result2);
-
-            $x = 0;
-
-            foreach ($result as $a) {
-
-                $data[] = explode(',', $result[$x]);
-
-                unset($result[$x],$a);
-
-                $x++;
-            }
-
-            return $data;
+            exec($command, $result, $return_value);
+        } else {
+            $result = "N/A";
         }
+
+        // Get external adress
+        $result2 = file_get_contents('http://ipecho.net/plain');
+
+        $data = array();
+        $data[] = array('external ip', $result2);
+
+        $x = 0;
+
+        foreach ($result as $a) {
+
+            $data[] = explode(',', $result[$x]);
+
+            unset($result[$x], $a);
+
+            $x++;
+        }
+
+        return $data;
     }
+}

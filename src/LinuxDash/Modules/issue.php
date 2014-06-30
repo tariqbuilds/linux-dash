@@ -1,11 +1,18 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class issue extends \ld\Modules\Module {
-        protected $name = 'issue';
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
-            return shell_exec('/usr/bin/lsb_release -ds;/bin/uname -r');
-        }
+class issue extends Module
+{
+    protected $name = 'issue';
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
+        return shell_exec('/usr/bin/lsb_release -ds;/bin/uname -r');
     }
+}

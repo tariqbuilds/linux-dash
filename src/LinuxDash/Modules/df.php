@@ -1,28 +1,35 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class df extends \ld\Modules\Module {
-        protected $name = 'df';
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
+class df extends Module
+{
+    protected $name = 'df';
 
-            exec('/bin/df -Ph | awk \'BEGIN {OFS=","} {print $1,$2,$3,$4,$5,$6}\'', $result);
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
 
-            $data = array();
+        exec('/bin/df -Ph | awk \'BEGIN {OFS=","} {print $1,$2,$3,$4,$5,$6}\'', $result);
 
-            $x = 0;
-            foreach ($result as $a) {
-                if ($x==0) {
-                    $x++;
-                    continue;
-                }
-                $data[] = explode(',', $result[$x]);
+        $data = array();
 
-                unset($result[$x], $a);
+        $x = 0;
+        foreach ($result as $a) {
+            if ($x == 0) {
                 $x++;
+                continue;
             }
+            $data[] = explode(',', $result[$x]);
 
-            return $data;
+            unset($result[$x], $a);
+            $x++;
         }
+
+        return $data;
     }
+}

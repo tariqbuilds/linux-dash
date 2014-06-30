@@ -1,43 +1,50 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class bandwidth extends \ld\Modules\Module {
-        protected $name = 'bandwidth';
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
-            $interface_path = 'ls /sys/class/net';
+class bandwidth extends Module
+{
+    protected $name = 'bandwidth';
 
-            $interfaces = explode("\n", shell_exec($interface_path));
-            array_pop($interfaces);
-            $key = array_search("lo", $interfaces);
-            unset($interfaces[$key]);
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
+        $interface_path = 'ls /sys/class/net';
 
-            $results = array();
+        $interfaces = explode("\n", shell_exec($interface_path));
+        array_pop($interfaces);
+        $key = array_search("lo", $interfaces);
+        unset($interfaces[$key]);
 
-            sleep(5);
+        $results = array();
 
-            foreach ($interfaces as $interface) {
+        sleep(5);
 
-                $tx_path = "cat /sys/class/net/{$interface}/statistics/tx_bytes";
-                $rx_path = "cat /sys/class/net/{$interface}/statistics/rx_bytes";
+        foreach ($interfaces as $interface) {
 
-                $tx_start = intval(shell_exec($tx_path));
-                $rx_start = intval(shell_exec($rx_path));
+            $tx_path = "cat /sys/class/net/{$interface}/statistics/tx_bytes";
+            $rx_path = "cat /sys/class/net/{$interface}/statistics/rx_bytes";
 
-                sleep(2);
+            $tx_start = intval(shell_exec($tx_path));
+            $rx_start = intval(shell_exec($rx_path));
 
-                $tx_end = intval(shell_exec($tx_path));
-                $rx_end = intval(shell_exec($rx_path));
-	
-		$result = array();
-                $result['interface'] = $interface;
-                $result['tx'] = ($tx_end - $tx_start);
-                $result['rx'] = ($rx_end - $rx_start);
+            sleep(2);
 
-                $results[] = $result;
-            }
+            $tx_end = intval(shell_exec($tx_path));
+            $rx_end = intval(shell_exec($rx_path));
 
-            return $results;
+            $result = array();
+            $result['interface'] = $interface;
+            $result['tx'] = ($tx_end - $tx_start);
+            $result['rx'] = ($rx_end - $rx_start);
+
+            $results[] = $result;
         }
+
+        return $results;
     }
+}

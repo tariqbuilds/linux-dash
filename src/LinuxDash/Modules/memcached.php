@@ -1,16 +1,23 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class memcached extends \ld\Modules\Module {
-        protected $name = 'memcached';
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
-            exec(
-                'echo "stats" | nc -w 1 127.0.0.1 11211 | awk \'BEGIN {}/bytes/{line[j++] = $2 ":" $3 }END{ for(i=0;i<j;i++) print line[i]; }\'',
-                $result
-            );
+class memcached extends Module
+{
+    protected $name = 'memcached';
 
-            return $result;
-        }
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
+        exec(
+            'echo "stats" | nc -w 1 127.0.0.1 11211 | awk \'BEGIN {}/bytes/{line[j++] = $2 ":" $3 }END{ for(i=0;i<j;i++) print line[i]; }\'',
+            $result
+        );
+
+        return $result;
     }
+}

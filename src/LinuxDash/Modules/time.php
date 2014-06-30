@@ -1,11 +1,18 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class time extends \ld\Modules\Module {
-        protected $name = 'time';
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
-            return shell_exec('/bin/date');
-        }
+class time extends Module
+{
+    protected $name = 'time';
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
+        return shell_exec('/bin/date');
     }
+}

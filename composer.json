@@ -1,0 +1,19 @@
+{
+    "name": "afaqurk/linux-dash",
+    "type": "statistics tool",
+    "description": "A low-overhead monitoring web dashboard for a GNU/Linux machine",
+    "keywords": ["php", "statistics", "linux"],
+    "homepage": "https://github.com/afaqurk/linux-dash",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "afaqurk"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "classmap": [
+            "src/LinuxDash"
+        ]
+    }
+}

@@ -1,28 +1,35 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class online extends \ld\Modules\Module {
-        protected $name = 'online';
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
-	    $users = array();
+class online extends Module
+{
+    protected $name = 'online';
 
-            // change username column length for w command
-            putenv("PROCPS_USERLEN=20");
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
+        $users = array();
 
-            exec(
-                'PROCPS_FROMLEN=40 /usr/bin/w -h |' .
-                ' /usr/bin/awk \'{print $1","$3","$4","$5}\'',
-                $users
-            );
+        // change username column length for w command
+        putenv("PROCPS_USERLEN=20");
 
-            $result = array();
+        exec(
+            'PROCPS_FROMLEN=40 /usr/bin/w -h |' .
+            ' /usr/bin/awk \'{print $1","$3","$4","$5}\'',
+            $users
+        );
 
-            foreach ($users as $user) {
-                $result[] = explode(",", $user);
-            }
+        $result = array();
 
-            return $result;
+        foreach ($users as $user) {
+            $result[] = explode(",", $user);
         }
+
+        return $result;
     }
+}

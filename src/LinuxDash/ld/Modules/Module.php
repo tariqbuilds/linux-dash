@@ -1,11 +1,15 @@
 <?php
 
-    namespace ld\Modules;
+namespace LinuxDash\ld\Modules;
 
-    class Module {
-        protected $name = '';
+abstract class Module
+{
+    protected $name = '';
 
-        public function getData($args=array()) {
-            return array();
-        }
-    }
+    /**
+     * @param array $args
+     *
+     * @return array
+     */
+    abstract public function getData($args = array());
+}

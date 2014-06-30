@@ -20,8 +20,11 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
 ## Installation
 
 1. Make sure you have `php5-json` installed and enabled
-2. [Download the source](https://github.com/afaqurk/linux-dash/archive/master.zip) or clone the repo 
-3. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
+2. Install via composer(you need to get composer before: `php -r "readfile('https://getcomposer.org/installer');" | php`)   
+2.1 `php composer.phar create-project afaqurk/linux-dash /var/www/`
+3.[Download the source](https://github.com/afaqurk/linux-dash/archive/master.zip) or clone the repo 
+4. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
+5. Configure web directory to `/var/www/web/`
 
 **Please note: If you would like to limit access to linux-dash, please add
 `.htaccess` or other security measure.**

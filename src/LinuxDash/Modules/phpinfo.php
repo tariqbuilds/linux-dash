@@ -1,18 +1,23 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class phpinfo extends \ld\Modules\Module {
-        protected $name = 'phpinfo';
-        protected $raw_output = true;
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
+class phpinfo extends Module
+{
+    protected $name = 'phpinfo';
+    protected $raw_output = true;
 
-            if(isset($args["what"])){
-                phpinfo((int)$args["what"]);
-            }
-            else{
-                phpinfo();
-            }
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
+        if (isset($args["what"])) {
+            phpinfo((int)$args["what"]);
+        } else {
+            phpinfo();
         }
     }
+}

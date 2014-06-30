@@ -1,33 +1,40 @@
 <?php
 
-    namespace Modules;
+namespace LinuxDash\Modules;
 
-    class netstat extends \ld\Modules\Module {
-        protected $name = 'netstat';
+use LinuxDash\ld\Modules\Module;
 
-        public function getData($args=array()) {
-            /* this section finds command paths from OS */
-            $netstat = exec("command -v netstat");
-            $awk = exec("command -v awk");
-            $sort = exec("command -v sort");
-            $uniq = exec("command -v uniq");
+class netstat extends Module
+{
+    protected $name = 'netstat';
 
-            /* execute command */
-            exec("$netstat -ntu | $awk 'NR>2 {sub(/:[^:]+$/, \"\"); print $5}' | $sort | $uniq -c", $result);
+    /**
+     * {@inheritdoc}
+     */
+    public function getData($args = array())
+    {
+        /* this section finds command paths from OS */
+        $netstat = exec("command -v netstat");
+        $awk = exec("command -v awk");
+        $sort = exec("command -v sort");
+        $uniq = exec("command -v uniq");
+
+        /* execute command */
+        exec("$netstat -ntu | $awk 'NR>2 {sub(/:[^:]+$/, \"\"); print $5}' | $sort | $uniq -c", $result);
 
 
-            $data = array();
+        $data = array();
 
-            $max = count($result);
-            for ($i = 0; $i < $max; $i++) {
-                $data[] = preg_split(
-                    '@\s+@',
-                    $result[$i],
-                    null,
-                    PREG_SPLIT_NO_EMPTY
-                );
-            }
-
-            return $data;
+        $max = count($result);
+        for ($i = 0; $i < $max; $i++) {
+            $data[] = preg_split(
+                '@\s+@',
+                $result[$i],
+                null,
+                PREG_SPLIT_NO_EMPTY
+            );
         }
+
+        return $data;
     }
+}
