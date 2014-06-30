@@ -17,7 +17,7 @@ $(document).ready(function() {
     var target = $(this.hash).parent();
     pulseElement(target, 8, 400);
 
-    $("html,body").animate({
+    $("html,body").stop().animate({
         scrollTop: target.offset().top - 130
     }, 1000);
 }).on("click", ".js-refresh-info", function(event) {
