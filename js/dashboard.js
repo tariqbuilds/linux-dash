@@ -575,6 +575,29 @@ dashboard.getSwaps = function () {
 }
 
 
+dashboard.redis = function () {
+    moduleData("redis_status", function (data) {
+		
+        if (data.length == 0)
+		{
+			$('#redis-installed').addClass('hide');
+			$('#redis-not').removeClass('hide');
+		}
+		else
+		{
+			$('#version-info').html(data['redis_version']);
+			$('#cc-info').html(data['connected_clients']);
+			$('#cs-info').html(data['connected_slaves']);
+			$('#memory-info').html(data['used_memory_human']);
+			$('#totc-info').html(data['total_connections_received']);
+			$('#totcp-info').html(data['total_commands_processed']);
+			
+			$('#redis-installed').removeClass('hide');
+			$('#redis-not').addClass('hide');
+		}
+	});
+}
+
 /**
  * Refreshes all widgets. Does not call itself recursively.
  */
@@ -610,4 +633,5 @@ dashboard.fnMap = {
     ping: dashboard.getPing,
     swap: dashboard.getSwaps,
     arp: dashboard.getArp,
+	redis: dashboard.redis,
 };

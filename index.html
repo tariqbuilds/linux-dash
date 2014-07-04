@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +10,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
         <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="css/style.css" rel="stylesheet" type="text/css">
+        <link href="css/style.css?v=1" rel="stylesheet" type="text/css">
         <link href="css/pages/dashboard.css" rel="stylesheet" type="text/css">
         <link href="css/odometer.css" rel="stylesheet" type="text/css">
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -476,6 +475,50 @@
                             </div>
                         </div> <!-- /span6 -->
 
+						<div class="span3">
+							<div id="redis-widget" class="widget widget-table action-table">
+								<div class="widget-header">
+									<i class="icon-list"></i>
+									<h3>
+										Redis Status
+									</h3>
+									<div id="refresh-redis" class="btn icon-refresh js-refresh-info"></div>
+								</div><!-- /widget-header -->
+								<div class="widget-content">
+									<div id="redis-installed" class="hide">
+										<div class="general-info-item">
+											<span class="general-title">Version</span>
+											<span class="general-data" id="version-info"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Connected Clients</span>
+											<span class="general-data" id="cc-info"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Connected Slaves</span>
+											<span class="general-data" id="cs-info"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Used Memory</span>
+											<span class="general-data" id="memory-info"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Total connections recieved</span>
+											<span class="general-data" id="totc-info"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Total commands processed</span>
+											<span class="general-data" id="totcp-info"></span>
+										</div>
+										
+									</div>
+									<div id="redis-not" class="hide">
+										Redis not installed
+									</div>
+								</div><!-- /widget-content -->
+							</div><!-- /widget -->
+                        </div><!-- /span3 -->  
+							
                     </div><!-- #/widgets -->
                 </div>
             </div><!-- /main-inner -->
@@ -500,7 +543,7 @@
         <script src="js/bootstrap.js" type="text/javascript"></script>
         <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="js/odometer.js" type="text/javascript"></script>
-        <script src="js/dashboard.js" type="text/javascript"></script>
+        <script src="js/dashboard.js?v=1" type="text/javascript"></script>
         <script src="js/base.js" type="text/javascript"></script>
     </body>
 </html>
