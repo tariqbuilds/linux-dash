@@ -1336,3 +1336,23 @@ width: 11px;}
 	margin-bottom:5px;
 }
 
+
+/*------------------------------------------------------------------
+	redis-info widget specific style
+*/
+
+#redis-widget .general-title {
+	font-weight: bold;
+}
+
+#redis-widget .general-title:after {
+	content:":";
+}
+
+#redis-widget .widget-content {
+	padding:5px;
+}
+
+#redis-widget .widget-content div {
+	margin-bottom:5px;
+}

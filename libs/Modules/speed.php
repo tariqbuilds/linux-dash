@@ -63,7 +63,6 @@
             $dChosenHost = 1;
             $dHostname = $hosts['download'][$dChosenHost]['hostname'];
             $dResource = $hosts['download'][$dChosenHost]['resource'];
-            $dSize = $hosts['download'][$dChosenHost]['size'] * $mb;
             $dTimeout = $hosts['download'][$dChosenHost]['timeout'];
             $dPort = 80;
 
@@ -72,8 +71,8 @@
             $outDownload .= "Connection: Close\r\n\r\n";
             $chunkSize = 1024;
 
-            $endDownload = null;
             $speedDownstream = 0;
+	    $speedUpstream = 0;
 
             $strFile = '';
             $realDownloadSize = 0;
@@ -122,14 +121,12 @@
                 $outUpload .= "Accept: */*\r\n\r\n";
                 $data = urlencode($strFile);
 
-                $endUpload = null;
-                $speedUpstream = 0;
-
                 $startUpload = microtime(true);
 
                 $fpUpload = fsockopen($uHostname, $uPort, $errno, $errstr, $uTimeout);
                 if (!$fpUpload) {
                     echo "$errstr ($errno)<br />\n";
+		    $speedUpstream = "n/a";
                 } else {
                     fwrite($fpUpload, $outUpload);
                     stream_set_timeout($fpUpload, $uTimeout);
