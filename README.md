@@ -6,7 +6,7 @@ the app and go!
 
 Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documentation.
 
-[**View DEMO**](http://www.linuxdash.com/) | [**View Features**](#features) | [**Installation Instructions**](#installation) | [**News**](https://github.com/afaqurk/linux-dash/news) | [**Documentation**](https://github.com/afaqurk/linux-dash/wiki)
+[**View DEMO**](http://www.linuxdash.com/) | [**View Features**](#features) | [**Installation Instructions**](#installation) | [**News**](https://github.com/afaqurk/linux-dash#news) | [**Documentation**](https://github.com/afaqurk/linux-dash/wiki)
 
 <img src="https://raw.githubusercontent.com/afaqurk/linux-dash/master/linux-dash.PNG">
 
