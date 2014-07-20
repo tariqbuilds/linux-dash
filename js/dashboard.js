@@ -69,7 +69,7 @@ jQuery.extend(jQuery.fn.dataTableExt.oSort, {
         //
         function zeroPad(num, places) {
             var zero = places - num.toString().length + 1;
-            return Array(+(zero > 0 && zero)).join("0") + num;
+            return new Array(+(zero > 0 && zero)).join("0") + num;
         }
 
         // build the resulting IP
@@ -114,12 +114,15 @@ dashboard.fillElement = function(module, $el){
     moduleData(module, function(data) {
         $el.text(data);
     });
-}
+};
 
 dashboard.getPs = function () {
     moduleData("ps", function (data) {
         destroy_dataTable("ps_dashboard");
-        $("#filter-ps").val("").off("keyup");
+        $("#filter-ps").val("").off("keyup")
+            .on("keyup", function () {
+                psTable.fnFilter(this.value);
+            });
 
         var psTable = $("#ps_dashboard").dataTable({
             aaData: data,
@@ -143,12 +146,8 @@ dashboard.getPs = function () {
             bAutoWidth: false,
             bInfo: false
         }).fadeIn();
-
-        $("#filter-ps").on("keyup", function () {
-            psTable.fnFilter(this.value);
-        });
     });
-}
+};
 
 dashboard.getNetStat = function () {
     moduleData("netstat", function (data) {
@@ -172,7 +171,7 @@ dashboard.getNetStat = function () {
             bInfo: false
         }).fadeIn();
     });
-}
+};
 
 
 dashboard.getUsers = function () {
@@ -198,7 +197,7 @@ dashboard.getUsers = function () {
         }).fadeIn();
     });
     $("select[name='users_dashboard_length']").val("5");
-}
+};
 
 dashboard.getOnline = function () {
     moduleData("online", function (data) {
@@ -224,7 +223,7 @@ dashboard.getOnline = function () {
         }).fadeIn();
     });
     $("select[name='online_dashboard_length']").val("5");
-}
+};
 
 dashboard.getLastLog = function () {
     moduleData("lastlog", function (data) {
@@ -235,7 +234,7 @@ dashboard.getLastLog = function () {
             aoColumns: [
                 { sTitle: "Who" },
                 { sTitle: "From" },
-                { sTitle: "When" },
+                { sTitle: "When" }
             ],
             aaSorting: [
                 [2, "desc"]
@@ -249,7 +248,7 @@ dashboard.getLastLog = function () {
         }).fadeIn();
     });
     $("select[name='lastlog_dashboard_length']").val("5");
-}
+};
 
 dashboard.getRam = function () {
     moduleData("mem", function (data) {
@@ -264,7 +263,7 @@ dashboard.getRam = function () {
         $("#ram-free-per").text(ram_free);
         $("#ram-used-per").text(ram_used);
     });
-}
+};
 
 dashboard.getMemcached = function () {
     moduleData("memcached", function (data) {
@@ -272,7 +271,7 @@ dashboard.getMemcached = function () {
         var i;
         var max = 0, read = 0, written = 0, used = 0;
         for(i=0;i<data.length;i++) {
-            parts = data[i].split(":") ;
+            var parts = data[i].split(":") ;
             if (parts[0] == 'limit_maxbytes') {
                 max = parts[1]/1024/1024;
             } else if (parts[0] == 'bytes_read') {
@@ -283,10 +282,10 @@ dashboard.getMemcached = function () {
                 used = parts[1]/1024/1024;
             }
         }
-        used = Math.round(1.0*used);
-        max = Math.round(1.0*max);
+        used = Math.round(used);
+        max = Math.round(max);
 
-        var free = Math.round(1.0*max - 1.0*used);
+        var free = Math.round(max - used);
         var per_used = Math.round((used / max) * 100);
         var per_free = Math.round((free / max) * 100);
 
@@ -297,7 +296,7 @@ dashboard.getMemcached = function () {
         $("#memcached-free-per").text(per_free);
         $("#memcached-used-per").text(per_used);
     });
-}
+};
 
 dashboard.getDf = function () {
     moduleData("df", function (data) {
@@ -325,7 +324,7 @@ dashboard.getDf = function () {
             bInfo: false
         }).fadeIn();
     });
-}
+};
 
 dashboard.getArp = function () {
     moduleData("arp", function (data) {
@@ -343,7 +342,7 @@ dashboard.getArp = function () {
                 { sTitle: "HWtype" },
                 { sTitle: "HWaddress"},
                 { sTitle: "Flags Mask" },
-                { sTitle: "Iface"},
+                { sTitle: "Iface"}
             ],
             iDisplayLength: 5,
             bPaginate: true,
@@ -352,7 +351,7 @@ dashboard.getArp = function () {
             bInfo: false
         }).fadeIn();
     });
-}
+};
 
 dashboard.getWhereIs = function () {
     moduleData("where", function (data) {
@@ -379,14 +378,14 @@ dashboard.getWhereIs = function () {
             bInfo: false
         }).fadeIn();
     });
-}
+};
 
 dashboard.getOs = function () {
     this.fillElement("issue", $("#os-info"));
     this.fillElement("hostname", $("#os-hostname"));
     this.fillElement("time", $("#os-time"));
     this.fillElement("uptime", $("#os-uptime"));
-}
+};
 
 dashboard.getIp = function () {
     moduleData("ip", function (data) {
@@ -405,7 +404,7 @@ dashboard.getIp = function () {
             bInfo: false
         }).fadeIn();
     });
-}
+};
 
 dashboard.getPing = function () {
     var refreshIcon = $('#refresh-ping .icon-refresh');
@@ -433,7 +432,7 @@ dashboard.getPing = function () {
 
         refreshIcon.removeClass('icon-spin');
     });
-}
+};
 
 dashboard.getIspeed = function () {
     var rateUpstream = $("#ispeed-rate-upstream");
@@ -465,7 +464,7 @@ dashboard.getIspeed = function () {
     var leadDownstream = rateDownstream.next(".lead");
     leadUpstream.text(AS ? "MB/s" : "KB/s");
     leadDownstream.text(AS ? "MB/s" : "KB/s");
-}
+};
 
 dashboard.getSabspeed = function () {
     var rateDownstream = $("#sabspeed-rate-downstream");
@@ -492,7 +491,7 @@ dashboard.getSabspeed = function () {
     // update unit value in widget
     var leadDownstream = rateDownstream.next(".lead");
     leadDownstream.text(AS ? "MB/s" : "KB/s");
-}
+};
 
 dashboard.getLoadAverage = function () {
     moduleData("loadavg", function (data) {
@@ -504,7 +503,7 @@ dashboard.getLoadAverage = function () {
         $("#cpu-15min-per").text(data[2][1]);
     });
     this.fillElement("numberofcores", $("#core-number"));
-}
+};
 
 dashboard.getDnsmasqLeases = function () {
     moduleData("dhcpleases", function (data) {
@@ -529,7 +528,7 @@ dashboard.getDnsmasqLeases = function () {
             bInfo: false
         }).fadeIn();
     });
-}
+};
 
 dashboard.getBandwidth = function () {
     var refreshIcon = $('#refresh-bandwidth .icon-refresh');
@@ -543,7 +542,7 @@ dashboard.getBandwidth = function () {
         refreshIcon.removeClass('icon-spin');
     });
 
-}
+};
 
 dashboard.getSwaps = function () {
     moduleData("swap", function (data) {
@@ -572,12 +571,12 @@ dashboard.getSwaps = function () {
 
     });
 
-}
+};
 
 
 dashboard.redis = function () {
     moduleData("redis_status", function (data) {
-		
+
         if (data.length == 0)
 		{
 			$('#redis-installed').addClass('hide');
@@ -591,12 +590,12 @@ dashboard.redis = function () {
 			$('#memory-info').html(data['used_memory_human']);
 			$('#totc-info').html(data['total_connections_received']);
 			$('#totcp-info').html(data['total_commands_processed']);
-			
+
 			$('#redis-installed').removeClass('hide');
 			$('#redis-not').addClass('hide');
 		}
 	});
-}
+};
 
 /**
  * Refreshes all widgets. Does not call itself recursively.
@@ -610,7 +609,7 @@ dashboard.getAll = function () {
             }
         }
     }
-}
+};
 
 dashboard.fnMap = {
     all: dashboard.getAll,
@@ -633,5 +632,5 @@ dashboard.fnMap = {
     ping: dashboard.getPing,
     swap: dashboard.getSwaps,
     arp: dashboard.getArp,
-	redis: dashboard.redis,
+	redis: dashboard.redis
 };
