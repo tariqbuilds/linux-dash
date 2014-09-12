@@ -1356,3 +1356,23 @@ width: 11px;}
 #redis-widget .widget-content div {
 	margin-bottom:5px;
 }
+
+/*------------------------------------------------------------------
+	varnish-info widget specific style
+*/
+
+#varnish-widget .general-title {
+	font-weight: bold;
+}
+
+#varnish-widget .general-title:after {
+	content:":";
+}
+
+#varnish-widget .widget-content {
+	padding:5px;
+}
+
+#varnish-widget .widget-content div {
+	margin-bottom:5px;
+}

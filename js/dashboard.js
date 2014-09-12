@@ -598,6 +598,34 @@ dashboard.redis = function () {
 	});
 }
 
+dashboard.varnish = function () {
+    moduleData("varnish_status", function (data) {
+		
+        if (data.length == 0)
+		{
+			$('#varnish-installed').addClass('hide');
+			$('#varnish-not').removeClass('hide');
+		}
+		else
+		{
+
+			$('#client_conn').html(data['client_conn']);
+			$('#client_req').html(data['client_req']);
+			$('#cache_hit').html(data['cache_hit']);
+			$('#cache_miss').html(data['cache_miss']);
+			$('#n_wrk').html(data['n_wrk']);
+			$('#n_backend').html(data['n_backend']);
+			$('#s_sess').html(data['s_sess']);
+			$('#total_caches').html(data['total_caches']);
+			$('#cache_hit_rate').html(data['cache_hit_rate']);
+			$('#cache_miss_rate').html(data['cache_miss_rate']);
+			
+			$('#varnish-installed').removeClass('hide');
+			$('#varnish-not').addClass('hide');
+		}
+	});
+}
+
 /**
  * Refreshes all widgets. Does not call itself recursively.
  */
@@ -633,5 +661,6 @@ dashboard.fnMap = {
     ping: dashboard.getPing,
     swap: dashboard.getSwaps,
     arp: dashboard.getArp,
-	redis: dashboard.redis,
+    redis: dashboard.redis,
+    varnish: dashboard.varnish,
 };
