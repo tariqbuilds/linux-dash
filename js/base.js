@@ -9,7 +9,7 @@ $(document).ready(function() {
     $(".pop").popover();
 
    // activate tooltips on hover
-   $("[data-toggle='tooltip']").tooltip({trigger: 'hover', placement:'right'});  
+   $("[data-toggle='tooltip']").tooltip({trigger: 'hover', placement:'right'});
 
     dashboard.getAll();
 }).on("click", ".js-smoothscroll", function(event) {
@@ -89,9 +89,9 @@ $( "#widgets" ).sortable({
       opacity: 0.7,
       scrollSensitivity:10,
       tolerance: 'pointer',
-      stop: function(event, ui) {
+      stop: function() {
             // save widget order in localstorage
-            var newOrder = new Array();
+            var newOrder = [];
             $('.widget').each(function() {
                 newOrder.push($(this).attr("id"));
             });
@@ -105,13 +105,13 @@ $( "#widgets" ).sortable({
  *
 **/
 // general cached DOM objects
-closedWidgetCount = $('#closed-widget-count'),
+closedWidgetCount = $('#closed-widget-count');
 closedWidgets = $('#closed-widget-list');
 allWidgets = $('.widget');
 
 // Close all widgets
 $('#close-all-widgets').click(function(){
-    allWidgets.each(function(index){
+    allWidgets.each(function(){
         if ($(this).is(":visible")){
 	       hideWidget($(this), 400);
         }
@@ -120,7 +120,7 @@ $('#close-all-widgets').click(function(){
 
 // Open all widgets
 $('#open-all-widgets').click(function(){
-    allWidgets.each(function(index){
+    allWidgets.each(function(){
 	   openWidget($(this), $(this).attr('id'), 500);
     });
 });
@@ -148,9 +148,8 @@ $('.open-widget').live('click',function(){
 
 });
 
-function openWidget(widget, widgetIdentifier, speed){
-
-    // decrement closed-widget-count 
+function openWidget(widget, widgetIdentifier){
+    // decrement closed-widget-count
     if(widget.is(":hidden")) {
         closedWidgetCount.text( Number(closedWidgetCount.text()) - 1);
     }
@@ -172,7 +171,7 @@ function openWidget(widget, widgetIdentifier, speed){
 function hideWidget(widget, speed){
     // cache DOM objects/data used in this function
     var widgetName = widget.find('.widget-header h3').text();
-    var widgetIdentifier = widget.attr('id'); 
+    var widgetIdentifier = widget.attr('id');
 
     // update count
     if(!widget.is(":hidden")) {
@@ -188,7 +187,7 @@ function hideWidget(widget, speed){
     // add widget to localstorage (and create item if needed)
     var localData = JSON.parse(window.localStorage.getItem('hidden'));
     if(localData == null) {
-        hidden = new Array();
+        hidden = [];
         hidden.push(widgetIdentifier);
         localStorage.setItem('hidden', JSON.stringify(hidden));
     }
@@ -221,5 +220,5 @@ function keepWidgetOrdered(){
 
 function isInArray(array, search)
 {
-    return (array.indexOf(search) >= 0) ? true : false; 
+    return array.indexOf(search) >= 0;
 }
