@@ -27,8 +27,9 @@
         'uptime',
         'users',
         'where',
-		'arp',
-		'redis_status'
+	'arp',
+	'redis_status',
+	'varnish_status',
     );
 
 

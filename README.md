@@ -26,6 +26,9 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
 **Please note: If you would like to limit access to linux-dash, please add
 `.htaccess` or other security measure.**
 
+### varnish module
+To use varnish module, please install from pecl varnish PHP extension
+
 ## Support
 
 *The information listed here is currently limited and will expand shortly.*

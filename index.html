@@ -519,6 +519,62 @@
 							</div><!-- /widget -->
                         </div><!-- /span3 -->
 
+						<div class="span4">
+							<div id="varnish-widget" class="widget widget-table action-table">
+								<div class="widget-header">
+									<i class="icon-list"></i>
+									<h3>
+										Varnish Status
+									</h3>
+									<div id="refresh-varnish" class="btn icon-refresh js-refresh-info"></div>
+								</div><!-- /widget-header -->
+								<div class="widget-content">
+									<div id="varnish-installed" class="hide">
+										<div class="general-info-item">
+											<span class="general-title">Client connections accepted</span>
+											<span class="general-data" id="client_conn"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Client requests received</span>
+											<span class="general-data" id="client_req"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">N backends</span>
+											<span class="general-data" id="n_backend"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">N worker threads</span>
+											<span class="general-data" id="n_wrk"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Total sessions</span>
+											<span class="general-data" id="s_sess"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Total cache hit</span>
+											<span class="general-data" id="total_caches"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Cache hit</span>
+											<span class="general-data" id="cache_hit"></span>
+											<span class="general-title">%</span>
+											<span class="general-data" id="cache_hit_rate"></span>
+										</div>
+										<div class="general-info-item">
+											<span class="general-title">Cache miss</span>
+											<span class="general-data" id="cache_miss"></span>
+											<span class="general-title">%</span>
+											<span class="general-data" id="cache_miss_rate"></span>
+										</div>
+
+									</div>
+									<div id="varnish-not" class="hide">
+										Varnish not installed
+									</div>
+								</div><!-- /widget-content -->
+							</div><!-- /widget -->
+                        </div><!-- /span3 -->
+
                     </div><!-- #/widgets -->
                 </div>
             </div><!-- /main-inner -->

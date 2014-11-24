@@ -7,7 +7,7 @@
 
         public function getData($args=array()) {
 
-            exec('/bin/df -Ph | awk \'BEGIN {OFS=","} {print $1,$2,$3,$4,$5,$6}\'', $result);
+            exec('/bin/df -Ph | awk \'BEGIN {OFS="-"} {print $1,$2,$3,$4,$5,$6}\'', $result);
 
             $data = array();
 
@@ -17,7 +17,7 @@
                     $x++;
                     continue;
                 }
-                $data[] = explode(',', $result[$x]);
+                $data[] = explode('-', $result[$x]);
 
                 unset($result[$x], $a);
                 $x++;
