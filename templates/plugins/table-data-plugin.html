@@ -1,5 +1,8 @@
 <div class="plugin" heading="{{heading}}">
 	[Table Data Plugin]
+	[Last Updated: {{ lastGet | date:'hh:mm:ss a' }}]
+	<button ng-click="getData()">Refresh</button>
+
 	<h3>Title: {{heading}}</h3>
 
 	<loader ng-hide="tableRows"></loader>

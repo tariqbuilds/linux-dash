@@ -1,5 +1,7 @@
 var linuxDash = angular.module('linuxDash', []);
 
+linuxDash.constant('requestUrl', 'module.php?module=');
+
 linuxDash.controller('body', function ($scope) {
     
     $scope.basicInfo = [
@@ -75,7 +77,7 @@ linuxDash.directive('loader', function() {
  * @param  string heading
  * @param  collection staticData
  */
-linuxDash.directive('staticDataPlugin', [ '$http', function($http) {
+linuxDash.directive('staticDataPlugin', [ '$http', '$timeout', 'requestUrl', function($http, $timeout, requestUrl) {
   return {
     restrict: 'E',
     isoloate: true,
@@ -86,14 +88,20 @@ linuxDash.directive('staticDataPlugin', [ '$http', function($http) {
     templateUrl: '/templates/plugins/static-data-plugin.html',
     link: function (scope, element) {
 
-        scope.staticData.forEach(function (staticObj) {
-            
-            $http.get('module.php?module=' + staticObj.module)
-                .then(function (resp) {
-                    staticObj.data = resp.data.data;
-                });
+        scope.getData = function () {
+            scope.staticData.forEach(function (staticObj) {
 
-        });
+                $http.get(requestUrl + staticObj.module)
+                    .then(function (resp) {
+                        staticObj.data = resp.data.data;
+                    });
+            });
+
+            scope.lastGet = new Date().getTime();
+        };
+
+        scope.getData();
+
     }
   };
 }]);
@@ -104,7 +112,7 @@ linuxDash.directive('staticDataPlugin', [ '$http', function($http) {
  * @param  string heading
  * @param  collection tableData
  */
-linuxDash.directive('tableDataPlugin', [ '$http', function($http) {
+linuxDash.directive('tableDataPlugin', [ '$http', 'requestUrl', function($http, requestUrl) {
   return {
     restrict: 'E',
     isoloate: true,
@@ -117,9 +125,16 @@ linuxDash.directive('tableDataPlugin', [ '$http', function($http) {
     link: function (scope, element) {
         scope.rowLimit = 10;
 
-        $http.get('module.php?module=' + scope.moduleName).then(function (resp) {
-            scope.tableRows = resp.data.data;
-        });
+        scope.getData = function () {
+        
+            $http.get(requestUrl + scope.moduleName).then(function (resp) {
+                scope.tableRows = resp.data.data;
+                scope.lastGet = new Date().getTime();
+            });
+
+        };
+
+        scope.getData();
     }
   };
 }]);
