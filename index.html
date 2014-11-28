@@ -19,6 +19,7 @@
 
             .plugin {
                 background: lightblue;
+                float: left;
                 padding: 10px;
                 margin: 10px;
                 height: 30%;
@@ -31,7 +32,7 @@
         <![endif]-->
     </head>
     <body ng-controller="body">
-        <h2>{{welcome}} to Linux Dash</h2>
+        <h2>Linux Dash</h2>
         <small>Simple plug-and-play linux stats monitoring dashboard</small>
         
         <br><br>
@@ -46,7 +47,37 @@
             <table-data-plugin 
                 heading="IP Addresses" 
                 module-name="ip"
-                table-headers="ip.tableConfig">
+                table-headers="ipTableConfig">
+            </table-data-plugin>
+
+            <table-data-plugin 
+                heading="Running Processes" 
+                module-name="ps"
+                table-headers="psTableConfig">
+            </table-data-plugin>
+
+            <table-data-plugin 
+                heading="Network Connections" 
+                module-name="netstat"
+                table-headers="netstatTableConfig">
+            </table-data-plugin>
+
+            <table-data-plugin 
+                heading="Accounts" 
+                module-name="users"
+                table-headers="usersTableConfig">
+            </table-data-plugin>
+
+            <table-data-plugin 
+                heading="Logged In Accounts" 
+                module-name="online"
+                table-headers="onlineTableConfig">
+            </table-data-plugin> 
+
+            <table-data-plugin 
+                heading="Recent Logins" 
+                module-name="lastlog"
+                table-headers="lastloginTableConfig">
             </table-data-plugin>
 
         </div>

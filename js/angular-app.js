@@ -9,16 +9,65 @@ linuxDash.controller('body', function ($scope) {
         {name: 'Server Uptime', module: 'uptime' },
     ];
 
-    $scope.ip = {
-        tableConfig: [
-            'Name',
-            'IP Address'
-        ],
+    $scope.ipTableConfig = [
+        'Name',
+        'IP Address'
+    ];
 
-    };
+    $scope.psTableConfig = [
+        'USER',
+        'PID',
+        '%CPU',
+        '%MEM',
+        'VSZ',
+        'RSS',
+        'TTY',
+        'STAT',
+        'START',
+        'TIME',
+        'COMMAND' 
+    ];
 
+    $scope.netstatTableConfig = [
+        'Connections',
+        'IP Address'
+    ];
+
+    $scope.usersTableConfig = [
+        'Account Type',
+        'User',
+        'Home Directory'
+    ];
+
+    $scope.onlineTableConfig = [
+        'Who',
+        'From',
+        'Last Login',
+        'Idle'
+    ];
+
+    $scope.lastloginTableConfig = [
+        'Who',
+        'From',
+        'Last Login',
+    ];
 });
 
+/**
+ * Loader directive
+ * 
+ * @param int width
+ * @return {[type]} [description]
+ */
+linuxDash.directive('loader', function() {
+  return {
+    restrict: 'E',
+    scope: {
+        width: '@'
+    },
+    templateUrl: '/templates/plugins/loader-plugin.html'
+  };
+});
 
 /**
  * Fetches and displays static data
@@ -53,7 +102,7 @@ linuxDash.directive('staticDataPlugin', [ '$http', function($http) {
  * Fetches and displays table data
  * 
  * @param  string heading
- * @param  collection staticData
+ * @param  collection tableData
  */
 linuxDash.directive('tableDataPlugin', [ '$http', function($http) {
   return {
@@ -66,6 +115,7 @@ linuxDash.directive('tableDataPlugin', [ '$http', function($http) {
     },
     templateUrl: '/templates/plugins/table-data-plugin.html',
     link: function (scope, element) {
+        scope.rowLimit = 10;
 
         $http.get('module.php?module=' + scope.moduleName).then(function (resp) {
             scope.tableRows = resp.data.data;
