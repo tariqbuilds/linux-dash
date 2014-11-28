@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="linuxDash">
     <head>
         <title>linux-dash : Server Monitoring Web Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +7,52 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+        <!-- Angular Libs -->
+        <script src="js/angular.min.js" type="text/javascript"></script>
+        <style>
+            #plugins {
+                width: 800px;
+                height: 100%;
+                border: 1px dashed;
+            }
+
+            .plugin {
+                background: lightblue;
+                padding: 10px;
+                margin: 10px;
+                height: 30%;
+                border: 3px solid lightgrey;
+            }
+        </style>
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
           <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body>
-       <h2>Linux Dash!</h2>
+    <body ng-controller="body">
+        <h2>{{welcome}} to Linux Dash</h2>
+        <small>Simple plug-and-play linux stats monitoring dashboard</small>
+        
+        <br><br>
+
+        <div id="plugins">
+            
+            <static-data-plugin 
+                heading="Machine Info" 
+                static-data="basicInfo">
+            </static-data-plugin>
+
+            <table-data-plugin 
+                heading="IP Addresses" 
+                module-name="ip"
+                table-headers="ip.tableConfig">
+            </table-data-plugin>
+
+        </div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/angular.min.js" type="text/javascript"></script>
-        <script src="js/odometer.js" type="text/javascript"></script>
-        <script src="js/dashboard.js" type="text/javascript"></script>
-        <script src="js/base.js" type="text/javascript"></script>
+        <script src="js/angular-app.js" type="text/javascript"></script>
     </body>
 </html>

@@ -1,0 +1,18 @@
+<div class="plugin" heading="{{heading}}">
+	[Table Data Plugin]
+	<h3>Title: {{heading}}</h3>
+
+	<table border="3">
+		<thead>
+			<tr>
+				<th ng-repeat="header in tableHeaders">{{header}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="row in tableRows">
+				<td>{{row[0]}}</td>
+				<td>{{row[1]}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
