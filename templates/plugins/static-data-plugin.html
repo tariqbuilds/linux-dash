@@ -1,8 +1,8 @@
 <div class="plugin" heading="{{heading}}">
 	[Static Data Plugin]
-	[Last Updated: {{ lastGet | date:'hh:mm:ss a' }}]
+	<last-update timestamp="lastGet"></last-update>
 	
-	<button ng-click="getData()">Refresh</button>
+	<refresh-btn refresh="getData()"></refresh-btn>
 
 	<h3>Title: {{heading}}</h3>
 

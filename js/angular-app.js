@@ -1,8 +1,7 @@
 var linuxDash = angular.module('linuxDash', []);
 
-linuxDash.constant('requestUrl', 'module.php?module=');
-
-linuxDash.controller('body', function ($scope, $http, requestUrl) {
+////////////////// Global Application //////////////////
+linuxDash.controller('body', function ($scope, server) {
     
     $scope.basicInfo = [
         {name: 'OS', module: 'issue' },
@@ -55,8 +54,8 @@ linuxDash.controller('body', function ($scope, $http, requestUrl) {
     ];
 
     // get max ram available on machone
-    $http.get(requestUrl + 'mem').then(function (resp) {
-        $scope.maxRam = resp.data.data[1];
+    server.get('mem', function (resp) {
+        $scope.maxRam = resp[1];
         $scope.minRam = 0;
     });
 
@@ -84,7 +83,25 @@ linuxDash.controller('body', function ($scope, $http, requestUrl) {
 });
 
 /**
- * Loader directive
+ * Gets data from server and runs callbacks on response.data.data
+ * 
+ * @param int width
+ * @return {[type]} [description]
+ */
+linuxDash.service('server',[ '$http', function ($http) {
+  
+  this.get = function (moduleName, callback) {
+        return $http.get('module.php?module=' + moduleName).then(function (response) {
+            return callback(response.data.data);
+        });
+  };
+
+}]);
+
+////////////////// UI Element Directives //////////////////
+
+/**
+ * Shows loader
  * 
  * @param int width
  * @return {[type]} [description]
@@ -95,17 +112,50 @@ linuxDash.directive('loader', function() {
     scope: {
         width: '@'
     },
-    templateUrl: '/templates/plugins/loader-plugin.html'
+    templateUrl: '/templates/plugins/ui-elements/loader.html'
   };
 });
 
+/**
+ * Shows refresh button and calls 
+ * provided expression on-click
+ * 
+ * @param expression refresh
+ */
+linuxDash.directive('refreshBtn', function() {
+  return {
+    restrict: 'E',
+    scope: {
+        refresh: '&'
+    },
+    templateUrl: '/templates/plugins/ui-elements/refresh-button.html'
+  };
+});
+
+/**
+ * Displays last updated timestamp for widget
+ * 
+ * @param expression refresh
+ */
+linuxDash.directive('lastUpdate', function() {
+  return {
+    restrict: 'E',
+    scope: {
+        timestamp: '='
+    },
+    templateUrl: '/templates/plugins/ui-elements/last-update.html'
+  };
+});
+
+////////////////// Plugin Directives //////////////////
+///
 /**
  * Fetches and displays static data
  * 
  * @param  string heading
  * @param  collection staticData
  */
-linuxDash.directive('staticDataPlugin', [ '$http', '$timeout', 'requestUrl', function($http, $timeout, requestUrl) {
+linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout, server) {
   return {
     restrict: 'E',
     isoloate: true,
@@ -117,19 +167,21 @@ linuxDash.directive('staticDataPlugin', [ '$http', '$timeout', 'requestUrl', fun
     link: function (scope, element) {
 
         scope.getData = function () {
+
+            // for each peice of static data to be shown
             scope.staticData.forEach(function (staticObj) {
 
-                $http.get(requestUrl + staticObj.module)
-                    .then(function (resp) {
-                        staticObj.data = resp.data.data;
-                    });
+                // get the resp from the server and assign it to obj.data 
+                server.get(staticObj.module, function (serverResponseData) {
+                    staticObj.data = serverResponseData;
+                });
+
             });
 
             scope.lastGet = new Date().getTime();
         };
 
         scope.getData();
-
     }
   };
 }]);
@@ -140,7 +192,7 @@ linuxDash.directive('staticDataPlugin', [ '$http', '$timeout', 'requestUrl', fun
  * @param  string heading
  * @param  collection tableData
  */
-linuxDash.directive('tableDataPlugin', [ '$http', 'requestUrl', function($http, requestUrl) {
+linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
   return {
     restrict: 'E',
     isoloate: true,
@@ -154,12 +206,10 @@ linuxDash.directive('tableDataPlugin', [ '$http', 'requestUrl', function($http, 
         scope.rowLimit = 10;
 
         scope.getData = function () {
-        
-            $http.get(requestUrl + scope.moduleName).then(function (resp) {
-                scope.tableRows = resp.data.data;
+            server.get(scope.moduleName, function (serverResponseData) {
+                scope.tableRows = serverResponseData;
                 scope.lastGet = new Date().getTime();
             });
-
         };
 
         scope.getData();
@@ -173,7 +223,7 @@ linuxDash.directive('tableDataPlugin', [ '$http', 'requestUrl', function($http, 
  * @param  string heading
  * @param  collection tableData
  */
-linuxDash.directive('lineChartPlugin', [ '$http', '$interval', 'requestUrl', function($http, $interval, requestUrl) {
+linuxDash.directive('lineChartPlugin', ['$interval', 'server', function($interval, server) {
   return {
     restrict: 'E',
     isoloate: true,
@@ -204,17 +254,15 @@ linuxDash.directive('lineChartPlugin', [ '$http', '$interval', 'requestUrl', fun
         
         // update data on chart
         scope.getData = function () {
-        
-            $http.get(requestUrl + scope.moduleName).then(function (serverResponse) {
-                scope.currentData = serverResponse.data.data;
+            server.get(scope.moduleName, function (serverResponseData) {
                 scope.lastGet = new Date().getTime();
                 
                 // update chart with this response
-                series.append(scope.lastGet, scope.getDisplayValue(scope.currentData));
+                series.append(scope.lastGet, scope.getDisplayValue(serverResponseData));
 
                 // update the metrics for this chart
                 scope.metrics.forEach(function (metricObj) {
-                    metricObj.data = metricObj.generate(scope.currentData) ;
+                    metricObj.data = metricObj.generate(serverResponseData) ;
                 });
 
             });
@@ -242,7 +290,9 @@ linuxDash.directive('progressBarPlugin',function() {
   };
 });
 
-linuxDash.directive('diskSpace',[ '$http', '$interval', 'requestUrl', function($http, $interval, requestUrl) {
+////////////////// Widget Directives //////////////////
+///
+linuxDash.directive('diskSpace',[ 'server', '$interval', function(server, $interval) {
   return {
     restrict: 'E',
     isoloate: true,
@@ -252,14 +302,23 @@ linuxDash.directive('diskSpace',[ '$http', '$interval', 'requestUrl', function($
         scope.heading = "Disk Partitions";
 
         var getData = function () {
-            $http.get(requestUrl + 'df').then(function (resp) {
-                scope.diskSpaceData = resp.data.data;
+            server.get('df', function (serverResponseData) {
+                scope.diskSpaceData = serverResponseData;
             });  
         };
 
         getData();
 
-        scope.getInt = function (stringToParse) { return parseInt(stringToParse); }
+        scope.getKB = function (stringSize) { 
+            var lastChar = stringSize.slice(-1),
+                size = parseInt(stringSize);
+
+            switch (lastChar){
+                case 'M': return size * 1024;
+                case 'G': return size * 1048576;
+                default: return size;
+            }
+        };
     }
   };
 }]);
