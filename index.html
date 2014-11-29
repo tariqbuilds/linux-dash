@@ -38,14 +38,22 @@
         <br><br>
 
         <div id="plugins">
+            <disk-space>
+            </disk-space>
             
+
             <line-chart-plugin
                 ng-if="maxRam"
+                
                 heading="RAM Memory"
                 module-name="mem"
+
                 max-value="maxRam"
                 min-value="minRam"
-                refresh-rate="1000">
+                refresh-rate="2000"
+                
+                get-display-value="ramToDisplay"
+                metrics="ramMetrics">
             </line-chart-plugin>
 
             <static-data-plugin 
@@ -96,5 +104,6 @@
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/angular-app.js" type="text/javascript"></script>
         <script src="js/smoothie.js" type="text/javascript"></script>
+        <script src="js/chart.min.js" type="text/javascript"></script>
     </body>
 </html>

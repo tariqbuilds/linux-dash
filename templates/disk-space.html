@@ -1,0 +1,35 @@
+<button ng-click="getData()">Refresh</button>
+
+<h3>Title: {{heading}}</h3>
+
+<loader ng-hide="diskSpaceData"></loader>
+
+<table border="1" ng-show="diskSpaceData">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th></th>
+			<th>Stats</th>
+			<th>Mount Path</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr  ng-repeat="partition in diskSpaceData">
+			<td>{{partition[0]}}</td>
+			<td>
+				<progress-bar-plugin
+				    width="150px"
+				    name="{{partition[0]}}"
+				    value="{{ getInt(partition[2]) }}"
+				    max="{{ getInt(partition[1]) }}">
+				</progress-bar-plugin>
+			</td>
+			<td>
+				{{ partition[2] }} / {{ partition[1] }}<br>
+				({{ partition[4] }})
+			</td>
+			<td>{{ partition[5] }}</td>
+		</tr>
+	</tbody>
+
+</table>

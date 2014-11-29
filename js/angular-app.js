@@ -59,6 +59,28 @@ linuxDash.controller('body', function ($scope, $http, requestUrl) {
         $scope.maxRam = resp.data.data[1];
         $scope.minRam = 0;
     });
+
+    $scope.ramToDisplay = function (serverResponseData) {
+        return serverResponseData[2];
+    };
+
+    $scope.ramMetrics = [
+        {
+            name: 'Used',
+            generate: function (serverResponseData) {
+                var ratio = serverResponseData[2] / serverResponseData[1];
+                var percentage = parseInt(ratio * 100);
+
+                return percentage.toString() + ' %';
+            }
+        },
+        {
+            name: 'Free',
+            generate: function (serverResponseData) {
+                return serverResponseData[3].toString() + ' MB';
+            }
+        } 
+    ];
 });
 
 /**
@@ -160,42 +182,84 @@ linuxDash.directive('lineChartPlugin', [ '$http', '$interval', 'requestUrl', fun
         moduleName: '@',
         refreshRate: '=',
         maxValue: '=',
-        minValue: '='
+        minValue: '=',
+        getDisplayValue: '=',
+        metrics: '='
     },
     templateUrl: '/templates/plugins/line-chart-plugin.html',
     link: function (scope, element) {
         
-        // smoothie
+        // smoothieJS - Create new chart
         var chart = new SmoothieChart({
-                      grid: { strokeStyle:'#ccc', fillStyle:'#eee',
-                              lineWidth: 1, millisPerLine: 250, verticalSections: 6, },
-                      labels: { fillStyle:'rgb(60, 0, 0)' },
-                      maxValue: parseInt(scope.maxValue),
-                      minValue: parseInt(scope.minValue),
-                      horizontalLines: [{ value: 0, color: '#ffffff', lineWidth: 1 }]
-                    });
+            maxValue: parseInt(scope.maxValue),
+            minValue: parseInt(scope.minValue),
+            horizontalLines: [{ value: 0, color: '#ffffff', lineWidth: 1 }]
+        });
 
-        // canvas = document.getElementById('smoothie-chart'),
+        // smoothieJS - set up canvas element for chart
         canvas = element.find('canvas')[0],
         series = new TimeSeries();
-
-        chart.addTimeSeries(series, { strokeStyle:'rgb(0, 105, 0)', fillStyle:'rgba(0, 0, 0, 0.2)', lineWidth:3 });
-        chart.streamTo(canvas, 1093);
-
-        /********************************/        
+        chart.addTimeSeries(series, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+        chart.streamTo(canvas, 1000);
+        
+        // update data on chart
         scope.getData = function () {
         
-            $http.get(requestUrl + scope.moduleName).then(function (resp) {
-                scope.currentData = resp.data.data;
-                series.append(new Date().getTime(), scope.currentData[2]);
+            $http.get(requestUrl + scope.moduleName).then(function (serverResponse) {
+                scope.currentData = serverResponse.data.data;
                 scope.lastGet = new Date().getTime();
-            });
+                
+                // update chart with this response
+                series.append(scope.lastGet, scope.getDisplayValue(scope.currentData));
 
+                // update the metrics for this chart
+                scope.metrics.forEach(function (metricObj) {
+                    metricObj.data = metricObj.generate(scope.currentData) ;
+                });
+
+            });
         };
 
-        scope.getData();
-
+        // set the directive-provided interval 
+        // at which to run the chart update
         $interval(scope.getData, scope.refreshRate);
+    }
+  };
+}]);
+
+linuxDash.directive('progressBarPlugin',function() {
+  return {
+    restrict: 'E',
+    isoloate: true,
+    scope: {
+        width: '@',
+        moduleName: '@',
+        name: '@',
+        value: '@',
+        max: '@'
+    },
+    templateUrl: '/templates/plugins/progress-bar-plugin.html'
+  };
+});
+
+linuxDash.directive('diskSpace',[ '$http', '$interval', 'requestUrl', function($http, $interval, requestUrl) {
+  return {
+    restrict: 'E',
+    isoloate: true,
+    templateUrl: '/templates/disk-space.html',
+    link: function (scope, element) {
+
+        scope.heading = "Disk Partitions";
+
+        var getData = function () {
+            $http.get(requestUrl + 'df').then(function (resp) {
+                scope.diskSpaceData = resp.data.data;
+            });  
+        };
+
+        getData();
+
+        scope.getInt = function (stringToParse) { return parseInt(stringToParse); }
     }
   };
 }]);
