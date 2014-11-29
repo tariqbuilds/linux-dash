@@ -20,6 +20,7 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
 ## Installation
 
 1. Make sure you have `php5-json` installed and enabled
+2. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
 2. [Download the source](https://github.com/afaqurk/linux-dash/archive/master.zip) or clone the repo 
 3. Place it in `/var/www/` (for Apache); For nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov)
 
