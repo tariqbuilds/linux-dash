@@ -164,15 +164,18 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
+            borderVisible:false,
+            grid:{strokeStyle:'rgba(119,119,119,0.20)'},
+            labels:{fontSize:12,precision:0},
             maxValue: parseInt(scope.maxValue),
             minValue: parseInt(scope.minValue),
-            horizontalLines: [{ value: 0, color: '#ffffff', lineWidth: 1 }]
+            horizontalLines: [{ value: 5, color: '#ffffff', lineWidth: 1 }]
         });
 
         // smoothieJS - set up canvas element for chart
         canvas = element.find('canvas')[0],
         series = new TimeSeries();
-        chart.addTimeSeries(series, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 4 });
+        chart.addTimeSeries(series, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 2 });
         chart.streamTo(canvas, 1000);
         
         // update data on chart
@@ -193,6 +196,87 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
 
         // set the directive-provided interval 
         // at which to run the chart update
+        $interval(scope.getData, scope.refreshRate);
+    }
+  };
+}]);
+
+/**
+ * Fetches and displays data as line chart at a certain refresh rate
+ * 
+ * @param  string heading
+ * @param  collection tableData
+ */
+linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
+  return {
+    restrict: 'E',
+    isoloate: true,
+    scope: {
+        heading: '@',
+        moduleName: '@',
+        refreshRate: '=',
+        maxValue: '=',
+        minValue: '=',
+        getDisplayValue: '=',
+        metrics: '='
+    },
+    templateUrl: '/templates/plugins/multi-line-chart-plugin.html',
+    link: function (scope, element) {
+        
+        // smoothieJS - Create new chart
+        var chart = new SmoothieChart({
+            borderVisible:false,
+            grid:{strokeStyle:'rgba(119,119,119,0.20)'},
+            labels:{fontSize:12,precision:0},
+            maxValue: parseInt(scope.maxValue),
+            minValue: parseInt(scope.minValue),
+            horizontalLines: [{ value: 1, color: '#ffffff', lineWidth: 1 }]
+        });
+
+        var seriesOptions = [
+          { strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 3 },
+          { strokeStyle: 'rgba(0, 255, 0, 1)', lineWidth: 3 },
+          { strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 3 },
+          { strokeStyle: 'rgba(255, 255, 0, 1)', lineWidth: 3 }
+        ];
+
+        // smoothieJS - set up canvas element for chart
+        var canvas = element.find('canvas')[0];
+        var seriesArray = [];
+
+        // get the data once to set up # of lines on chart
+        server.get(scope.moduleName, function (serverResponseData) {
+
+            serverResponseData.forEach(function (obj, key) {
+                
+                seriesArray[key] = new TimeSeries();
+                chart.addTimeSeries(seriesArray[key], seriesOptions[key]);
+                scope.metrics[key].color = seriesOptions[key].strokeStyle;
+            });
+
+        });
+
+        chart.streamTo(canvas, 1000);
+        
+        // update data on chart
+        scope.getData = function () {
+            server.get(scope.moduleName, function (serverResponseData) {
+                scope.lastGet = new Date().getTime();
+                
+                // update chart with current response
+                serverResponseData.forEach(function (item, key) {
+                    seriesArray[key].append(scope.lastGet, scope.getDisplayValue(serverResponseData[key]));
+                });
+
+                // update the metrics for this chart
+                scope.metrics.forEach(function (metricObj) {
+
+                    metricObj.data = metricObj.generate(serverResponseData) ;
+                });
+
+            });
+        };
+
         $interval(scope.getData, scope.refreshRate);
     }
   };

@@ -1,0 +1,20 @@
+<div class="plugin">
+
+	<last-update timestamp="lastGet"></last-update>
+	
+	<h3>{{heading}}</h3>
+
+	<div class="plugin-body">
+
+		<canvas class="canvas" width="413" height="300"></canvas>
+
+		<div ng-repeat="metric in metrics">
+			<div>
+				<div class="metric-square" style="display: inline-block; border: 1px solid black; width: 20px; height: 20px; background: {{metric.color}}"></div>
+				{{metric.name}}: {{metric.data}}
+			</div>
+		</div>
+		
+	</div>
+
+</plugin>

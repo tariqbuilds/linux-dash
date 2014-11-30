@@ -58,19 +58,62 @@ linuxDash.directive('memory',[ 'server', function(server) {
                         var ratio = serverResponseData[2] / serverResponseData[1];
                         var percentage = parseInt(ratio * 100);
 
-                        return percentage.toString() + ' %';
+                        return serverResponseData[2] + ' MB ('
+                                + percentage.toString() + '%)';
                     }
                 },
                 {
                     name: 'Free',
                     generate: function (serverResponseData) {
-                        return serverResponseData[3].toString() + ' MB';
+                        return serverResponseData[3].toString() 
+                                + ' MB of '
+                                + serverResponseData[1] 
+                                + 'MB';
                     }
                 } 
             ];
         }
     };
 }]);
+
+
+linuxDash.directive('cpuLoad',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/cpu-load.html',
+        link: function (scope) {
+            scope.maxLoad = 0;
+            scope.minLoad = 100;
+
+            scope.loadToDisplay = function (serverResponseData) {
+                return serverResponseData[1];
+            };
+
+            scope.loadMetrics = [
+                {
+                    name: '1 Minute Average',
+                    generate: function (serverResponseData) {
+                        return serverResponseData[0][1] + ' %';
+                    }
+                },
+                {
+                    name: '5 Minute Average',
+                    generate: function (serverResponseData) {
+                        return serverResponseData[1][1] + ' %';
+                    }
+                },
+                {
+                    name: '15 Minute Average',
+                    generate: function (serverResponseData) {
+                        return serverResponseData[2][1] + ' %';
+                    }
+                }
+            ];
+        }
+    };
+}]);
+
 
 linuxDash.directive('machineInfo',[ 'server', function(server) {
     return {
