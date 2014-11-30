@@ -3,83 +3,6 @@ var linuxDash = angular.module('linuxDash', []);
 ////////////////// Global Application //////////////////
 linuxDash.controller('body', function ($scope, server) {
     
-    $scope.basicInfo = [
-        {name: 'OS', module: 'issue' },
-        {name: 'Hostname', module: 'hostname' },
-        {name: 'Server Time', module: 'time' },
-        {name: 'Server Uptime', module: 'uptime' },
-    ];
-
-    $scope.ipTableConfig = [
-        'Name',
-        'IP Address'
-    ];
-
-    $scope.psTableConfig = [
-        'USER',
-        'PID',
-        '%CPU',
-        '%MEM',
-        'VSZ',
-        'RSS',
-        'TTY',
-        'STAT',
-        'START',
-        'TIME',
-        'COMMAND' 
-    ];
-
-    $scope.netstatTableConfig = [
-        'Connections',
-        'IP Address'
-    ];
-
-    $scope.usersTableConfig = [
-        'Account Type',
-        'User',
-        'Home Directory'
-    ];
-
-    $scope.onlineTableConfig = [
-        'Who',
-        'From',
-        'Last Login',
-        'Idle'
-    ];
-
-    $scope.lastloginTableConfig = [
-        'Who',
-        'From',
-        'Last Login',
-    ];
-
-    // get max ram available on machone
-    server.get('mem', function (resp) {
-        $scope.maxRam = resp[1];
-        $scope.minRam = 0;
-    });
-
-    $scope.ramToDisplay = function (serverResponseData) {
-        return serverResponseData[2];
-    };
-
-    $scope.ramMetrics = [
-        {
-            name: 'Used',
-            generate: function (serverResponseData) {
-                var ratio = serverResponseData[2] / serverResponseData[1];
-                var percentage = parseInt(ratio * 100);
-
-                return percentage.toString() + ' %';
-            }
-        },
-        {
-            name: 'Free',
-            generate: function (serverResponseData) {
-                return serverResponseData[3].toString() + ' MB';
-            }
-        } 
-    ];
 });
 
 /**
@@ -223,7 +146,7 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
  * @param  string heading
  * @param  collection tableData
  */
-linuxDash.directive('lineChartPlugin', ['$interval', 'server', function($interval, server) {
+linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
   return {
     restrict: 'E',
     isoloate: true,
@@ -275,6 +198,25 @@ linuxDash.directive('lineChartPlugin', ['$interval', 'server', function($interva
   };
 }]);
 
+/**
+ * 
+ * 
+ * @param  string heading
+ * @param  collection tableData
+ */
+linuxDash.directive('plugin', function() {
+    return {
+        restrict: 'E',
+        transclude: true,
+        // scope: {
+        //     heading: '@',
+        //     lastUpdated: '=',
+        //     onRefresh: '&',
+        // },
+        templateUrl: '/templates/plugins/base-plugin.html'
+    }
+});
+
 linuxDash.directive('progressBarPlugin',function() {
   return {
     restrict: 'E',
@@ -289,36 +231,3 @@ linuxDash.directive('progressBarPlugin',function() {
     templateUrl: '/templates/plugins/progress-bar-plugin.html'
   };
 });
-
-////////////////// Widget Directives //////////////////
-///
-linuxDash.directive('diskSpace',[ 'server', '$interval', function(server, $interval) {
-  return {
-    restrict: 'E',
-    isoloate: true,
-    templateUrl: '/templates/disk-space.html',
-    link: function (scope, element) {
-
-        scope.heading = "Disk Partitions";
-
-        var getData = function () {
-            server.get('df', function (serverResponseData) {
-                scope.diskSpaceData = serverResponseData;
-            });  
-        };
-
-        getData();
-
-        scope.getKB = function (stringSize) { 
-            var lastChar = stringSize.slice(-1),
-                size = parseInt(stringSize);
-
-            switch (lastChar){
-                case 'M': return size * 1024;
-                case 'G': return size * 1048576;
-                default: return size;
-            }
-        };
-    }
-  };
-}]);

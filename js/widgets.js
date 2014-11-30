@@ -1,0 +1,186 @@
+////////////////// Widget Directives ///////////////////
+
+linuxDash.directive('diskSpace',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/disk-space.html',
+        link: function (scope) {
+
+            scope.heading =  "Disk Partitions";
+
+            scope.getData = function () {
+                server.get('df', function (serverResponseData) {
+                    scope.diskSpaceData = serverResponseData;
+                });
+
+                scope.lastGet = new Date().getTime();
+            };
+
+            scope.getData();
+
+            scope.getKB = function (stringSize) { 
+                var lastChar = stringSize.slice(-1),
+                    size = parseInt(stringSize);
+
+                switch (lastChar){
+                    case 'M': return size * 1024;
+                    case 'G': return size * 1048576;
+                    default: return size;
+                }
+            };
+        }
+    };
+}]);
+
+linuxDash.directive('memory',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/memory.html',
+        link: function (scope) {
+
+            // get max ram available on machine before we 
+            // can start charting
+            server.get('mem', function (resp) {
+                scope.maxRam = resp[1];
+                scope.minRam = 0;
+            });
+
+            scope.ramToDisplay = function (serverResponseData) {
+                return serverResponseData[2];
+            };
+
+            scope.ramMetrics = [
+                {
+                    name: 'Used',
+                    generate: function (serverResponseData) {
+                        var ratio = serverResponseData[2] / serverResponseData[1];
+                        var percentage = parseInt(ratio * 100);
+
+                        return percentage.toString() + ' %';
+                    }
+                },
+                {
+                    name: 'Free',
+                    generate: function (serverResponseData) {
+                        return serverResponseData[3].toString() + ' MB';
+                    }
+                } 
+            ];
+        }
+    };
+}]);
+
+linuxDash.directive('machineInfo',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/machine-info.html',
+        link: function (scope) {
+            scope.basicInfo = [
+                {name: 'OS', module: 'issue' },
+                {name: 'Hostname', module: 'hostname' },
+                {name: 'Server Time', module: 'time' },
+                {name: 'Server Uptime', module: 'uptime' },
+            ];
+        }
+    };
+}]);
+
+linuxDash.directive('ipAddresses',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/ip-addresses.html',
+        link: function (scope) {
+            scope.ipTableConfig = [
+                'Name',
+                'IP Address'
+            ];
+        }
+    };
+}]);
+
+linuxDash.directive('processes',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/processes.html',
+        link: function (scope) {
+            scope.psTableConfig = [
+                'USER',
+                'PID',
+                '%CPU',
+                '%MEM',
+                'VSZ',
+                'RSS',
+                'TTY',
+                'STAT',
+                'START',
+                'TIME',
+                'COMMAND' 
+            ];
+        }
+    };
+}]);
+
+linuxDash.directive('networkConnections',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/network-connections.html',
+        link: function (scope) {
+            scope.netstatTableConfig = [
+                'Connections',
+                'IP Address'
+            ];
+        }
+    };
+}]);
+
+linuxDash.directive('machineAccounts',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/machine-accounts.html',
+        link: function (scope) {
+            scope.usersTableConfig = [
+                'Account Type',
+                'User',
+                'Home Directory'
+            ];
+        }
+    };
+}]);
+
+linuxDash.directive('loggedInAccounts',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/logged-in-accounts.html',
+        link: function (scope) {
+            scope.onlineTableConfig = [
+                'Who',
+                'From',
+                'Last Login',
+                'Idle'
+            ];
+        }
+    };
+}]);
+
+linuxDash.directive('recentLogins',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: '/templates/recent-logins.html',
+        link: function (scope) {
+            scope.lastloginTableConfig = [
+                'Who',
+                'From',
+                'Last Login',
+            ];
+        }
+    };
+}]);

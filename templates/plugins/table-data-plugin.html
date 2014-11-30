@@ -1,10 +1,7 @@
-<div class="plugin" heading="{{heading}}">
-	[Table Data Plugin]
-	<last-update timestamp="lastGet"></last-update>
-	
-	<refresh-btn refresh="getData()"></refresh-btn>
-
-	<h3>Title: {{heading}}</h3>
+<plugin 
+	heading="{{ heading }}"
+	last-updated="lastGet"
+	on-refresh="getData()">
 
 	<loader ng-hide="tableRows"></loader>
 
@@ -20,4 +17,5 @@
 			</tr>
 		</tbody>
 	</table>
-</div>
+
+</plugin>

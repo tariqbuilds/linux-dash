@@ -1,16 +1,18 @@
 <div class="plugin">
-	[Line Chart Plugin]
+
 	<last-update timestamp="lastGet"></last-update>
 	
-	<h3>Title: {{heading}}</h3>
+	<h3>{{heading}}</h3>
 
-	<canvas width="423" height="144"></canvas>
+	<div class="plugin-body">
 
-	<br>
-	[Metrics]
-	<div ng-repeat="metric in metrics">
-		{{metric.name}}: {{metric.data}}
+		<canvas class="canvas" width="300" height="200"></canvas>
+
+		[Metrics]
+		<div ng-repeat="metric in metrics">
+			{{metric.name}}: {{metric.data}}
+		</div>
+		
 	</div>
 
-	{{currentData}}
-</div>
+</plugin>

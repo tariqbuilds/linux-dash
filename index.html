@@ -13,7 +13,11 @@
         <script src="js/angular.min.js" type="text/javascript"></script>
         <style>
             #plugins {
-                border: 1px dashed;
+                border: 1px;
+            }
+
+            #plugins section {
+                clear: both;
             }
 
             .plugin {
@@ -22,16 +26,17 @@
                 padding: 10px;
                 margin: 10px;
                 height: 30%;
-                border: 3px solid lightgrey;
+                border: 3px solid orange;
+                min-height: 400px;
             }
 
             table
             {
                 font-family: "Ubuntu", sans-serif;
                 font-size: 12px;
-                background: rgba(255, 255, 255, .7);
-                margin: 45px;
-                width: 480px;
+                background: rgba(255, 255, 255, .5);
+                margin: 10px;
+                min-width: 400px;
                 border-collapse: collapse;
                 text-align: left;
             }
@@ -47,7 +52,7 @@
             {
                 border-bottom: 1px solid #ccc;
                 color: #669;
-                padding: 6px 8px;
+                padding: 9px 8px;
             }
             table tbody tr:hover td
             {
@@ -63,73 +68,43 @@
         <h2>Linux Dash</h2>
         <small>Simple plug-and-play linux stats monitoring dashboard</small>
         
-        <br><br>
-
         <div id="plugins">
-            <disk-space>
-            </disk-space>
-        
-            <line-chart-plugin
-                ng-if="maxRam"
-                
-                heading="RAM Memory"
-                module-name="mem"
 
-                max-value="maxRam"
-                min-value="minRam"
-                refresh-rate="2000"
-                
-                get-display-value="ramToDisplay"
-                metrics="ramMetrics">
-            </line-chart-plugin>
+            <section>
+                <hr>
+                <h2>Basic Info</h2>
+                <machine-info></machine-info>
+            </section>
 
-            <static-data-plugin 
-                heading="Machine Info" 
-                static-data="basicInfo">
-            </static-data-plugin>
+            <section>
+                <hr>
+                <h2>System State</h2>
+                <memory></memory>
+                <processes></processes>
+                <disk-space></disk-space>
+            </section>
 
-            <table-data-plugin 
-                heading="IP Addresses" 
-                module-name="ip"
-                table-headers="ipTableConfig">
-            </table-data-plugin>
-
-
-            <table-data-plugin 
-                heading="Running Processes" 
-                module-name="ps"
-                table-headers="psTableConfig">
-            </table-data-plugin>
-
-            <table-data-plugin 
-                heading="Network Connections" 
-                module-name="netstat"
-                table-headers="netstatTableConfig">
-            </table-data-plugin>
-
-            <table-data-plugin 
-                heading="Accounts" 
-                module-name="users"
-                table-headers="usersTableConfig">
-            </table-data-plugin>
-
-            <table-data-plugin 
-                heading="Logged In Accounts" 
-                module-name="online"
-                table-headers="onlineTableConfig">
-            </table-data-plugin> 
-
-            <table-data-plugin 
-                heading="Recent Logins" 
-                module-name="lastlog"
-                table-headers="lastloginTableConfig">
-            </table-data-plugin>
+            <section>
+                <hr>
+                <h2>Networking</h2>
+                <ip-addresses></ip-addresses>
+                <network-connections></network-connections>
+            </section>
+            
+            <section>
+                <hr>
+                <h2>Accounts</h2>
+                <machine-accounts></machine-accounts>
+                <logged-in-accounts></logged-in-accounts>
+                <recent-logins></recent-logins>
+            </section>
 
         </div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="js/angular-app.js" type="text/javascript"></script>
+        <script src="js/app.js" type="text/javascript"></script>
+        <script src="js/widgets.js" type="text/javascript"></script>
         <script src="js/smoothie.min.js" type="text/javascript"></script>
     </body>
 </html>

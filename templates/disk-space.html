@@ -1,7 +1,7 @@
-<div class="plugin">
-	<refresh-btn refresh="getData()"></refresh-btn>
-
-	<h3>Title: {{heading}}</h3>
+<plugin 
+	heading="Disk Partitions"
+	last-updated="lastGet"
+	on-refresh="getData()">
 
 	<loader ng-hide="diskSpaceData"></loader>
 
@@ -35,6 +35,6 @@
 				<td>{{ partition[5] }}</td>
 			</tr>
 		</tbody>
-
 	</table>
-</div>
+	
+</plugin>
