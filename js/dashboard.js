@@ -319,6 +319,7 @@ dashboard.getDf = function () {
             ],
 	    iDisplayLength: 5,
             bPaginate: true,
+            sPaginationType: "full_numbers",
             bFilter: false,
             bAutoWidth: true,
             bInfo: false
@@ -368,7 +369,7 @@ dashboard.getWhereIs = function () {
                 { sTitle: "Software" },
                 { sTitle: "Installation" }
             ],
-            bPaginate: true,
+            sPaginationType: "full_numbers",
             iDisplayLength: 5,
             bFilter: false,
             aaSorting: [
