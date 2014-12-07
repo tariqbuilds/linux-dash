@@ -83,8 +83,8 @@ linuxDash.directive('cpuLoad',[ 'server', function(server) {
         isoloate: true,
         templateUrl: '/templates/cpu-load.html',
         link: function (scope) {
-            scope.maxLoad = 0;
-            scope.minLoad = 100;
+            scope.maxLoad = 100;
+            scope.minLoad = 0;
 
             scope.loadToDisplay = function (serverResponseData) {
                 return serverResponseData[1];

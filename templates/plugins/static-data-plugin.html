@@ -3,9 +3,13 @@
 	last-updated="lastGet"
 	on-refresh="getData()">
 
-	<div ng-repeat="staticItem in staticData">
-		<strong> {{staticItem.name}}: </strong> 
-		<span> {{ staticItem.data }} </span>
-	</div>
-	
+	<table>
+		<thead></thead>
+		<tbody ng-repeat="staticItem in staticData">
+			<tr>
+				<td>{{staticItem.name}}</td>
+				<td>{{staticItem.data}}</td>
+			</tr>
+		</tbody>
+	</table>
 </plugin>

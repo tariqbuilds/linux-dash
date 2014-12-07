@@ -2,7 +2,7 @@ var linuxDash = angular.module('linuxDash', []);
 
 ////////////////// Global Application //////////////////
 linuxDash.controller('body', function ($scope, server) {
-    
+    $scope.view = 'basicInfo';    
 });
 
 /**
@@ -36,6 +36,31 @@ linuxDash.directive('loader', function() {
         width: '@'
     },
     templateUrl: '/templates/plugins/ui-elements/loader.html'
+  }; 
+});
+
+/**
+ * Top Bar for widget 
+ * 
+ * @param int width
+ * @return {[type]} [description]
+ */
+linuxDash.directive('topBar', function() {
+  return {
+    restrict: 'E',
+    scope: {
+        heading: '=',
+        refresh: '&',
+        lastUpdated: '='
+    },
+    templateUrl: '/templates/plugins/ui-elements/top-bar.html',
+    link: function(scope, element, attrs){
+        var $refreshBtn = element.find('refresh-btn').eq(0);
+
+        if (typeof attrs.noRefreshBtn !== 'undefined') {
+            $refreshBtn.remove();
+        } 
+    }
   };
 });
 
@@ -165,11 +190,18 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
             borderVisible:false,
-            grid:{strokeStyle:'rgba(119,119,119,0.20)'},
-            labels:{fontSize:12,precision:0},
+            grid:{
+                strokeStyle:'rgba(119,119,119,0.20)',
+                fillStyle:'#ffffff'
+            },
+            labels:{
+                fontSize:12,
+                precision:0,
+                fillStyle:'#0f0e0e'
+            },
             maxValue: parseInt(scope.maxValue),
             minValue: parseInt(scope.minValue),
-            horizontalLines: [{ value: 5, color: '#ffffff', lineWidth: 1 }]
+            horizontalLines: [{ value: 5, color: '#ecc', lineWidth: 1 }]
         });
 
         // smoothieJS - set up canvas element for chart
@@ -226,18 +258,25 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
             borderVisible:false,
-            grid:{strokeStyle:'rgba(119,119,119,0.20)'},
-            labels:{fontSize:12,precision:0},
+            grid:{
+                strokeStyle:'rgba(119,119,119,0.20)',
+                fillStyle:'#ffffff'
+            },
+            labels:{
+                fontSize:12,
+                precision:0, 
+                fillStyle:'#0f0e0e'
+            },
             maxValue: parseInt(scope.maxValue),
             minValue: parseInt(scope.minValue),
-            horizontalLines: [{ value: 1, color: '#ffffff', lineWidth: 1 }]
+            horizontalLines: [{ value: 1, color: '#ecc', lineWidth: 1 }]
         });
 
         var seriesOptions = [
-          { strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 3 },
-          { strokeStyle: 'rgba(0, 255, 0, 1)', lineWidth: 3 },
-          { strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 3 },
-          { strokeStyle: 'rgba(255, 255, 0, 1)', lineWidth: 3 }
+          { strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 2 },
+          { strokeStyle: 'rgba(0, 255, 0, 1)', lineWidth: 2 },
+          { strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 2 },
+          { strokeStyle: 'rgba(255, 255, 0, 1)', lineWidth: 1 }
         ];
 
         // smoothieJS - set up canvas element for chart

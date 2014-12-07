@@ -1,12 +1,9 @@
 <div class="plugin">
-
-	<last-update timestamp="lastGet"></last-update>
+	<top-bar heading="heading" last-updated="lastGet" no-refresh-btn></top-bar>
 	
-	<h3>{{heading}}</h3>
+	<div class="plugin-body no-padding">
 
-	<div class="plugin-body">
-
-		<canvas class="canvas" width="413" height="300"></canvas>
+		<canvas class="canvas" width="300" height="200"></canvas>
 
 		<div ng-repeat="metric in metrics">
 			<div>

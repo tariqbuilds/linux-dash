@@ -1,9 +1,10 @@
-<div class="plugin">
-	<last-update timestamp="lastGet"></last-update>
-	
-	<refresh-btn refresh="getData()"></refresh-btn>
+<div class="plugin" draggable="true">
 
-	<h3>{{heading}}</h3>
+	<top-bar 
+		heading="heading"
+		last-updated="lastGet" 
+		refresh="getData()">
+	</top-bar>
 
 	<div class="plugin-body" ng-transclude></div>
 </div>
