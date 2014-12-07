@@ -59,7 +59,6 @@ body {
 #plugins {
     padding: 20px;
     border: 1px;
-    background: white;
 }
 
 #plugins section {
@@ -72,8 +71,6 @@ body {
     float: left;
     padding: 0;
     margin: 10px;
-    /*border-top: 20px solid #445561;*/
-    /*background-color: #f9f6f1;*/
     background-color: white;
     color: black;
     max-width: 90%;
