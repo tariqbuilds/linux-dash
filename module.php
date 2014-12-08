@@ -28,7 +28,8 @@
         'users',
         'where',
 		'arp',
-		'redis_status'
+		'redis_status',
+		'packages'
     );
 
 

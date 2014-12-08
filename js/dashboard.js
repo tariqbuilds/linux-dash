@@ -381,6 +381,14 @@ dashboard.getWhereIs = function () {
     });
 };
 
+dashboard.getPackages = function () {
+    moduleData("packages", function (data) {
+		$("#soft-installed").text(data['installed']);
+		$("#softs-upgradables").text(data['upgradables']);
+		$("#last-upgrade").text(data['last']);
+    });
+};
+
 dashboard.getOs = function () {
     this.fillElement("issue", $("#os-info"));
     this.fillElement("hostname", $("#os-hostname"));
@@ -623,6 +631,7 @@ dashboard.fnMap = {
     online: dashboard.getOnline,
     lastlog: dashboard.getLastLog,
     whereis: dashboard.getWhereIs,
+    packages: dashboard.getPackages,
     ip: dashboard.getIp,
     ispeed: dashboard.getIspeed,
     sabspeed: dashboard.getSabspeed,
