@@ -1,8 +1,28 @@
-var linuxDash = angular.module('linuxDash', []);
+var linuxDash = angular.module('linuxDash', ['ngRoute']);
+
+////////////////// Routing /////////////////////////////
+linuxDash.config(['$routeProvider',
+    function($routeProvider) {
+        $routeProvider.
+          when('/basic-info', {
+            templateUrl: 'templates/sections/basic-info.html',
+          }).
+          when('/network', {
+            templateUrl: 'templates/sections/network.html',
+          }).
+          when('/system-stats', {
+            templateUrl: 'templates/sections/system-stats.html',
+          }).
+          when('/accounts', {
+            templateUrl: 'templates/sections/accounts.html',
+          }).
+          otherwise({
+            redirectTo: '/basic-info'
+          });
+    }]);
 
 ////////////////// Global Application //////////////////
-linuxDash.controller('body', function ($scope, server) {
-    $scope.view = 'basicInfo';    
+linuxDash.controller('body', function ($scope, server, $route, $location) {
 });
 
 /**
@@ -20,6 +40,37 @@ linuxDash.service('server',[ '$http', function ($http) {
   };
 
 }]);
+
+/**
+ * Sidebar for SPA
+ * 
+ * @param int width
+ * @return {[type]} [description]
+ */
+linuxDash.directive('sideBar',function ($location) {
+  return {
+    restrict: 'E',
+    templateUrl: 'templates/sidebar.html',
+    link: function (scope) {
+        scope.items = [
+            'basic-info',
+            'network',
+            'system-stats',
+            'accounts'
+        ];
+
+        scope.getSidebarItemName = function (url) {
+            return url.replace('-', ' ');
+        };
+
+        scope.isActive = function(route) {
+            return '/' + route === $location.path();
+        };
+    }
+  };
+
+});
+
 
 ////////////////// UI Element Directives //////////////////
 

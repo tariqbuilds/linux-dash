@@ -12,6 +12,7 @@
 
         <!-- Angular Libs -->
         <script src="js/angular.min.js" type="text/javascript"></script>
+        <script src="js/angular-route.js" type="text/javascript"></script>
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
           <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,56 +24,11 @@
             <h2>Linux Dash</h2>
             <small>Simple linux dashboard</small>
 
-            <ul class="widget-nav">
-                <li ng-class="{active: view == 'basicInfo'}">
-                    <a href="#basic-info" ng-click="view = 'basicInfo'">
-                        Basic Info
-                    </a>
-                </li>
-                <li ng-class="{active: view == 'systemStats'}">
-                    <a href="#system-stats" ng-click="view = 'systemStats'">
-                        System Stats
-                    </a>
-                </li>
-                <li ng-class="{active: view == 'network'}">
-                    <a href="#network" ng-click="view = 'network'">
-                        Network
-                    </a>
-                </li>
-                <li ng-class="{active: view == 'accounts'}">
-                    <a href="#accounts" ng-click="view = 'accounts'">
-                        Accounts
-                    </a>
-                </li>
-            </ul>
-
+            <side-bar></side-bar>
         </div>
         
-        <div>
-            
-            <section ng-show="view == 'basicInfo'">
-                <machine-info></machine-info>
-            </section>
-
-            <section ng-show="view == 'systemStats'">
-                <memory></memory>
-                <cpu-load></cpu-load>
-                <disk-space></disk-space>
-                <processes></processes>
-            </section>
-
-            <section ng-show="view == 'network'">
-                <ip-addresses></ip-addresses>
-                <network-connections></network-connections>
-            </section>
-            
-            <section ng-show="view == 'accounts'">
-                <machine-accounts></machine-accounts>
-                <logged-in-accounts></logged-in-accounts>
-                <recent-logins></recent-logins>
-            </section>
-
-        </div>
+        <!-- Templates -->
+        <div ng-view class="view-fade"></div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->

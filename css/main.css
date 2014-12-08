@@ -10,6 +10,28 @@ body {
     background: #f2f2f2; 
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-button {
+    width: 8px;
+    height:5px;
+}
+::-webkit-scrollbar-track {
+    background:#eee;
+    border: thin solid lightgray;
+    box-shadow: 0px 0px 3px #dfdfdf inset;
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb {
+    background:#999;
+    border: thin solid gray;
+    border-radius:10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background:#7d7d7d;
+}           
+
 .hero {
     padding: 10px 0 20px 0;
     text-align: center;
@@ -22,22 +44,24 @@ body {
     margin-bottom: 0;
 }
 
-.hero ul.widget-nav {
+.hero side-bar ul {
+    margin: 0;
+    padding: 0;
     list-style-type: none;
-    text-align: left;
+    text-align: center;
 }
 
-.hero ul.widget-nav li.active a,
-.hero ul.widget-nav li a:hover {
+.hero side-bar ul li.active a,
+.hero side-bar ul li a:hover {
     color: yellow;
 }
 
-.hero ul.widget-nav li {
+.hero side-bar ul li {
     margin-left: 20px;
     display: inline;
 }
 
-.hero ul.widget-nav li a {
+.hero side-bar ul li a {
     color: white;
 }
 
@@ -55,6 +79,10 @@ body {
         margin: 0;
     }
 }
+
+/***** ng-view Transitions ****/
+
+
 /***** Plugins Container ****/
 #plugins {
     padding: 20px;
@@ -73,7 +101,16 @@ body {
     margin: 10px;
     background-color: white;
     color: black;
-    max-width: 90%;
+}
+
+
+@media (max-width: 768px) { 
+    .plugin {
+        max-width: 90%;
+    }
+    .plugin-body {
+       max-height: 400px;
+    }
 }
 
 .plugin .top-bar {
@@ -90,9 +127,11 @@ body {
 }
 
 .plugin-body {
+    max-height: 400px;
     font-size: 12px;
     padding: 10px;
     line-height: 30px;
+    overflow: auto;
 }
 
 .plugin last-update{
@@ -107,10 +146,9 @@ body {
 }
 
 refresh-btn button {
-    background-color: green;
+    background-color: white;
     width: 30px;
     border: 0;
-    color: white;
     float: right;
     font-size: 15px;
 }
@@ -137,6 +175,7 @@ table
     min-width: 400px;
     border-collapse: collapse;
     text-align: left;
+    max-width: 100%;
 }
 table th
 {
