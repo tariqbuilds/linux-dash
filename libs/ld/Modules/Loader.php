@@ -2,6 +2,8 @@
 
     namespace ld\Modules;
 
+    error_reporting(E_ALL ^ E_WARNING);
+        
     class Loader {
         private $loaded_modules = array();
         private $default_namespace = '';
