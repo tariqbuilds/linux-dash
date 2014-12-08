@@ -47,10 +47,10 @@ linuxDash.service('server',[ '$http', function ($http) {
  * @param int width
  * @return {[type]} [description]
  */
-linuxDash.directive('sideBar',function ($location) {
+linuxDash.directive('navBar',function ($location) {
   return {
     restrict: 'E',
-    templateUrl: 'templates/sidebar.html',
+    templateUrl: 'templates/navbar.html',
     link: function (scope) {
         scope.items = [
             'basic-info',

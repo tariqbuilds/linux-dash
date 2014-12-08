@@ -6,7 +6,7 @@ html {
 
 body {
     padding: 0;
-    font-family: "Ubuntu", sans-serif;
+    font-family: "`buntu", sans-serif;
     background: #f2f2f2; 
 }
 
@@ -44,24 +44,29 @@ body {
     margin-bottom: 0;
 }
 
-.hero side-bar ul {
+.hero nav-bar {
+    display: block;
+}
+
+.hero nav-bar ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
-    text-align: center;
+    display: inline;
 }
 
-.hero side-bar ul li.active a,
-.hero side-bar ul li a:hover {
+.hero nav-bar ul li.active a,
+.hero nav-bar ul li a:hover {
     color: yellow;
 }
 
-.hero side-bar ul li {
+.hero nav-bar ul li {
     margin-left: 20px;
     display: inline;
 }
 
-.hero side-bar ul li a {
+.hero nav-bar ul li a {
+    display: inline;
     color: white;
 }
 
@@ -101,6 +106,7 @@ body {
     margin: 10px;
     background-color: white;
     color: black;
+    border: 1px solid #ecc;
 }
 
 
