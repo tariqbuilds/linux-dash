@@ -4,11 +4,16 @@
 	
 	<div class="plugin-body no-padding">
 
-		<canvas class="canvas" width="300" height="100"></canvas>
+		<canvas class="canvas" width="300" height="200"></canvas>
 
-		<div ng-repeat="metric in metrics">
-			{{metric.name}}: {{metric.data}}
-		</div>
+		<table border="0" class="metrics-table">
+			<tbody>
+				<tr ng-repeat="metric in metrics">
+					<td><strong>{{ metric.name }}</strong></td>
+					<td>{{ metric.data }}</td>
+				</tr>
+			</tbody>
+		</table>
 		
 	</div>
 

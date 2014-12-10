@@ -7,7 +7,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
-        <link rel="stylesheet" type="text/css" href="/css/ubuntu-font.css">
+        <link rel="stylesheet" type="text/css" href="/css/raleway-font.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
 
         <!-- Angular Libs -->
@@ -18,17 +18,17 @@
           <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body ng-controller="body">
-
+    <body ng-controller="body" drop="true">
+        
         <div class="hero">
-            <h2>Linux Dash</h2>
-            <small>Simple linux dashboard</small>
+            <h4 class="title">Linux Dash</h4>
+            <small>A simple linux dashboard</small>
 
             <nav-bar></nav-bar>
         </div>
         
         <!-- Templates -->
-        <div ng-view class="view-fade"></div>
+        <div ng-view></div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->

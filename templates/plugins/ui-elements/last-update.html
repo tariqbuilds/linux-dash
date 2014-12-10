@@ -1,2 +1,4 @@
-<loader ng-hide="timestamp"></loader>
-<span ng-show="timestamp">{{ timestamp | date:'hh:mm:ss a' }}</span>
+<span ng-hide="timestamp">Loading...</span>
+<small>
+	<span ng-show="timestamp">{{ timestamp | date:'hh:mm:ss a' }}</span>
+</small>

@@ -5,12 +5,21 @@
 
 		<canvas class="canvas" width="300" height="200"></canvas>
 
-		<div ng-repeat="metric in metrics">
-			<div>
-				<div class="metric-square" style="display: inline-block; border: 1px solid black; width: 20px; height: 20px; background: {{metric.color}}"></div>
-				{{metric.name}}: {{metric.data}}
-			</div>
-		</div>
+		<table class="metrics-table" border="0">
+			<tbody>
+				<tr ng-repeat="metric in metrics">
+					<td>
+						<div 
+							class="metric-square" 
+							style="display: inline-block; border: 1px solid {{metric.color}}; width: 8px; height: 8px; background: {{metric.color}}">
+						</div>
+					</td>
+					<td>{{ metric.name }}</td>
+					<td>{{ metric.data }}</td>
+				</tr>
+			</tbody>
+		</table>
+	
 		
 	</div>
 

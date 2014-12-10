@@ -2,12 +2,28 @@
 html {
     margin-top: 0px;
     padding-top: 0;
+    border-top: 1px solid #4F8EF7;
 }
 
 body {
     padding: 0;
-    font-family: "`buntu", sans-serif;
-    background: #f2f2f2; 
+    font-family: Raleway, HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    letter-spacing: .1rem;
+    background-color: #f9f9f9;
+}
+
+.title {
+    color: rgb(34, 34, 34);
+    display: block;
+    font-size: 30px;
+    font-family: Raleway, HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    height: 32px;
+    letter-spacing: .1rem;
+    line-height: 52.5px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    text-align: center;
 }
 
 ::-webkit-scrollbar {
@@ -35,8 +51,6 @@ body {
 .hero {
     padding: 10px 0 20px 0;
     text-align: center;
-    color: white;
-    background: #3d4a57;
 }
 
 .hero h2 {
@@ -55,9 +69,20 @@ body {
     display: inline;
 }
 
+.hero nav-bar ul li a {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .2rem;
+    margin-right: 35px;
+    text-decoration: none;
+    line-height: 2.3rem;
+    color: #222;
+}
+
 .hero nav-bar ul li.active a,
 .hero nav-bar ul li a:hover {
-    color: yellow;
+    color: #1EAEDB;
 }
 
 .hero nav-bar ul li {
@@ -67,7 +92,6 @@ body {
 
 .hero nav-bar ul li a {
     display: inline;
-    color: white;
 }
 
 @media (min-width: 1080px) { 
@@ -104,9 +128,19 @@ body {
     float: left;
     padding: 0;
     margin: 10px;
+    min-width: 30%;
     background-color: white;
+    
     color: black;
-    border: 1px solid #ecc;
+    text-align: center;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.28);
+    -moz-box-shadow:    0px 0px 10px 0px rgba(50, 50, 50, 0.28);
+    box-shadow:         0px 0px 10px 0px rgba(50, 50, 50, 0.28);
 }
 
 
@@ -122,9 +156,14 @@ body {
 .plugin .top-bar {
     height: 25px;
     max-width: 100%;
-    padding: 5px;
-    background-color: #445561;
-    color: white;
+    padding: 20px;
+
+    letter-spacing: .1rem;
+    line-height: 1.3rem;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #222;
     text-align: center;
 }
 
@@ -158,7 +197,48 @@ refresh-btn button {
     float: right;
     font-size: 15px;
 }
-
+refresh-btn button:hover {
+    background-color: #efffff;
+}
+refresh-btn button:active {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 6000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 6000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 6000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    animation-name: spin;
+    animation-duration: 6000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
 /**** Section ****/
 section {
     text-align: center;
@@ -174,44 +254,45 @@ section h2 {
 /**** General Elements ****/
 table
 {
-    font-family: "Ubuntu", sans-serif;
-    font-size: 12px;
-    /*background: rgba(255, 255, 255, .5) */;
+    font-size: 10px;
     margin: 0;
     min-width: 400px;
     border-collapse: collapse;
     text-align: left;
     max-width: 100%;
 }
+table th, 
+table td {
+    padding: 5px;
+}
 table th
 {
-    font-weight: normal;
-    color: #039;
-    padding-right: 20px;
-    padding-left: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
     border-bottom: 1px solid #6678b1;
 }
 table td
 {
-    padding-left: 10px;
-    padding-right: 20px;
     border-bottom: 1px solid #ccc;
-    color: #669;
     padding: 9px 8px;
 }
 table tbody tr:hover td
 {
-    color: #009;
+    background-color: #eff;
+}
+table.metrics-table {
+    text-align: center;
 }
 
 canvas {
-    
+    float: none;
+    margin: 0 auto;
 }
 /*********************************************
     Widget Elements
 *********************************************/
 .progress-bar {
-    background-color: lightgrey;
+    background-color: #eec;
     border-radius: 10px; /* (height of inner div) / 2 + padding */
     padding: 0px;
     clear: both;
@@ -221,7 +302,7 @@ canvas {
 }
 
 .progress-bar > div {
-    background-color: green;
+    background-color: #1EAEDB;
     width: 0%;
     height: 5px;
     border-radius: 5px;

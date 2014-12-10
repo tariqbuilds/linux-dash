@@ -12,7 +12,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="row in tableRows | limitTo:10 track by $index ">
+			<tr ng-repeat="row in tableRows track by $index ">
 				<td ng-repeat="item in row track by $index">{{item}}</td>
 			</tr>
 		</tbody>

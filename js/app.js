@@ -241,18 +241,22 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
             borderVisible:false,
-            grid:{
-                strokeStyle:'rgba(119,119,119,0.20)',
-                fillStyle:'#ffffff'
+            sharpLines:true,
+            grid: {
+                fillStyle:'#ffffff',
+                strokeStyle:'rgba(232,230,230,0.93)',
+                sharpLines:true,
+                millisPerLine:3000,
+                borderVisible:false
             },
             labels:{
-                fontSize:12,
+                fontSize:11,
                 precision:0,
                 fillStyle:'#0f0e0e'
             },
             maxValue: parseInt(scope.maxValue),
             minValue: parseInt(scope.minValue),
-            horizontalLines: [{ value: 5, color: '#ecc', lineWidth: 1 }]
+            horizontalLines: [{ value: 5, color: '#eff', lineWidth: 1 }]
         });
 
         // smoothieJS - set up canvas element for chart
@@ -309,9 +313,12 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
             borderVisible:false,
-            grid:{
-                strokeStyle:'rgba(119,119,119,0.20)',
-                fillStyle:'#ffffff'
+            sharpLines:true,
+            grid: {
+                fillStyle:'#ffffff',
+                strokeStyle:'rgba(232,230,230,0.93)',
+                sharpLines:true,
+                borderVisible:false
             },
             labels:{
                 fontSize:12,

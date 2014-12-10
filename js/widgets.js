@@ -92,19 +92,19 @@ linuxDash.directive('cpuLoad',[ 'server', function(server) {
 
             scope.loadMetrics = [
                 {
-                    name: '1 Minute Average',
+                    name: '1 Min Avg',
                     generate: function (serverResponseData) {
                         return serverResponseData[0][1] + ' %';
                     }
                 },
                 {
-                    name: '5 Minute Average',
+                    name: '5 Min Avg',
                     generate: function (serverResponseData) {
                         return serverResponseData[1][1] + ' %';
                     }
                 },
                 {
-                    name: '15 Minute Average',
+                    name: '15 Min Avg',
                     generate: function (serverResponseData) {
                         return serverResponseData[2][1] + ' %';
                     }
