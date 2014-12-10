@@ -86,7 +86,7 @@ linuxDash.directive('loader', function() {
     scope: {
         width: '@'
     },
-    templateUrl: '/templates/plugins/ui-elements/loader.html'
+    templateUrl: 'templates/plugins/ui-elements/loader.html'
   }; 
 });
 
@@ -104,7 +104,7 @@ linuxDash.directive('topBar', function() {
         refresh: '&',
         lastUpdated: '='
     },
-    templateUrl: '/templates/plugins/ui-elements/top-bar.html',
+    templateUrl: 'templates/plugins/ui-elements/top-bar.html',
     link: function(scope, element, attrs){
         var $refreshBtn = element.find('refresh-btn').eq(0);
 
@@ -127,7 +127,7 @@ linuxDash.directive('refreshBtn', function() {
     scope: {
         refresh: '&'
     },
-    templateUrl: '/templates/plugins/ui-elements/refresh-button.html'
+    templateUrl: 'templates/plugins/ui-elements/refresh-button.html'
   };
 });
 
@@ -142,7 +142,7 @@ linuxDash.directive('lastUpdate', function() {
     scope: {
         timestamp: '='
     },
-    templateUrl: '/templates/plugins/ui-elements/last-update.html'
+    templateUrl: 'templates/plugins/ui-elements/last-update.html'
   };
 });
 
@@ -162,7 +162,7 @@ linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout
         heading: '@',
         staticData: '='
     },
-    templateUrl: '/templates/plugins/static-data-plugin.html',
+    templateUrl: 'templates/plugins/static-data-plugin.html',
     link: function (scope, element) {
 
         scope.getData = function () {
@@ -200,7 +200,7 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
         moduleName: '@',
         tableHeaders: '=',
     },
-    templateUrl: '/templates/plugins/table-data-plugin.html',
+    templateUrl: 'templates/plugins/table-data-plugin.html',
     link: function (scope, element) {
         scope.rowLimit = 10;
 
@@ -235,7 +235,7 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         getDisplayValue: '=',
         metrics: '='
     },
-    templateUrl: '/templates/plugins/line-chart-plugin.html',
+    templateUrl: 'templates/plugins/line-chart-plugin.html',
     link: function (scope, element) {
         
         // smoothieJS - Create new chart
@@ -307,7 +307,7 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
         getDisplayValue: '=',
         metrics: '='
     },
-    templateUrl: '/templates/plugins/multi-line-chart-plugin.html',
+    templateUrl: 'templates/plugins/multi-line-chart-plugin.html',
     link: function (scope, element) {
         
         // smoothieJS - Create new chart
@@ -394,7 +394,7 @@ linuxDash.directive('plugin', function() {
         //     lastUpdated: '=',
         //     onRefresh: '&',
         // },
-        templateUrl: '/templates/plugins/base-plugin.html'
+        templateUrl: 'templates/plugins/base-plugin.html'
     }
 });
 
@@ -409,6 +409,6 @@ linuxDash.directive('progressBarPlugin',function() {
         value: '@',
         max: '@'
     },
-    templateUrl: '/templates/plugins/progress-bar-plugin.html'
+    templateUrl: 'templates/plugins/progress-bar-plugin.html'
   };
 });

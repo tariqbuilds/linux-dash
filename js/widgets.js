@@ -4,7 +4,7 @@ linuxDash.directive('diskSpace',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/disk-space.html',
+        templateUrl: 'templates/disk-space.html',
         link: function (scope) {
 
             scope.heading =  "Disk Partitions";
@@ -37,7 +37,7 @@ linuxDash.directive('memory',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/memory.html',
+        templateUrl: 'templates/memory.html',
         link: function (scope) {
 
             // get max ram available on machine before we 
@@ -81,7 +81,7 @@ linuxDash.directive('cpuLoad',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/cpu-load.html',
+        templateUrl: 'templates/cpu-load.html',
         link: function (scope) {
             scope.maxLoad = 100;
             scope.minLoad = 0;
@@ -119,7 +119,7 @@ linuxDash.directive('machineInfo',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/machine-info.html',
+        templateUrl: 'templates/machine-info.html',
         link: function (scope) {
             scope.basicInfo = [
                 {name: 'OS', module: 'issue' },
@@ -135,7 +135,7 @@ linuxDash.directive('ipAddresses',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/ip-addresses.html',
+        templateUrl: 'templates/ip-addresses.html',
         link: function (scope) {
             scope.ipTableConfig = [
                 'Name',
@@ -149,7 +149,7 @@ linuxDash.directive('processes',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/processes.html',
+        templateUrl: 'templates/processes.html',
         link: function (scope) {
             scope.psTableConfig = [
                 'USER',
@@ -172,7 +172,7 @@ linuxDash.directive('networkConnections',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/network-connections.html',
+        templateUrl: 'templates/network-connections.html',
         link: function (scope) {
             scope.netstatTableConfig = [
                 'Connections',
@@ -186,7 +186,7 @@ linuxDash.directive('machineAccounts',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/machine-accounts.html',
+        templateUrl: 'templates/machine-accounts.html',
         link: function (scope) {
             scope.usersTableConfig = [
                 'Account Type',
@@ -201,7 +201,7 @@ linuxDash.directive('loggedInAccounts',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/logged-in-accounts.html',
+        templateUrl: 'templates/logged-in-accounts.html',
         link: function (scope) {
             scope.onlineTableConfig = [
                 'Who',
@@ -217,7 +217,7 @@ linuxDash.directive('recentLogins',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: '/templates/recent-logins.html',
+        templateUrl: 'templates/recent-logins.html',
         link: function (scope) {
             scope.lastloginTableConfig = [
                 'Who',
