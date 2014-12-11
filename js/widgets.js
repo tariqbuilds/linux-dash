@@ -10,7 +10,7 @@ linuxDash.directive('diskSpace',[ 'server', function(server) {
             scope.heading =  "Disk Partitions";
 
             scope.getData = function () {
-                server.get('df', function (serverResponseData) {
+                server.get('disk_partitions', function (serverResponseData) {
                     scope.diskSpaceData = serverResponseData;
                 });
 
@@ -33,23 +33,23 @@ linuxDash.directive('diskSpace',[ 'server', function(server) {
     };
 }]);
 
-linuxDash.directive('memory',[ 'server', function(server) {
+linuxDash.directive('ramChart',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: 'templates/memory.html',
+        templateUrl: 'templates/ram-chart.html',
         link: function (scope) {
 
             // get max ram available on machine before we 
             // can start charting
-            server.get('mem', function (resp) {
+            server.get('current_ram', function (resp) {
                 scope.maxRam = resp[1];
                 scope.minRam = 0;
             });
 
             scope.ramToDisplay = function (serverResponseData) {
                 return serverResponseData[2];
-            };
+        };
 
             scope.ramMetrics = [
                 {
@@ -77,7 +77,7 @@ linuxDash.directive('memory',[ 'server', function(server) {
 }]);
 
 
-linuxDash.directive('cpuLoad',[ 'server', function(server) {
+linuxDash.directive('cpuLoadChart',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
@@ -145,17 +145,35 @@ linuxDash.directive('ipAddresses',[ 'server', function(server) {
     };
 }]);
 
-linuxDash.directive('processes',[ 'server', function(server) {
+linuxDash.directive('ramIntensiveProcesses',[ 'server', function(server) {
     return {
         restrict: 'E',
         isoloate: true,
-        templateUrl: 'templates/processes.html',
+        templateUrl: 'templates/ram-intensive-processes.html',
         link: function (scope) {
-            scope.psTableConfig = [
+            scope.tableConfig = [
                 'PID',
                 'USER',
                 'COMMAND', 
                 '%MEM',
+                'RSS',
+                'VSZ',
+            ];
+        }
+    };
+}]);
+
+linuxDash.directive('cpuIntensiveProcesses',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        isoloate: true,
+        templateUrl: 'templates/cpu-intensive-processes.html',
+        link: function (scope) {
+            scope.tableConfig = [
+                'PID',
+                'USER',
+                'COMMAND', 
+                '%CPU',
                 'RSS',
                 'VSZ',
             ];

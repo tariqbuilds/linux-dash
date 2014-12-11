@@ -2,8 +2,8 @@
 
     namespace Modules;
 
-    class df extends \ld\Modules\Module {
-        protected $name = 'df';
+    class disk_partitions extends \ld\Modules\Module {
+        protected $name = 'disk_partitions';
 
         public function getData($args=array()) {
 

@@ -2,8 +2,8 @@
 
     namespace Modules;
 
-    class mem extends \ld\Modules\Module {
-        protected $name = 'mem';
+    class current_ram extends \ld\Modules\Module {
+        protected $name = 'current_ram';
 
         public function getData($args=array()) {
             exec(
