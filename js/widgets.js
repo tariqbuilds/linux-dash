@@ -152,17 +152,12 @@ linuxDash.directive('processes',[ 'server', function(server) {
         templateUrl: 'templates/processes.html',
         link: function (scope) {
             scope.psTableConfig = [
-                'USER',
                 'PID',
-                '%CPU',
+                'USER',
+                'COMMAND', 
                 '%MEM',
-                'VSZ',
                 'RSS',
-                'TTY',
-                'STAT',
-                'START',
-                'TIME',
-                'COMMAND' 
+                'VSZ',
             ];
         }
     };

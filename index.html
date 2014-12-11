@@ -22,13 +22,25 @@
         
         <div class="hero">
             <h4 class="title">Linux Dash</h4>
-            <small>A simple linux dashboard</small>
 
+            <div class="color-changer">
+                <div 
+                    class="option" 
+                    ng-click="setBackground(color)"
+                    ng-repeat="color in backgroundColors" 
+                    style="background-color:{{ color }};">
+                </div>
+            </div>
+
+            <small>A simple linux dashboard</small>
+            
             <nav-bar></nav-bar>
+
         </div>
         
+
         <!-- Templates -->
-        <div ng-view></div>
+        <div id="plugins" ng-view></div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->

@@ -9,7 +9,6 @@ body {
     padding: 0;
     font-family: Raleway, HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     letter-spacing: .1rem;
-    background-color: #f9f9f9;
 }
 
 .title {
@@ -52,23 +51,19 @@ body {
     padding: 10px 0 20px 0;
     text-align: center;
 }
-
 .hero h2 {
     font-weight: normal;
     margin-bottom: 0;
 }
-
 .hero nav-bar {
     display: block;
 }
-
 .hero nav-bar ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
     display: inline;
 }
-
 .hero nav-bar ul li a {
     font-size: 11px;
     text-transform: uppercase;
@@ -79,33 +74,44 @@ body {
     line-height: 2.3rem;
     color: #222;
 }
-
 .hero nav-bar ul li.active a,
 .hero nav-bar ul li a:hover {
     color: #1EAEDB;
 }
-
 .hero nav-bar ul li {
     margin-left: 20px;
     display: inline;
 }
-
 .hero nav-bar ul li a {
     display: inline;
 }
 
+.color-changer {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+}
+.color-changer .option {
+    margin: 10px;
+    border: 1px solid lightgray;
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+}
+
 @media (min-width: 1080px) { 
-    body {
+    #plugins {
+        float: none;
         margin: 0 auto;
         max-width: 80%;
     }
 }
 
 @media (max-width: 1079px) { 
-    body {
-        width: 100%;
-        padding: 0;
-        margin: 0;
+    #plugins {
+        float: none;
+        margin: 0 auto;
+        width: 80%;
     }
 }
 
@@ -134,13 +140,10 @@ body {
     color: black;
     text-align: center;
 
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+    border-radius: 2px;
 
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.28);
-    -moz-box-shadow:    0px 0px 10px 0px rgba(50, 50, 50, 0.28);
-    box-shadow:         0px 0px 10px 0px rgba(50, 50, 50, 0.28);
+    margin-top: 50px;
 }
 
 
@@ -163,7 +166,7 @@ body {
     font-size: 11px;
     text-transform: uppercase;
     font-weight: 600;
-    color: #222;
+    color: #009587;
     text-align: center;
 }
 
@@ -177,6 +180,7 @@ body {
     padding: 10px;
     line-height: 30px;
     overflow: auto;
+    border-top: 1px solid #ececec;
 }
 
 .plugin last-update{
@@ -191,53 +195,22 @@ body {
 }
 
 refresh-btn button {
-    background-color: white;
-    width: 30px;
+    background-color: #009587;
     border: 0;
     float: right;
     font-size: 15px;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
 }
 refresh-btn button:hover {
-    background-color: #efffff;
+    background-color: #ffeb3b;
+    color: black;
 }
 refresh-btn button:active {
-    -webkit-animation-name: spin;
-    -webkit-animation-duration: 6000ms;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    -moz-animation-name: spin;
-    -moz-animation-duration: 6000ms;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-timing-function: linear;
-    -ms-animation-name: spin;
-    -ms-animation-duration: 6000ms;
-    -ms-animation-iteration-count: infinite;
-    -ms-animation-timing-function: linear;
-    
-    animation-name: spin;
-    animation-duration: 6000ms;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-@-ms-keyframes spin {
-    from { -ms-transform: rotate(0deg); }
-    to { -ms-transform: rotate(360deg); }
-}
-@-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
-}
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
+    background-color: #0f9d58;
 }
 /**** Section ****/
 section {
@@ -260,10 +233,13 @@ table
     border-collapse: collapse;
     text-align: left;
     max-width: 100%;
+    table-layout:fixed;    
 }
 table th, 
 table td {
     padding: 5px;
+    max-width: 200px;
+    word-wrap: break-word;
 }
 table th
 {
@@ -278,7 +254,7 @@ table td
 }
 table tbody tr:hover td
 {
-    background-color: #eff;
+    background-color: #fafafa;
 }
 table.metrics-table {
     text-align: center;
