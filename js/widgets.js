@@ -139,7 +139,7 @@ linuxDash.directive('ipAddresses',[ 'server', function(server) {
         link: function (scope) {
             scope.ipTableConfig = [
                 'Name',
-                'IP Address'
+                'IP'
             ];
         }
     };
@@ -170,8 +170,8 @@ linuxDash.directive('networkConnections',[ 'server', function(server) {
         templateUrl: 'templates/network-connections.html',
         link: function (scope) {
             scope.netstatTableConfig = [
-                'Connections',
-                'IP Address'
+                '# of Connections',
+                'IP'
             ];
         }
     };
