@@ -16,7 +16,7 @@ linuxDash.config(['$routeProvider',
           when('/accounts', {
             templateUrl: 'templates/sections/accounts.html',
           }).
-          when('/applications', {
+          when('/apps', {
             templateUrl: 'templates/sections/applications.html',
           }).
           otherwise({
