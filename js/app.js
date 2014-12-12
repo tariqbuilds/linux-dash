@@ -5,16 +5,19 @@ linuxDash.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
           when('/basic-info', {
-            templateUrl: 'templates/sections/basic-info/index.html',
+            templateUrl: 'templates/sections/basic-info.html',
           }).
           when('/network', {
-            templateUrl: 'templates/sections/network/index.html',
+            templateUrl: 'templates/sections/network.html',
           }).
           when('/system-stats', {
-            templateUrl: 'templates/sections/system-stats/index.html',
+            templateUrl: 'templates/sections/system-stats.html',
           }).
           when('/accounts', {
-            templateUrl: 'templates/sections/accounts/index.html',
+            templateUrl: 'templates/sections/accounts.html',
+          }).
+          when('/applications', {
+            templateUrl: 'templates/sections/applications.html',
           }).
           otherwise({
             redirectTo: '/basic-info'
@@ -28,7 +31,6 @@ linuxDash.controller('body', function ($scope, server, $route, $location) {
         'rgba(79,142,247,0.2)',
         'rgb(236,236,236)',
         'white'
-
     ];
 
     $scope.setBackground = function (color) {
@@ -68,6 +70,7 @@ linuxDash.directive('navBar',function ($location) {
             'network',
             'system-stats',
             'accounts',
+            'apps'
         ];
 
         scope.getNavItemName = function (url) {

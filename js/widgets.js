@@ -119,7 +119,10 @@ linuxDash.directive('machineInfo',[ 'server', function(server) {
     return {
         restrict: 'E',
         scope: {},
-        templateUrl: 'templates/modules/machine-info.html',
+        template: '<static-data-plugin ' +
+                        'heading="Machine Info" ' + 
+                        'static-data="basicInfo"> ' +
+                    '</static-data-plugin>',
         link: function (scope) {
             scope.basicInfo = [
                 {name: 'OS', module: 'issue' },
@@ -131,6 +134,7 @@ linuxDash.directive('machineInfo',[ 'server', function(server) {
     };
 }]);
 
+/////////////// Table Data Directives ////////////////////
 var simpleTableDirectives = [
     { name: 'ipAddresses', templateUrl: 'ip-addresses.html' },
     { name: 'ramIntensiveProcesses', templateUrl: 'ram-intensive-processes.html' },
@@ -139,6 +143,7 @@ var simpleTableDirectives = [
     { name: 'serverAccounts', templateUrl: 'server-accounts.html' },
     { name: 'loggedInAccounts', templateUrl: 'logged-in-accounts.html' },
     { name: 'recentLogins', templateUrl: 'recent-logins.html' },
+    { name: 'memcached', templateUrl: 'memcached.html' },
 ];
 
 simpleTableDirectives.forEach(function (directive, key) {
