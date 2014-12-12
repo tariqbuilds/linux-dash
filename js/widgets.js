@@ -149,6 +149,8 @@ var simpleTableDirectives = [
     { name: 'pingSpeeds', templateUrl: 'ping-speeds.html' },
     { name: 'dhcpLeases', templateUrl: 'dhcp-leases.html' },
     { name: 'bandwidth', templateUrl: 'bandwidth.html' },
+    { name: 'swapUsage', templateUrl: 'swap-usage.html' },
+    { name: 'redis', templateUrl: 'redis.html' },
 ];
 
 simpleTableDirectives.forEach(function (directive, key) {
