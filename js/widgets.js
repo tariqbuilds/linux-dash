@@ -3,8 +3,8 @@
 linuxDash.directive('diskSpace',[ 'server', function(server) {
     return {
         restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/disk-space.html',
+        scope: {},
+        templateUrl: 'templates/modules/disk-space.html',
         link: function (scope) {
 
             scope.heading =  "Disk Partitions";
@@ -36,8 +36,8 @@ linuxDash.directive('diskSpace',[ 'server', function(server) {
 linuxDash.directive('ramChart',[ 'server', function(server) {
     return {
         restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/ram-chart.html',
+        scope: {},
+        templateUrl: 'templates/modules/ram-chart.html',
         link: function (scope) {
 
             // get max ram available on machine before we 
@@ -80,8 +80,8 @@ linuxDash.directive('ramChart',[ 'server', function(server) {
 linuxDash.directive('cpuLoadChart',[ 'server', function(server) {
     return {
         restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/cpu-load.html',
+        scope: {},
+        templateUrl: 'templates/modules/cpu-load.html',
         link: function (scope) {
             scope.maxLoad = 100;
             scope.minLoad = 0;
@@ -118,8 +118,8 @@ linuxDash.directive('cpuLoadChart',[ 'server', function(server) {
 linuxDash.directive('machineInfo',[ 'server', function(server) {
     return {
         restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/machine-info.html',
+        scope: {},
+        templateUrl: 'templates/modules/machine-info.html',
         link: function (scope) {
             scope.basicInfo = [
                 {name: 'OS', module: 'issue' },
@@ -131,112 +131,24 @@ linuxDash.directive('machineInfo',[ 'server', function(server) {
     };
 }]);
 
-linuxDash.directive('ipAddresses',[ 'server', function(server) {
-    return {
-        restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/ip-addresses.html',
-        link: function (scope) {
-            scope.ipTableConfig = [
-                'Name',
-                'IP'
-            ];
-        }
-    };
-}]);
+var simpleTableDirectives = [
+    { name: 'ipAddresses', templateUrl: 'ip-addresses.html' },
+    { name: 'ramIntensiveProcesses', templateUrl: 'ram-intensive-processes.html' },
+    { name: 'cpuIntensiveProcesses', templateUrl: 'cpu-intensive-processes.html' },
+    { name: 'networkConnections', templateUrl: 'network-connections.html' },
+    { name: 'serverAccounts', templateUrl: 'server-accounts.html' },
+    { name: 'loggedInAccounts', templateUrl: 'logged-in-accounts.html' },
+    { name: 'recentLogins', templateUrl: 'recent-logins.html' },
+];
 
-linuxDash.directive('ramIntensiveProcesses',[ 'server', function(server) {
-    return {
-        restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/ram-intensive-processes.html',
-        link: function (scope) {
-            scope.tableConfig = [
-                'PID',
-                'USER',
-                'COMMAND', 
-                '%MEM',
-                'RSS',
-                'VSZ',
-            ];
-        }
-    };
-}]);
+simpleTableDirectives.forEach(function (directive, key) {
 
-linuxDash.directive('cpuIntensiveProcesses',[ 'server', function(server) {
-    return {
-        restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/cpu-intensive-processes.html',
-        link: function (scope) {
-            scope.tableConfig = [
-                'PID',
-                'USER',
-                'COMMAND', 
-                '%CPU',
-                'RSS',
-                'VSZ',
-            ];
-        }
-    };
-}]);
+    linuxDash.directive(directive.name,[ 'server', function(server) {
+        return {
+            restrict: 'E',
+            scope: {},
+            templateUrl: 'templates/modules/' + directive.templateUrl
+        };
+    }]);
 
-linuxDash.directive('networkConnections',[ 'server', function(server) {
-    return {
-        restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/network-connections.html',
-        link: function (scope) {
-            scope.netstatTableConfig = [
-                '# of Connections',
-                'IP'
-            ];
-        }
-    };
-}]);
-
-linuxDash.directive('machineAccounts',[ 'server', function(server) {
-    return {
-        restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/machine-accounts.html',
-        link: function (scope) {
-            scope.usersTableConfig = [
-                'Account Type',
-                'User',
-                'Home Directory'
-            ];
-        }
-    };
-}]);
-
-linuxDash.directive('loggedInAccounts',[ 'server', function(server) {
-    return {
-        restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/logged-in-accounts.html',
-        link: function (scope) {
-            scope.onlineTableConfig = [
-                'Who',
-                'From',
-                'Last Login',
-                'Idle'
-            ];
-        }
-    };
-}]);
-
-linuxDash.directive('recentLogins',[ 'server', function(server) {
-    return {
-        restrict: 'E',
-        isoloate: true,
-        templateUrl: 'templates/recent-logins.html',
-        link: function (scope) {
-            scope.lastloginTableConfig = [
-                'Who',
-                'From',
-                'Last Login',
-            ];
-        }
-    };
-}]);
+});

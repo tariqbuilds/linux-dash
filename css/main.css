@@ -43,7 +43,9 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background:#7d7d7d;
 }           
-
+.centered {
+    margin: 0 auto;
+}
 .hero {
     padding: 10px 0 20px 0;
     text-align: center;

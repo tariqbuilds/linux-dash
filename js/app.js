@@ -5,16 +5,16 @@ linuxDash.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
           when('/basic-info', {
-            templateUrl: 'templates/sections/basic-info.html',
+            templateUrl: 'templates/sections/basic-info/index.html',
           }).
           when('/network', {
-            templateUrl: 'templates/sections/network.html',
+            templateUrl: 'templates/sections/network/index.html',
           }).
           when('/system-stats', {
-            templateUrl: 'templates/sections/system-stats.html',
+            templateUrl: 'templates/sections/system-stats/index.html',
           }).
           when('/accounts', {
-            templateUrl: 'templates/sections/accounts.html',
+            templateUrl: 'templates/sections/accounts/index.html',
           }).
           otherwise({
             redirectTo: '/basic-info'
@@ -61,16 +61,16 @@ linuxDash.service('server',[ '$http', function ($http) {
 linuxDash.directive('navBar',function ($location) {
   return {
     restrict: 'E',
-    templateUrl: 'templates/navbar.html',
+    templateUrl: 'templates/app/navbar.html',
     link: function (scope) {
         scope.items = [
             'basic-info',
             'network',
             'system-stats',
-            'accounts'
+            'accounts',
         ];
 
-        scope.getSidebarItemName = function (url) {
+        scope.getNavItemName = function (url) {
             return url.replace('-', ' ');
         };
 
@@ -97,7 +97,7 @@ linuxDash.directive('loader', function() {
     scope: {
         width: '@'
     },
-    templateUrl: 'templates/plugins/ui-elements/loader.html'
+    templateUrl: 'templates/app/ui-elements/loader.html'
   }; 
 });
 
@@ -115,7 +115,7 @@ linuxDash.directive('topBar', function() {
         refresh: '&',
         lastUpdated: '='
     },
-    templateUrl: 'templates/plugins/ui-elements/top-bar.html',
+    templateUrl: 'templates/app/ui-elements/top-bar.html',
     link: function(scope, element, attrs){
         var $refreshBtn = element.find('refresh-btn').eq(0);
 
@@ -138,7 +138,7 @@ linuxDash.directive('refreshBtn', function() {
     scope: {
         refresh: '&'
     },
-    templateUrl: 'templates/plugins/ui-elements/refresh-button.html'
+    templateUrl: 'templates/app/ui-elements/refresh-button.html'
   };
 });
 
@@ -153,7 +153,7 @@ linuxDash.directive('lastUpdate', function() {
     scope: {
         timestamp: '='
     },
-    templateUrl: 'templates/plugins/ui-elements/last-update.html'
+    templateUrl: 'templates/app/ui-elements/last-update.html'
   };
 });
 
@@ -173,7 +173,7 @@ linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout
         heading: '@',
         staticData: '='
     },
-    templateUrl: 'templates/plugins/static-data-plugin.html',
+    templateUrl: 'templates/app/static-data-plugin.html',
     link: function (scope, element) {
 
         scope.getData = function () {
@@ -211,7 +211,7 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
         moduleName: '@',
         tableHeaders: '=',
     },
-    templateUrl: 'templates/plugins/table-data-plugin.html',
+    templateUrl: 'templates/app/table-data-plugin.html',
     link: function (scope, element) {
         scope.rowLimit = 10;
 
@@ -246,7 +246,7 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         getDisplayValue: '=',
         metrics: '='
     },
-    templateUrl: 'templates/plugins/line-chart-plugin.html',
+    templateUrl: 'templates/app/line-chart-plugin.html',
     link: function (scope, element) {
         
         // smoothieJS - Create new chart
@@ -318,7 +318,7 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
         getDisplayValue: '=',
         metrics: '='
     },
-    templateUrl: 'templates/plugins/multi-line-chart-plugin.html',
+    templateUrl: 'templates/app/multi-line-chart-plugin.html',
     link: function (scope, element) {
         
         // smoothieJS - Create new chart
@@ -405,7 +405,7 @@ linuxDash.directive('plugin', function() {
         //     lastUpdated: '=',
         //     onRefresh: '&',
         // },
-        templateUrl: 'templates/plugins/base-plugin.html'
+        templateUrl: 'templates/app/base-plugin.html'
     }
 });
 
@@ -420,6 +420,6 @@ linuxDash.directive('progressBarPlugin',function() {
         value: '@',
         max: '@'
     },
-    templateUrl: 'templates/plugins/progress-bar-plugin.html'
+    templateUrl: 'templates/app/progress-bar-plugin.html'
   };
 });

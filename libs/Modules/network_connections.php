@@ -2,8 +2,8 @@
 
     namespace Modules;
 
-    class netstat extends \ld\Modules\Module {
-        protected $name = 'netstat';
+    class network_connections extends \ld\Modules\Module {
+        protected $name = 'network_connections';
 
         public function getData($args=array()) {
             /* this section finds command paths from OS */

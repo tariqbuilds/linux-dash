@@ -2,8 +2,8 @@
 
     namespace Modules;
 
-    class online extends \ld\Modules\Module {
-        protected $name = 'online';
+    class logged_in_accounts extends \ld\Modules\Module {
+        protected $name = 'logged_in_accounts';
 
         public function getData($args=array()) {
 	    $users = array();

@@ -2,8 +2,8 @@
 
     namespace Modules;
 
-    class lastlog extends \ld\Modules\Module {
-        protected $name = 'lastlog';
+    class recent_account_logins extends \ld\Modules\Module {
+        protected $name = 'recent_account_logins';
 
         public function getData($args=array()) {
 
