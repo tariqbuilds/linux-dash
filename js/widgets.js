@@ -134,6 +134,17 @@ linuxDash.directive('machineInfo',[ 'server', function(server) {
     };
 }]);
 
+linuxDash.directive('sabnzbd',[ 'server', function(server) {
+    return {
+        restrict: 'E',
+        scope: {},
+        template: '<static-data-plugin ' +
+                        'heading="SABnzbd" ' + 
+                        'static-data="[{name: \'Downstream\', module:\'sabnzbd\'}]"> ' +
+                    '</static-data-plugin>'
+    };
+}]);
+
 /////////////// Table Data Directives ////////////////////
 var simpleTableDirectives = [
     { name: 'ipAddresses', templateUrl: 'ip-addresses.html' },

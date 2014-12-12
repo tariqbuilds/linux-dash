@@ -15,9 +15,7 @@
             $json_output = json_decode($json);
             $speedDownstream = preg_replace("/[^\.0-9]+/", "", $json_output->{'speed'});
             $speedDownstream = $speedDownstream * 1024;
-            $speed = array(
-                'downstream' => (string) $speedDownstream,
-            );
+            $speed = (string) $speedDownstream;
 
             return $speed;
         }
