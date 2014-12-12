@@ -231,6 +231,36 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
 }]);
 
 /**
+ * Fetches and displays table data for a named object
+ * 
+ * @param  string heading
+ * @param  collection tableData
+ */
+linuxDash.directive('objectTablePlugin', [ 'server', function(server) {
+  return {
+    restrict: 'E',
+    isoloate: true,
+    scope: {
+        heading: '@',
+        moduleName: '@'
+    },
+    templateUrl: 'templates/app/object-table-plugin.html',
+    link: function (scope, element) {
+        scope.rowLimit = 10;
+
+        scope.getData = function () {
+            server.get(scope.moduleName, function (serverResponseData) {
+                scope.tableRows = serverResponseData;
+                scope.lastGet = new Date().getTime();
+            });
+        };
+
+        scope.getData();
+    }
+  };
+}]);
+
+/**
  * Fetches and displays data as line chart at a certain refresh rate
  * 
  * @param  string heading
