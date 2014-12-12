@@ -23,7 +23,8 @@
                 unset($result[$x],$a);
                 $x++;
             }
-
+            
+            unset($data[0]); // remove header row
             return $data;
         }
     }

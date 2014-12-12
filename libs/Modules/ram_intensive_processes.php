@@ -16,7 +16,7 @@
 
             $data = array();
 
-            $x = 1;
+            $x = 0;
             foreach ($result as $a) {
                 $data[] = explode(',', $result[$x]);
 
@@ -24,6 +24,7 @@
                 $x++;
             }
 
+            unset($data[0]); // remove header row
             return $data;
         }
     }
