@@ -146,6 +146,9 @@ var simpleTableDirectives = [
     { name: 'memcached', templateUrl: 'memcached.html' },
     { name: 'arpCacheTable', templateUrl: 'arp-cache-table.html' },
     { name: 'commonApplications', templateUrl: 'common-applications.html' },
+    { name: 'pingSpeeds', templateUrl: 'ping-speeds.html' },
+    { name: 'dhcpLeases', templateUrl: 'dhcp-leases.html' },
+    { name: 'bandwidth', templateUrl: 'bandwidth.html' },
 ];
 
 simpleTableDirectives.forEach(function (directive, key) {
