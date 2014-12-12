@@ -2,8 +2,8 @@
 
     namespace Modules;
 
-    class where extends \ld\Modules\Module {
-        protected $name = 'where';
+    class common_applications extends \ld\Modules\Module {
+        protected $name = 'common_applications';
 
         public function getData($args=array()) {
 
