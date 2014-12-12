@@ -15,8 +15,7 @@
 
             foreach ($result as $a) {
                 $p = explode(':', $a);
-                $number = $p[1]/1024/1024;
-                $data[$p[0]] = number_format((float) $number, 3, '.', '');
+                $data[$p[0]] = $p[1];
             }
 
             return $data;

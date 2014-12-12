@@ -242,7 +242,8 @@ linuxDash.directive('objectTablePlugin', [ 'server', function(server) {
     isoloate: true,
     scope: {
         heading: '@',
-        moduleName: '@'
+        moduleName: '@',
+        keyReplacements: '='
     },
     templateUrl: 'templates/app/object-table-plugin.html',
     link: function (scope, element) {
