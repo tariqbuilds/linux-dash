@@ -144,6 +144,7 @@ var simpleTableDirectives = [
     { name: 'loggedInAccounts', templateUrl: 'logged-in-accounts.html' },
     { name: 'recentLogins', templateUrl: 'recent-logins.html' },
     { name: 'memcached', templateUrl: 'memcached.html' },
+    { name: 'arpCacheTable', templateUrl: 'arp-cache-table.html' },
 ];
 
 simpleTableDirectives.forEach(function (directive, key) {

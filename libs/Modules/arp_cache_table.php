@@ -1,9 +1,9 @@
 <?php
     namespace Modules;
 
-    class arp extends \ld\Modules\Module {
+    class arp_cache_table extends \ld\Modules\Module {
 
-        protected $name = 'arp';
+        protected $name = 'arp_cache_table';
 
         public function getData($args=array()) {
 

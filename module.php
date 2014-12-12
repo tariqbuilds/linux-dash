@@ -28,7 +28,7 @@
         'uptime',
         'users',
         'where',
-		'arp',
+		'arp_cache_table',
 		'redis_status'
     );
 
