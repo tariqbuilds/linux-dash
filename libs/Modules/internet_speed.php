@@ -5,6 +5,16 @@
     class internet_speed extends \ld\Modules\Module {
         protected $name = 'internet_speed';
 
+        public function convertKBToMB($number) {
+            $mb = $number/1048576;
+
+            $newNumber = number_format($mb, 3);
+
+            $numberWithUnits = strval($newNumber) . ' MB';
+
+            return $numberWithUnits;
+        }
+
         public function getData($args=array()) {
 
             $mb = 1000000;
@@ -101,6 +111,7 @@
                 $timeDownload = $endDownload - $startDownload;
                 if ($timeDownload) {
                     $speedDownstream = ($realDownloadSize / $timeDownload);
+                    $speedDownstream = $this->convertKBToMb($speedDownstream);
                 }
             }
 
@@ -142,12 +153,13 @@
                         }
 
                     }
+                    $speedUpstream = $this->convertKBToMB($speedUpstream);
                 }
             }
 
             $speed = array(
-                'upstream' => $speedUpstream,
-                'downstream' => $speedDownstream,
+                'Upload' => $speedUpstream,
+                'Download' => $speedDownstream,
             );
 
             return $speed;
