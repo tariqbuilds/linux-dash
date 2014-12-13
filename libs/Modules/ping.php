@@ -26,7 +26,7 @@
                     " awk -F/ '/^rtt/ { print $5 }'",
                     $result
                 );
-                $pingTime = (empty($result[0]))? 'could not reach host': $result[0];
+                $pingTime = (empty($result[0]))? 'could not reach host': $result[0] . ' ms';
                 $data[] = array($hosts[$i], $pingTime);
             }
 
