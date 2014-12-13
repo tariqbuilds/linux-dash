@@ -2,8 +2,8 @@
 
     namespace Modules;
 
-    class speed extends \ld\Modules\Module {
-        protected $name = 'speed';
+    class internet_speed extends \ld\Modules\Module {
+        protected $name = 'internet_speed';
 
         public function getData($args=array()) {
 
@@ -72,7 +72,7 @@
             $chunkSize = 1024;
 
             $speedDownstream = 0;
-	    $speedUpstream = 0;
+	        $speedUpstream = 0;
 
             $strFile = '';
             $realDownloadSize = 0;
@@ -126,7 +126,7 @@
                 $fpUpload = fsockopen($uHostname, $uPort, $errno, $errstr, $uTimeout);
                 if (!$fpUpload) {
                     echo "$errstr ($errno)<br />\n";
-		    $speedUpstream = "n/a";
+		            $speedUpstream = "n/a";
                 } else {
                     fwrite($fpUpload, $outUpload);
                     stream_set_timeout($fpUpload, $uTimeout);

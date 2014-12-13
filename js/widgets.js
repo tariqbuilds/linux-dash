@@ -162,6 +162,7 @@ var simpleTableDirectives = [
     { name: 'bandwidth', templateUrl: 'bandwidth.html' },
     { name: 'swapUsage', templateUrl: 'swap-usage.html' },
     { name: 'redis', templateUrl: 'redis.html' },
+    { name: 'internetSpeed', templateUrl: 'internet-speed.html' },
 ];
 
 simpleTableDirectives.forEach(function (directive, key) {

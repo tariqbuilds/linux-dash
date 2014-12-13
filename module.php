@@ -22,7 +22,7 @@
         'ram_intensive_processes',
         'cpu_intensive_processes',
         'sabnzbd',
-        'speed',
+        'internet_speed',
         'swap',
         'time',
         'uptime',
