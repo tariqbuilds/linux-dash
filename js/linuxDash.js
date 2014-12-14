@@ -39,10 +39,7 @@ linuxDash.controller('body', function ($scope, server, $route, $location) {
 });
 
 /**
- * Gets data from server and runs callbacks on response.data.data
- * 
- * @param int width
- * @return {[type]} [description]
+ * Gets data from server and runs callbacks on response.data.data 
  */
 linuxDash.service('server',[ '$http', function ($http) {
   
@@ -56,9 +53,6 @@ linuxDash.service('server',[ '$http', function ($http) {
 
 /**
  * Sidebar for SPA
- * 
- * @param int width
- * @return {[type]} [description]
  */
 linuxDash.directive('navBar',function ($location) {
   return {
@@ -89,10 +83,7 @@ linuxDash.directive('navBar',function ($location) {
 ////////////////// UI Element Directives //////////////////
 
 /**
- * Shows loader
- * 
- * @param int width
- * @return {[type]} [description]
+ * Shows loader 
  */
 linuxDash.directive('loader', function() {
   return {
@@ -106,9 +97,6 @@ linuxDash.directive('loader', function() {
 
 /**
  * Top Bar for widget 
- * 
- * @param int width
- * @return {[type]} [description]
  */
 linuxDash.directive('topBar', function() {
   return {
@@ -132,8 +120,6 @@ linuxDash.directive('topBar', function() {
 /**
  * Shows refresh button and calls 
  * provided expression on-click
- * 
- * @param expression refresh
  */
 linuxDash.directive('refreshBtn', function() {
   return {
@@ -146,9 +132,17 @@ linuxDash.directive('refreshBtn', function() {
 });
 
 /**
+ * Message shown when no data is found from server 
+ */
+linuxDash.directive('noData', function() {
+  return {
+    restrict: 'E',
+    template: 'No Data'
+  };
+});
+
+/**
  * Displays last updated timestamp for widget
- * 
- * @param expression refresh
  */
 linuxDash.directive('lastUpdate', function() {
   return {
@@ -164,9 +158,6 @@ linuxDash.directive('lastUpdate', function() {
 ///
 /**
  * Fetches and displays static data
- * 
- * @param  string heading
- * @param  collection staticData
  */
 linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout, server) {
   return {
@@ -201,9 +192,6 @@ linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout
 
 /**
  * Fetches and displays table data
- * 
- * @param  string heading
- * @param  collection tableData
  */
 linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
   return {
@@ -213,6 +201,7 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
         heading: '@',
         moduleName: '@',
         tableHeaders: '=',
+        objectTable: '='
     },
     templateUrl: 'templates/app/table-data-plugin.html',
     link: function (scope, element) {
@@ -220,37 +209,11 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
 
         scope.getData = function () {
             server.get(scope.moduleName, function (serverResponseData) {
-                scope.tableRows = serverResponseData;
-                scope.lastGet = new Date().getTime();
-            });
-        };
 
-        scope.getData();
-    }
-  };
-}]);
+                if(serverResponseData.length < 1) {
+                    scope.emptyResult = true;
+                }
 
-/**
- * Fetches and displays table data for a named object
- * 
- * @param  string heading
- * @param  collection tableData
- */
-linuxDash.directive('objectTablePlugin', [ 'server', function(server) {
-  return {
-    restrict: 'E',
-    isoloate: true,
-    scope: {
-        heading: '@',
-        moduleName: '@',
-        keyReplacements: '='
-    },
-    templateUrl: 'templates/app/object-table-plugin.html',
-    link: function (scope, element) {
-        scope.rowLimit = 10;
-
-        scope.getData = function () {
-            server.get(scope.moduleName, function (serverResponseData) {
                 scope.tableRows = serverResponseData;
                 scope.lastGet = new Date().getTime();
             });
@@ -263,9 +226,6 @@ linuxDash.directive('objectTablePlugin', [ 'server', function(server) {
 
 /**
  * Fetches and displays data as line chart at a certain refresh rate
- * 
- * @param  string heading
- * @param  collection tableData
  */
 linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
   return {
@@ -336,8 +296,6 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
 /**
  * Fetches and displays data as line chart at a certain refresh rate
  * 
- * @param  string heading
- * @param  collection tableData
  */
 linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
   return {
@@ -425,10 +383,7 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
 }]);
 
 /**
- * 
- * 
- * @param  string heading
- * @param  collection tableData
+ * Base plugin structure 
  */
 linuxDash.directive('plugin', function() {
     return {
@@ -443,6 +398,9 @@ linuxDash.directive('plugin', function() {
     }
 });
 
+/**
+ * Progress bar element 
+ */
 linuxDash.directive('progressBarPlugin',function() {
   return {
     restrict: 'E',
