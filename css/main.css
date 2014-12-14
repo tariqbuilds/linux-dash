@@ -177,6 +177,9 @@ body {
     clear: both;
     font-weight: normal;
 }
+no-data {
+    font-style: italic;
+}
 refresh-btn button {
     background-color: #009587;
     border: 0;
@@ -187,6 +190,14 @@ refresh-btn button {
     width: 30px;
     height: 30px;
     padding: 5px;
+
+    -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+
+    box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
 }
 refresh-btn button:hover {
     background-color: #ffeb3b;
