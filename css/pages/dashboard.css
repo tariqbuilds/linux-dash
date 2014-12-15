@@ -198,7 +198,6 @@ Bootstrap Admin Template by EGrappler.com
 .big_stats  {
 	width: 100%; 
 	display: table;
-	margin-top: 1.5em;
 }
 
 .big-stats-container .widget-content {
@@ -250,6 +249,13 @@ h6.bigstats {
 	color: #545454;
 	line-height: 1em;
 }
+
+.big_stats .caption {
+	text-align: center;
+	font-weight: bold;
+	display: table-caption;
+}
+
 
 
 
