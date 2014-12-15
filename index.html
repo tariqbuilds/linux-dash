@@ -152,10 +152,10 @@
                                     <div id="refresh-cpu" class="btn icon-refresh js-refresh-info"></div>
                                 </div><!-- /widget-header -->
                                 <div class="widget-content">
-                                    <div style="text-align:center;">
-                                        <b>Number of cores:</b> <span class="lead" id="core-number">0</span>
-                                    </div>
                                     <div class="cf big_stats">
+					<div class="caption">
+						Number of cores: <span class="lead" id="core-number">0</span>
+					</div><!-- .caption -->
                                         <div class="stat">
                                             <i class="icon-#">1 min&nbsp;</i> <span class="value odometer" id="cpu-1min-per"></span> %<br>
                                             <span class="value" id="cpu-1min"></span>
@@ -315,23 +315,20 @@
                                     </div>
                                 </div>
                             </div><!-- /span4 -->
-                        <div class="span4">
+			<div class="span4">
                                 <div id="bandwidth-widget" class="widget widget-table">
                                     <div class="widget-header">
                                         <i class="icon-exchange"></i>
                                         <h3>
                                             Bandwidth
                                         </h3>
-                                        <div id="refresh-bandwidth" class="btn js-refresh-info"><span class="icon-refresh"></span></div>
+                                        <div id="refresh-bandwidth" class="btn icon-refresh js-refresh-info"></div>
                                     </div><!-- /widget-header -->
                                     <div class="widget-content">
-                                        <div style="padding:10px;text-align:center;">
-                                            <i style="color:#19bc9c; font:20px/2em 'Open Sans',sans-serif;" class="icon-#" id="bw-int">eth0:</i>&nbsp; RX: <span class="lead odometer" style="margin-top:11px;" id="bw-rx">0</span>&nbsp;&nbsp;|&nbsp;&nbsp; TX: <span class="lead odometer" style="margin-top:11px;" id="bw-tx"></span>
-                                        </div>
+                                        <table id="bandwidth_dashboard" class="table table-hover table-condensed table-bordered"></table>
                                     </div><!-- /widget-content -->
                                 </div><!-- /widget -->
                             </div><!-- /span4 -->
-
                         <div class="span4">
                                 <div id="users-widget" class="widget widget-table action-table">
                                     <div class="widget-header">

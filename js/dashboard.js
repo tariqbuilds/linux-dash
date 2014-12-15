@@ -532,17 +532,23 @@ dashboard.getDnsmasqLeases = function () {
 };
 
 dashboard.getBandwidth = function () {
-    var refreshIcon = $('#refresh-bandwidth .icon-refresh');
-    refreshIcon.addClass('icon-spin');
-
     moduleData('bandwidth', function (data) {
-        $('#bw-int').text(data['0'].interface + ":");
-        $('#bw-tx').text(data['0'].tx);
-        $('#bw-rx').text(data['0'].rx);
-
-        refreshIcon.removeClass('icon-spin');
-    });
-
+        destroy_dataTable("bandwidth_dashboard");
+        $("#bandwidth_dashboard").dataTable({
+            aaData: data,
+            aoColumns: [
+                { sTitle: "Interface" },
+                { sTitle: "RX" },
+				{ sTitle: "TX" }
+            ],
+            iDisplayLength: 5,
+            bPaginate: true,
+            sPaginationType: "two_button",
+            bFilter: false,
+            bAutoWidth: true,
+            bInfo: false
+        }).fadeIn();
+    });	
 };
 
 dashboard.getSwaps = function () {
