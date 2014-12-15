@@ -208,6 +208,8 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
         scope.rowLimit = 10;
 
         scope.getData = function () {
+            delete scope.tableRows;
+
             server.get(scope.moduleName, function (serverResponseData) {
 
                 if(serverResponseData.length < 1) {
