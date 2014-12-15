@@ -91,7 +91,7 @@ linuxDash.directive('loader', function() {
     scope: {
         width: '@'
     },
-    templateUrl: 'templates/app/ui-elements/loader.html'
+    template: '<div class="loader"></div>'
   }; 
 });
 
@@ -127,7 +127,7 @@ linuxDash.directive('refreshBtn', function() {
     scope: {
         refresh: '&'
     },
-    templateUrl: 'templates/app/ui-elements/refresh-button.html'
+    template: '<button ng-click="refresh()">&olarr;</button>'
   };
 });
 
