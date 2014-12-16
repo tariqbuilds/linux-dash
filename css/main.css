@@ -125,7 +125,7 @@ body {
     float: left;
     padding: 0;
     margin: 10px;
-    min-width: 30%;
+    min-width: 40%;
     background-color: white;
     
     color: black;
@@ -138,10 +138,10 @@ body {
 }
 @media (max-width: 768px) { 
     .plugin {
-        max-width: 90%;
+      max-width: 90%;
     }
     .plugin-body {
-       max-height: 400px;
+      max-height: 400px;
     }
 }
 .plugin .top-bar {
@@ -161,7 +161,7 @@ body {
     padding: 0px;
 }
 .plugin-body {
-    max-height: 400px;
+    height: 400px;
     font-size: 12px;
     padding: 10px;
     line-height: 30px;
@@ -339,13 +339,12 @@ table
     min-width: 400px;
     border-collapse: collapse;
     text-align: left;
-    max-width: 100%;
-    table-layout:fixed;    
+    table-layout:fixed;
 }
 table th, 
 table td {
     padding: 5px;
-    max-width: 200px;
+    max-width: 250px;
     word-wrap: break-word;
 }
 table th
