@@ -387,3 +387,22 @@ canvas {
     height: 5px;
     border-radius: 5px;
 }
+.table-data-filter-container {
+    padding-bottom: 0;
+    margin: 0;
+}
+.table-data-filter, 
+.table-data-filter:focus,
+.table-data-filter:active {
+    height: 20px;
+    padding: 5px;
+    margin:5px;
+    border: none;
+    outline-color: transparent;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    font-size: 15px;
+    font-family: Raleway, HelveticaNeue, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    letter-spacing: .1rem;
+}
