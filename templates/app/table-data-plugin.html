@@ -14,43 +14,16 @@
                     <th colspan="{{ tableHeaders.length }}" class="filter-container">
                         <input class="filter" ng-model="keyword" placeholder="Search">
                     </th>
-
                 </tr>
 				<tr>
 					<th ng-repeat="header in tableHeaders track by $index">{{header}}</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="row in tableRows | startFrom:currentPage*pageSize | limitTo: pageSize | filter:keyword">
+				<tr ng-repeat="row in tableRows | filter:keyword">
 					<td ng-repeat="item in row track by $index">{{item}}</td>
 				</tr>
 			</tbody>
-			<tfoot ng-show="tableRows.length && numberOfPages() > 1">
-				<tr>
-                	<th colspan="{{ tableHeaders.length }}">
-                		<div class="pagination">
-
-	                		<button
-	                			class="previous-button" 
-	                			ng-disabled="currentPage == 0" 
-	                			ng-click="currentPage=currentPage-1">
-						        &lt;
-						    </button>
-
-						    {{ currentPage+1 }} / {{ numberOfPages() }}
-						    
-						    <button 
-						    	class="next-button"
-						    	ng-disabled="currentPage >= tableRows.length/pageSize - 1" 
-						    	ng-click="currentPage=currentPage+1">
-						    	&gt;
-						    </button>
-
-						</div>
-
-                	</th>
-                </tr>
-			</tfoot>
 		</table>
 		
 		<table ng-if="objectTable">

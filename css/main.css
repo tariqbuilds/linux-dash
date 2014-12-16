@@ -406,22 +406,5 @@ canvas {
   font-size: 15px;
 }
 .table-data-plugin .filter:focus {
-  border-bottom: 2px solid #ff5722;
-}
-.table-data-plugin .pagination { 
-  text-align: center;
-  font-size: 10px;
-  font-weight: normal;
-}
-.table-data-plugin .pagination .previous-button, 
-.table-data-plugin .pagination .next-button {
-  color: lightgrey;
-  background-color: #428bca;
-  border: none;
-}
-.table-data-plugin .pagination .next-button {
-  float: right;
-}
-.table-data-plugin .pagination .previous-button {
-  float: left;
+  border-bottom: 1px solid #ff5722;
 }

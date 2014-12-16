@@ -191,19 +191,6 @@ linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout
 }]);
 
 /**
- * ng-repeat filter which slices 
- * array to start from specified index
- * http://jsfiddle.net/2ZzZB/56/
- */
-linuxDash.filter('startFrom', function() {
-    return function(input, start) {
-        start = +start; //parse to int
-        if (input)
-            return input.slice(start);
-    }
-});
-
-/**
  * Fetches and displays table data
  */
 linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
@@ -218,12 +205,6 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
     },
     templateUrl: 'templates/app/table-data-plugin.html',
     link: function (scope, element) {
-        scope.currentPage = 0;
-        scope.pageSize = 5;
-        scope.numberOfPages = function () {
-            if (scope.tableRows)
-                return Math.ceil(scope.tableRows.length / scope.pageSize);                
-        };
 
         scope.getData = function () {
             delete scope.tableRows;
