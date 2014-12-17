@@ -10,7 +10,7 @@
             // First get list of links
             $command='/bin/ip -oneline link show | /usr/bin/awk \'{print $2}\' | /bin/sed "s/://"';
 
-	    $result = array();
+            $result = array();
 
             exec($command, $result, $error);
 
@@ -34,30 +34,25 @@
                    ' /bin/grep -v fe80 | /usr/bin/awk \'{print $2","$4}\';' .
                    ' done; done';
 
-		$result = array();
+                  $result = array();
 
                 exec($command, $result, $return_value);
             }
 
-	    else {
-		$result = "N/A";
-	    }
-
-            // Get external adress
-            $result2 = file_get_contents('http://ipecho.net/plain');
+           else {
+              $result = null;
+           }
 
             $data = array();
-            $data[] = array('external ip', $result2);
+            
+            // Get external adress
+            $data['external_ip'] = file_get_contents('http://ipecho.net/plain');
 
             $x = 0;
 
-            foreach ($result as $a) {
-
-                $data[] = explode(',', $result[$x]);
-
-                unset($result[$x],$a);
-
-                $x++;
+            for ($x = 0; $x < count($result); $x++ ) {
+                $temp = explode(',', $result[$x]);
+                $data[$temp[0]] = $temp[1];                
             }
 
             return $data;

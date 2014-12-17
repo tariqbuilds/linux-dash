@@ -130,6 +130,8 @@ body {
   margin: 10px;
   background-color: white;
   
+  min-width: 40%;
+  
   color: black;
   text-align: center;
 

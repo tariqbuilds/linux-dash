@@ -193,25 +193,26 @@ linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout
 /**
  * Fetches and displays table data
  */
-linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
+linuxDash.directive('tableData', [ 'server', function(server) {
   return {
     restrict: 'E',
     isoloate: true,
     scope: {
         heading: '@',
-        moduleName: '@',
-        tableHeaders: '=',
-        objectTable: '='
+        moduleName: '@'
     },
     templateUrl: 'templates/app/table-data-plugin.html',
     link: function (scope, element) {
 
-        scope.headerSorts = [];
 
         scope.getData = function () {
             delete scope.tableRows;
 
             server.get(scope.moduleName, function (serverResponseData) {
+                scope.tableHeaders = Object.keys(serverResponseData[0]);
+
+                console.log(scope.tableHeaders);
+
                 scope.tableRows = serverResponseData;
                 scope.lastGet = new Date().getTime();
 
