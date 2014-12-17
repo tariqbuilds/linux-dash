@@ -6,7 +6,7 @@
 	<loader ng-hide="tableRows"></loader>
 
 	<div class="animate" ng-show="tableRows">
-	
+		
 		<table ng-if="!objectTable" class="table-data-plugin">
 			<thead>
                 <tr class="table-data-filter-container" ng-show="tableRows.length">
@@ -15,7 +15,10 @@
                     </th>
                 </tr>
 				<tr>
-					<th ng-repeat="header in tableHeaders track by $index">{{header}}</th>
+					<th 
+						ng-repeat="header in tableHeaders track by $index">
+						{{ header }}
+					</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -16,6 +16,11 @@
         }
 
         public function getData($args=array()) {
+            
+            return array(
+                'Upload' => '100 MB',
+                'Download' => '10 MB'
+            );
 
             $mb = 1000000;
 

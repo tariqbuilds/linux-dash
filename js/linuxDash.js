@@ -206,11 +206,48 @@ linuxDash.directive('tableDataPlugin', [ 'server', function(server) {
     templateUrl: 'templates/app/table-data-plugin.html',
     link: function (scope, element) {
 
+        scope.headerSorts = [];
+
         scope.getData = function () {
             delete scope.tableRows;
 
             server.get(scope.moduleName, function (serverResponseData) {
                 scope.tableRows = serverResponseData;
+                scope.lastGet = new Date().getTime();
+
+                if(serverResponseData.length < 1) {
+                    scope.emptyResult = true;
+                }
+            });
+        };
+
+        scope.getData();
+    }
+  };
+}]);
+
+/**
+ * Fetches and displays table data
+ */
+linuxDash.directive('keyValueList', ['server', function(server) {
+  return {
+    restrict: 'E',
+    isoloate: true,
+    scope: {
+        heading: '@',
+        moduleName: '@',
+    },
+    templateUrl: 'templates/app/key-value-list-plugin.html',
+    link: function (scope, element) {
+
+        scope.getData = function () {
+            delete scope.tableRows;
+
+            server.get(scope.moduleName, function (serverResponseData) {
+                scope.tableRows = serverResponseData;
+
+                console.log(scope.tableRows);
+
                 scope.lastGet = new Date().getTime();
 
                 if(serverResponseData.length < 1) {

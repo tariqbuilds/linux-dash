@@ -145,8 +145,8 @@ linuxDash.directive('sabnzbd', ['server', function(server) {
     };
 }]);
 
-/////////////// Table Data Directives ////////////////////
-var simpleTableDirectives = [
+/////////////// Table Data Modules ////////////////////
+var simpleTableModules = [
     { name: 'ipAddresses', templateUrl: 'ip-addresses.html' },
     { name: 'ramIntensiveProcesses', templateUrl: 'ram-intensive-processes.html' },
     { name: 'cpuIntensiveProcesses', templateUrl: 'cpu-intensive-processes.html' },
@@ -154,7 +154,6 @@ var simpleTableDirectives = [
     { name: 'serverAccounts', templateUrl: 'server-accounts.html' },
     { name: 'loggedInAccounts', templateUrl: 'logged-in-accounts.html' },
     { name: 'recentLogins', templateUrl: 'recent-logins.html' },
-    { name: 'memcached', templateUrl: 'memcached.html' },
     { name: 'arpCacheTable', templateUrl: 'arp-cache-table.html' },
     { name: 'commonApplications', templateUrl: 'common-applications.html' },
     { name: 'pingSpeeds', templateUrl: 'ping-speeds.html' },
@@ -162,17 +161,28 @@ var simpleTableDirectives = [
     { name: 'bandwidth', templateUrl: 'bandwidth.html' },
     { name: 'swapUsage', templateUrl: 'swap-usage.html' },
     { name: 'redis', templateUrl: 'redis.html' },
-    { name: 'internetSpeed', templateUrl: 'internet-speed.html' },
+    { name: 'internetSpeed', template: '<key-value-list heading="Internet Speed" module-name="internet_speed"></key-value-list>' }, 
+    { name: 'memcached', template: '<key-value-list heading="Memcached" module-name="memcached"></key-value-list>' },
+    { name: 'redis', template: '<key-value-list heading="Redis" module-name="redis_status"></key-value-list>' },
 ];
 
-simpleTableDirectives.forEach(function (directive, key) {
+simpleTableModules.forEach(function (module, key) {
 
-    linuxDash.directive(directive.name, ['server', function(server) {
-        return {
+    linuxDash.directive(module.name, ['server', function(server) {
+        var moduleDirective = {
             restrict: 'E',
             scope: {},
-            templateUrl: 'templates/modules/' + directive.templateUrl
         };
+        
+        if (module.templateUrl) {
+            moduleDirective['templateUrl'] = 'templates/modules/' + module.templateUrl
+        }
+
+        if (module.template) {
+            moduleDirective['template'] = module.template;
+        }
+
+        return moduleDirective;
     }]);
 
 });
