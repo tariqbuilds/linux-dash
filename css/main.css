@@ -115,6 +115,8 @@ body {
 /***** Plugins Container ****/
 #plugins {
   padding: 20px;
+  padding-top: 0;
+  margin-top: 0;
   border: 1px;
 }
 #plugins section {
@@ -126,13 +128,12 @@ body {
   float: left;
   padding: 0;
   margin: 10px;
-  min-width: 40%;
   background-color: white;
   
   color: black;
   text-align: center;
 
-  box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+  box-shadow: 0 5px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
   border-radius: 2px;
 
   margin-top: 50px;

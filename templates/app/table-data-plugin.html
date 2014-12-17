@@ -6,11 +6,10 @@
 	<loader ng-hide="tableRows"></loader>
 
 	<div class="animate" ng-show="tableRows">
-        
+	
 		<table ng-if="!objectTable" class="table-data-plugin">
 			<thead>
                 <tr class="table-data-filter-container" ng-show="tableRows.length">
-
                     <th colspan="{{ tableHeaders.length }}" class="filter-container">
                         <input class="filter" ng-model="keyword" placeholder="Search">
                     </th>

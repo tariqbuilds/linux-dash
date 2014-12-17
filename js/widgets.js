@@ -1,6 +1,6 @@
 ////////////////// Widget Directives ///////////////////
 
-linuxDash.directive('diskSpace',[ 'server', function(server) {
+linuxDash.directive('diskSpace', ['server', function(server) {
     return {
         restrict: 'E',
         scope: {},
@@ -33,7 +33,7 @@ linuxDash.directive('diskSpace',[ 'server', function(server) {
     };
 }]);
 
-linuxDash.directive('ramChart',[ 'server', function(server) {
+linuxDash.directive('ramChart', ['server', function(server) {
     return {
         restrict: 'E',
         scope: {},
@@ -77,7 +77,7 @@ linuxDash.directive('ramChart',[ 'server', function(server) {
 }]);
 
 
-linuxDash.directive('cpuLoadChart',[ 'server', function(server) {
+linuxDash.directive('cpuLoadChart', ['server', function(server) {
     return {
         restrict: 'E',
         scope: {},
@@ -115,7 +115,7 @@ linuxDash.directive('cpuLoadChart',[ 'server', function(server) {
 }]);
 
 
-linuxDash.directive('machineInfo',[ 'server', function(server) {
+linuxDash.directive('machineInfo', ['server', function(server) {
     return {
         restrict: 'E',
         scope: {},
@@ -134,7 +134,7 @@ linuxDash.directive('machineInfo',[ 'server', function(server) {
     };
 }]);
 
-linuxDash.directive('sabnzbd',[ 'server', function(server) {
+linuxDash.directive('sabnzbd', ['server', function(server) {
     return {
         restrict: 'E',
         scope: {},
@@ -167,7 +167,7 @@ var simpleTableDirectives = [
 
 simpleTableDirectives.forEach(function (directive, key) {
 
-    linuxDash.directive(directive.name,[ 'server', function(server) {
+    linuxDash.directive(directive.name, ['server', function(server) {
         return {
             restrict: 'E',
             scope: {},
