@@ -158,7 +158,7 @@ var simpleTableModules = [
     { name: 'commonApplications', templateUrl: 'common-applications.html' },
     { name: 'pingSpeeds', template: '<table-data heading="Ping Speeds" module-name="ping"> </table-data>' },
     { name: 'dhcpLeases', templateUrl: 'dhcp-leases.html' },
-    { name: 'bandwidth', templateUrl: 'bandwidth.html' },
+    { name: 'bandwidth', template: '<table-data heading="Bandwidth" module-name="bandwidth"> </table-data>' },
     { name: 'swapUsage', templateUrl: 'swap-usage.html' },
     { name: 'redis', templateUrl: 'redis.html' },
     { name: 'internetSpeed', template: '<key-value-list heading="Internet Speed" module-name="internet_speed"></key-value-list>' }, 
