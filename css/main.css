@@ -411,3 +411,12 @@ canvas {
 .table-data-plugin .filter:focus {
   border-bottom: 1px solid #ff5722;
 }
+.table-data-plugin thead tr th a, 
+.table-data-plugin thead tr th a:visited {
+  color: black;
+  text-decoration: none;
+}
+.table-data-plugin .column-sort-caret {
+  font-size: 10px;
+  color: #1EAEDB;
+}

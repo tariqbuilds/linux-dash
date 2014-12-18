@@ -204,14 +204,26 @@ linuxDash.directive('tableData', [ 'server', function(server) {
     templateUrl: 'templates/app/table-data-plugin.html',
     link: function (scope, element) {
 
+        scope.sortByColumn = null;
+
+        // set the column to sort by
+        scope.setSortColumn = function (column) {
+
+            // if the column is already being sorted
+            // reverse the order
+            if (column === scope.sortByColumn) {
+                scope.sortByColumn = '-' + column;
+            }
+            else {
+                scope.sortByColumn = column;
+            }
+        };
 
         scope.getData = function () {
             delete scope.tableRows;
 
             server.get(scope.moduleName, function (serverResponseData) {
                 scope.tableHeaders = Object.keys(serverResponseData[0]);
-
-                console.log(scope.tableHeaders);
 
                 scope.tableRows = serverResponseData;
                 scope.lastGet = new Date().getTime();
@@ -246,8 +258,6 @@ linuxDash.directive('keyValueList', ['server', function(server) {
 
             server.get(scope.moduleName, function (serverResponseData) {
                 scope.tableRows = serverResponseData;
-
-                console.log(scope.tableRows);
 
                 scope.lastGet = new Date().getTime();
 
