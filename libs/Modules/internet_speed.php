@@ -5,7 +5,8 @@
     class internet_speed extends \ld\Modules\Module {
         protected $name = 'internet_speed';
 
-        public function convertKBToMB($number) {
+        public function prettifyNumber($number) {
+
             $mb = $number/1048576;
 
             $newNumber = number_format($mb, 3);
@@ -16,11 +17,6 @@
         }
 
         public function getData($args=array()) {
-            
-            return array(
-                'Upload' => '100 MB',
-                'Download' => '10 MB'
-            );
 
             $mb = 1000000;
 
@@ -49,27 +45,27 @@
                         /* IPv4 & IPv6 Port: 80, 81, 8080 IPv6 */
                         'hostname' => 'download.thinkbroadband.com',
                         'resource' => '/10MB.zip',
-                        'size' => 10, //MB
+                        'size' => 5, //MB
                         'timeout' => 30,
                     ),
                     1 => array(
                         'hostname' => 'cachefly.cachefly.net',
-                        'resource' => '/10mb.test',
-                        'size' => 10, //MB
+                        'resource' => '/5mb.test',
+                        'size' => 5, //MB
                         'timeout' => 30,
                     ),
                     2 => array(
-                        /* Download 10MB file from Seattle */
+                        /* Download 5MB file from Seattle */
                         'hostname' => 'speedtest.sea01.softlayer.com',
-                        'resource' => '/downloads/test10.zip',
-                        'size' => 10, //MB
+                        'resource' => '/downloads/test5.zip',
+                        'size' => 5, //MB
                         'timeout' => 30,
                     ),
                     3 => array(
                         /* 50 MB */
                         'hostname' => 'download.thinkbroadband.com',
-                        'resource' => '/50MB.zip',
-                        'size' => 50, //MB
+                        'resource' => '/10MB.zip',
+                        'size' => 10, //MB
                         'timeout' => 120,
                     ),
                 ),
@@ -116,7 +112,7 @@
                 $timeDownload = $endDownload - $startDownload;
                 if ($timeDownload) {
                     $speedDownstream = ($realDownloadSize / $timeDownload);
-                    $speedDownstream = $this->convertKBToMb($speedDownstream);
+                    $speedDownstream = $this->prettifyNumber($speedDownstream);
                 }
             }
 
@@ -158,7 +154,7 @@
                         }
 
                     }
-                    $speedUpstream = $this->convertKBToMB($speedUpstream);
+                    $speedUpstream = $this->prettifyNumber($speedUpstream);
                 }
             }
 
