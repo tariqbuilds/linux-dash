@@ -15,10 +15,9 @@
             }
 
             $pingCount = 2;
-
             $data = array();
-
             $max = count($hosts);
+
             for ($i = 0; $i < $max; $i++) {
                 $result = array();
                 exec(
@@ -26,8 +25,13 @@
                     " awk -F/ '/^rtt/ { print $5 }'",
                     $result
                 );
+                
                 $pingTime = (empty($result[0]))? 'could not reach host': $result[0] . ' ms';
-                $data[] = array($hosts[$i], $pingTime);
+                
+                $data[] = array( 
+                    'host' => $hosts[$i], 
+                    'ping' => $pingTime
+                );
             }
 
             return $data;
