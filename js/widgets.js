@@ -150,7 +150,7 @@ var simpleTableModules = [
     { name: 'ipAddresses', template: '<key-value-list heading="IP Addresses" module-name="ip"> </key-value-list> ' },
     { name: 'ramIntensiveProcesses', templateUrl: 'ram-intensive-processes.html' },
     { name: 'cpuIntensiveProcesses', templateUrl: 'cpu-intensive-processes.html' },
-    { name: 'networkConnections', templateUrl: 'network-connections.html' },
+    { name: 'networkConnections', template: '<table-data heading="Network Connections" module-name="network_connections"> </table-data>' },
     { name: 'serverAccounts', templateUrl: 'server-accounts.html' },
     { name: 'loggedInAccounts', templateUrl: 'logged-in-accounts.html' },
     { name: 'recentLogins', templateUrl: 'recent-logins.html' },
