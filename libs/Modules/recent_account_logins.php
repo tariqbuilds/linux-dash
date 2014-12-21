@@ -15,6 +15,8 @@
                 $result
             );
             
+            array_shift($result); // remove headers
+
             $x = 0;
             foreach ($result as $a) {
                 $temp = explode(',', $result[$x]);
