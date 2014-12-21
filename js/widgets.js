@@ -149,7 +149,7 @@ linuxDash.directive('sabnzbd', ['server', function(server) {
 var simpleTableModules = [
     { 
         name: 'ipAddresses', 
-        template: '<key-value-list heading="IP Addresses" module-name="ip"></key-value-list> ' 
+        template: '<key-value-list heading="IP Addresses" module-name="ip"></key-value-list>' 
     },
     { 
         name: 'ramIntensiveProcesses', 
@@ -198,10 +198,6 @@ var simpleTableModules = [
     { 
         name: 'swapUsage', 
         template: '<table-data heading="Swap Usage" module-name="swap"></table-data>' 
-    },
-    { 
-        name: 'redis', 
-        templateUrl: 'redis.html' 
     },
     { 
         name: 'internetSpeed', 
