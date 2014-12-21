@@ -6,7 +6,7 @@
         protected $name = 'memory_info';
         protected $raw_output = true;
 
-        public function getData() {
+        public function getData($args=array()) {
 			$data = array();
 			
 			exec(
