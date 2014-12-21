@@ -6,15 +6,15 @@
         protected $name = 'recent_account_logins';
 
         public function getData($args=array()) {
+            $result = array();
+            $data = array();
 
             exec(
                 '/usr/bin/lastlog --time 365 |' .
                 ' /usr/bin/awk \'{print $1","$3","$4" "$5" "$6" "$7" "$8}\'',
-                $data
+                $result
             );
             
-            $result = array();
-
             $x = 0;
             foreach ($result as $a) {
                 $temp = explode(',', $result[$x]);
@@ -29,6 +29,6 @@
                 $x++;
             }
 
-            return $result;
+            return $data;
         }
     }
