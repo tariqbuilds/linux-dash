@@ -147,23 +147,74 @@ linuxDash.directive('sabnzbd', ['server', function(server) {
 
 /////////////// Table Data Modules ////////////////////
 var simpleTableModules = [
-    { name: 'ipAddresses', template: '<key-value-list heading="IP Addresses" module-name="ip"> </key-value-list> ' },
-    { name: 'ramIntensiveProcesses', template: '<table-data heading="RAM Intensive Processes" module-name="ram_intensive_processes"> </table-data>' },
-    { name: 'cpuIntensiveProcesses', template: '<table-data heading="CPU Intensive Processes" module-name="cpu_intensive_processes"> </table-data>' },
-    { name: 'networkConnections', template: '<table-data heading="Network Connections" module-name="network_connections"> </table-data>' },
-    { name: 'serverAccounts', templateUrl: 'server-accounts.html' },
-    { name: 'loggedInAccounts', templateUrl: 'logged-in-accounts.html' },
-    { name: 'recentLogins', templateUrl: 'recent-logins.html' },
-    { name: 'arpCacheTable', template: '<table-data heading="ARP Cache Table" module-name="arp_cache_table"> </table-data>' },
-    { name: 'commonApplications', templateUrl: 'common-applications.html' },
-    { name: 'pingSpeeds', template: '<table-data heading="Ping Speeds" module-name="ping"> </table-data>' },
-    { name: 'dhcpLeases', templateUrl: 'dhcp-leases.html' },
-    { name: 'bandwidth', template: '<table-data heading="Bandwidth" module-name="bandwidth"> </table-data>' },
-    { name: 'swapUsage', templateUrl: 'swap-usage.html' },
-    { name: 'redis', templateUrl: 'redis.html' },
-    { name: 'internetSpeed', template: '<key-value-list heading="Internet Speed" module-name="internet_speed"></key-value-list>' }, 
-    { name: 'memcached', template: '<key-value-list heading="Memcached" module-name="memcached"></key-value-list>' },
-    { name: 'redis', template: '<key-value-list heading="Redis" module-name="redis_status"></key-value-list>' },
+    { 
+        name: 'ipAddresses', 
+        template: '<key-value-list heading="IP Addresses" module-name="ip"></key-value-list> ' 
+    },
+    { 
+        name: 'ramIntensiveProcesses', 
+        template: '<table-data heading="RAM Intensive Processes" module-name="ram_intensive_processes"></table-data>' 
+    },
+    { 
+        name: 'cpuIntensiveProcesses', 
+        template: '<table-data heading="CPU Intensive Processes" module-name="cpu_intensive_processes"></table-data>' 
+    },
+    { 
+        name: 'networkConnections', 
+        template: '<table-data heading="Network Connections" module-name="network_connections"></table-data>' 
+    },
+    { 
+        name: 'serverAccounts', 
+        templateUrl: 'server-accounts.html' 
+    },
+    { 
+        name: 'loggedInAccounts', 
+        templateUrl: 'logged-in-accounts.html' 
+    },
+    { 
+        name: 'recentLogins', 
+        templateUrl: 'recent-logins.html' 
+    },
+    { 
+        name: 'arpCacheTable', 
+        template: '<table-data heading="ARP Cache Table" module-name="arp_cache_table"></table-data>' 
+    },
+    { 
+        name: 'commonApplications', 
+        templateUrl: 'common-applications.html' 
+    },
+    { 
+        name: 'pingSpeeds', 
+        template: '<table-data heading="Ping Speeds" module-name="ping"></table-data>' 
+    },
+    { 
+        name: 'dhcpLeases', 
+        templateUrl: 'dhcp-leases.html' 
+    },
+    { 
+        name: 'bandwidth', 
+        template: '<table-data heading="Bandwidth" module-name="bandwidth"></table-data>' 
+    },
+    { 
+        name: 'swapUsage', 
+        template: '<table-data heading="Swap Usage" module-name="swap"></table-data>' 
+    },
+    { 
+        name: 'redis', 
+        templateUrl: 'redis.html' 
+    },
+    { 
+        name: 'internetSpeed', 
+        template: '<key-value-list heading="Internet Speed" module-name="internet_speed"></key-value-list>' 
+    }, 
+    { 
+        name: 'memcached', 
+        template: '<key-value-list heading="Memcached" module-name="memcached"></key-value-list>' 
+    },
+    { 
+        name: 'redis', 
+        template: '<key-value-list heading="Redis" module-name="redis_status"></key-value-list>' 
+    },
 ];
 
 simpleTableModules.forEach(function (module, key) {
