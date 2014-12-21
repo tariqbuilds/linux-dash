@@ -22,7 +22,7 @@
                 $data[] = array(
                     'user' => $temp[0],
                     'from' => $temp[1],
-                    'when' => date('Y-m-d H:i:s', strtotime($row[2])),
+                    'when' => date('Y-m-d H:i:s', strtotime($temp[2])),
                 );
 
                 unset($result[$x],$a);
