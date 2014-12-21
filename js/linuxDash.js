@@ -223,7 +223,10 @@ linuxDash.directive('tableData', [ 'server', function(server) {
             delete scope.tableRows;
 
             server.get(scope.moduleName, function (serverResponseData) {
-                scope.tableHeaders = Object.keys(serverResponseData[0]);
+                
+                if (serverResponseData.length > 0) {
+                    scope.tableHeaders = Object.keys(serverResponseData[0]);
+                }
 
                 scope.tableRows = serverResponseData;
                 scope.lastGet = new Date().getTime();

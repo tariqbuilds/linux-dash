@@ -165,15 +165,15 @@ var simpleTableModules = [
     },
     { 
         name: 'serverAccounts', 
-        templateUrl: 'server-accounts.html' 
+        template: '<table-data heading="Accounts" module-name="users"></table-data>' 
     },
     { 
         name: 'loggedInAccounts', 
-        templateUrl: 'logged-in-accounts.html' 
+        template: '<table-data heading="Logged In Accounts" module-name="logged_in_accounts"></table-data>' 
     },
     { 
         name: 'recentLogins', 
-        templateUrl: 'recent-logins.html' 
+        template: '<table-data heading="Recent Logins" module-name="recent_account_logins"></table-data>' 
     },
     { 
         name: 'arpCacheTable', 

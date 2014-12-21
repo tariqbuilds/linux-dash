@@ -10,21 +10,25 @@
             exec(
                 '/usr/bin/lastlog --time 365 |' .
                 ' /usr/bin/awk \'{print $1","$3","$4" "$5" "$6" "$7" "$8}\'',
-                $users
+                $data
             );
             
             $result = array();
-            $row = array();
 
-            # ignore the first line of column names
-            for ($i = 1; $i < count($users); ++$i) {
-                $row = explode(",", $users[$i]);
-                $row[2] = strtotime($row[2]);
-                $row[2] = date('Y-m-d H:i:s',$row[2]);
-                $result[$i-1] = $row;                       
+            $x = 0;
+            foreach ($result as $a) {
+                $temp = explode(',', $result[$x]);
+
+                $data[] = array(
+                    'user' => $temp[0],
+                    'from' => $temp[1],
+                    'when' => date('Y-m-d H:i:s', strtotime($row[2])),
+                );
+
+                unset($result[$x],$a);
+                $x++;
             }
 
-
-            return $result;
+            return $data;
         }
     }
