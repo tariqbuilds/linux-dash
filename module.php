@@ -30,7 +30,8 @@
         'common_applications',
 		'arp_cache_table',
         'redis_status',
-		'memory_info',
+        'memory_info',
+		'cpu_info',
     );
 
 

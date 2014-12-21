@@ -215,6 +215,10 @@ var simpleTableModules = [
         name: 'meminfo', 
         template: '<key-value-list heading="Memory Info" module-name="memory_info"></key-value-list>' 
     },
+    { 
+        name: 'cpuinfo', 
+        template: '<key-value-list heading="CPU Info" module-name="cpu_info"></key-value-list>' 
+    },
 ];
 
 simpleTableModules.forEach(function (module, key) {
