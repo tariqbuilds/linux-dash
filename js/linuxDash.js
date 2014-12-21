@@ -7,11 +7,11 @@ linuxDash.config(['$routeProvider',
           when('/basic-info', {
             templateUrl: 'templates/sections/basic-info.html',
           }).
+          when('/system-status', {
+            templateUrl: 'templates/sections/system-status.html',
+          }).
           when('/network', {
             templateUrl: 'templates/sections/network.html',
-          }).
-          when('/system-stats', {
-            templateUrl: 'templates/sections/system-stats.html',
           }).
           when('/accounts', {
             templateUrl: 'templates/sections/accounts.html',
@@ -61,8 +61,8 @@ linuxDash.directive('navBar',function ($location) {
     link: function (scope) {
         scope.items = [
             'basic-info',
+            'system-status',
             'network',
-            'system-stats',
             'accounts',
             'apps'
         ];

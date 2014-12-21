@@ -26,7 +26,9 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="row in tableRows | filter:keyword | orderBy: sortByColumn">
-					<td ng-repeat="item in row track by $index">{{item}}</td>
+					<td ng-repeat="header in tableHeaders track by $index">
+						{{ row[header] }}
+					</td>
 				</tr>
 			</tbody>
 		</table>

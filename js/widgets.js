@@ -148,8 +148,8 @@ linuxDash.directive('sabnzbd', ['server', function(server) {
 /////////////// Table Data Modules ////////////////////
 var simpleTableModules = [
     { name: 'ipAddresses', template: '<key-value-list heading="IP Addresses" module-name="ip"> </key-value-list> ' },
-    { name: 'ramIntensiveProcesses', templateUrl: 'ram-intensive-processes.html' },
-    { name: 'cpuIntensiveProcesses', templateUrl: 'cpu-intensive-processes.html' },
+    { name: 'ramIntensiveProcesses', template: '<table-data heading="RAM Intensive Processes" module-name="ram_intensive_processes"> </table-data>' },
+    { name: 'cpuIntensiveProcesses', template: '<table-data heading="CPU Intensive Processes" module-name="cpu_intensive_processes"> </table-data>' },
     { name: 'networkConnections', template: '<table-data heading="Network Connections" module-name="network_connections"> </table-data>' },
     { name: 'serverAccounts', templateUrl: 'server-accounts.html' },
     { name: 'loggedInAccounts', templateUrl: 'logged-in-accounts.html' },
