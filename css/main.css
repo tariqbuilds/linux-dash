@@ -135,8 +135,8 @@ body {
   color: black;
   text-align: center;
 
-  box-shadow: 0 5px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
   border-radius: 2px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.53),0 3px 10px rgba(0,0,0,.16);
 
   margin-top: 50px;
 }

@@ -30,7 +30,8 @@ linuxDash.controller('body', function ($scope, server, $route, $location) {
         'rgba(244,226,201,0.5)',
         'rgba(79,142,247,0.2)',
         'rgb(236,236,236)',
-        'white'
+        'rgb(100,100,100)',
+        'rgb(255,255,255)'
     ];
 
     $scope.setBackground = function (color) {

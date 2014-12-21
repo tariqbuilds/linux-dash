@@ -211,6 +211,10 @@ var simpleTableModules = [
         name: 'redis', 
         template: '<key-value-list heading="Redis" module-name="redis_status"></key-value-list>' 
     },
+    { 
+        name: 'meminfo', 
+        template: '<key-value-list heading="Memory Info" module-name="memory_info"></key-value-list>' 
+    },
 ];
 
 simpleTableModules.forEach(function (module, key) {

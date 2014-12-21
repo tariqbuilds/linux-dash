@@ -29,7 +29,8 @@
         'users',
         'common_applications',
 		'arp_cache_table',
-		'redis_status'
+        'redis_status',
+		'memory_info',
     );
 
 
