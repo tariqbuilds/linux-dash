@@ -29,6 +29,6 @@
                 $x++;
             }
 
-            return $data;
+            return $result;
         }
     }
