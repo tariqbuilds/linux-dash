@@ -24,7 +24,7 @@
                     'pid' => $temp[0],
                     'user' => $temp[1],
                     'command' => $temp[2],
-                    'percent' => $temp[3],
+                    'per' => $temp[3],
                     'rss' => $temp[4],
                     'vsz' => $temp[5],
                 );
