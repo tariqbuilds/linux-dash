@@ -181,7 +181,7 @@ var simpleTableModules = [
     },
     { 
         name: 'commonApplications', 
-        templateUrl: 'common-applications.html' 
+        template: '<table-data heading="Common Applications" module-name="common_applications"></table-data>' 
     },
     { 
         name: 'pingSpeeds', 
