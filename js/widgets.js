@@ -221,7 +221,7 @@ var simpleTableModules = [
     },
     { 
         name: 'ioStats', 
-        template: '<key-value-list heading="IO Stats" module-name="io_stats"></key-value-list>' 
+        template: '<table-data heading="IO Stats" module-name="io_stats"></table-data>' 
     },
 ];
 
