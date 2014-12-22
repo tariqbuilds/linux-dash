@@ -7,7 +7,7 @@ Simply drop-in the app and go!
 
 Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documentation.
 
-[**DEMO**](http://www.linuxdash.com/) | [**View Features**](#features) | [**Installation Instructions**](#installation) | [**News**](https://github.com/afaqurk/linux-dash#news) | [**Documentation**](https://github.com/afaqurk/linux-dash/wiki)
+[**DEMO**](http://www.linuxdash.com/) | [**Installation Instructions**](#installation)
 
 <img src="https://github.com/afaqurk/linux-dash/screenshots/system-status.png">
 
