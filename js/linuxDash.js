@@ -26,16 +26,7 @@ linuxDash.config(['$routeProvider',
 
 ////////////////// Global Application //////////////////
 linuxDash.controller('body', function ($scope, server, $route, $location) {
-    $scope.backgroundColors = [
-        'rgba(244,226,201,0.5)',
-        'rgba(79,142,247,0.2)',
-        'rgb(236,236,236)',
-        'rgb(255,255,255)'
-    ];
-
-    $scope.setBackground = function (color) {
-        document.body.style.backgroundColor  = color;
-    };
+    
 });
 
 /**
