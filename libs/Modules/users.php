@@ -13,6 +13,16 @@
                 $result
             );
 
+            if (!$result) {
+
+                exec(
+                    'getent passwd | /usr/bin/awk -F: \'{ if ($3<=499) print "system,"$1","$6;' .
+                    ' else print "user,"$1","$6; }\'',
+                    $result
+                );
+                
+            }
+
             $data = array();
 
             $x = 0;
