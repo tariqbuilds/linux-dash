@@ -9,7 +9,7 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
 
 [**DEMO**](http://www.linuxdash.com/) | [**Installation Instructions**](#installation)
 
-<img src="https://github.com/afaqurk/linux-dash/screenshots/system-status.png">
+<img src="https://raw.githubusercontent.com/afaqurk/linux-dash/master/screenshots/system-status.png">
 
 ## Features
 * A beautiful, simple web-based dashboard for monitoring server info
