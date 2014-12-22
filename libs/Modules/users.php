@@ -13,17 +13,30 @@
                 $result
             );
 
+            if (!$result) {
+
+                exec(
+                    'getent passwd | /usr/bin/awk -F: \'{ if ($3<=499) print "system,"$1","$6;' .
+                    ' else print "user,"$1","$6; }\'',
+                    $result
+                );
+                
+            }
+
             $data = array();
 
             $x = 0;
             foreach ($result as $a) {
-                $x++;
-                $line = explode(',', $a);
-                if ($line[1][0] == '#') {
-                    continue;
-                }
-                $data[] = $line;
+                $temp = explode(',', $result[$x]);
+                
+                $data[] = array(
+                    'type' => $temp[0],
+                    'user' => $temp[1],
+                    'home' => $temp[2],
+                );
 
+                unset($result[$x],$a);
+                $x++;
             }
 
             return $data;

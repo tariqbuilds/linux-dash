@@ -1,0 +1,13 @@
+<line-chart-plugin
+    ng-if="maxRam"
+    
+    heading="RAM Usage"
+    module-name="current_ram"
+
+    max-value="maxRam"
+    min-value="minRam"
+    refresh-rate="1000"
+    
+    get-display-value="ramToDisplay"
+    metrics="ramMetrics">
+</line-chart-plugin>

@@ -1,0 +1,40 @@
+<plugin 
+	heading="Disk Partitions"
+	last-updated="lastGet"
+	on-refresh="getData()">
+
+	<loader ng-hide="diskSpaceData"></loader>
+
+	<table ng-show="diskSpaceData">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th></th>
+				<th>Stats</th>
+				<th>% Full</th>
+				<th>Mount Path</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr  ng-repeat="partition in diskSpaceData">
+				<td>{{partition[0]}}</td>
+				<td>
+					<progress-bar-plugin
+					    width="70px"
+					    name="{{partition[0]}}"
+					    value="{{ getKB(partition[2]) }}"
+					    max="{{ getKB(partition[1]) }}">
+					</progress-bar-plugin>
+				</td>
+				<td>
+					{{ partition[2] }} / {{ partition[1] }}
+				</td>
+				<td>
+					{{ partition[4] }}
+				</td>
+				<td>{{ partition[5] }}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</plugin>

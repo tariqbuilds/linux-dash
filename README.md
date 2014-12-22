@@ -1,20 +1,20 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/afaqurk/linux-dash/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/afaqurk/linux-dash/?branch=master)
-# linux-dash (Beta)
+# linux-dash
 
-A low-overhead monitoring web dashboard for a GNU/Linux machine. Simply drop-in
-the app and go!
+A simple, low-overhead monitoring web dashboard for GNU / Linux. 
+
+Simply drop-in the app and go!
 
 Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documentation.
 
-[**View DEMO**](http://www.linuxdash.com/) | [**View Features**](#features) | [**Installation Instructions**](#installation) | [**News**](https://github.com/afaqurk/linux-dash#news) | [**Documentation**](https://github.com/afaqurk/linux-dash/wiki)
+[**DEMO**](http://www.linuxdash.com/) | [**Installation Instructions**](#installation)
 
-<img src="https://raw.githubusercontent.com/afaqurk/linux-dash/master/linux-dash.PNG">
+<img src="https://github.com/afaqurk/linux-dash/screenshots/system-status.png">
 
 ## Features
-* A beautiful web-based dashboard for monitoring server info
-* Live, on-demand monitoring of RAM, Load, Uptime, Disk Allocation, Users and many more system stats
-* Drop-in install for servers with Apache2/nginx + PHP
-* Click and drag to re-arrange widgets
+* A beautiful, simple web-based dashboard for monitoring server info
+* Live graphs, refresh-able widgets, and a growing # of supported modules 
+* Drop-in install for servers with Apache2 or nginx + PHP 
 * Support for wide range of linux server flavors [(See Support section)](#support)
 
 ## Installation
@@ -52,8 +52,3 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
 * [http://www.ubuntugeek.com/linux-dash-a-low-overhead-monitoring-web-dashboard-for-a-gnulinux-machine.html](http://www.ubuntugeek.com/linux-dash-a-low-overhead-monitoring-web-dashboard-for-a-gnulinux-machine.html)
 * [http://www.oschina.net/p/linux-dash](http://www.oschina.net/p/linux-dash)
 * [t3n - Schickes Dashboard: Mit linux-dash den Server überwachen (DE)](http://t3n.de/news/dashboard-linux-dash-553038/?utm_content=buffer4aec9&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer)
-
-## Credits:
-* [Dashboard Template](http://www.egrappler.com/templatevamp-free-twitter-bootstrap-admin-template/)
-* [Bootstrap](http://getbootstrap.com)
-* [Font Awesome](http://fontawesome.io/)

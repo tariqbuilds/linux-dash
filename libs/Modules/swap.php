@@ -17,11 +17,21 @@
 
             $x = 0;
             foreach ($result as $a) {
-                $x++;
-                $data[] = explode(',', $a);
+                $temp = explode(',', $result[$x]);
+                
+                $data[] = array(
+                    'filename' => $temp[0],
+                    'type' => $temp[1],
+                    'size' => $temp[2],
+                    'used' => $temp[3],
+                    'priority' => $temp[4],
+                );
 
+                unset($result[$x],$a);
+                $x++;
             }
 
+            array_shift($data); // remove header row
             return $data;
         }
     }

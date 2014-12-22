@@ -1,0 +1,39 @@
+<plugin 
+	heading="{{ heading }}"
+	last-updated="lastGet"
+	on-refresh="getData()">
+    
+	<loader ng-hide="tableRows"></loader>
+
+	<div class="animate" ng-show="tableRows">
+		
+		<table class="table-data-plugin">
+			<thead>
+                <tr class="table-data-filter-container" ng-show="tableRows.length">
+                    <th colspan="{{ tableHeaders.length }}" class="filter-container">
+                        <input class="filter" ng-model="keyword" placeholder="Search">
+                    </th>
+                </tr>
+				<tr>
+					<th ng-repeat="header in tableHeaders track by $index">
+						<a href="" ng-click="setSortColumn(header)">{{ header }}</a>
+						<span class="column-sort-caret">
+							{{ (header === sortByColumn) ? '&#9650;': ''; }}
+							{{ ('-' + header === sortByColumn) ? '&#9660;': ''; }}
+						</span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in tableRows | filter:keyword | orderBy: sortByColumn">
+					<td ng-repeat="header in tableHeaders track by $index">
+						{{ row[header] }}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+
+	<no-data ng-show="emptyResult"></no-data>
+</plugin>

@@ -1,0 +1,20 @@
+<div class="plugin">
+
+	<top-bar heading="heading" last-updated="lastGet" no-refresh-btn></top-bar>
+	
+	<div class="plugin-body no-padding">
+
+		<canvas class="canvas" width="300" height="200"></canvas>
+
+		<table border="0" class="metrics-table">
+			<tbody>
+				<tr ng-repeat="metric in metrics">
+					<td><strong>{{ metric.name }}</strong></td>
+					<td>{{ metric.data }}</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+
+</plugin>
