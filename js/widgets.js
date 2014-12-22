@@ -212,12 +212,16 @@ var simpleTableModules = [
         template: '<key-value-list heading="Redis" module-name="redis_status"></key-value-list>' 
     },
     { 
-        name: 'meminfo', 
+        name: 'memoryInfo', 
         template: '<key-value-list heading="Memory Info" module-name="memory_info"></key-value-list>' 
     },
     { 
-        name: 'cpuinfo', 
+        name: 'cpuInfo', 
         template: '<key-value-list heading="CPU Info" module-name="cpu_info"></key-value-list>' 
+    },
+    { 
+        name: 'ioStats', 
+        template: '<key-value-list heading="IO Stats" module-name="io_stats"></key-value-list>' 
     },
 ];
 

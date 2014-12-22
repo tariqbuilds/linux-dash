@@ -3,7 +3,7 @@
     namespace Modules;
 
     class cpu_info extends \ld\Modules\Module {
-        protected $name = 'memory_info';
+        protected $name = 'cpu_info';
         protected $raw_output = true;
 
         public function getData($args=array()) {

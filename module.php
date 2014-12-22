@@ -31,7 +31,8 @@
 		'arp_cache_table',
         'redis_status',
         'memory_info',
-		'cpu_info',
+        'cpu_info',
+		'io_stats',
     );
 
 
