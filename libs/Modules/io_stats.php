@@ -35,16 +35,16 @@
 
                 $data[] = array ( 
                     'device'    => $temp[2],    
-                    'reads'       => $temp[3],    
+                    'reads'       => number_format($temp[3]),    
                     // 'read_merges'    => $temp[4],
                     // 'read_sectors'   => $temp[5],
                     // 'read_ticks'     => $temp[6],
-                    'writes'      => $temp[7],
+                    'writes'      => number_format($temp[7]),
                     // 'write_merges'   => $temp[8],
                     // 'write_sectors'  => $temp[9],
                     // 'write_ticks'    => $temp[10],
-                    'in_progress'      => $temp[11],
-                    'time_in_io'       => $temp[12] . 'ms',
+                    'in_progress'      => number_format($temp[11]),
+                    'time_in_io'       => number_format($temp[12]) . 'ms',
                     // 'time_in_io'  => $temp[13],
                 );
 

@@ -49,7 +49,7 @@ linuxDash.directive('ramChart', ['server', function(server) {
 
             scope.ramToDisplay = function (serverResponseData) {
                 return serverResponseData[2];
-        };
+            };
 
             scope.ramMetrics = [
                 {
