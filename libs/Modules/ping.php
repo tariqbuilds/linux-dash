@@ -26,6 +26,15 @@
                     $result
                 );
                 
+		if (empty($result[0])) {
+			// Empty, so maybe it's an IPv6-only host, so run ping6
+			exec(
+				"/bin/ping6 -qc {$pingCount} {$hosts[$i]} |" .
+				" awk -F/ '/^rtt/ { print $5 }'",
+				$result
+			);
+		} // if
+
                 $pingTime = (empty($result[0]))? 'could not reach host': $result[0] . ' ms';
                 
                 $data[] = array( 
