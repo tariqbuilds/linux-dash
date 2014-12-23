@@ -26,7 +26,7 @@ linuxDash.config(['$routeProvider',
 
 ////////////////// Global Application //////////////////
 linuxDash.controller('body', function ($scope, server, $route, $location) {
-    
+
 });
 
 /**
@@ -153,7 +153,6 @@ linuxDash.directive('lastUpdate', function() {
 linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout, server) {
   return {
     restrict: 'E',
-    isoloate: true,
     scope: {
         heading: '@',
         staticData: '='
@@ -187,7 +186,6 @@ linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout
 linuxDash.directive('tableData', [ 'server', function(server) {
   return {
     restrict: 'E',
-    isoloate: true,
     scope: {
         heading: '@',
         moduleName: '@'
@@ -239,7 +237,6 @@ linuxDash.directive('tableData', [ 'server', function(server) {
 linuxDash.directive('keyValueList', ['server', function(server) {
   return {
     restrict: 'E',
-    isoloate: true,
     scope: {
         heading: '@',
         moduleName: '@',
@@ -272,7 +269,6 @@ linuxDash.directive('keyValueList', ['server', function(server) {
 linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
   return {
     restrict: 'E',
-    isoloate: true,
     scope: {
         heading: '@',
         moduleName: '@',
@@ -342,7 +338,6 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
 linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
   return {
     restrict: 'E',
-    isoloate: true,
     scope: {
         heading: '@',
         moduleName: '@',
@@ -446,7 +441,6 @@ linuxDash.directive('plugin', function() {
 linuxDash.directive('progressBarPlugin',function() {
   return {
     restrict: 'E',
-    isoloate: true,
     scope: {
         width: '@',
         moduleName: '@',
@@ -457,3 +451,64 @@ linuxDash.directive('progressBarPlugin',function() {
     templateUrl: 'templates/app/progress-bar-plugin.html'
   };
 });
+
+
+/**
+ * Theme switcher 
+ */
+linuxDash.directive('themeSwitcher',['$location', function($location) {
+  return {
+    restrict: 'E',
+    scope: {
+
+    },
+    templateUrl: 'templates/app/theme-switcher.html',
+    link: function (scope) {
+        // alternate themes available
+        scope.themes = [
+            {
+                name: 'winter',
+                background_color: '#F3F2AB',
+                font_color: 'white',
+                stylesheet: 'winter.css'
+            },
+            {
+                name: 'summer',
+                background_color: '#0f9d58',
+                font_color: 'white',
+                stylesheet: 'summer.css'
+            },
+            {
+                name: 'fall',
+                background_color: '#AAB3B4',
+                font_color: 'white',
+                stylesheet: 'fall.css'
+            },
+            {
+                name: 'spring',
+                background_color: '#EB7260',
+                font_color: 'white',
+                stylesheet: 'spring.css'
+            }
+        ];
+
+        scope.themeSwitcherOpen = false;
+
+        scope.switchTheme = function (theme) {
+            scope.removeExistingThemes();
+            theme.selected = true;
+            document.body.style.background = theme.background_color;
+        };
+
+        scope.toggleThemeSwitcher = function () {
+            scope.themeSwitcherOpen = !scope.themeSwitcherOpen;
+        };
+
+        scope.removeExistingThemes = function () {
+            scope.themes.forEach(function (item) {
+                item.selected = false;
+            });
+        };
+    }
+  };
+}]);

@@ -81,17 +81,47 @@ body {
 .hero nav-bar ul li a {
   display: inline;
 }
-.color-changer {
-  float: none;
-  margin: 0 auto;
-  width: 50%;
+#theme-switcher {
+  position: fixed;
+  top: 25px;
+  right: -330px;
+  border-radius: 5px 0px 0px 5px;
+  padding: 4px;
+  z-index: 999999;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  background-color: #009587;
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
-.color-changer .option {
-  margin: 10px;
-  border: 1px solid lightgray;
+#theme-switcher .settings-icon{
+  font-size: 25px;
+}
+#theme-switcher.open {
+  right: 0;
+}
+#theme-switcher .option {
+  margin: 5px;
+  border: 1px solid transparent;
   display: inline-block;
-  width: 8px;
-  height: 8px;
+  padding: 5px;
+  color: black;
+  background-color: #ffeb3b;
+  border-radius: 2px;
+   -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#theme-switcher .option:hover,
+#theme-switcher .option.selected {
+  box-shadow: 0 5px 10px rgba(0,0,0,.53),0 3px 10px rgba(0,0,0,.16);
+  background-color: ;
 }
 @media (min-width: 1080px) { 
   #plugins {
@@ -133,6 +163,7 @@ body {
   margin-top: 10px;
 
   margin: 0 auto;
+  margin-top: 20px;
   margin-left: 50px;
   margin-bottom: 50px;
 }

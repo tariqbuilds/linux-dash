@@ -9,6 +9,7 @@
         <link rel="icon" href="favicon.ico" type="image/x-icon">
         <link href='http://fonts.googleapis.com/css?family=Merriweather:300italic,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link id="theme-css" rel="stylesheet" type="text/css" href="">
 
         <!-- Angular Libs -->
         <script src="js/angular.min.js" type="text/javascript"></script>
@@ -18,13 +19,15 @@
           <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body ng-controller="body" drop="true">
+    <body ng-controller="body">
         
         <div class="hero">
             <h4 class="title">Linux Dash</h4>
 
             <small>A simple linux dashboard</small>
-            
+
+            <theme-switcher></theme-switcher>
+
             <nav-bar></nav-bar>
 
         </div>
