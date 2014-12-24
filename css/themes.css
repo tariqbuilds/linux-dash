@@ -43,3 +43,24 @@ html.summer .plugin .top-bar {
 html.summer .plugin refresh-btn button {
   background-color: #BF360C;
 }
+
+/**************************************
+  Theme: Spring
+**************************************/
+
+html.spring {
+  clear: both;
+  background-color: #EBE3D9;
+}
+html.spring .hero nav-bar ul li.active a,
+html.spring .hero nav-bar ul li a:hover {
+  color: #94353C;
+}
+html.spring .plugin {
+}
+html.spring .plugin .top-bar {
+  color: #5C0811;
+}
+html.spring .plugin refresh-btn button {
+  background-color: #DBA72E;
+}
