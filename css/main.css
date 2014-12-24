@@ -128,6 +128,7 @@ body {
     float: none;
     margin: 0 auto;
     max-width: 80%;
+    clear: both;
   }
 }
 @media (max-width: 1079px) { 
@@ -135,6 +136,7 @@ body {
     float: none;
     margin: 0 auto;
     width: 80%;
+    clear: both;
   }
 }
 

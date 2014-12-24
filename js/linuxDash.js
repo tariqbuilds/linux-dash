@@ -459,37 +459,23 @@ linuxDash.directive('progressBarPlugin',function() {
 linuxDash.directive('themeSwitcher',['$location', function($location) {
   return {
     restrict: 'E',
-    scope: {
-
-    },
     templateUrl: 'templates/app/theme-switcher.html',
     link: function (scope) {
+
         // alternate themes available
         scope.themes = [
             {
                 name: 'winter',
-                background_color: '#F3F2AB',
-                font_color: 'white',
-                stylesheet: 'winter.css'
             },
             {
                 name: 'summer',
-                background_color: '#0f9d58',
-                font_color: 'white',
-                stylesheet: 'summer.css'
-            },
-            {
-                name: 'fall',
-                background_color: '#AAB3B4',
-                font_color: 'white',
-                stylesheet: 'fall.css'
             },
             {
                 name: 'spring',
-                background_color: '#EB7260',
-                font_color: 'white',
-                stylesheet: 'spring.css'
-            }
+            },
+            {
+                name: 'fall',
+            },
         ];
 
         scope.themeSwitcherOpen = false;
@@ -497,7 +483,8 @@ linuxDash.directive('themeSwitcher',['$location', function($location) {
         scope.switchTheme = function (theme) {
             scope.removeExistingThemes();
             theme.selected = true;
-            document.body.style.background = theme.background_color;
+            document.getElementsByTagName('html')[0].className = theme.name;
+            localStorage.setItem('theme', theme.name);
         };
 
         scope.toggleThemeSwitcher = function () {
@@ -509,6 +496,19 @@ linuxDash.directive('themeSwitcher',['$location', function($location) {
                 item.selected = false;
             });
         };
+
+        // on load, check if theme was set in localStorage
+        if(localStorage.getItem('theme')) {
+
+            scope.themes.forEach(function (theme) {
+                
+                if(theme.name === localStorage.getItem('theme'))
+                {
+                    scope.switchTheme(theme);
+                }
+
+            });
+        }
     }
   };
 }]);

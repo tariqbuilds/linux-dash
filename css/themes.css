@@ -1,0 +1,14 @@
+/**************************************
+  Theme: Winter
+**************************************/
+
+html.winter {
+  clear: both;
+  background-color: #F3F2AB;  
+}
+
+html.winter .plugin {
+}
+
+html.winter .plugin refresh-btn button {
+}
