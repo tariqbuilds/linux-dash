@@ -50,17 +50,40 @@ html.summer .plugin refresh-btn button {
 
 html.spring {
   clear: both;
-  background-color: #EBE3D9;
+  background-color: #FFF8E1;
 }
 html.spring .hero nav-bar ul li.active a,
 html.spring .hero nav-bar ul li a:hover {
-  color: #94353C;
+  color: #E65100;
 }
-html.spring .plugin {
+html.spring .plugin, 
+{
+  background-color: #E1F5FE;
 }
 html.spring .plugin .top-bar {
-  color: #5C0811;
+  color: #FF6D00;
 }
 html.spring .plugin refresh-btn button {
+  background-color: #E65100;
+}
+
+/**************************************
+  Theme: Fall
+**************************************/
+
+html.fall {
+  clear: both;
+  background-color: #EBE3D9;
+}
+html.fall .hero nav-bar ul li.active a,
+html.fall .hero nav-bar ul li a:hover {
+  color: #94353C;
+}
+html.fall .plugin {
+}
+html.fall .plugin .top-bar {
+  color: #5C0811;
+}
+html.fall .plugin refresh-btn button {
   background-color: #DBA72E;
 }

@@ -37,7 +37,7 @@ body {
   border-radius:10px;
 }
 ::-webkit-scrollbar-thumb {
-  background:#999;
+  background: #999;
   border: thin solid gray;
   border-radius:10px;
 }
@@ -84,7 +84,7 @@ body {
 #theme-switcher {
   position: fixed;
   top: 25px;
-  right: -330px;
+  right: -320px;
   border-radius: 5px 0px 0px 5px;
   padding: 4px;
   z-index: 999999;
@@ -101,8 +101,12 @@ body {
 #theme-switcher .settings-icon{
   font-size: 25px;
   height: 100%;
+  margin-top: 5px;
   float: left;
   display: inline-block;
+}
+#theme-switcher .settings-icon:hover{
+  color: #5C0811;
 }
 #theme-switcher.open {
   right: 0;
