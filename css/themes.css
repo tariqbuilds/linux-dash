@@ -4,11 +4,21 @@
 
 html.winter {
   clear: both;
-  background-color: #F3F2AB;  
+  background-color: #bbe2f2;
 }
-
+html.winter .hero nav-bar ul li.active a,
+html.winter .hero nav-bar ul li a:hover {
+  color: #23568f;
+}
 html.winter .plugin {
-}
 
+}
+html.winter .plugin .top-bar {
+  color: #012e40;
+}
 html.winter .plugin refresh-btn button {
+  background-color: #4c6c73;
+}
+table th {
+  color: #012e40;
 }
