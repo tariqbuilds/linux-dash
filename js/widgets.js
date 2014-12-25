@@ -125,10 +125,10 @@ linuxDash.directive('machineInfo', ['server', function(server) {
                     '</static-data-plugin>',
         link: function (scope) {
             scope.basicInfo = [
-                {name: 'OS', module: 'issue' },
-                {name: 'Hostname', module: 'hostname' },
-                {name: 'Server Time', module: 'time' },
-                {name: 'Server Uptime', module: 'uptime' },
+                {module: 'issue' },
+                {module: 'hostname' },
+                {module: 'time' },
+                {module: 'uptime' },
             ];
         }
     };
@@ -140,7 +140,7 @@ linuxDash.directive('sabnzbd', ['server', function(server) {
         scope: {},
         template: '<static-data-plugin ' +
                         'heading="SABnzbd" ' + 
-                        'static-data="[{name: \'Downstream\', module:\'sabnzbd\'}]"> ' +
+                        'static-data="[{module:\'sabnzbd\'}]"> ' +
                     '</static-data-plugin>'
     };
 }]);

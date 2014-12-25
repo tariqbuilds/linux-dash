@@ -26,6 +26,8 @@ class uptime extends \ld\Modules\Module
 			$formatUptime .= $minutes . ' minute' . ( ( 1 < $minutes ) ? 's' : '' ) . ' ';
 		}
 
-		return $formatUptime;
+		return array( 
+			'Server Uptime' => $formatUptime
+		);
 	}
 }

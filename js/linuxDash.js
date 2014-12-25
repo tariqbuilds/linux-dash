@@ -167,7 +167,7 @@ linuxDash.directive('staticDataPlugin', ['$timeout', 'server', function($timeout
 
                 // get the resp from the server and assign it to obj.data 
                 server.get(staticObj.module, function (serverResponseData) {
-                    staticObj.data = serverResponseData;
+                    staticObj.info = serverResponseData;
                 });
 
             });
