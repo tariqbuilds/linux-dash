@@ -117,7 +117,7 @@ body {
   display: inline-block;
   padding: 5px;
   color: black;
-  background-color: #ffeb3b;
+  background-color: #ececec;
   border-radius: 2px;
    -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -128,7 +128,10 @@ body {
 #theme-switcher .option:hover,
 #theme-switcher .option.selected {
   box-shadow: 0 5px 10px rgba(0,0,0,.53),0 3px 10px rgba(0,0,0,.16);
-  background-color: ;
+  background-color: #ffeb3b;
+}
+#theme-switcher .option.selected:hover {
+  background-color: lightgrey;
 }
 @media (min-width: 1080px) { 
   #plugins {

@@ -481,6 +481,12 @@ linuxDash.directive('themeSwitcher',['$location', function($location) {
         scope.themeSwitcherOpen = false;
 
         scope.switchTheme = function (theme) {
+
+            if(theme.selected) {
+                scope.setDefaultTheme();
+                return;
+            }
+
             scope.removeExistingThemes();
             theme.selected = true;
             document.getElementsByTagName('html')[0].className = theme.name;
@@ -495,6 +501,12 @@ linuxDash.directive('themeSwitcher',['$location', function($location) {
             scope.themes.forEach(function (item) {
                 item.selected = false;
             });
+        };
+
+        scope.setDefaultTheme = function () {
+            scope.removeExistingThemes();
+            document.getElementsByTagName('html')[0].className = '';
+            localStorage.setItem('theme', null);
         };
 
         // on load, check if theme was set in localStorage
