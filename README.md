@@ -1,20 +1,15 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/afaqurk/linux-dash/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/afaqurk/linux-dash/?branch=master)
-# linux-dash
+# Linux Dash
 
-A simple, low-overhead monitoring web dashboard for GNU / Linux. 
+A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
-Simply drop-in the app and go!
-
-Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documentation.
-
-[**DEMO**](http://www.linuxdash.com/) | [**Installation Instructions**](#installation)
-
-<img src="https://raw.githubusercontent.com/afaqurk/linux-dash/master/screenshots/system-status.png">
+[**DEMO**](http://linuxdash.afaqtariq.com/demo.html) | [**Installation Instructions**](#installation)
 
 ## Features
 * A beautiful, simple web-based dashboard for monitoring server info
 * Live graphs, refresh-able widgets, and a growing # of supported modules 
 * Drop-in install for servers with Apache2 or nginx + PHP 
+* Easy to customize and extend
+* Only 1MB! (with .git removed)
 * Support for wide range of linux server flavors [(See Support section)](#support)
 
 ## Installation
@@ -41,14 +36,3 @@ Visit [linuxdash.com](http://www.linuxdash.com/) to view demo and full documenta
 * Nginx
 * PHP 5
 * Modern browsers
-
-## News
-* [https://news.ycombinator.com/item?id=7125153](https://news.ycombinator.com/item?id=7125153)
-* [http://www.linuxpromagazine.com/Online/Blogs/Productivity-Sauce/Monitor-Your-server-with-Linux-Dash](http://www.linuxpromagazine.com/Online/Blogs/Productivity-Sauce/Monitor-Your-server-with-Linux-Dash)
-* [http://www.lafermeduweb.net/billet/linux-dash-un-dashboard-simple-pour-monitorer-votre-serveur-linux-1698.html](http://www.lafermeduweb.net/billet/linux-dash-un-dashboard-simple-pour-monitorer-votre-serveur-linux-1698.html)
-* [http://linuxundich.de/ubuntu/linux-dash-als-alternative-zu-monitoring-mittels-phpsysinfo/](http://linuxundich.de/ubuntu/linux-dash-als-alternative-zu-monitoring-mittels-phpsysinfo/)
-* [http://www.html.it/articoli/monitoring-di-un-server-linux-con-linux-dash/](http://www.html.it/articoli/monitoring-di-un-server-linux-con-linux-dash/)
-* [https://www.youtube.com/watch?v=3gb3z-a7XfA](https://www.youtube.com/watch?v=3gb3z-a7XfA)
-* [http://www.ubuntugeek.com/linux-dash-a-low-overhead-monitoring-web-dashboard-for-a-gnulinux-machine.html](http://www.ubuntugeek.com/linux-dash-a-low-overhead-monitoring-web-dashboard-for-a-gnulinux-machine.html)
-* [http://www.oschina.net/p/linux-dash](http://www.oschina.net/p/linux-dash)
-* [t3n - Schickes Dashboard: Mit linux-dash den Server überwachen (DE)](http://t3n.de/news/dashboard-linux-dash-553038/?utm_content=buffer4aec9&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer)
