@@ -48,8 +48,6 @@
             // Get external adress
             $data['external_ip'] = file_get_contents('http://ipecho.net/plain');
 
-            $x = 0;
-
             for ($x = 0; $x < count($result); $x++ ) {
                 $temp = explode(',', $result[$x]);
                 $data[$temp[0]] = $temp[1];                

@@ -13,6 +13,10 @@
                 $result
             );
 
+            if (!$result) {
+                $result = array();
+            }
+            
             foreach ($result as $a) {
                 $p = explode(':', $a);
                 $data[$p[0]] = $p[1];

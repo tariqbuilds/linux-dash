@@ -6,6 +6,7 @@
         protected $name = 'ram_intensive_processes';
 
         public function getData($args=array()) {
+            
             exec(
                 '/bin/ps axo pid,user,comm,pmem,rss,vsz --sort -pmem,-rss,-vsz | head -n 15 | /usr/bin/awk ' .
                     "'{print ". 
@@ -14,6 +15,10 @@
                 $result
             );
 
+            if (!$result) {
+                $result = array();
+            }
+            
             $data = array();
 
             $x = 0;

@@ -7,8 +7,6 @@
 
         public function getData($args=array()) {
 	       
-            $result = array();
-
             // change username column length for w command
             putenv("PROCPS_USERLEN=20");
 
@@ -18,6 +16,10 @@
                 $result
             );
 
+            if (!$result) {
+                $result = array();
+            }
+            
             $data = array();
 
             $x = 0;

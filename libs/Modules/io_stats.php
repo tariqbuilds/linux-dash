@@ -20,6 +20,10 @@
                 $result
             );
 			
+            if (!$result) {
+                $result = array();
+            }
+            
             $x = 0;
             foreach($result as $a) {
 

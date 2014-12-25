@@ -14,6 +14,10 @@
                 $result
             );
 			
+            if (!$result) {
+                $result = array();
+            }
+            
 			foreach ($result as $a) {
 				$p = explode(':', $a);
 
