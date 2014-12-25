@@ -15,6 +15,10 @@
 
             $data = array();
 
+            if (!$result) {
+                $result = array();
+            }
+            
             $x = 0;
             foreach ($result as $a) {
                 $temp = explode(',', $result[$x]);

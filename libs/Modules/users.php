@@ -23,6 +23,10 @@
                 
             }
 
+            if (!$result) {
+                $result = array();
+            }
+            
             $data = array();
 
             $x = 0;

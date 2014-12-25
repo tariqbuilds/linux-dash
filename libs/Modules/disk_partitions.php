@@ -11,6 +11,10 @@
 
             $data = array();
 
+            if (!$result) {
+                $result = array();
+            }
+            
             $x = 0;
             foreach ($result as $a) {
                 if ($x==0) {
