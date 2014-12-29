@@ -6,7 +6,7 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
 ## Features
 * A beautiful, simple web-based dashboard for monitoring server info
-* Only 1MB! (with .git removed)
+* Only 1MB on disk! (with .git removed)
 * Live graphs, refresh-able widgets, and a growing # of supported modules 
 * Drop-in install for servers with Apache2 or nginx + PHP 
 * Easy to customize and extend
