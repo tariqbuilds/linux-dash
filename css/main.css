@@ -7,6 +7,14 @@ html {
   margin-top: 0px;
   padding-top: 0;
   border-top: 1px solid #4F8EF7;
+  
+  background: url(../img/themes/crossword.png);
+
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
 }
 body {
   padding: 0;
@@ -90,7 +98,7 @@ body {
   z-index: 999999;
   cursor: pointer;
   color: rgb(255, 255, 255);
-  background-color: #009587;
+  background-color: #517fa4;
 
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -106,7 +114,7 @@ body {
   display: inline-block;
 }
 #theme-switcher .settings-icon:hover{
-  color: #5C0811;
+  color: #243949;
 }
 #theme-switcher.open {
   right: 0;
@@ -128,7 +136,7 @@ body {
 #theme-switcher .option:hover,
 #theme-switcher .option.selected {
   box-shadow: 0 5px 10px rgba(0,0,0,.53),0 3px 10px rgba(0,0,0,.16);
-  background-color: #ffeb3b;
+  background-color: #FFF94C;
 }
 #theme-switcher .option.selected:hover {
   background-color: lightgrey;
@@ -162,8 +170,8 @@ body {
 .plugin {
   float: left;
   padding: 0;
-  background-color: white;
-  
+
+  background-color: #FFFFFF;
   min-width: 40%;
   
   color: black;
@@ -181,7 +189,7 @@ body {
 }
 @media (max-width: 768px) { 
   .plugin {
-    max-width: 50%;
+    max-width: 80%;
     float: none;
     margin: 0 auto;
     margin-bottom: 10px;
@@ -238,7 +246,7 @@ refresh-btn button {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 
-  box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.12);
+  box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.5);
 }
 refresh-btn button:hover {
   background-color: #ffeb3b;
@@ -430,6 +438,7 @@ canvas {
   margin: 5px;
   border: none;
   outline-color: transparent;
+  background: transparent;
   width: 100%;
   margin: 0;
   text-align: center;

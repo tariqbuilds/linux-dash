@@ -286,16 +286,16 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
             borderVisible:false,
             sharpLines:true,
             grid: {
-                fillStyle:'#ffffff',
-                strokeStyle:'rgba(232,230,230,0.93)',
-                sharpLines:true,
-                millisPerLine:3000,
-                borderVisible:false
+                fillStyle: '#ffffff',
+                strokeStyle: 'rgba(232,230,230,0.93)',
+                sharpLines: true,
+                millisPerLine: 3000,
+                borderVisible: false
             },
             labels:{
-                fontSize:11,
-                precision:0,
-                fillStyle:'#0f0e0e'
+                fontSize: 11,
+                precision: 0,
+                fillStyle: '#0f0e0e'
             },
             maxValue: parseInt(scope.maxValue),
             minValue: parseInt(scope.minValue),

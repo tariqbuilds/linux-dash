@@ -3,15 +3,14 @@
 **************************************/
 
 html.winter {
-  clear: both;
-  background-color: #bbe2f2;
+  background: url(../img/themes/contemporary_china_2.png) ;
 }
 html.winter .hero nav-bar ul li.active a,
 html.winter .hero nav-bar ul li a:hover {
   color: #23568f;
 }
 html.winter .plugin {
-
+  background-color: rgba(255, 255, 255, 0.60);
 }
 html.winter .plugin .top-bar {
   color: #012e40;
@@ -29,13 +28,14 @@ table th {
 
 html.summer {
   clear: both;
-  background-color: #FBE9E7;
+  background: url(../img/themes/congruent_pentagon.png);
 }
 html.summer .hero nav-bar ul li.active a,
 html.summer .hero nav-bar ul li a:hover {
   color: #D84315;
 }
-html.summer .plugin {
+html.summer .plugin{
+  background-color: rgba(255, 255, 255, 0.8);
 }
 html.summer .plugin .top-bar {
   color: #BF360C;
@@ -50,15 +50,14 @@ html.summer .plugin refresh-btn button {
 
 html.spring {
   clear: both;
-  background-color: #FFF8E1;
+  background: url(../img/themes/food.png);
 }
 html.spring .hero nav-bar ul li.active a,
 html.spring .hero nav-bar ul li a:hover {
   color: #E65100;
 }
-html.spring .plugin, 
-{
-  background-color: #E1F5FE;
+html.spring .plugin {
+  background-color: rgba(255,255,255,0.95);
 }
 html.spring .plugin .top-bar {
   color: #FF6D00;
@@ -72,18 +71,16 @@ html.spring .plugin refresh-btn button {
 **************************************/
 
 html.fall {
-  clear: both;
-  background-color: #EBE3D9;
-}
-html.fall .hero nav-bar ul li.active a,
-html.fall .hero nav-bar ul li a:hover {
-  color: #94353C;
+  background: url(../img/themes/skulls.png);   
 }
 html.fall .plugin {
+  background: url(../img/themes/crossword.png);
 }
+html.fall .hero nav-bar ul li.active a,
+html.fall .hero nav-bar ul li a:hover,
 html.fall .plugin .top-bar {
-  color: #5C0811;
+  color: #F09819;
 }
 html.fall .plugin refresh-btn button {
-  background-color: #DBA72E;
+  background-color: #FF512F;
 }
