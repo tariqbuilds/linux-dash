@@ -6,10 +6,10 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
 ## Features
 * A beautiful, simple web-based dashboard for monitoring server info
+* Only 1MB! (with .git removed)
 * Live graphs, refresh-able widgets, and a growing # of supported modules 
 * Drop-in install for servers with Apache2 or nginx + PHP 
 * Easy to customize and extend
-* Only 1MB! (with .git removed)
 * Support for wide range of linux server flavors [(See Support section)](#support)
 
 ## Installation
@@ -21,6 +21,14 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
 **Please note: If you would like to limit access to linux-dash, please add
 `.htaccess` or other security measure.**
+
+## Goals for v2.0
+- [ ] Backend ported to Python from PHP
+- [ ] Add config file
+- [ ] Segregate core code-base and modules
+  - Each module in a separate directory with front-end template, back-end file, bash script
+- [ ] Add project to package managers
+- [ ] Backend ported to Python from PHP
 
 ## Support
 
