@@ -28,7 +28,6 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 - [ ] Segregate core code-base and modules
   - Each module in a separate directory with front-end template, back-end file, bash script
 - [ ] Add project to package managers
-- [ ] Backend ported to Python from PHP
 
 ## Support
 
