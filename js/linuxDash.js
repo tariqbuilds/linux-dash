@@ -3,6 +3,7 @@ var linuxDash = angular.module('linuxDash', ['ngRoute']);
 ////////////////// Routing /////////////////////////////
 linuxDash.config(['$routeProvider',
     function($routeProvider) {
+
         $routeProvider.
           when('/basic-info', {
             templateUrl: 'templates/sections/basic-info.html',
@@ -22,6 +23,7 @@ linuxDash.config(['$routeProvider',
           otherwise({
             redirectTo: '/basic-info'
           });
+          
     }]);
 
 ////////////////// Global Application //////////////////
