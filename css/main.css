@@ -32,7 +32,7 @@ body {
   text-align: center;
 }
 .plugin ::-webkit-scrollbar {
-  width: 8px;
+  width: 5px;
 }
 .plugin ::-webkit-scrollbar-button {
   width: 8px;
