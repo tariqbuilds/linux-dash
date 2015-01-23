@@ -31,25 +31,25 @@ body {
   margin-top: 0px;
   text-align: center;
 }
-::-webkit-scrollbar {
+.plugin ::-webkit-scrollbar {
   width: 8px;
 }
-::-webkit-scrollbar-button {
+.plugin ::-webkit-scrollbar-button {
   width: 8px;
   height:5px;
 }
-::-webkit-scrollbar-track {
+.plugin ::-webkit-scrollbar-track {
   background:#eee;
   border: thin solid lightgray;
   box-shadow: 0px 0px 3px #dfdfdf inset;
   border-radius:10px;
 }
-::-webkit-scrollbar-thumb {
+.plugin ::-webkit-scrollbar-thumb {
   background: #999;
   border: thin solid gray;
   border-radius:10px;
 }
-::-webkit-scrollbar-thumb:hover {
+.plugin ::-webkit-scrollbar-thumb:hover {
   background:#7d7d7d;
 }
 .centered {
@@ -145,7 +145,6 @@ body {
   #plugins {
     float: none;
     margin: 0 auto;
-    max-width: 80%;
     clear: both;
   }
 }
@@ -153,7 +152,6 @@ body {
   #plugins {
     float: none;
     margin: 0 auto;
-    width: 80%;
     clear: both;
   }
 }
@@ -170,18 +168,12 @@ body {
 .plugin {
   float: left;
   padding: 0;
-
   background-color: #FFFFFF;
-  min-width: 40%;
-  
   color: black;
   text-align: center;
-
   border-radius: 2px;
   box-shadow: 0 5px 10px rgba(0,0,0,.53),0 3px 10px rgba(0,0,0,.16);
-
   margin-top: 10px;
-
   margin: 0 auto;
   margin-top: 20px;
   margin-left: 50px;
