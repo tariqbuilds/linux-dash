@@ -314,7 +314,21 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         scope.getData = function () {
             server.get(scope.moduleName, function (serverResponseData) {
                 scope.lastGet = new Date().getTime();
-                
+
+                // change graph colour depending on usage
+                if (scope.maxValue / 4 * 3 < scope.getDisplayValue(serverResponseData)) {
+                    chart.seriesSet[0].options.strokeStyle = 'rgba(255, 89, 0, 1)';
+		    chart.seriesSet[0].options.fillStyle = 'rgba(255, 89, 0, 0.2)';
+		}
+		else if (scope.maxValue / 3 < scope.getDisplayValue(serverResponseData)) {
+		    chart.seriesSet[0].options.strokeStyle = 'rgba(255, 238, 0, 1)';
+		    chart.seriesSet[0].options.fillStyle = 'rgba(255, 238, 0, 0.2)';
+		}
+		else {
+		    chart.seriesSet[0].options.strokeStyle = 'rgba(0, 255, 0, 1)';
+		    chart.seriesSet[0].options.fillStyle = 'rgba(0, 255, 0, 0.2)';
+		}
+
                 // update chart with this response
                 series.append(scope.lastGet, scope.getDisplayValue(serverResponseData));
 
