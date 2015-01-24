@@ -4,6 +4,8 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
 [**DEMO**](http://linuxdash.afaqtariq.com/demo.html) | [**Installation Instructions**](#installation)
 
+![Linux Dash screenshot](https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/system-status-full.png)
+
 ## Features
 * A beautiful, simple web-based dashboard for monitoring server info
 * Only 1MB on disk! (with .git removed)
@@ -30,9 +32,6 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 - [ ] Add project to package managers
 
 ## Support
-
-*The information listed here is currently limited and will expand shortly.*
-
 * OS
     * Arch
     * Debian 6, 7
