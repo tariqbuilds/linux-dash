@@ -2,7 +2,7 @@
 
 A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
-[**DEMO**](http://linuxdash.afaqtariq.com/demo.html) | [**Installation Instructions**](#installation)
+[**DEMO**](http://linuxdash.afaqtariq.com) | [**Installation Instructions**](#installation)
 
 ![Linux Dash screenshot](https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/system-status-full.png)
 
