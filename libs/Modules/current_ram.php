@@ -12,8 +12,8 @@
 
 	    }
 	    else {
-            	exec('/usr/bin/free -tm | /usr/bin/awk \'BEGIN {OFS=","} {print $1,$2,$3+$6,$4}\'', $result);
+            	exec('/usr/bin/free -tm | /usr/bin/awk \'BEGIN {OFS=","} NR>1 {print $2,$3,$4}\'', $result);
 	    }
-            return explode(',', $result[1]);
+            return explode(',', $result[0]);
         }
     }
