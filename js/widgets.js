@@ -43,7 +43,7 @@ linuxDash.directive('ramChart', ['server', function(server) {
             // get max ram available on machine before we 
             // can start charting
             server.get('current_ram', function (resp) {
-                scope.maxRam = resp[1];
+                scope.maxRam = resp[0];
                 scope.minRam = 0;
             });
 
