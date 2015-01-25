@@ -48,29 +48,29 @@ linuxDash.directive('ramChart', ['server', function(server) {
             });
 
             scope.ramToDisplay = function (serverResponseData) {
-                return serverResponseData[2];
+                return serverResponseData[1];
             };
 
             scope.ramMetrics = [
                 {
                     name: 'Used',
                     generate: function (serverResponseData) {
-                        var ratio = serverResponseData[2] / serverResponseData[1];
+                        var ratio = serverResponseData[1] / serverResponseData[0];
                         var percentage = parseInt(ratio * 100);
 
-                        return serverResponseData[2] + ' MB ('
+                        return serverResponseData[1] + ' MB ('
                                 + percentage.toString() + '%)';
                     }
                 },
                 {
                     name: 'Free',
                     generate: function (serverResponseData) {
-                        return serverResponseData[3].toString() 
+                        return serverResponseData[2].toString()
                                 + ' MB of '
-                                + serverResponseData[1] 
+                                + serverResponseData[0]
                                 + 'MB';
                     }
-                } 
+                }
             ];
         }
     };
