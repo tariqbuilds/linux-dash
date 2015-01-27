@@ -11,7 +11,7 @@
 
             exec(
                 '/usr/bin/lastlog --time 365 |' .
-                ' /usr/bin/awk \'{print $1","$3","$4" "$5" "$6" "$7" "$8}\'',
+                ' /usr/bin/awk \'{print $1","$3","$4" "$5" "$6" "$7" "$8" "$9}\'',
                 $result
             );
             
