@@ -1,0 +1,16 @@
+{
+    "name": "linux-dash/linux-dash",
+    "description": "A drop-in, low-overhead monitoring web dashboard for a linux machine.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Afaq Tariq",
+            "email": "afaq05@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+	"php": ">=5.4.0",
+	"linux-dash/core-modules": "dev-master"
+    }
+}

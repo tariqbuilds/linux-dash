@@ -1,0 +1,50 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "c5d762b82725f496407089eed17c4702",
+    "packages": [
+        {
+            "name": "linux-dash/core-modules",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/linux-dash/core-modules.git",
+                "reference": "6ea6d93e4951b0246c21c65ca66736c65c8a64eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/linux-dash/core-modules/zipball/6ea6d93e4951b0246c21c65ca66736c65c8a64eb",
+                "reference": "6ea6d93e4951b0246c21c65ca66736c65c8a64eb",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Afaq Tariq",
+                    "email": "afaq05@gmail.com"
+                }
+            ],
+            "description": "Core set of modules which gather data from the OS and return it as JSON.",
+            "time": "2015-02-02 01:26:06"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "linux-dash/core-modules": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.4.0"
+    },
+    "platform-dev": []
+}
