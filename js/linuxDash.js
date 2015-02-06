@@ -27,36 +27,42 @@ linuxDash.config(['$routeProvider',
     }]);
 
 ////////////////// Global Application //////////////////
-linuxDash.controller('body', function ($scope, server, $route, $location) {
+linuxDash.controller('body', function ($scope, serverAddress) {
+    $scope.serverSet = false;
+
+    serverAddress.configure().then(function (res) {
+        $scope.serverSet = true;
+        console.log(res);
+        console.log(localStorage.getItem('serverFile'));
+    });
 
 });
+
+/**
+ * Figures out which server-side file works and sets it to localStorage
+ */
+linuxDash.service('serverAddress', ['$http', function ($http) {
+
+    this.configure = function () {
+        return $http
+            .get('server/server.php?module=machineInfo')
+            .success(function (response) {
+                localStorage.setItem('serverFile','server/server.php');
+            })
+            .error(function (response) {
+                localStorage.setItem('serverFile','server/server.js');
+            });
+    }
+
+}]);
 
 /**
  * Gets data from server and runs callbacks on response.data.data 
  */
 linuxDash.service('server', ['$http', function ($http) {
 
-    var getServerAddress = function () {
-        var serverFile = localStorage.getItem('serverFile');
-
-        if(serverFile === null) {
-            console.log('it was empty');
-
-            $http
-                .get('server/server.php?module=machineInfo')
-                .success(function (response) {
-                    localStorage.setItem('serverFile','server/server.php');
-                })
-                .error(function (response) {
-                    localStorage.setItem('serverFile','server/server.js');
-                });
-        }
-
-        return localStorage.getItem('serverFile');
-    };
-
     this.get = function (moduleName, callback) {
-        var serverAddress = getServerAddress();
+        var serverAddress = localStorage.getItem('serverFile');
 
         return $http.get( serverAddress + '?module=' + moduleName )
                     .then(function (response) {

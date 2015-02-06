@@ -33,8 +33,13 @@
 
         </div>
         
+        <div ng-if="!serverSet">
+            <h2>Setting server...</h2>
+            <loader></loader>
+        </div>
+
         <!-- Templates Get Rendered Here -->
-        <div id="plugins" ng-view></div>
+        <div ng-if="serverSet" id="plugins" ng-view></div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->
