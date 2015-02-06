@@ -1,8 +1,8 @@
 {
-    "name": "linux-dash/linux-dash",
+    "name": "afaqurk/linux-dash",
     "description": "A drop-in, low-overhead monitoring web dashboard for a linux machine.",
     "license": "MIT",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "keywords": ["linux", "dashboard", "linux-dash", "server dashboard"],
     "authors": [
         {
@@ -13,6 +13,5 @@
     "minimum-stability": "stable",
     "require": {
     	"php": ">=5.4.0",
-    	"linux-dash/core-modules": "dev-master"
     }
 }
