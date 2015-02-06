@@ -11,7 +11,6 @@ linuxDash.directive('diskSpace', ['server', function(server) {
 
             scope.getData = function () {
                 server.get('disk_partitions', function (serverResponseData) {
-                    console.log(serverResponseData);
                     scope.diskSpaceData = serverResponseData;
                 });
 

@@ -34,13 +34,35 @@ linuxDash.controller('body', function ($scope, server, $route, $location) {
 /**
  * Gets data from server and runs callbacks on response.data.data 
  */
-linuxDash.service('server',[ '$http', function ($http) {
-  
-  this.get = function (moduleName, callback) {
-        return $http.get('server.php?module=' + moduleName).then(function (response) {
-            return callback(response.data);
-        });
-  };
+linuxDash.service('server', ['$http', function ($http) {
+
+    var getServerAddress = function () {
+        var serverFile = localStorage.getItem('serverFile');
+
+        if(serverFile === null) {
+            console.log('it was empty');
+
+            $http
+                .get('server/server.php?module=machineInfo')
+                .success(function (response) {
+                    localStorage.setItem('serverFile','server/server.php');
+                })
+                .error(function (response) {
+                    localStorage.setItem('serverFile','server/server.js');
+                });
+        }
+
+        return localStorage.getItem('serverFile');
+    };
+
+    this.get = function (moduleName, callback) {
+        var serverAddress = getServerAddress();
+
+        return $http.get( serverAddress + '?module=' + moduleName )
+                    .then(function (response) {
+                        return callback(response.data);
+                    });
+    };
 
 }]);
 
