@@ -13,5 +13,10 @@
     "minimum-stability": "stable",
     "require": {
     	"php": ">=5.4.0"
+    },
+     "support": {
+        "issues": "https://github.com/afaqurk/linux-dash/issues?state=open",
+        "forum": "https://gitter.im/afaqurk/linux-dash",
+        "source": "https://github.com/afaqurk/linux-dash"
     }
 }
