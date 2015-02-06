@@ -12,6 +12,6 @@
     ],
     "minimum-stability": "stable",
     "require": {
-    	"php": ">=5.4.0",
+    	"php": ">=5.4.0"
     }
 }
