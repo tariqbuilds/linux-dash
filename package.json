@@ -1,0 +1,29 @@
+{
+  "name": "linux-dash",
+  "version": "1.2.0",
+  "description": "A simple, low overhead web dashboard for linux.",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afaqurk/linux-dash.git"
+  },
+  "keywords": [
+    "linux",
+    "gnu",
+    "dashboard",
+    "monitor",
+    "server"
+  ],
+  "author": "Afaq Tariq",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/afaqurk/linux-dash/issues"
+  },
+  "homepage": "https://github.com/afaqurk/linux-dash",
+  "dependencies": {
+    "express": "^4.11.1"
+  }
+}

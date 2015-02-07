@@ -32,7 +32,6 @@ linuxDash.controller('body', function ($scope, serverAddress) {
 
     serverAddress.configure().then(function (res) {
         $scope.serverSet = true;
-        console.log(res);
         console.log(localStorage.getItem('serverFile'));
     });
 
@@ -41,17 +40,10 @@ linuxDash.controller('body', function ($scope, serverAddress) {
 /**
  * Figures out which server-side file works and sets it to localStorage
  */
-linuxDash.service('serverAddress', ['$http', function ($http) {
+linuxDash.service('serverAddress', ['$q', function ($q) {
 
     this.configure = function () {
-        return $http
-            .get('server/server.php?module=machineInfo')
-            .success(function (response) {
-                localStorage.setItem('serverFile','server/server.php');
-            })
-            .error(function (response) {
-                localStorage.setItem('serverFile','server/server.js');
-            });
+        return  $q.when(localStorage.setItem('serverFile','server/'));
     }
 
 }]);
@@ -63,11 +55,11 @@ linuxDash.service('server', ['$http', function ($http) {
 
     this.get = function (moduleName, callback) {
         var serverAddress = localStorage.getItem('serverFile');
+        var moduleAddress = serverAddress + '?module=' + moduleName;
 
-        return $http.get( serverAddress + '?module=' + moduleName )
-                    .then(function (response) {
-                        return callback(response.data);
-                    });
+        return $http.get(moduleAddress).then(function (response) {
+            return callback(response.data);
+        });
     };
 
 }]);
