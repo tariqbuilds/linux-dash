@@ -15,7 +15,6 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 ## Installation
 
 ### PHP
- 
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
 2. Go to the web root for your server 
   - `/var/www/` by default for Apache
@@ -26,7 +25,6 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
   - Or [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
 
 ### Node.js
-
 1. Get a copy of Linux Dash by one of the following methods
   - Clone the git repo: `git clone https://github.com/afaqurk/linux-dash.git`
   - Or [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
@@ -34,7 +32,6 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 3. Start Linux Dash by running: `node server`
 
 ## Security
-
 **Please note: If you would like to limit access to linux-dash, please add
 `.htaccess` or other security measure.**
 
