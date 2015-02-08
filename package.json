@@ -2,7 +2,7 @@
   "name": "linux-dash",
   "version": "1.2.0",
   "description": "A simple, low overhead web dashboard for linux.",
-  "main": "server/server.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
