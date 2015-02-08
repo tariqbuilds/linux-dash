@@ -45,7 +45,7 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 `.htaccess` or other security measure.**
 
 ## Goals for v2.0
-- [x] Backend ported to ~~ Python ~~ shell scripts & python from PHP
+- [x] Backend ported to ~~Python~~ shell scripts & python from PHP
 - [x] Add config file
 - [x] Segregate core code-base and modules
 - [ ] Each module in a separate directory with front-end template, back-end file, bash script
