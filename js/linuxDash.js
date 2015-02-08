@@ -32,7 +32,6 @@ linuxDash.controller('body', function ($scope, serverAddress) {
 
     serverAddress.configure().then(function (res) {
         $scope.serverSet = true;
-        console.log(localStorage.getItem('serverFile'));
     });
 
 });
