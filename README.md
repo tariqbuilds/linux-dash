@@ -30,6 +30,15 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
   - Or [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
 2. Go into the linux-dash folder and run `npm install`
 3. Start Linux Dash by running: `node server`
+  - Default port is 80. You may change this in [server/index.js on line 8](https://github.com/afaqurk/linux-dash/blob/master/server/index.js#L8)
+
+### Go
+1. Get a copy of Linux Dash by one of the following methods
+  - Clone the git repo: `git clone https://github.com/afaqurk/linux-dash.git`
+  - Or [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
+2. Go to the linux-dash/server folder and `run go run index.go`
+  - To build a binary, `run go build && ./server -h`
+  - See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
 ## Security
 **Please note: If you would like to limit access to linux-dash, please add
@@ -46,7 +55,7 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
   - [ ] aur
   - [ ] apt
 - [x] Bonus: multiple server side languages supported
-  - node & php currently
+  - Currently supported: node, php, & go
 
 ## Support
 * OS
