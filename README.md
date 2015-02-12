@@ -36,7 +36,7 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 1. Get a copy of Linux Dash by one of the following methods
   - Clone the git repo: `git clone https://github.com/afaqurk/linux-dash.git`
   - Or [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
-2. Go to the linux-dash/server folder and `run go run index.go`
+2. Go to the linux-dash/server folder and run `go run index.go`
   - To build a binary, run `go build && ./server -h`
   - See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
