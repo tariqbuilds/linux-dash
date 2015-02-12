@@ -74,8 +74,8 @@ done < <(cut --fields=1 --delimiter=: /etc/passwd)
 
 $catCmd "${temp}" \
     | awk 'BEGIN {print "["} \
-                {print "{ \"hour(s)\": \"" $1 \
-                "\", \"min(s)\": \"" $2 "\", " \
+                {print "{ \"min(s)\": \"" $1 \
+                "\", \"hours(s)\": \"" $2 "\", " \
                 " \"day(s)\": \"" $3 "\", " \
                 " \"month\": \"" $4 "\", " \
                 " \"day_of_week\": \"" $5 "\", " \
