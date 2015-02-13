@@ -3,7 +3,7 @@
 	last-updated="lastGet"
 	on-refresh="getData()">
     
-	<loader ng-hide="tableRows || emptyResult"></loader>
+	<loader ng-if="!tableRows"></loader>
 
 	<div class="animate" ng-show="tableRows">
 		<table class="key-value-list">
