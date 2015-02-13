@@ -18,8 +18,11 @@ app.get('/server/', function (req, res) {
 
 	var shellFile = __dirname + '/modules/shell_files/' + req.query.module + '.sh';
 
-	if (!req.query.module || !fs.existsSync(shellFile)) 
+	if (req.query.module.indexOf('.') > -1 || !req.query.module || !fs.existsSync(shellFile)) 
+	{
 		res.sendStatus(406);
+		return;
+	}	
 
 	var command = spawn(shellFile, [ req.query.color || '' ]);
 	var output  = [];
