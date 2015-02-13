@@ -161,10 +161,6 @@ var simpleTableModules = [
         template: '<table-data heading="Ping Speeds" module-name="ping"></table-data>' 
     },
     { 
-        name: 'dhcpLeases', 
-        templateUrl: 'dhcp-leases.html' 
-    },
-    { 
         name: 'bandwidth', 
         template: '<table-data heading="Bandwidth" module-name="bandwidth"></table-data>' 
     },
