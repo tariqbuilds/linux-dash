@@ -2,7 +2,7 @@
 
 A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
-[**DEMO**](http://linuxdash.afaqtariq.com) | [**Installation Instructions**](#installation)
+[**DEMO**](http://linuxdash.afaqtariq.com) | [**Installation Instructions**](#installation) | [**Digital Ocean Tutorial**](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04)
 
 ![Linux Dash screenshot](https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/system-status-full.png)
 
@@ -13,6 +13,8 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 * Drop-in install for PHP (Apache, NGINX) and Node.js 
 
 ## Installation
+
+Follow the [Digital Ocean Tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04) for PHP + Apache setup on Digital Ocean.
 
 ### PHP
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
