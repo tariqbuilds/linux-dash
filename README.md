@@ -14,21 +14,22 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
 ## Installation
 
-Follow the [Digital Ocean Tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04) for PHP + Apache setup on Digital Ocean.
-
 ### 1. Download Linux Dash
-- Or clone the git repo: `git clone https://github.com/afaqurk/linux-dash.git`
-- Or [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
+
+**Pick 1** of the following methods to download Linux Dash:
+- Clone the git repo: `git clone https://github.com/afaqurk/linux-dash.git`
 - Use composer, run `composer create-project afaqurk/linux-dash -s dev`
+- [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
  
 ### 2. Secure Linux Dash
-It is strongly recommended to add htpasswd or other security measure to your Linux Dash installation.
+**It is strongly recommended that all Linux Dash installations be password protected.**
 
 ### 3. Start Linux Dash
 
 #### PHP
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
 2. Restart Apache or nginx 
+  - Follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04) for PHP + Apache setup.
   - For help with nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov).
 
 #### Node.js
