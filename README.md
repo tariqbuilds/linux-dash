@@ -50,14 +50,20 @@ Follow the [Digital Ocean Tutorial](https://www.digitalocean.com/community/tutor
 - [x] Backend ported to ~~Python~~ shell scripts & python from PHP
 - [x] Add config file
 - [x] Segregate core code-base and modules
-- [ ] Each module in a separate directory with front-end template, back-end file, bash script
+- [ ] ~~Each module in a separate directory with front-end template, back-end file, bash script~~
+- [ ] Add info popover UI element for modules
+- [ ] Angular tests
+- [ ] Back-end tests
+  - [ ] for shell files
 - Add project to package managers
   - [x] npm
   - [x] composer
   - [ ] aur
   - [ ] apt
-- [x] Bonus: multiple server side languages supported
-  - Currently supported: node, php, & go
+- [x] Bonus: 
+  - multiple server side languages supported
+    - Currently supported: node, php, & go
+  - use websockets in PHP & NodeJS
 
 ## Support
 * OS
