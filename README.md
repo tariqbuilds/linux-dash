@@ -55,6 +55,7 @@ See the instructions section for the platform of your preference.
 - [ ] Back-end tests
   - [ ] for shell files
   - [ ] for PHP, NodeJS, & Go
+- [ ] "Quick Guide to Contributing" Wiki page
 - Add project to package managers
   - [x] npm
   - [x] composer
