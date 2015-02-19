@@ -8,9 +8,9 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
 ## Features
 * A beautiful, simple web-based dashboard for monitoring a linux server
-* Only 1MB on disk! (.git removed)
+* Only ~1MB on disk! *(.git removed)*
 * Live graphs, refresh-able widgets, and a growing # of supported modules
-* Drop-in install for PHP (Apache, NGINX) and Node.js 
+* Drop-in install for PHP (Apache, NGINX), Node.js, and Go 
 
 ## Installation
 
@@ -22,9 +22,12 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 - [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
  
 ### 2. Secure Linux Dash
-**It is strongly recommended that all Linux Dash installations be password protected.**
+*It is strongly recommended that all Linux Dash installations be password protected.*
 
 ### 3. Start Linux Dash
+See the instructions section for the platform of your preference. 
+
+*Note*: All stacks of Linux Dash provide the same functionality. You may switch platforms at any time without any further downloads.
 
 #### PHP
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
@@ -63,13 +66,15 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
 ## Support
 * OS
-  * Arch
-  * Debian 6,7
-  * Ubuntu 11.04+
-  * Linux Mint 16+
-  * CentOS 5, 6
-* Node.js
-* Go
-* Apache 2
-* Nginx
-* PHP 5
+ * Arch
+ * Debian 6,7
+ * Ubuntu 11.04+
+ * Linux Mint 16+
+ * CentOS 5, 6
+* Backend
+ * Node.js
+ * Go
+ * PHP 5
+  * Apache 2
+  * Nginx
+ 
