@@ -1,8 +1,10 @@
 # Linux Dash
 
+[![Linux Dash Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/afaqurk/linux-dash)
+
 A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
-[**DEMO**](http://linuxdash.afaqtariq.com) | [**Installation Instructions**](#installation) | [**Digital Ocean Tutorial**](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04)
+[**DEMO**](http://linuxdash.afaqtariq.com) | [**Installation Instructions**](#installation) | [**Support**](#support)
 
 ![Linux Dash screenshot](https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/system-status-full.png)
 
@@ -16,32 +18,47 @@ A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
 
 ### 1. Download Linux Dash
 
-**Pick 1** of the following methods to download Linux Dash:
-- Clone the git repo: `git clone https://github.com/afaqurk/linux-dash.git`
-- Use composer, run `composer create-project afaqurk/linux-dash -s dev`
-- [download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
- 
+Clone the git repo: 
+```shell
+git clone https://github.com/afaqurk/linux-dash.git
+```
+*Alternatives*: 
+- Install the [Composer](https://packagist.org/packages/afaqurk/linux-dash) package
+```bash
+composer create-project afaqurk/linux-dash -s dev
+```
+- [Download the source](https://github.com/afaqurk/linux-dash/archive/master.zip)
+
 ### 2. Secure Linux Dash
 *It is strongly recommended that all Linux Dash installations be password protected.*
+
 
 ### 3. Start Linux Dash
 See the instructions section for the platform of your preference. 
 
-*Note*: All stacks of Linux Dash provide the same functionality. You may switch platforms at any time without any further downloads.
-
 #### PHP
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
-2. Restart Apache or nginx 
-  - Follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04) for PHP + Apache setup.
+2. Restart your web server (Apache, nginx, etc.) 
+  - For PHP + Apache setup follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04).
   - For help with nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov).
 
 #### Node.js
-1. Run `npm install`
-2. Start Linux Dash by running: `node server`
+1. Install NPM dependencies
+```
+npm install
+```
+
+2. Start Linux Dash 
+```
+node server
+```
   - Default port is 80. You may change this in [server/index.js on line 8](https://github.com/afaqurk/linux-dash/blob/master/server/index.js#L8)
 
 #### Go
-1. Go to the linux-dash/server folder and run `go run index.go`
+1. Go to the `linux-dash/server` folder and run 
+```
+go run index.go
+```
   - To build a binary, run `go build && ./server -h`
   - See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
@@ -50,7 +67,7 @@ See the instructions section for the platform of your preference.
 - [x] Add config file
 - [x] Segregate core code-base and modules
 - [ ] ~~Each module in a separate directory with front-end template, back-end file, bash script~~
-- [ ] Add info popover UI element for modules
+- [ ] Add angular element to show info section for a module
 - [ ] Angular tests
 - [ ] Back-end tests
   - [ ] for shell files
@@ -66,6 +83,10 @@ See the instructions section for the platform of your preference.
   - [ ] use websockets in PHP & NodeJS
 
 ## Support
+
+For help with general setup and configuration issues please use the [Linux Dash Gitter](https://gitter.im/afaqurk/linux-dash).
+
+The following categories are targeted by the Linux Dash project:
 * OS
  * Arch
  * Debian 6,7
@@ -76,6 +97,3 @@ See the instructions section for the platform of your preference.
  * Node.js
  * Go
  * PHP 5
-  * Apache 2
-  * Nginx
- 
