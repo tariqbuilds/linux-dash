@@ -4,4 +4,4 @@ result=$(redis-cli INFO \
 			| awk -F: '{print "\"" $1 "\":" "\"" $2 }' \
 			| tr '\r' '"' | tr '\n' ','
 		)
-echo { ${result::-1} }
+echo { ${result%?} }

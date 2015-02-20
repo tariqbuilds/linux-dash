@@ -10,4 +10,4 @@ result=$(/bin/ps axo pid,user,pcpu,rss,vsz,comm --sort -pcpu,-rss,-vsz \
 							", \"command\": \"" $6 "\"" "},"\
 						}')
 
-echo "[" ${result::-1} "]"
+echo "[" ${result%?} "]"

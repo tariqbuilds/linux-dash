@@ -7,4 +7,4 @@ result=$(/usr/bin/lastlog -t 365 \
 					\"date\": \"" $5" "$6" "$7" "$8" "$9 "\"},"
 				}'
 		)
-echo [ ${result::-1} ]
+echo [ ${result%?} ]

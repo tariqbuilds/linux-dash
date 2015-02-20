@@ -8,4 +8,4 @@ result=$(whereis php node mysql mongo vim python ruby java apache2 nginx openssl
 				\"installed\": "installed" \
 			},"}')
 
-echo "[" ${result::-1} "]"
+echo "[" ${result%?} "]"

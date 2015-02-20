@@ -9,4 +9,4 @@ result=$(/bin/ps axo pid,user,pmem,rss,vsz,comm --sort -pmem,-rss,-vsz \
 										", \"command\": \"" $6 \
 										"\"},"}')
 
-echo [ ${result::-1} ]
+echo [ ${result%?} ]

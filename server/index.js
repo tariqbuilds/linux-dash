@@ -18,7 +18,9 @@ app.get('/server/', function (req, res) {
 
 	var shellFile = __dirname + '/modules/shell_files/' + req.query.module + '.sh';
 
-	if (req.query.module.indexOf('.') > -1 || !req.query.module || !fs.existsSync(shellFile)) 
+	if (req.query.module.indexOf('.') > -1 
+		|| !req.query.module 
+		|| !fs.existsSync(shellFile)) 
 	{
 		res.sendStatus(406);
 		return;
@@ -32,7 +34,7 @@ app.get('/server/', function (req, res) {
 	}); 
 
 	command.on('close', function(code) {
-		if (code === 0) res.send(JSON.parse(output));
+		if (code === 0) res.send(output.toString());
 		else res.sendStatus(500);
 	});
 

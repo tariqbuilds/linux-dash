@@ -4,4 +4,4 @@ result=$(/bin/cat /proc/diskstats | /usr/bin/awk \
 				{print "{ \"device\": \"" $3 "\", \"reads\": \""$4"\", \"writes\": \"" $8 "\", \"in_progress\": \"" $12 "\", \"time_in_io\": \"" $13 "\"},"}'
 		)
 
-echo [ ${result::-1} ]
+echo [ ${result%?} ]
