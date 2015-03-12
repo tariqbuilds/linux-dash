@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from os import curdir, sep
+import os
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import subprocess
 
@@ -11,13 +11,13 @@ class MainHandler(BaseHTTPRequestHandler):
         try:
             contentType = 'text/html'
             if self.path.startswith("/server/"):
-                output = subprocess.Popen(curdir + sep + 'server/modules/shell_files/' + self.path.split(
+                output = subprocess.Popen(os.path.dirname(os.path.realpath(__file__)) + os.sep + 'server/modules/shell_files/' + self.path.split(
                     '=')[1] + '.sh', shell=True, stdout=subprocess.PIPE)
                 data = output.communicate()[0]
             else:
                 if self.path == '/':
                     self.path = 'index.html'
-                f = open(curdir + sep + self.path)
+                f = open(os.path.dirname(os.path.realpath(__file__)) + os.sep + self.path)
                 data = f.read()
                 if self.path.startswith('/css/'):
                     contentType = 'text/css'
