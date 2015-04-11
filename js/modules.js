@@ -24,8 +24,13 @@ linuxDash.directive('diskSpace', ['server', function(server) {
                     size = parseInt(stringSize);
 
                 switch (lastChar){
-                    case 'M': return size * 1024;
-                    case 'G': return size * 1048576;
+                    case 'M': return size * Math.pow(1024, 1);
+                    case 'G': return size * Math.pow(1024, 2);
+                    case 'T': return size * Math.pow(1024, 3);
+                    case 'P': return size * Math.pow(1024, 4);
+                    case 'E': return size * Math.pow(1024, 5);
+                    case 'Z': return size * Math.pow(1024, 6);
+                    case 'Y': return size * Math.pow(1024, 7);
                     default: return size;
                 }
             };

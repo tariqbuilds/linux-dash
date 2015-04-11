@@ -404,11 +404,13 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
                 scope.lastGet = new Date().getTime();
                 
                 var keyCount = 0;
+                var maxAvg = 0;
 
                 // update chart with current response
                 for(var key in serverResponseData[0]) {
                     seriesArray[keyCount].append(scope.lastGet, scope.getDisplayValue(serverResponseData[0][key]));
                     keyCount++;
+                    maxAvg = Math.max(maxAvg, serverResponseData[0][key]);
                 }
 
 
@@ -417,6 +419,12 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
                     metricObj.data = metricObj.generate(serverResponseData) ;
                 });
 
+                // define a minimum average of one
+                maxAvg = Math.max(maxAvg, 1);
+                // round up the average and set the maximum scale
+                var len = parseInt(Math.log10(maxAvg));
+                var div = Math.pow(10, len);
+                chart.options.maxValue = Math.ceil(maxAvg / div) * div;
             });
         };
 
