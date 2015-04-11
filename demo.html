@@ -10,7 +10,7 @@
         <link href='http://fonts.googleapis.com/css?family=Merriweather:300italic,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/themes.css">
-        <link id="theme-css" rel="stylesheet" type="text/css" href="">
+        <link rel="stylesheet" type="text/css" href="css/animate.css">
 
         <!-- Angular Libs -->
         <script src="js/angular.min.js" type="text/javascript"></script>
@@ -41,8 +41,13 @@
 
         </div>
         
+        <div ng-if="!serverSet">
+            <h2>Setting server...</h2>
+            <loader></loader>
+        </div>
+
         <!-- Templates Get Rendered Here -->
-        <div id="plugins" ng-view></div>
+        <div ng-if="serverSet" id="plugins" class="animated slideInLeft" ng-view></div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->
