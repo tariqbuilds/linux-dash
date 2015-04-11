@@ -10,7 +10,7 @@
         <link href='//fonts.googleapis.com/css?family=Merriweather:300italic,300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/themes.css">
-        <link id="theme-css" rel="stylesheet" type="text/css" href="">
+        <link rel="stylesheet" type="text/css" href="css/animate.css">
 
         <!-- Angular Libs -->
         <script src="js/angular.min.js" type="text/javascript"></script>
@@ -20,7 +20,7 @@
           <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body ng-controller="body">
+    <body ng-controller="body" class="animated fadeIn">
         
         <div class="hero">
             <h4 class="title">Linux Dash</h4>
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Templates Get Rendered Here -->
-        <div ng-if="serverSet" id="plugins" ng-view></div>
+        <div ng-if="serverSet" id="plugins" class="animated slideInLeft" ng-view></div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->
