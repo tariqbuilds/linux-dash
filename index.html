@@ -20,7 +20,7 @@
           <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body ng-controller="body" class="animated fadeIn">
+    <body ng-controller="body">
         
         <div class="hero">
             <h4 class="title">Linux Dash</h4>
@@ -39,7 +39,7 @@
         </div>
 
         <!-- Templates Get Rendered Here -->
-        <div ng-if="serverSet" id="plugins" class="animated slideInLeft" ng-view></div>
+        <div ng-if="serverSet" id="plugins" class="animated fadeInDown" ng-view></div>
 
         <!-- Javascript-->
         <!-- Placed at the end of the document so the pages load faster -->
