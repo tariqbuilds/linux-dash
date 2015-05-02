@@ -196,6 +196,10 @@ var simpleTableModules = [
         name: 'scheduledCrons', 
         template: '<table-data heading="Scheduled Cron Jobs" module-name="scheduled_crons"></table-data>' 
     },
+    { 
+        name: 'cronHistory', 
+        template: '<table-data heading="Cron Job History" module-name="cron_history"></table-data>' 
+    },
 ];
 
 simpleTableModules.forEach(function (module, key) {
