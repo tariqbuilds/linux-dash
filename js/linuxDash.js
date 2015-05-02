@@ -406,7 +406,12 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
 
         });
 
-        chart.streamTo(canvas, 1000);
+        var delay = 1000;
+
+        if(angular.isDefined(scope.delay))
+            delay = scope.delay;
+
+        chart.streamTo(canvas, delay);
         
         // update data on chart
         scope.getData = function () {
@@ -436,7 +441,8 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
             });
         };
 
-        $interval(scope.getData, scope.refreshRate);
+        var refreshRate = (angular.isDefined(scope.refreshRate))? scope.refreshRate: 1000;
+        $interval(scope.getData, refreshRate);
     }
   };
 }]);
