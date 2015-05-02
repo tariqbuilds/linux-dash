@@ -81,40 +81,35 @@ linuxDash.directive('ramChart', ['server', function(server) {
     };
 }]);
 
-
 linuxDash.directive('cpuLoadChart', ['server', function(server) {
     return {
         restrict: 'E',
         scope: {},
         templateUrl: 'templates/modules/cpu-load.html',
         link: function (scope) {
-            scope.maxLoad = 100;
-            scope.minLoad = 0;
+            scope.units = '%';
+        }
+    };
+}]);
 
-            scope.loadToDisplay = function (serverResponseData) {
-                return serverResponseData;
-            };
+linuxDash.directive('uploadTransferRateChart', ['server', function(server) {
+    return {
+        restrict: 'E',
+        scope: {},
+        templateUrl: 'templates/modules/upload-transfer-rate.html',
+        link: function (scope) {
+            scope.units = 'KB/s';
+        }
+    };
+}]);
 
-            scope.loadMetrics = [
-                {
-                    name: '1 Min Avg',
-                    generate: function (serverResponseData) {
-                        return serverResponseData[0]['1_min_avg'] + ' %';
-                    }
-                },
-                {
-                    name: '5 Min Avg',
-                    generate: function (serverResponseData) {
-                        return serverResponseData[0]['5_min_avg'] + ' %';
-                    }
-                },
-                {
-                    name: '15 Min Avg',
-                    generate: function (serverResponseData) {
-                        return serverResponseData[0]['15_min_avg'] + ' %';
-                    }
-                }
-            ];
+linuxDash.directive('downloadTransferRateChart', ['server', function(server) {
+    return {
+        restrict: 'E',
+        scope: {},
+        templateUrl: 'templates/modules/download-transfer-rate.html',
+        link: function (scope) {
+            scope.units = 'KB/s';
         }
     };
 }]);

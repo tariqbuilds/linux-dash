@@ -350,10 +350,8 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
         heading: '@',
         moduleName: '@',
         refreshRate: '=',
-        maxValue: '=',
-        minValue: '=',
         getDisplayValue: '=',
-        metrics: '='
+        units: '='
     },
     templateUrl: 'templates/app/multi-line-chart-plugin.html',
     link: function (scope, element) {
@@ -373,8 +371,8 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
                 precision:0, 
                 fillStyle:'#0f0e0e'
             },
-            maxValue: parseInt(scope.maxValue),
-            minValue: parseInt(scope.minValue),
+            maxValue: 100,
+            minValue: 0,
             horizontalLines: [{ value: 1, color: '#ecc', lineWidth: 1 }]
         });
 
@@ -388,16 +386,22 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
         // smoothieJS - set up canvas element for chart
         var canvas = element.find('canvas')[0];
         var seriesArray = [];
+        scope.metricsArray = [];
 
         // get the data once to set up # of lines on chart
         server.get(scope.moduleName, function (serverResponseData) {
 
-            var numberOfLines = Object.keys(serverResponseData[0]).length;
+            var numberOfLines = Object.keys(serverResponseData).length;
 
             for (var x=0; x < numberOfLines; x++) {
+                var keyForThisLine = Object.keys(serverResponseData)[x];
+
                 seriesArray[x] = new TimeSeries();
                 chart.addTimeSeries(seriesArray[x], seriesOptions[x]);
-                scope.metrics[x].color = seriesOptions[x].strokeStyle;
+                scope.metricsArray[x] = {
+                    name: keyForThisLine,
+                    color: seriesOptions[x].strokeStyle,
+                };
             }
 
         });
@@ -409,24 +413,22 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
             server.get(scope.moduleName, function (serverResponseData) {
                 scope.lastGet = new Date().getTime();
                 
-                var keyCount = 0;
-                var maxAvg = 0;
+                var keyCount    = 0;
+                var maxAvg      = 100;
 
                 // update chart with current response
-                for(var key in serverResponseData[0]) {
-                    seriesArray[keyCount].append(scope.lastGet, scope.getDisplayValue(serverResponseData[0][key]));
+                for(var key in serverResponseData) {
+                    seriesArray[keyCount].append(scope.lastGet, serverResponseData[key]);
                     keyCount++;
-                    maxAvg = Math.max(maxAvg, serverResponseData[0][key]);
+                    maxAvg = Math.max(maxAvg, serverResponseData[key]);
                 }
 
-
                 // update the metrics for this chart
-                scope.metrics.forEach(function (metricObj) {
-                    metricObj.data = metricObj.generate(serverResponseData) ;
+                scope.metricsArray.forEach(function (metricObj) {
+                    // metricObj.data = metricObj.generate(serverResponseData) ;
+                    metricObj.data = serverResponseData[metricObj.name].toString() + ' ' + scope.units;
                 });
 
-                // define a minimum average of one
-                maxAvg = Math.max(maxAvg, 1);
                 // round up the average and set the maximum scale
                 var len = parseInt(Math.log10(maxAvg));
                 var div = Math.pow(10, len);
@@ -446,11 +448,6 @@ linuxDash.directive('plugin', function() {
     return {
         restrict: 'E',
         transclude: true,
-        // scope: {
-        //     heading: '@',
-        //     lastUpdated: '=',
-        //     onRefresh: '&',
-        // },
         templateUrl: 'templates/app/base-plugin.html'
     }
 });
