@@ -269,11 +269,18 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         maxValue: '=',
         minValue: '=',
         getDisplayValue: '=',
-        metrics: '='
+        metrics: '=',
+	color: '@'
     },
     templateUrl: 'templates/app/line-chart-plugin.html',
     link: function (scope, element) {
         
+	if (!scope.color) {
+		scope.color = '0, 255, 0';
+	}
+	var series;
+
+
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
             borderVisible:false,
@@ -298,7 +305,7 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         // smoothieJS - set up canvas element for chart
         canvas = element.find('canvas')[0],
         series = new TimeSeries();
-        chart.addTimeSeries(series, { strokeStyle: 'rgba(0, 255, 0, 1)', fillStyle: 'rgba(0, 255, 0, 0.2)', lineWidth: 2 });
+        chart.addTimeSeries(series, { strokeStyle: 'rgba(' + scope.color + ', 1)', fillStyle: 'rgba(' + scope.color + ', 0.2)', lineWidth: 2 });
         chart.streamTo(canvas, 1000);
         
         // update data on chart
@@ -317,8 +324,8 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         		    chart.seriesSet[0].options.fillStyle = 'rgba(255, 238, 0, 0.2)';
         		}
         		else {
-        		    chart.seriesSet[0].options.strokeStyle = 'rgba(0, 255, 0, 1)';
-        		    chart.seriesSet[0].options.fillStyle = 'rgba(0, 255, 0, 0.2)';
+        		    chart.seriesSet[0].options.strokeStyle = 'rgba(' + scope.color + ', 1)';
+        		    chart.seriesSet[0].options.fillStyle = 'rgba(' + scope.color + ', 0.2)';
         		}
 
                 // update chart with this response
