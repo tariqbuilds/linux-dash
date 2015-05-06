@@ -1,14 +1,35 @@
 var express = require('express');
 var app 	= require('express')();
 var server 	= require('http').Server(app);
+var basicAuth = require('basic-auth');
 var path 	= require('path');
 var spawn 	= require('child_process').spawn;
 var fs 		= require('fs');
+
+var auth = function (req, res, next) {
+  function unauthorized(res) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    return res.sendStatus(401);
+  };
+
+  var user = basicAuth(req);
+
+  if (!user || !user.name || !user.pass) {
+    return unauthorized(res);
+  };
+
+  if (user.name === 'foo' && user.pass === 'bar') {
+    return next();
+  } else {
+    return unauthorized(res);
+  };
+};
 
 server.listen(80);
 console.log('Linux Dash Server Started!');
 
 app.use(express.static(path.resolve(__dirname + '/../')));
+app.use(auth);
 
 app.get('/', function (req, res) {
 	res.sendFile(path.resolve(__dirname + '/../index.html'));
