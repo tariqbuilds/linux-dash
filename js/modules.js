@@ -98,6 +98,7 @@ linuxDash.directive('uploadTransferRateChart', ['server', function(server) {
         scope: {},
         templateUrl: 'templates/modules/upload-transfer-rate.html',
         link: function (scope) {
+            scope.delay = 2000;
             scope.units = 'KB/s';
         }
     };
@@ -109,6 +110,7 @@ linuxDash.directive('downloadTransferRateChart', ['server', function(server) {
         scope: {},
         templateUrl: 'templates/modules/download-transfer-rate.html',
         link: function (scope) {
+            scope.delay = 2000;
             scope.units = 'KB/s';
         }
     };
