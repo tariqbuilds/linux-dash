@@ -11,22 +11,22 @@ do
 	basename=$(basename "$interface")
 	
 	# find the number of bytes transfered for this interface
-	in1=$(cat /sys/class/net/"$basename"/statistics/rx_bytes)
+	out1=$(cat /sys/class/net/"$basename"/statistics/tx_bytes)
 
 	# wait a second
 	sleep 1
 
 	# check same interface again
-	in2=$(cat /sys/class/net/"$basename"/statistics/rx_bytes)
+	out2=$(cat /sys/class/net/"$basename"/statistics/tx_bytes)	
 
 	# get the difference (transfer rate)
-	in_bytes=$((in2 - in1))
+	out_bytes=$((out2 - out1))
 
 	# convert transfer rate to KB
-	in_kbytes=$((in_bytes / 1024))
+	out_kbytes=$((out_bytes / 1024))
 
 	# convert transfer rate to KB
-	json_output="$json_output \"$basename\": $in_kbytes"
+	json_output="$json_output \"$basename\": $out_kbytes"
 
 	# if it is not the last line
 	if [[ ! $interface == $last ]]
