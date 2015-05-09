@@ -358,7 +358,8 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
         moduleName: '@',
         refreshRate: '=',
         getDisplayValue: '=',
-        units: '='
+        units: '=',
+        delay: '='
     },
     templateUrl: 'templates/app/multi-line-chart-plugin.html',
     link: function (scope, element) {
