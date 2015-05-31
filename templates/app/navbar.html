@@ -1,6 +1,6 @@
 <br>
-<ul ng-repeat="navItem in items">
-    <li ng-class="{active: isActive(navItem) }">
+<ul>
+    <li ng-class="{active: isActive(navItem) }" ng-repeat="navItem in items">
         <a href="#/{{navItem}}">
             {{getNavItemName(navItem)}}
         </a>
