@@ -128,7 +128,7 @@ html.old body .hero nav-bar br {
   display: none;
 }
 html.old body .hero nav-bar ul {
-  display: block;
+  display: inline-block;
 }
 html.old body .hero nav-bar ul li {
   display: inline-block;
