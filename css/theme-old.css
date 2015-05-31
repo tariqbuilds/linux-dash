@@ -33,6 +33,12 @@ html.old body .hero small {
   opacity: 0.9;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
+html.old body .hero #theme-switcher {
+  right: -315px;
+}
+html.old body .hero #theme-switcher.open {
+  right: 0;
+}
 html.old body .hero nav-bar {
   background: #ffffff;
   border-bottom: 1px solid #d6d6d6;
