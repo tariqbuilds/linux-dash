@@ -84,3 +84,117 @@ html.fall .plugin .top-bar {
 html.fall .plugin refresh-btn button {
   background-color: #FF512F;
 }
+/**************************************
+  Theme: linus-dash beta
+**************************************/
+html.old {
+  background: #F9F6F1;
+}
+html.old body {
+  margin: 0;
+}
+html.old body * {
+  font-family: "Open Sans";
+  letter-spacing: 0;
+}
+html.old body .hero {
+  background: #00BA8B;
+  color: #ffffff;
+  padding: 0;
+}
+html.old body .hero h4 {
+  color: #ffffff;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 35px;
+  margin: 0;
+  vertical-align: middle;
+}
+html.old body .hero small {
+  letter-spacing: 0.1rem;
+  line-height: 40px;
+  margin-left: 20px;
+  opacity: 0.9;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+html.old body .hero nav-bar {
+  background: #ffffff;
+  border-bottom: 1px solid #d6d6d6;
+  color: #333333;
+}
+html.old body .hero nav-bar br {
+  display: none;
+}
+html.old body .hero nav-bar ul {
+  display: block;
+}
+html.old body .hero nav-bar ul li {
+  display: inline-block;
+  margin: 0;
+}
+html.old body .hero nav-bar ul li:not(:first-child) {
+  border-left: 1px solid #e6e6e6;
+}
+html.old body .hero nav-bar ul li a {
+  color: #B2AFAA;
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 30px;
+  margin: 0;
+  padding: 0 15px;
+  text-transform: capitalize;
+}
+html.old body .hero nav-bar ul li:hover a {
+  color: #888888;
+}
+html.old body .plugin {
+  border: 1px solid #d5d5d5;
+  border-radius: 0 0 5px 5px;
+  box-shadow: none;
+}
+html.old body .plugin .top-bar {
+  background: transparent -moz-linear-gradient(center top, #f9f6f1 0%, #f2efea 100%) repeat scroll 0px 0px;
+  border-bottom: 1px solid #d6d6d6;
+  color: #525252;
+  font-size: 14px;
+  font-weight: bold;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 15px;
+  position: relative;
+  text-align: left;
+  text-transform: none;
+}
+html.old body .plugin .top-bar last-update {
+  float: right;
+  margin-left: 10px;
+  opacity: 0.8;
+}
+html.old body .plugin .top-bar refresh-btn {
+  position: absolute;
+  right: -5px;
+  top: -5px;
+}
+html.old body .plugin .top-bar refresh-btn button {
+  background: #27cf42;
+  border: 1px solid #09a81f;
+  color: #006400;
+  box-shadow: none;
+  display: block;
+  float: none;
+  font-size: 14px;
+  line-height: 10px;
+  padding: 0;
+  height: 15px;
+  width: 15px;
+}
+html.old body .plugin .top-bar refresh-btn button:hover {
+  color: #ffffff;
+  opacity: 0.9;
+}
+html.old body .plugin .plugin-body {
+  border: none;
+}
