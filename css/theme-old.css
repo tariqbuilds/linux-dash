@@ -82,7 +82,7 @@ html.old body .plugin {
   margin: 10px;
 }
 html.old body .plugin .top-bar {
-  background: transparent -moz-linear-gradient(center top, #f9f6f1 0%, #f2efea 100%) repeat scroll 0px 0px;
+  background: transparent linear-gradient(to bottom, #f9f6f1 0%, #f2efea 100%) repeat scroll 0px 0px;
   border-bottom: 1px solid #d6d6d6;
   color: #525252;
   font-size: 14px;
