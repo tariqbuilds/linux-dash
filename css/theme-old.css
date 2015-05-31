@@ -73,7 +73,7 @@ html.old body .hero nav-bar ul li:hover a {
 html.old body #plugins {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 html.old body .plugin {
   border: 1px solid #d5d5d5;
