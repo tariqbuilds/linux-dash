@@ -197,4 +197,45 @@ html.old body .plugin .top-bar refresh-btn button:hover {
 }
 html.old body .plugin .plugin-body {
   border: none;
+  height: auto;
+  line-height: normal;
+  max-height: 300px;
+  padding: 0;
+}
+html.old body .plugin .plugin-body table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+  min-width: 300px;
+}
+html.old body .plugin .plugin-body table tr:not(:first-child) th {
+  border-top: 1px solid #dddddd;
+}
+html.old body .plugin .plugin-body table td,
+html.old body .plugin .plugin-body table th {
+  border-bottom: none;
+  padding: 4px 5px;
+}
+html.old body .plugin .plugin-body table td:not(:first-child),
+html.old body .plugin .plugin-body table th:not(:first-child) {
+  border-left: 1px solid #dddddd;
+}
+html.old body .plugin .plugin-body table th:not(.filter-container) {
+  background: transparent -moz-linear-gradient(center top, #fafafa 0%, #e9e9e9 100%) repeat scroll 0% 0%;
+  text-transform: uppercase;
+}
+html.old body .plugin .plugin-body table th.filter-container .filter {
+  border-bottom: none;
+  font-size: 12px;
+  height: auto;
+  padding: 2px;
+}
+html.old body .plugin .plugin-body table th.filter-container .filter::before {
+  content: 'Search >';
+  opacity: 0.5;
+  position: absolute;
+  left: 0;
+}
+html.old body .plugin .plugin-body table td {
+  border-top: 1px solid #dddddd;
 }
