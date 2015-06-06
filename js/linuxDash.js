@@ -507,6 +507,9 @@ linuxDash.directive('themeSwitcher',['$location', function($location) {
             {
                 name: 'fall',
             },
+            {
+                name: 'old',
+            },
         ];
 
         scope.themeSwitcherOpen = false;

@@ -1,0 +1,167 @@
+/**************************************
+  Theme: linux-dash beta
+**************************************/
+html.old {
+  background: #F9F6F1;
+}
+html.old body {
+  margin: 0;
+}
+html.old body * {
+  font-family: "Open Sans";
+  letter-spacing: 0;
+}
+html.old body .hero {
+  background: #00BA8B;
+  color: #ffffff;
+  padding: 0;
+}
+html.old body .hero h4 {
+  color: #ffffff;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 600;
+  height: 40px;
+  line-height: 35px;
+  margin: 0;
+  vertical-align: middle;
+}
+html.old body .hero small {
+  letter-spacing: 0.1rem;
+  line-height: 40px;
+  margin-left: 20px;
+  opacity: 0.9;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+html.old body .hero #theme-switcher {
+  right: -315px;
+}
+html.old body .hero #theme-switcher.open {
+  right: 0;
+}
+html.old body .hero nav-bar {
+  background: #ffffff;
+  border-bottom: 1px solid #d6d6d6;
+  color: #333333;
+}
+html.old body .hero nav-bar br {
+  display: none;
+}
+html.old body .hero nav-bar ul {
+  display: inline-block;
+}
+html.old body .hero nav-bar ul li {
+  display: inline-block;
+  margin: 0;
+}
+html.old body .hero nav-bar ul li:not(:first-child) {
+  border-left: 1px solid #e6e6e6;
+}
+html.old body .hero nav-bar ul li a {
+  color: #B2AFAA;
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 30px;
+  margin: 0;
+  padding: 0 15px;
+  text-transform: capitalize;
+}
+html.old body .hero nav-bar ul li:hover a {
+  color: #888888;
+}
+html.old body #plugins {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+html.old body .plugin {
+  border: 1px solid #d5d5d5;
+  border-radius: 0 0 5px 5px;
+  box-shadow: none;
+  margin: 10px;
+}
+html.old body .plugin .top-bar {
+  background: transparent linear-gradient(to bottom, #f9f6f1 0%, #f2efea 100%) repeat scroll 0px 0px;
+  border-bottom: 1px solid #d6d6d6;
+  color: #525252;
+  font-size: 14px;
+  font-weight: bold;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 0 0 15px;
+  position: relative;
+  text-align: left;
+  text-transform: none;
+}
+html.old body .plugin .top-bar last-update {
+  float: right;
+  margin: 0 10px;
+  opacity: 0.8;
+}
+html.old body .plugin .top-bar refresh-btn {
+  float: right;
+}
+html.old body .plugin .top-bar refresh-btn button {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.1) inset, 0px 1px 2px rgba(0, 0, 0, 0.1);
+  color: #555555;
+  cursor: pointer;
+  box-shadow: none;
+  display: inline-block;
+  float: none;
+  font-size: 14px;
+  height: auto;
+  margin: 0 -5px 0 10px;
+  padding: 0 4px;
+  width: auto;
+}
+html.old body .plugin .top-bar refresh-btn button:hover {
+  background: #e6e6e6;
+}
+html.old body .plugin .plugin-body {
+  border: none;
+  height: auto;
+  line-height: normal;
+  max-height: 300px;
+  padding: 0;
+}
+html.old body .plugin .plugin-body table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+  min-width: 300px;
+}
+html.old body .plugin .plugin-body table tr:not(:first-child) th {
+  border-top: 1px solid #dddddd;
+}
+html.old body .plugin .plugin-body table td,
+html.old body .plugin .plugin-body table th {
+  border-bottom: none;
+  padding: 4px 5px;
+}
+html.old body .plugin .plugin-body table td:not(:first-child),
+html.old body .plugin .plugin-body table th:not(:first-child) {
+  border-left: 1px solid #dddddd;
+}
+html.old body .plugin .plugin-body table th:not(.filter-container) {
+  background: transparent -moz-linear-gradient(center top, #fafafa 0%, #e9e9e9 100%) repeat scroll 0% 0%;
+  text-transform: uppercase;
+}
+html.old body .plugin .plugin-body table th.filter-container .filter {
+  border-bottom: none;
+  font-size: 12px;
+  height: auto;
+  padding: 2px;
+}
+html.old body .plugin .plugin-body table th.filter-container .filter::before {
+  content: 'Search >';
+  opacity: 0.5;
+  position: absolute;
+  left: 0;
+}
+html.old body .plugin .plugin-body table td {
+  border-top: 1px solid #dddddd;
+}
