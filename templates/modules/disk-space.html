@@ -22,11 +22,11 @@
 					<progress-bar-plugin
 					    width="70px"
 					    value="{{ getKB(partition['used']) }}"
-					    max="{{ getKB(partition['avail']) }}">
+					    max="{{ getKB(partition['size']) }}">
 					</progress-bar-plugin>
 				</td>
 				<td>
-					{{ partition['used'] }} / {{ partition['avail'] }}
+					{{ partition['used'] }} / {{ partition['size'] }}
 				</td>
 				<td>
 					{{ partition['used%'] }}
