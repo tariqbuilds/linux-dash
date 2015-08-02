@@ -3,7 +3,6 @@ netstatCmd=`which netstat`
 awkCmd=`which awk`
 sortCmd=`which sort`
 uniqCmd=`which uniq`
-awkCmd=`which awk`
 sedCmd=`which sed`
 
 $netstatCmd -ntu \
