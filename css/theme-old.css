@@ -165,3 +165,6 @@ html.old body .plugin .plugin-body table th.filter-container .filter::before {
 html.old body .plugin .plugin-body table td {
   border-top: 1px solid #dddddd;
 }
+html.old body .plugin canvas {
+  width: 100%;
+}
