@@ -73,10 +73,8 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
   - [ ] for PHP, NodeJS, & Go
 - [ ] "Quick Guide to Contributing" Wiki page
 - Add project to package managers
-  - [x] npm
-  - [x] composer
   - [ ] aur
-  - [ ] apt
+  - [ ] apt (ubuntu)
 - [x] Bonus: 
   - [x] multiple server side languages supported
   - [ ] use websockets in PHP & NodeJS
