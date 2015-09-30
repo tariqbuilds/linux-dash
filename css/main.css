@@ -92,7 +92,7 @@ body {
 #theme-switcher {
   position: fixed;
   top: 25px;
-  right: -320px;
+  right: -371px;
   border-radius: 5px 0px 0px 5px;
   padding: 4px;
   z-index: 999999;
@@ -389,4 +389,97 @@ canvas {
 .table-data-plugin .column-sort-caret {
   font-size: 10px;
   color: #1EAEDB;
+}
+/*
+ * Popover 
+ * http://codepen.io/derekpcollins/pen/JCLhG/
+ */
+
+/* The element to hover over */
+.qs {
+  cursor: default;
+  display: inline-block;
+  position: relative;
+}
+.qs .popover {
+  text-transform: none;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 5px;
+  bottom: 42px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  display: none;
+  font-size: 12px;
+  font-family: 'Helvetica',sans-serif;
+  padding: 7px 10px;
+  position: absolute;
+  left: -80px;
+  width: 200px;
+  z-index: 4;
+}
+.qs .popover:before {
+  border-top: 7px solid rgba(0, 0, 0, 0.85);
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  bottom: -7px;
+  content: '';
+  display: block;
+  left: 50%;
+  margin-left: -7px;
+  position: absolute;
+}
+.qs:hover .popover {
+  display: block;
+  -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
+}
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-ms-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes move-up {
+  from {
+    bottom: 30px;
+  }
+  to {
+    bottom: 42px;
+  }
+}
+@-moz-keyframes move-up {
+  from {
+    bottom: 30px;
+  }
+  to {
+    bottom: 42px;
+  }
+}
+@-ms-keyframes move-up {
+  from {
+    bottom: 30px;
+  }
+  to {
+    bottom: 42px;
+  }
 }

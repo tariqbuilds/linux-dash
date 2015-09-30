@@ -145,19 +145,19 @@ linuxDash.directive('downloadTransferRateChart', ['server', function(server) {
 var simpleTableModules = [
     { 
         name: 'machineInfo', 
-        template: '<key-value-list heading="General Info." module-name="general_info"></key-value-list>' 
+        template: '<key-value-list heading="General Info." module-name="general_info" info="System Information"></key-value-list>' 
     },
     { 
         name: 'ipAddresses', 
-        template: '<table-data heading="IP Addresses" module-name="ip_addresses"></table-data>' 
+        template: '<table-data heading="IP Addresses" module-name="ip_addresses" info="IPs assigned to this server"></table-data>' 
     },
     { 
         name: 'ramIntensiveProcesses', 
-        template: '<table-data heading="RAM Intensive Processes" module-name="ram_intensive_processes"></table-data>' 
+        template: '<table-data heading="RAM Intensive Processes" module-name="ram_intensive_processes" info="Processes which are using most RAM."></table-data>' 
     },
     { 
         name: 'cpuIntensiveProcesses', 
-        template: '<table-data heading="CPU Intensive Processes" module-name="cpu_intensive_processes"></table-data>' 
+        template: '<table-data heading="CPU Intensive Processes" module-name="cpu_intensive_processes" info="Processes which are using most CPU."></table-data>' 
     },
     { 
         name: 'networkConnections', 
@@ -165,15 +165,15 @@ var simpleTableModules = [
     },
     { 
         name: 'serverAccounts', 
-        template: '<table-data heading="Accounts" module-name="user_accounts"></table-data>' 
+        template: '<table-data heading="Accounts" module-name="user_accounts" info="User accounts on this server."></table-data>' 
     },
     { 
         name: 'loggedInAccounts', 
-        template: '<table-data heading="Logged In Accounts" module-name="logged_in_users"></table-data>' 
+        template: '<table-data heading="Logged In Accounts" module-name="logged_in_users" info="Users currently logged in."></table-data>' 
     },
     { 
         name: 'recentLogins', 
-        template: '<table-data heading="Recent Logins" module-name="recent_account_logins"></table-data>' 
+        template: '<table-data heading="Recent Logins" module-name="recent_account_logins" info="Recent user sessions."></table-data>' 
     },
     { 
         name: 'arpCacheTable', 
@@ -181,11 +181,11 @@ var simpleTableModules = [
     },
     { 
         name: 'commonApplications', 
-        template: '<table-data heading="Common Applications" module-name="common_applications"></table-data>' 
+        template: '<table-data heading="Common Applications" module-name="common_applications" info="List of commonly installed applications."></table-data>' 
     },
     { 
         name: 'pingSpeeds', 
-        template: '<table-data heading="Ping Speeds" module-name="ping"></table-data>' 
+        template: '<table-data heading="Ping Speeds" module-name="ping" info="Ping speed in milliseconds."></table-data>' 
     },
     { 
         name: 'bandwidth', 
@@ -197,7 +197,7 @@ var simpleTableModules = [
     },
     { 
         name: 'internetSpeed', 
-        template: '<key-value-list heading="Internet Speed" module-name="internet_speed"></key-value-list>' 
+        template: '<key-value-list heading="Internet Speed" module-name="internet_speed" info="Internet connection speed of server."></key-value-list>' 
     }, 
     { 
         name: 'memcached', 
@@ -209,23 +209,23 @@ var simpleTableModules = [
     },
     { 
         name: 'memoryInfo', 
-        template: '<key-value-list heading="Memory Info" module-name="memory_info"></key-value-list>' 
+        template: '<key-value-list heading="Memory Info" module-name="memory_info" info="/proc/meminfo read-out."></key-value-list>' 
     },
     { 
         name: 'cpuInfo', 
-        template: '<key-value-list heading="CPU Info" module-name="cpu_info"></key-value-list>' 
+        template: '<key-value-list heading="CPU Info" module-name="cpu_info" info="/usr/bin/lscpu read-out."></key-value-list>' 
     },
     { 
         name: 'ioStats', 
-        template: '<table-data heading="IO Stats" module-name="io_stats"></table-data>' 
+        template: '<table-data heading="IO Stats" module-name="io_stats" info="/proc/diskstats read-out."></table-data>' 
     },
     { 
         name: 'scheduledCrons', 
-        template: '<table-data heading="Scheduled Cron Jobs" module-name="scheduled_crons"></table-data>' 
+        template: '<table-data heading="Scheduled Cron Jobs" module-name="scheduled_crons" info="Crons for all users on the server."></table-data>' 
     },
     { 
         name: 'cronHistory', 
-        template: '<table-data heading="Cron Job History" module-name="cron_history"></table-data>' 
+        template: '<table-data heading="Cron Job History" module-name="cron_history" info="Crons which have run recently."></table-data>' 
     },
 ];
 

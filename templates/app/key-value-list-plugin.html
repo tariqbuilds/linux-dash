@@ -1,7 +1,8 @@
 <plugin 
 	heading="{{ heading }}"
 	last-updated="lastGet"
-	on-refresh="getData()">
+	on-refresh="getData()"
+	info="{{ info }}">
     
 	<loader ng-if="!tableRows"></loader>
 

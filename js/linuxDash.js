@@ -122,7 +122,8 @@ linuxDash.directive('topBar', function() {
     scope: {
         heading: '=',
         refresh: '&',
-        lastUpdated: '='
+        lastUpdated: '=',
+        info: '=',
     },
     templateUrl: 'templates/app/ui-elements/top-bar.html',
     link: function(scope, element, attrs){
@@ -182,6 +183,7 @@ linuxDash.directive('tableData', [ 'server', function(server) {
     restrict: 'E',
     scope: {
         heading: '@',
+        info: '@',
         moduleName: '@'
     },
     templateUrl: 'templates/app/table-data-plugin.html',
@@ -233,6 +235,7 @@ linuxDash.directive('keyValueList', ['server', function(server) {
     restrict: 'E',
     scope: {
         heading: '@',
+        info: '@',
         moduleName: '@',
     },
     templateUrl: 'templates/app/key-value-list-plugin.html',
