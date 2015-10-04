@@ -47,18 +47,48 @@ linuxDash.service('serverAddress', ['$q', function ($q) {
 
 }]);
 
+var websocket = null;
+var websocketCallbacks = {};
+var websocketRequests = [];
 /**
  * Gets data from server and runs callbacks on response.data.data 
  */
 linuxDash.service('server', ['$http', function ($http) {
-
     this.get = function (moduleName, callback) {
-        var serverAddress = localStorage.getItem('serverFile');
-        var moduleAddress = serverAddress + '?module=' + moduleName;
+        if (window.WebSocket) {
+            if (websocket == null) {
+                websocket = new WebSocket('ws://' + window.location.hostname + ':' + window.location.port, 'linux-dash');
+                websocket.onopen = function() {
+                    for (var i = 0; i < websocketRequests.length; i += 1) {
+                        websocket.send(JSON.stringify(websocketRequests[i]));
+                    }
+                    websocketRequests = [];
+                };
+                websocket.onmessage = function(event) {
+                    var response = JSON.parse(event.data);
+                    var callback = websocketCallbacks[response.timestamp.toString()];
+                    delete websocketCallbacks[response.timestamp.toString()];
+                    callback(JSON.parse(response.output));
+                };
+                websocket.onclose = function() {
+                    websocket = null;
+                }
+            }
 
-        return $http.get(moduleAddress).then(function (response) {
-            return callback(response.data);
-        });
+            var request = { timestamp: Date.now().toString(), type: 'utf8', module: moduleName }
+            if (websocket.readyState == 1)
+                websocket.send(JSON.stringify(request));
+            else
+                websocketRequests.push(request);
+            websocketCallbacks[request.timestamp] = callback;
+        } else {
+            var serverAddress = localStorage.getItem('serverFile');
+            var moduleAddress = serverAddress + '?module=' + moduleName;
+
+            return $http.get(moduleAddress).then(function (response) {
+                return callback(response.data);
+            });
+        }
     };
 
 }]);
