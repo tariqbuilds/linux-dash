@@ -15,6 +15,10 @@ app.get('/', function (req, res) {
 	res.sendFile(path.resolve(__dirname + '/../index.html'));
 });
 
+app.get('/websocket', function (req, res) {
+	res.status(200).send("");
+});
+
 wsServer = new ws({
 	httpServer: server
 });

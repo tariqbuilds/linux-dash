@@ -50,12 +50,31 @@ linuxDash.service('serverAddress', ['$q', function ($q) {
 var websocket = null;
 var websocketCallbacks = {};
 var websocketRequests = [];
+var websocketSupported = 'unknown';
+
 /**
  * Gets data from server and runs callbacks on response.data.data 
  */
 linuxDash.service('server', ['$http', function ($http) {
     this.get = function (moduleName, callback) {
-        if (window.WebSocket) {
+
+        //Query websocket support status, can be removed once all backends support websockets
+        if (window.WebSocket && websocketSupported === 'unknown') {
+            $http.get("/websocket").then(function () {
+                websocketSupported = 'yes';
+            }, function() {
+                websocketSupported = 'no';
+            });
+        }
+        if (window.WebSocket && websocketSupported === 'yes') {
+            //Query websocket support status, can be removed once all backends support websockets
+            if (websocketSupported == 'unknown') {
+                $http.get("/websocket").then(function () {
+                    websocketSupported = 'yes';
+                }, function() {
+                    websocketSupported = 'no';
+                });
+            }
             if (websocket == null) {
                 websocket = new WebSocket('ws://' + window.location.hostname + ':' + window.location.port, 'linux-dash');
                 websocket.onopen = function() {
