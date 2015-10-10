@@ -13,7 +13,7 @@ function displaytime {
   printf '%d seconds\n' $S
 }
 
-os=$(/usr/bin/lsb_release -ds;/bin/uname -r)
+os=$(/usr/bin/lsb_release -ds;/bin/uname -r | sed -e 's/^"//'  -e 's/"$//')
 hostname=$(/bin/hostname)
 uptime_seconds=$(/bin/cat /proc/uptime | awk '{print $1}')
 server_time=$(date)
