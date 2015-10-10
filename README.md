@@ -65,11 +65,11 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
 - [x] Backend ported to ~~Python~~ shell scripts & python from PHP
 - [x] Add config file
 - [x] Segregate core code-base and modules
-- ~~[ ] Each module in a separate directory with front-end template, back-end file, bash script~~
+- [ ] ~~Each module in a separate directory with front-end template, back-end file, bash script~~ Doesn't make sense in implementation.
 - [x] Add angular element to show info section for a module
 - [ ] Angular tests
 - [ ] Back-end tests
-  - ~~[ ] for shell files~~
+  - [ ] ~~for shell files~~
   - [ ] for PHP, NodeJS, & Go
 - [ ] "Quick Guide to Contributing" Wiki page
 - Add project to package managers
@@ -77,7 +77,7 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
   - [ ] apt (ubuntu)
 - [x] Bonus: 
   - [x] multiple server side languages supported
-  - [ ] use websockets in PHP & NodeJS
+  - [x] use websockets in ~~PHP~~ & NodeJS
 
 ## Support
 
