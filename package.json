@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/afaqurk/linux-dash",
   "dependencies": {
-    "express": "^4.11.1"
+    "express": "^4.11.1",
+    "websocket": "^1.0.22"
   }
 }
