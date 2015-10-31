@@ -339,8 +339,8 @@ table.metrics-table {
 canvas {
   float: none;
   margin: 0 auto;
-  height: 30%;
-  width: 70%;
+  width: 100%;
+  max-width: 100%;
 }
 /*********************************************
     Widget Elements
