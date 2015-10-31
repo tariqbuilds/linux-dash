@@ -1,3 +1,4 @@
+#!/bin/bash
 awkCmd=`which awk`
 grepCmd=`which grep`
 sedCmd=`which sed`

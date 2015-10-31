@@ -495,7 +495,7 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
                 });
 
                 // round up the average and set the maximum scale
-                var len = parseInt(Math.log10(maxAvg));
+                var len = parseInt(Math.log(maxAvg)/Math.log(10));
                 var div = Math.pow(10, len);
                 chart.options.maxValue = Math.ceil(maxAvg / div) * div;
             });
