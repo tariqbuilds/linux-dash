@@ -324,10 +324,13 @@ table th
   text-transform: uppercase;
   border-bottom: 1px solid #f1f1f1;
 }
-table td
-{
+table td {
   border-bottom: 1px solid #f1f1f1;
   padding: 9px 8px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: rgba(0,0,0,.65);
 }
 table tbody tr:hover td
 {
