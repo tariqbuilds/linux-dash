@@ -387,7 +387,7 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
                 scope.metrics.forEach(function (metricObj) {
                     metricObj.data = metricObj.generate(serverResponseData) ;
                 });
-
+                
             });
         };
 
