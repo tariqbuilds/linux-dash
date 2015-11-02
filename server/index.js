@@ -16,7 +16,9 @@ app.get('/', function (req, res) {
 });
 
 app.get('/websocket', function (req, res) {
-	res.status(200).send("");
+	res.status(200).send({
+		websocket_support: true,
+	});
 });
 
 wsServer = new ws({
