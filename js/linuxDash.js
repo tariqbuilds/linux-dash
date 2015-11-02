@@ -61,7 +61,6 @@ linuxDash.service('server', ['$http', function ($http) {
         //Query websocket support status, can be removed once all backends support websockets
         if (window.WebSocket && websocketSupported === 'unknown') {
             $http.get("/websocket").then(function (response) {
-                console.log(response);
                 if (response.data.websocket_support) {
                     websocketSupported = 'yes';
                 }
