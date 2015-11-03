@@ -19,14 +19,14 @@
 					<th ng-repeat="header in tableHeaders track by $index">
 						<a href="" ng-click="setSortColumn(header)">{{ header }}</a>
 						<span class="column-sort-caret">
-							{{ (header === sortByColumn) ? '&#9650;': ''; }}
-							{{ ('-' + header === sortByColumn) ? '&#9660;': ''; }}
+							{{ (header === sortByColumn && !sortReverse) ? '&#9650;': ''; }}
+							{{ (header === sortByColumn && sortReverse) ? '&#9660;': ''; }}
 						</span>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="row in tableRows | filter:keyword | orderBy: sortByColumn">
+				<tr ng-repeat="row in tableRows | filter:keyword">
 					<td ng-repeat="header in tableHeaders track by $index">
 						{{ row[header] }}
 					</td>
