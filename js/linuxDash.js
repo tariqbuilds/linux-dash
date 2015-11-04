@@ -2,103 +2,169 @@
 
 ////////////////// Routing /////////////////////////////
 linuxDash.config(['$routeProvider',
-    function($routeProvider) {
+  function($routeProvider) {
 
-        $routeProvider.
-          when('/system-status', {
-            templateUrl: 'templates/sections/system-status.html',
-          }).
-          when('/basic-info', {
-            templateUrl: 'templates/sections/basic-info.html',
-          }).
-          when('/network', {
-            templateUrl: 'templates/sections/network.html',
-          }).
-          when('/accounts', {
-            templateUrl: 'templates/sections/accounts.html',
-          }).
-          when('/apps', {
-            templateUrl: 'templates/sections/applications.html',
-          }).
-          otherwise({
-            redirectTo: '/system-status'
-          });
-          
-    }]);
+    $routeProvider.
+      when('/system-status', {
+        templateUrl: 'templates/sections/system-status.html',
+      }).
+      when('/basic-info', {
+        templateUrl: 'templates/sections/basic-info.html',
+      }).
+      when('/network', {
+        templateUrl: 'templates/sections/network.html',
+      }).
+      when('/accounts', {
+        templateUrl: 'templates/sections/accounts.html',
+      }).
+      when('/apps', {
+        templateUrl: 'templates/sections/applications.html',
+      }).
+      otherwise({
+        redirectTo: '/system-status'
+      });
 
-var websocket = null;
-var websocketCallbacks = {};
-var websocketRequests = [];
-var websocketSupported = 'unknown';
+  }
+]);
+
 
 /**
- * Gets data from server and runs callbacks on response.data.data 
+ * Service which gets data from server
+ * via HTTP or Websocket (if supported)
  */
 linuxDash.service('server', ['$http', function ($http) {
-    this.get = function (moduleName, callback) {
 
-        //Query websocket support status, can be removed once all backends support websockets
-        if (window.WebSocket && websocketSupported === 'unknown') {
-            $http.get("/websocket").then(function (response) {
-                if (response.data.websocket_support) {
-                    websocketSupported = 'yes';
-                }
-                else {
-                    websocketSupported = 'no';
-                }
-            }, function() {
-                websocketSupported = 'no';
-            });
-        }
+  var websocket = {
+    connection: null,
+    onMessageEventHandlers: {}
+  };
 
-        if (window.WebSocket && websocketSupported === 'yes') {
-            //Query websocket support status, can be removed once all backends support websockets
-            if (websocketSupported == 'unknown') {
-                $http.get("/websocket").then(function (response) {
-                    console.log(response);
-                    if (response.data.websocket_support) {
-                        websocketSupported = 'yes';
-                    }
-                    else {
-                        websocketSupported = 'no';
-                    }
-                }, function() {
-                    websocketSupported = 'no';
-                });
-            }
-            if (websocket == null) {
-                websocket = new WebSocket('ws://' + window.location.hostname + ':' + window.location.port, 'linux-dash');
-                websocket.onopen = function() {
-                    for (var i = 0; i < websocketRequests.length; i += 1) {
-                        websocket.send(JSON.stringify(websocketRequests[i]));
-                    }
-                    websocketRequests = [];
-                };
-                websocket.onmessage = function(event) {
-                    var response = JSON.parse(event.data);
-                    var callback = websocketCallbacks[response.timestamp.toString()];
-                    delete websocketCallbacks[response.timestamp.toString()];
-                    callback(JSON.parse(response.output));
-                };
-                websocket.onclose = function() {
-                    websocket = null;
-                }
-            }
+  /**
+   * @description:
+   *   Establish a websocket connection with server
+   *
+   * @return Null
+   */
+  var establishWebsocketConnection = function () {
 
-            var request = { timestamp: Date.now().toString(), type: 'utf8', module: moduleName }
-            if (websocket.readyState == 1)
-                websocket.send(JSON.stringify(request));
-            else
-                websocketRequests.push(request);
-            websocketCallbacks[request.timestamp] = callback;
+    var websocketUrl = 'ws://' + window.location.hostname + ':' + window.location.port;
+
+    if (websocket.connection === null) {
+
+      websocket.connection = new WebSocket(websocketUrl, 'linux-dash');
+
+      console.log('requesting websocket from', websocketUrl);
+
+      websocket.connection.onopen = function () {
+        console.log('it is open');
+      };
+
+      websocket.connection.onmessage = function(event) {
+
+        var response = JSON.parse(event.data);
+        var moduleName = response.moduleName;
+        var moduleData = JSON.parse(response.output);
+
+        if (!!websocket.onMessageEventHandlers[moduleName]) {
+
+          websocket.onMessageEventHandlers[moduleName](moduleData);
         } else {
-            var moduleAddress = 'server/?module=' + moduleName;
-
-            return $http.get(moduleAddress).then(function (response) {
-                return callback(response.data);
-            });
+          console.log("Websocket could not find module", moduleName, "in:", websocket.onMessageEventHandlers);
         }
+
+      };
+
+      websocket.connection.onclose = function() {
+        websocket.connection = null;
+      }
+    }
+
+  };
+
+  /**
+   * @description:
+   *   Check if websockets are supported
+   *   If so, call establishWebsocketConnection()
+   *
+   * @return Null
+   */
+  var checkIfWebsocketsAreSupported = function () {
+
+    var websocketSupport = {
+      browser: null,
+      server: null,
     };
+
+    // does browser support websockets?
+    if (window.WebSocket) {
+
+      websocketSupport.browser = true;
+
+      // does backend support websockets?
+      $http.get("/websocket").then(function (response) {
+
+        // if websocket_support property exists and is trurthy
+        // websocketSupport.server will equal true.
+        websocketSupport.server = !!response.data["websocket_support"];
+
+      }).catch(function () {
+
+        websocketSupport.server = false;
+
+      }).then(function () {
+
+        if (websocketSupport.browser && websocketSupport.server) {
+
+          establishWebsocketConnection();
+
+        }
+
+      });
+
+    }
+
+  };
+
+  checkIfWebsocketsAreSupported();
+
+  /**
+   * Handles requests from modules for data from server
+   *
+   * @param  {String}   moduleName
+   * @param  {Function} callback
+   * @return {[ Null || callback(server response) ]}
+   */
+  this.get = function (moduleName, callback) {
+
+    console.log('1');
+    if (websocket.connection) {
+
+      console.log('2', moduleName, websocket.onMessageEventHandlers);
+      if (!websocket.onMessageEventHandlers[moduleName]) {
+
+      console.log('3', moduleName, websocket.onMessageEventHandlers);
+        websocket.onMessageEventHandlers[moduleName] = callback;
+
+      }
+
+      console.log("ready state", websocket.connection.readyState);
+
+      if (websocket.connection.readyState === 1) {
+      console.log('5', moduleName, websocket.onMessageEventHandlers);
+        websocket.connection.send(moduleName);
+      }
+
+    } else {
+
+      var moduleAddress = 'server/?module=' + moduleName;
+
+      return $http.get(moduleAddress).then(function (response) {
+          return callback(response.data);
+      });
+
+    }
+
+  };
 
 }]);
 
@@ -134,7 +200,7 @@ linuxDash.directive('navBar',function ($location) {
 ////////////////// UI Element Directives //////////////////
 
 /**
- * Shows loader 
+ * Shows loader
  */
 linuxDash.directive('loader', function() {
   return {
@@ -149,11 +215,11 @@ linuxDash.directive('loader', function() {
                   ' <div class="rect4"></div>' +
                   ' <div class="rect5"></div>' +
                 '</div>'
-  }; 
+  };
 });
 
 /**
- * Top Bar for widget 
+ * Top Bar for widget
  */
 linuxDash.directive('topBar', function() {
   return {
@@ -170,13 +236,13 @@ linuxDash.directive('topBar', function() {
 
         if (typeof attrs.noRefreshBtn !== 'undefined') {
             $refreshBtn.remove();
-        } 
+        }
     }
   };
 });
 
 /**
- * Shows refresh button and calls 
+ * Shows refresh button and calls
  * provided expression on-click
  */
 linuxDash.directive('refreshBtn', function() {
@@ -190,7 +256,7 @@ linuxDash.directive('refreshBtn', function() {
 });
 
 /**
- * Message shown when no data is found from server 
+ * Message shown when no data is found from server
  */
 linuxDash.directive('noData', function() {
   return {
@@ -249,7 +315,7 @@ linuxDash.directive('tableData', [ 'server', function(server) {
 
         scope.sortTableRows = function() {
             scope.tableRows.sort(function (currentRow, nextRow) {
-                
+
                 var sortResult = 0;
 
                 if (currentRow[scope.sortByColumn] < nextRow[scope.sortByColumn]) {
@@ -272,12 +338,12 @@ linuxDash.directive('tableData', [ 'server', function(server) {
             delete scope.tableRows;
 
             server.get(scope.moduleName, function (serverResponseData) {
-                
+
                 if (serverResponseData.length > 0) {
                     scope.tableHeaders = Object.keys(serverResponseData[0]);
                 }
 
-                
+
                 scope.tableRows = serverResponseData;
 
                 if (scope.sortByColumn) {
@@ -347,7 +413,7 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
     },
     templateUrl: 'templates/app/line-chart-plugin.html',
     link: function (scope, element) {
-        
+
 	if (!scope.color) {
 		scope.color = '0, 255, 0';
 	}
@@ -380,7 +446,7 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
         series = new TimeSeries();
         chart.addTimeSeries(series, { strokeStyle: 'rgba(' + scope.color + ', 1)', fillStyle: 'rgba(' + scope.color + ', 0.2)', lineWidth: 2 });
         chart.streamTo(canvas, 1000);
-        
+
         // update data on chart
         scope.getData = function () {
             server.get(scope.moduleName, function (serverResponseData) {
@@ -408,11 +474,11 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
                 scope.metrics.forEach(function (metricObj) {
                     metricObj.data = metricObj.generate(serverResponseData) ;
                 });
-                
+
             });
         };
 
-        // set the directive-provided interval 
+        // set the directive-provided interval
         // at which to run the chart update
         $interval(scope.getData, scope.refreshRate);
     }
@@ -421,7 +487,7 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
 
 /**
  * Fetches and displays data as line chart at a certain refresh rate
- * 
+ *
  */
 linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
   return {
@@ -436,7 +502,7 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
     },
     templateUrl: 'templates/app/multi-line-chart-plugin.html',
     link: function (scope, element) {
-        
+
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
             borderVisible:false,
@@ -449,7 +515,7 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
             },
             labels:{
                 fontSize:12,
-                precision:0, 
+                precision:0,
                 fillStyle:'#0f0e0e'
             },
             maxValue: 100,
@@ -493,12 +559,12 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
             delay = scope.delay;
 
         chart.streamTo(canvas, delay);
-        
+
         // update data on chart
         scope.getData = function () {
             server.get(scope.moduleName, function (serverResponseData) {
                 scope.lastGet = new Date().getTime();
-                
+
                 var keyCount    = 0;
                 var maxAvg      = 100;
 
@@ -529,7 +595,7 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
 }]);
 
 /**
- * Base plugin structure 
+ * Base plugin structure
  */
 linuxDash.directive('plugin', function() {
     return {
@@ -540,7 +606,7 @@ linuxDash.directive('plugin', function() {
 });
 
 /**
- * Progress bar element 
+ * Progress bar element
  */
 linuxDash.directive('progressBarPlugin',function() {
   return {
@@ -558,7 +624,7 @@ linuxDash.directive('progressBarPlugin',function() {
 
 
 /**
- * Theme switcher 
+ * Theme switcher
  */
 linuxDash.directive('themeSwitcher',['$location', function($location) {
   return {
@@ -620,7 +686,7 @@ linuxDash.directive('themeSwitcher',['$location', function($location) {
         if(localStorage.getItem('theme')) {
 
             scope.themes.forEach(function (theme) {
-                
+
                 if(theme.name === localStorage.getItem('theme'))
                 {
                     scope.switchTheme(theme);

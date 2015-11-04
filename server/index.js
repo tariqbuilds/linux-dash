@@ -26,36 +26,48 @@ wsServer = new ws({
 });
 
 wsServer.on('request', function(request) {
-	var connection = request.accept('linux-dash', request.origin);
-	connection.on('message', function(message) {
-        if (message.type === 'utf8') {
-			var req = JSON.parse(message.utf8Data)
 
-			var shellFile = __dirname + '/modules/shell_files/' + req.module + '.sh';
+	var wsClient = request.accept('linux-dash', request.origin);
 
-			if (req.module.indexOf('.') > -1
-				|| !req.module
-				|| !fs.existsSync(shellFile))
-			{
-				res.sendStatus(406);
-				return;
+  wsClient.on('message', function(wsReq) {
+
+    var moduleName = wsReq.utf8Data;
+
+    console.log(wsReq, moduleName);
+
+    var shellFile         = __dirname + '/modules/shell_files/' + moduleName + '.sh';
+    var moduleInvalidName = moduleName.indexOf('.') > -1;
+    var moduleNameEmpty   = !moduleName;
+    var moduleNotFound    = !fs.existsSync(shellFile);
+
+    if (moduleInvalidName || moduleNameEmpty || moduleNotFound) {
+      res.sendStatus(406);
+			return;
+		}
+
+		var command = spawn(shellFile, [ wsReq.color || '' ]);
+		var output  = [];
+
+		command.stdout.on('data', function(chunk) {
+			output.push(chunk);
+		});
+
+		command.on('close', function(code) {
+
+			if (code === 0) {
+
+        var wsResponse = {
+          moduleName: moduleName,
+				  output: output.toString(),
+        };
+
+				wsClient.sendUTF(JSON.stringify(wsResponse));
 			}
 
-			var command = spawn(shellFile, [ req.color || '' ]);
-			var output  = [];
+		});
 
-			command.stdout.on('data', function(chunk) {
-				output.push(chunk);
-			});
+  });
 
-			command.on('close', function(code) {
-				if (code === 0) {
-					req.output = output.toString();
-					connection.sendUTF(JSON.stringify(req));
-				}
-			});
-        }
-    });
 });
 
 app.get('/server/', function (req, res) {
@@ -68,14 +80,14 @@ app.get('/server/', function (req, res) {
 	{
 		res.sendStatus(406);
 		return;
-	}	
+	}
 
 	var command = spawn(shellFile, [ req.query.color || '' ]);
 	var output  = [];
 
 	command.stdout.on('data', function(chunk) {
 		output.push(chunk);
-	}); 
+	});
 
 	command.on('close', function(code) {
 		if (code === 0) res.send(output.toString());
