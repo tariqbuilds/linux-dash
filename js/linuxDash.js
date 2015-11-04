@@ -26,27 +26,6 @@ linuxDash.config(['$routeProvider',
           
     }]);
 
-////////////////// Global Application //////////////////
-linuxDash.controller('body', function ($scope, serverAddress) {
-    $scope.serverSet = false;
-
-    serverAddress.configure().then(function (res) {
-        $scope.serverSet = true;
-    });
-
-});
-
-/**
- * Figures out which server-side file works and sets it to localStorage
- */
-linuxDash.service('serverAddress', ['$q', function ($q) {
-
-    this.configure = function () {
-        return  $q.when(localStorage.setItem('serverFile','server/'));
-    }
-
-}]);
-
 var websocket = null;
 var websocketCallbacks = {};
 var websocketRequests = [];
@@ -113,8 +92,7 @@ linuxDash.service('server', ['$http', function ($http) {
                 websocketRequests.push(request);
             websocketCallbacks[request.timestamp] = callback;
         } else {
-            var serverAddress = localStorage.getItem('serverFile');
-            var moduleAddress = serverAddress + '?module=' + moduleName;
+            var moduleAddress = 'server/?module=' + moduleName;
 
             return $http.get(moduleAddress).then(function (response) {
                 return callback(response.data);
