@@ -53,10 +53,8 @@ linuxDash.service('server', ['$http', function ($http) {
 
       websocket.connection = new WebSocket(websocketUrl, 'linux-dash');
 
-      console.log('requesting websocket from', websocketUrl);
-
       websocket.connection.onopen = function () {
-        console.log('it is open');
+        console.info('Websocket connection is open');
       };
 
       websocket.connection.onmessage = function(event) {
@@ -66,10 +64,10 @@ linuxDash.service('server', ['$http', function ($http) {
         var moduleData = JSON.parse(response.output);
 
         if (!!websocket.onMessageEventHandlers[moduleName]) {
-
+          console.log("responding for", moduleName);
           websocket.onMessageEventHandlers[moduleName](moduleData);
         } else {
-          console.log("Websocket could not find module", moduleName, "in:", websocket.onMessageEventHandlers);
+          console.info("Websocket could not find module", moduleName, "in:", websocket.onMessageEventHandlers);
         }
 
       };
@@ -136,22 +134,22 @@ linuxDash.service('server', ['$http', function ($http) {
    */
   this.get = function (moduleName, callback) {
 
-    console.log('1');
     if (websocket.connection) {
 
-      console.log('2', moduleName, websocket.onMessageEventHandlers);
       if (!websocket.onMessageEventHandlers[moduleName]) {
 
-      console.log('3', moduleName, websocket.onMessageEventHandlers);
         websocket.onMessageEventHandlers[moduleName] = callback;
 
+        console.log(websocket.onMessageEventHandlers);
       }
 
-      console.log("ready state", websocket.connection.readyState);
-
       if (websocket.connection.readyState === 1) {
-      console.log('5', moduleName, websocket.onMessageEventHandlers);
+
+        console.log("sending", moduleName);
         websocket.connection.send(moduleName);
+
+      } else {
+        console.log("Websocket not ready yet.", moduleName);
       }
 
     } else {
@@ -455,17 +453,17 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
 
                 // change graph colour depending on usage
                 if (scope.maxValue / 4 * 3 < scope.getDisplayValue(serverResponseData)) {
-                    chart.seriesSet[0].options.strokeStyle = 'rgba(255, 89, 0, 1)';
-        		    chart.seriesSet[0].options.fillStyle = 'rgba(255, 89, 0, 0.2)';
-        		}
-        		else if (scope.maxValue / 3 < scope.getDisplayValue(serverResponseData)) {
-        		    chart.seriesSet[0].options.strokeStyle = 'rgba(255, 238, 0, 1)';
-        		    chart.seriesSet[0].options.fillStyle = 'rgba(255, 238, 0, 0.2)';
-        		}
-        		else {
-        		    chart.seriesSet[0].options.strokeStyle = 'rgba(' + scope.color + ', 1)';
-        		    chart.seriesSet[0].options.fillStyle = 'rgba(' + scope.color + ', 0.2)';
-        		}
+                  chart.seriesSet[0].options.strokeStyle = 'rgba(255, 89, 0, 1)';
+        		      chart.seriesSet[0].options.fillStyle = 'rgba(255, 89, 0, 0.2)';
+            		}
+            		else if (scope.maxValue / 3 < scope.getDisplayValue(serverResponseData)) {
+            		    chart.seriesSet[0].options.strokeStyle = 'rgba(255, 238, 0, 1)';
+            		    chart.seriesSet[0].options.fillStyle = 'rgba(255, 238, 0, 0.2)';
+            		}
+            		else {
+            		    chart.seriesSet[0].options.strokeStyle = 'rgba(' + scope.color + ', 1)';
+            		    chart.seriesSet[0].options.fillStyle = 'rgba(' + scope.color + ', 0.2)';
+            		}
 
                 // update chart with this response
                 series.append(scope.lastGet, scope.getDisplayValue(serverResponseData));
@@ -480,7 +478,12 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
 
         // set the directive-provided interval
         // at which to run the chart update
-        $interval(scope.getData, scope.refreshRate);
+        var intervalRef = $interval(scope.getData, scope.refreshRate);
+        var removeInterval = function() {
+          $interval.cancel(intervalRef);
+        };
+
+        element.on("$destroy", removeInterval);
     }
   };
 }]);
@@ -589,7 +592,12 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
         };
 
         var refreshRate = (angular.isDefined(scope.refreshRate))? scope.refreshRate: 1000;
-        $interval(scope.getData, refreshRate);
+        var intervalRef = $interval(scope.getData, refreshRate);
+        var removeInterval = function() {
+          $interval.cancel(intervalRef);
+        };
+
+        element.on("$destroy", removeInterval);
     }
   };
 }]);

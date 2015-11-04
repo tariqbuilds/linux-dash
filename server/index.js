@@ -31,10 +31,7 @@ wsServer.on('request', function(request) {
 
   wsClient.on('message', function(wsReq) {
 
-    var moduleName = wsReq.utf8Data;
-
-    console.log(wsReq, moduleName);
-
+    var moduleName        = wsReq.utf8Data;
     var shellFile         = __dirname + '/modules/shell_files/' + moduleName + '.sh';
     var moduleInvalidName = moduleName.indexOf('.') > -1;
     var moduleNameEmpty   = !moduleName;
