@@ -64,7 +64,6 @@ linuxDash.service('server', ['$http', function ($http) {
         var moduleData = JSON.parse(response.output);
 
         if (!!websocket.onMessageEventHandlers[moduleName]) {
-          console.log("responding for", moduleName);
           websocket.onMessageEventHandlers[moduleName](moduleData);
         } else {
           console.info("Websocket could not find module", moduleName, "in:", websocket.onMessageEventHandlers);
@@ -86,7 +85,7 @@ linuxDash.service('server', ['$http', function ($http) {
    *
    * @return Null
    */
-  var checkIfWebsocketsAreSupported = function () {
+  this.checkIfWebsocketsAreSupported = function () {
 
     var websocketSupport = {
       browser: null,
@@ -123,36 +122,38 @@ linuxDash.service('server', ['$http', function ($http) {
 
   };
 
-  checkIfWebsocketsAreSupported();
-
   /**
    * Handles requests from modules for data from server
    *
    * @param  {String}   moduleName
    * @param  {Function} callback
    * @return {[ Null || callback(server response) ]}
-   */
+  */
   this.get = function (moduleName, callback) {
 
+    // if we have a websocket connection
     if (websocket.connection) {
 
-      if (!websocket.onMessageEventHandlers[moduleName]) {
-
-        websocket.onMessageEventHandlers[moduleName] = callback;
-
-        console.log(websocket.onMessageEventHandlers);
-      }
-
+      // and the connection is ready
       if (websocket.connection.readyState === 1) {
 
-        console.log("sending", moduleName);
+        // set the callback as the event handler
+        // for server response.
+        //
+        // Callback instance needs to be overwritten
+        // each time for this to work. Not sure why.
+        websocket.onMessageEventHandlers[moduleName] = callback;
+
+        //
         websocket.connection.send(moduleName);
 
       } else {
         console.log("Websocket not ready yet.", moduleName);
       }
 
-    } else {
+    }
+    // otherwise
+    else {
 
       var moduleAddress = 'server/?module=' + moduleName;
 
@@ -165,6 +166,11 @@ linuxDash.service('server', ['$http', function ($http) {
   };
 
 }]);
+
+
+linuxDash.run(function (server) {
+  server.checkIfWebsocketsAreSupported();
+});
 
 /**
  * Sidebar for SPA
@@ -400,90 +406,91 @@ linuxDash.directive('lineChartPlugin', ['$interval', '$compile', 'server', funct
   return {
     restrict: 'E',
     scope: {
-        heading: '@',
-        moduleName: '@',
-        refreshRate: '=',
-        maxValue: '=',
-        minValue: '=',
-        getDisplayValue: '=',
-        metrics: '=',
-	color: '@'
+      heading: '@',
+      moduleName: '@',
+      refreshRate: '=',
+      maxValue: '=',
+      minValue: '=',
+      getDisplayValue: '=',
+      metrics: '=',
+      color: '@'
     },
     templateUrl: 'templates/app/line-chart-plugin.html',
     link: function (scope, element) {
 
-	if (!scope.color) {
-		scope.color = '0, 255, 0';
-	}
-	var series;
+      if (!scope.color) {
+        scope.color = '0, 255, 0';
+      }
 
+      var series;
 
-        // smoothieJS - Create new chart
-        var chart = new SmoothieChart({
-            borderVisible:false,
-            sharpLines:true,
-            grid: {
-                fillStyle: '#ffffff',
-                strokeStyle: 'rgba(232,230,230,0.93)',
-                sharpLines: true,
-                millisPerLine: 3000,
-                borderVisible: false
-            },
-            labels:{
-                fontSize: 11,
-                precision: 0,
-                fillStyle: '#0f0e0e'
-            },
-            maxValue: parseInt(scope.maxValue),
-            minValue: parseInt(scope.minValue),
-            horizontalLines: [{ value: 5, color: '#eff', lineWidth: 1 }]
+      // smoothieJS - Create new chart
+      var chart = new SmoothieChart({
+        borderVisible:false,
+        sharpLines:true,
+        grid: {
+          fillStyle: '#ffffff',
+          strokeStyle: 'rgba(232,230,230,0.93)',
+          sharpLines: true,
+          millisPerLine: 3000,
+          borderVisible: false
+        },
+        labels:{
+          fontSize: 11,
+          precision: 0,
+          fillStyle: '#0f0e0e'
+        },
+        maxValue: parseInt(scope.maxValue),
+        minValue: parseInt(scope.minValue),
+        horizontalLines: [{ value: 5, color: '#eff', lineWidth: 1 }]
+      });
+
+      // smoothieJS - set up canvas element for chart
+      canvas = element.find('canvas')[0],
+      series = new TimeSeries();
+      chart.addTimeSeries(series, { strokeStyle: 'rgba(' + scope.color + ', 1)', fillStyle: 'rgba(' + scope.color + ', 0.2)', lineWidth: 2 });
+      chart.streamTo(canvas, 1000);
+
+      // update data on chart
+      scope.getData = function () {
+
+        server.get(scope.moduleName, function (serverResponseData) {
+
+          scope.lastGet = new Date().getTime();
+
+          // change graph colour depending on usage
+          if (scope.maxValue / 4 * 3 < scope.getDisplayValue(serverResponseData)) {
+            chart.seriesSet[0].options.strokeStyle = 'rgba(255, 89, 0, 1)';
+            chart.seriesSet[0].options.fillStyle = 'rgba(255, 89, 0, 0.2)';
+          }
+          else if (scope.maxValue / 3 < scope.getDisplayValue(serverResponseData)) {
+              chart.seriesSet[0].options.strokeStyle = 'rgba(255, 238, 0, 1)';
+              chart.seriesSet[0].options.fillStyle = 'rgba(255, 238, 0, 0.2)';
+          }
+          else {
+              chart.seriesSet[0].options.strokeStyle = 'rgba(' + scope.color + ', 1)';
+              chart.seriesSet[0].options.fillStyle = 'rgba(' + scope.color + ', 0.2)';
+          }
+
+          // update chart with this response
+          series.append(scope.lastGet, scope.getDisplayValue(serverResponseData));
+
+          // update the metrics for this chart
+          scope.metrics.forEach(function (metricObj) {
+              metricObj.data = metricObj.generate(serverResponseData) ;
+          });
+
         });
+      };
 
-        // smoothieJS - set up canvas element for chart
-        canvas = element.find('canvas')[0],
-        series = new TimeSeries();
-        chart.addTimeSeries(series, { strokeStyle: 'rgba(' + scope.color + ', 1)', fillStyle: 'rgba(' + scope.color + ', 0.2)', lineWidth: 2 });
-        chart.streamTo(canvas, 1000);
+      // set the directive-provided interval
+      // at which to run the chart update
+      var intervalRef = $interval(scope.getData, scope.refreshRate);
+      var removeInterval = function() {
+        $interval.cancel(intervalRef);
+      };
 
-        // update data on chart
-        scope.getData = function () {
-            server.get(scope.moduleName, function (serverResponseData) {
-
-                scope.lastGet = new Date().getTime();
-
-                // change graph colour depending on usage
-                if (scope.maxValue / 4 * 3 < scope.getDisplayValue(serverResponseData)) {
-                  chart.seriesSet[0].options.strokeStyle = 'rgba(255, 89, 0, 1)';
-        		      chart.seriesSet[0].options.fillStyle = 'rgba(255, 89, 0, 0.2)';
-            		}
-            		else if (scope.maxValue / 3 < scope.getDisplayValue(serverResponseData)) {
-            		    chart.seriesSet[0].options.strokeStyle = 'rgba(255, 238, 0, 1)';
-            		    chart.seriesSet[0].options.fillStyle = 'rgba(255, 238, 0, 0.2)';
-            		}
-            		else {
-            		    chart.seriesSet[0].options.strokeStyle = 'rgba(' + scope.color + ', 1)';
-            		    chart.seriesSet[0].options.fillStyle = 'rgba(' + scope.color + ', 0.2)';
-            		}
-
-                // update chart with this response
-                series.append(scope.lastGet, scope.getDisplayValue(serverResponseData));
-
-                // update the metrics for this chart
-                scope.metrics.forEach(function (metricObj) {
-                    metricObj.data = metricObj.generate(serverResponseData) ;
-                });
-
-            });
-        };
-
-        // set the directive-provided interval
-        // at which to run the chart update
-        var intervalRef = $interval(scope.getData, scope.refreshRate);
-        var removeInterval = function() {
-          $interval.cancel(intervalRef);
-        };
-
-        element.on("$destroy", removeInterval);
+      element.on("$destroy", removeInterval);
     }
   };
 }]);
