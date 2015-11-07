@@ -1,9 +1,9 @@
 var express = require('express');
-var app 	= require('express')();
-var server 	= require('http').Server(app);
-var path 	= require('path');
-var spawn 	= require('child_process').spawn;
-var fs 		= require('fs');
+var app     = require('express')();
+var server  = require('http').Server(app);
+var path    = require('path');
+var spawn   = require('child_process').spawn;
+var fs      = require('fs');
 var ws      = require('websocket').server;
 
 server.listen(80);
@@ -16,9 +16,11 @@ app.get('/', function (req, res) {
 });
 
 app.get('/websocket', function (req, res) {
-	res.status(200).send({
-		websocket_support: true,
-	});
+
+  res.send({
+    websocket_support: true,
+  });
+
 });
 
 wsServer = new ws({
