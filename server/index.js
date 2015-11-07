@@ -27,22 +27,37 @@ wsServer = new ws({
 	httpServer: server
 });
 
+function getShellFilePath(moduleName) {
+  return __dirname + '/modules/shell_files/' + moduleName + '.sh';
+}
+
+function shellPathAndModuleNameAreValid(shellFilePath, moduleName) {
+
+  var moduleInvalidName = moduleName.indexOf('.') > -1;
+  var moduleNameEmpty   = !moduleName;
+  var moduleNotFound    = !fs.existsSync(shellFilePath);
+  var isValid = true;
+
+  if (moduleInvalidName || moduleNameEmpty || moduleNotFound) {
+    isValid = false;
+  }
+
+  return isValid;
+}
+
 wsServer.on('request', function(request) {
 
 	var wsClient = request.accept('linux-dash', request.origin);
 
   wsClient.on('message', function(wsReq) {
 
-    var moduleName        = wsReq.utf8Data;
-    var shellFile         = __dirname + '/modules/shell_files/' + moduleName + '.sh';
-    var moduleInvalidName = moduleName.indexOf('.') > -1;
-    var moduleNameEmpty   = !moduleName;
-    var moduleNotFound    = !fs.existsSync(shellFile);
+    var moduleName = wsReq.utf8Data;
+    var shellFile  = getShellFilePath(moduleName);
 
-    if (moduleInvalidName || moduleNameEmpty || moduleNotFound) {
+    if (!shellPathAndModuleNameAreValid(shellFile, moduleName)) {
       res.sendStatus(406);
-			return;
-		}
+      return;
+    }
 
 		var command = spawn(shellFile, [ wsReq.color || '' ]);
 		var output  = [];
@@ -71,15 +86,12 @@ wsServer.on('request', function(request) {
 
 app.get('/server/', function (req, res) {
 
-	var shellFile = __dirname + '/modules/shell_files/' + req.query.module + '.sh';
+	var shellFile = getShellFilePath(req.query.module);
 
-	if (req.query.module.indexOf('.') > -1
-		|| !req.query.module
-		|| !fs.existsSync(shellFile))
-	{
-		res.sendStatus(406);
-		return;
-	}
+	if (!shellPathAndModuleNameAreValid(shellFile, req.query.module)) {
+    res.sendStatus(406);
+    return;
+  }
 
 	var command = spawn(shellFile, [ req.query.color || '' ]);
 	var output  = [];
