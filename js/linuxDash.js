@@ -299,70 +299,71 @@ linuxDash.directive('tableData', [ 'server', function(server) {
     templateUrl: 'templates/app/table-data-plugin.html',
     link: function (scope, element) {
 
-        scope.sortByColumn = null;
-        scope.sortReverse = null;
+      scope.sortByColumn = null;
+      scope.sortReverse = null;
 
-        // set the column to sort by
-        scope.setSortColumn = function (column) {
+      // set the column to sort by
+      scope.setSortColumn = function (column) {
 
-            // if the column is already being sorted
-            // reverse the order
-            if (column === scope.sortByColumn) {
-                scope.sortReverse = !scope.sortReverse;
-            }
-            else {
-                scope.sortByColumn = column;
-            }
+        // if the column is already being sorted
+        // reverse the order
+        if (column === scope.sortByColumn) {
+            scope.sortReverse = !scope.sortReverse;
+        }
+        else {
+            scope.sortByColumn = column;
+        }
 
+        scope.sortTableRows();
+      };
+
+      scope.sortTableRows = function() {
+        scope.tableRows.sort(function (currentRow, nextRow) {
+
+          var sortResult = 0;
+
+          if (currentRow[scope.sortByColumn] < nextRow[scope.sortByColumn]) {
+              sortResult = -1;
+          } else if(currentRow[scope.sortByColumn] === nextRow[scope.sortByColumn]) {
+              sortResult = 0;
+          } else {
+              sortResult = 1;
+          }
+
+          if (scope.sortReverse) {
+              sortResult = -1 * sortResult;
+          }
+
+          return sortResult;
+        });
+      };
+
+      scope.getData = function () {
+        delete scope.tableRows;
+
+        server.get(scope.moduleName, function (serverResponseData) {
+
+          if (serverResponseData.length > 0) {
+            scope.tableHeaders = Object.keys(serverResponseData[0]);
+          }
+
+          scope.tableRows = serverResponseData;
+
+          if (scope.sortByColumn) {
             scope.sortTableRows();
-        };
+          }
 
-        scope.sortTableRows = function() {
-            scope.tableRows.sort(function (currentRow, nextRow) {
+          scope.lastGet = new Date().getTime();
 
-                var sortResult = 0;
+          if(serverResponseData.length < 1) {
+            scope.emptyResult = true;
+          }
 
-                if (currentRow[scope.sortByColumn] < nextRow[scope.sortByColumn]) {
-                    sortResult = -1;
-                } else if(currentRow[scope.sortByColumn] === nextRow[scope.sortByColumn]) {
-                    sortResult = 0;
-                } else {
-                    sortResult = 1;
-                }
+          scope.$digest();
+        });
+      };
 
-                if (scope.sortReverse) {
-                    sortResult = -1 * sortResult;
-                }
-
-                return sortResult;
-            });
-        };
-
-        scope.getData = function () {
-            delete scope.tableRows;
-
-            server.get(scope.moduleName, function (serverResponseData) {
-
-                if (serverResponseData.length > 0) {
-                    scope.tableHeaders = Object.keys(serverResponseData[0]);
-                }
-
-
-                scope.tableRows = serverResponseData;
-
-                if (scope.sortByColumn) {
-                    scope.sortTableRows();
-                }
-
-                scope.lastGet = new Date().getTime();
-
-                if(serverResponseData.length < 1) {
-                    scope.emptyResult = true;
-                }
-            });
-        };
-
-        scope.getData();
+      scope.getData();
     }
   };
 }]);
@@ -374,27 +375,29 @@ linuxDash.directive('keyValueList', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {
-        heading: '@',
-        info: '@',
-        moduleName: '@',
+      heading: '@',
+      info: '@',
+      moduleName: '@',
     },
     templateUrl: 'templates/app/key-value-list-plugin.html',
     link: function (scope, element) {
 
-        scope.getData = function () {
-            delete scope.tableRows;
+      scope.getData = function () {
+        delete scope.tableRows;
 
-            server.get(scope.moduleName, function (serverResponseData) {
-                scope.tableRows = serverResponseData;
-                scope.lastGet = new Date().getTime();
+        server.get(scope.moduleName, function (serverResponseData) {
+          scope.tableRows = serverResponseData;
+          scope.lastGet = new Date().getTime();
 
-                if(Object.keys(serverResponseData).length === 0) {
-                    scope.emptyResult = true;
-                }
-            });
-        };
+          if(Object.keys(serverResponseData).length === 0) {
+              scope.emptyResult = true;
+          }
 
-        scope.getData();
+          scope.$digest();
+        });
+      };
+
+      scope.getData();
     }
   };
 }]);
@@ -503,108 +506,113 @@ linuxDash.directive('multiLineChartPlugin', ['$interval', '$compile', 'server', 
   return {
     restrict: 'E',
     scope: {
-        heading: '@',
-        moduleName: '@',
-        refreshRate: '=',
-        getDisplayValue: '=',
-        units: '=',
-        delay: '='
+      heading: '@',
+      moduleName: '@',
+      refreshRate: '=',
+      getDisplayValue: '=',
+      units: '=',
+      delay: '='
     },
     templateUrl: 'templates/app/multi-line-chart-plugin.html',
     link: function (scope, element) {
 
-        // smoothieJS - Create new chart
-        var chart = new SmoothieChart({
-            borderVisible:false,
-            sharpLines:true,
-            grid: {
-                fillStyle:'#ffffff',
-                strokeStyle:'rgba(232,230,230,0.93)',
-                sharpLines:true,
-                borderVisible:false
-            },
-            labels:{
-                fontSize:12,
-                precision:0,
-                fillStyle:'#0f0e0e'
-            },
-            maxValue: 100,
-            minValue: 0,
-            horizontalLines: [{ value: 1, color: '#ecc', lineWidth: 1 }]
-        });
+      // smoothieJS - Create new chart
+      var chart = new SmoothieChart({
+        borderVisible:false,
+        sharpLines:true,
+        grid: {
+          fillStyle:'#ffffff',
+          strokeStyle:'rgba(232,230,230,0.93)',
+          sharpLines:true,
+          borderVisible:false
+        },
+        labels:{
+          fontSize:12,
+          precision:0,
+          fillStyle:'#0f0e0e'
+        },
+        maxValue: 100,
+        minValue: 0,
+        horizontalLines: [{ value: 1, color: '#ecc', lineWidth: 1 }]
+      });
 
-        var seriesOptions = [
-          { strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 2 },
-          { strokeStyle: 'rgba(0, 255, 0, 1)', lineWidth: 2 },
-          { strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 2 },
-          { strokeStyle: 'rgba(255, 255, 0, 1)', lineWidth: 1 }
-        ];
+      var seriesOptions = [
+        { strokeStyle: 'rgba(255, 0, 0, 1)', lineWidth: 2 },
+        { strokeStyle: 'rgba(0, 255, 0, 1)', lineWidth: 2 },
+        { strokeStyle: 'rgba(0, 0, 255, 1)', lineWidth: 2 },
+        { strokeStyle: 'rgba(255, 255, 0, 1)', lineWidth: 1 }
+      ];
 
-        // smoothieJS - set up canvas element for chart
-        var canvas = element.find('canvas')[0];
-        var seriesArray = [];
-        scope.metricsArray = [];
+      // smoothieJS - set up canvas element for chart
+      var canvas = element.find('canvas')[0];
+      scope.seriesArray = [];
+      scope.metricsArray = [];
 
-        // get the data once to set up # of lines on chart
+      // get the data once to set up # of lines on chart
+      server.get(scope.moduleName, function (serverResponseData) {
+
+        var numberOfLines = Object.keys(serverResponseData).length;
+
+        for (var x=0; x < numberOfLines; x++) {
+
+          var keyForThisLine = Object.keys(serverResponseData)[x];
+
+          scope.seriesArray[x] = new TimeSeries();
+          chart.addTimeSeries(scope.seriesArray[x], seriesOptions[x]);
+          scope.metricsArray[x] = {
+            name: keyForThisLine,
+            color: seriesOptions[x].strokeStyle,
+          };
+        }
+
+      });
+
+      var delay = 1000;
+
+      if(angular.isDefined(scope.delay))
+        delay = scope.delay;
+
+      chart.streamTo(canvas, delay);
+
+      // update data on chart
+      scope.getData = function () {
+
+        if (!scope.seriesArray.length) return;
+
         server.get(scope.moduleName, function (serverResponseData) {
+          scope.lastGet = new Date().getTime();
+          var keyCount    = 0;
+          var maxAvg      = 100;
 
-            var numberOfLines = Object.keys(serverResponseData).length;
+          // update chart with current response
+          for(var key in serverResponseData) {
 
-            for (var x=0; x < numberOfLines; x++) {
-                var keyForThisLine = Object.keys(serverResponseData)[x];
+            scope.seriesArray[keyCount].append(scope.lastGet, serverResponseData[key]);
+            keyCount++;
+            maxAvg = Math.max(maxAvg, serverResponseData[key]);
+          }
 
-                seriesArray[x] = new TimeSeries();
-                chart.addTimeSeries(seriesArray[x], seriesOptions[x]);
-                scope.metricsArray[x] = {
-                    name: keyForThisLine,
-                    color: seriesOptions[x].strokeStyle,
-                };
-            }
+          // update the metrics for this chart
+          scope.metricsArray.forEach(function (metricObj) {
+              metricObj.data = serverResponseData[metricObj.name].toString() + ' ' + scope.units;
+          });
+
+          // round up the average and set the maximum scale
+          var len = parseInt(Math.log(maxAvg)/Math.log(10));
+          var div = Math.pow(10, len);
+          chart.options.maxValue = Math.ceil(maxAvg / div) * div;
 
         });
 
-        var delay = 1000;
+      };
 
-        if(angular.isDefined(scope.delay))
-            delay = scope.delay;
+      var refreshRate = (angular.isDefined(scope.refreshRate))? scope.refreshRate: 1000;
+      var intervalRef = $interval(scope.getData, refreshRate);
+      var removeInterval = function() {
+        $interval.cancel(intervalRef);
+      };
 
-        chart.streamTo(canvas, delay);
-
-        // update data on chart
-        scope.getData = function () {
-            server.get(scope.moduleName, function (serverResponseData) {
-                scope.lastGet = new Date().getTime();
-
-                var keyCount    = 0;
-                var maxAvg      = 100;
-
-                // update chart with current response
-                for(var key in serverResponseData) {
-                    seriesArray[keyCount].append(scope.lastGet, serverResponseData[key]);
-                    keyCount++;
-                    maxAvg = Math.max(maxAvg, serverResponseData[key]);
-                }
-
-                // update the metrics for this chart
-                scope.metricsArray.forEach(function (metricObj) {
-                    // metricObj.data = metricObj.generate(serverResponseData) ;
-                    metricObj.data = serverResponseData[metricObj.name].toString() + ' ' + scope.units;
-                });
-
-                // round up the average and set the maximum scale
-                var len = parseInt(Math.log(maxAvg)/Math.log(10));
-                var div = Math.pow(10, len);
-                chart.options.maxValue = Math.ceil(maxAvg / div) * div;
-            });
-        };
-
-        var refreshRate = (angular.isDefined(scope.refreshRate))? scope.refreshRate: 1000;
-        var intervalRef = $interval(scope.getData, refreshRate);
-        var removeInterval = function() {
-          $interval.cancel(intervalRef);
-        };
-
-        element.on("$destroy", removeInterval);
+      element.on("$destroy", removeInterval);
     }
   };
 }]);
