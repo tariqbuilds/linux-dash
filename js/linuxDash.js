@@ -359,7 +359,7 @@ linuxDash.directive('tableData', [ 'server', function(server) {
             scope.emptyResult = true;
           }
 
-          scope.$digest();
+          if (!scope.$$phase) scope.$digest();
         });
       };
 
@@ -393,7 +393,7 @@ linuxDash.directive('keyValueList', ['server', function(server) {
               scope.emptyResult = true;
           }
 
-          scope.$digest();
+          if (!scope.$$phase) scope.$digest();
         });
       };
 
