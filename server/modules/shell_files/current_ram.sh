@@ -1,12 +1,14 @@
 #!/bin/bash
 
-freeCmd=`which free`
 awkCmd=`which awk`
+catCmd=`which cat`
+grepCmd=`which grep`
+memInfoFile="/proc/meminfo"
 
-procps=$($freeCmd -V | /bin/grep procps-ng)
+# References:
+#   Calculations: http://zcentric.com/2012/05/29/mapping-procmeminfo-to-output-of-free-command/
+#   Fields: https://www.kernel.org/doc/Documentation/filesystems/proc.txt
 
-if [ -z "$procps" ]; then
-	$freeCmd -tmo | $awkCmd 'NR==2 {print "{ \"total\": " $2 ", \"used\": " $3-$6-$7 ", \"free\": " $4+$6+$7 " }"}'
-else
-	$freeCmd -tm | $awkCmd 'NR==2 {print "{ \"total\": " $2 ", \"used\": " $3-$6-$7 ", \"free\": " $4+$6+$7 " }"}'
-fi
+memInfo=`$catCmd $memInfoFile | $grepCmd 'MemTotal\|MemFree\|Buffers\|Cached'`
+
+echo $memInfo | $awkCmd '{print "{ \"total\": " ($2/1024) ", \"used\": " ( ($2-($5+$8+$11))/1024 ) ", \"free\": " ($5+$8+$11) " }"  }'
