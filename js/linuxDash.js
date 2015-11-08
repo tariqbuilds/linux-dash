@@ -2,7 +2,9 @@
 
   angular.module('linuxDash', ['ngRoute']);
 
-  ////////////////// Routing /////////////////////////////
+  /**
+   * Routes for different tabs on UI
+   */
   angular.module('linuxDash').config(['$routeProvider',
     function($routeProvider) {
 
@@ -169,7 +171,9 @@
 
   }]);
 
-
+  /**
+   * Hook to run websocket support check.
+   */
   angular.module('linuxDash').run(function(server) {
     server.checkIfWebsocketsAreSupported();
   });
@@ -202,8 +206,9 @@
 
   });
 
-
-  ////////////////// UI Element Directives //////////////////
+  //////////////////////////////////////////////////////////////
+  ////////////////// UI Element Directives ////////////////// //
+  //////////////////////////////////////////////////////////////
 
   /**
    * Shows loader
