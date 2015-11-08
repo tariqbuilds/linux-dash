@@ -70,20 +70,40 @@
           return serverResponseData.used;
         };
 
+        var humanizeRam = function (ramInMB) {
+          var ram = {
+            value: parseInt(ramInMB, 10),
+            unit: 'MB',
+          };
+
+          // if ram > 1,000 MB, use GB
+          if (ram.value > 1000) {
+            ram = {
+              value: (ramInMB/1024).toFixed(2),
+              unit: 'GB',
+            };
+          }
+
+          return ram.value + ' ' + ram.unit;
+        };
+
         scope.ramMetrics = [{
           name: 'Used',
           generate: function(serverResponseData) {
             var ratio = serverResponseData.used / serverResponseData.total;
             var percentage = parseInt(ratio * 100);
 
-            return serverResponseData.used + ' KB (' + percentage.toString() + '%)';
+            var usedRam = humanizeRam(serverResponseData.used);
+            return usedRam + ' (' + percentage.toString() + '%)';
           }
         },
         {
           name: 'Free',
           generate: function(serverResponseData) {
 
-            return serverResponseData.free.toString() + ' KB of ' + serverResponseData.total + 'KB';
+            var freeRam = humanizeRam(serverResponseData.free);
+            var totalRam = humanizeRam(serverResponseData.total);
+            return  freeRam + ' of ' + totalRam;
           }
         }];
       }
