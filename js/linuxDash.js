@@ -406,7 +406,7 @@
   /**
    * Fetches and displays table data
    */
-  angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', function(server) {
+  angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', function(server, $rootScope) {
     return {
       restrict: 'E',
       scope: {
