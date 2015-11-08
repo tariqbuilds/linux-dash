@@ -34,7 +34,10 @@ composer create-project afaqurk/linux-dash -s dev
 
 
 ### 3. Start Linux Dash
-See the section for your platform. 
+
+While **Node.js** is the recommended platform, Linux Dash also supports PHP, Go, or Python.
+
+See the section for your preferred platform section. 
 
 #### PHP
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
@@ -49,7 +52,7 @@ npm install
 ```
 Start Linux Dash 
 ```
-node server
+node server/
 ```
   - Default port is 80. You may change this in [server/index.js on line 8](https://github.com/afaqurk/linux-dash/blob/master/server/index.js#L8)
 
@@ -81,16 +84,12 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
 
 ## Support
 
-For help with general setup and configuration issues please use the [Linux Dash Gitter](https://gitter.im/afaqurk/linux-dash).
+For help with general setup and configuration issues please use the [Linux Dash Gitter chat room](https://gitter.im/afaqurk/linux-dash).
 
-The following categories are targeted by the Linux Dash project:
-* OS
- * Arch
- * Debian 6,7
- * Ubuntu 11.04+
- * Linux Mint 16+
- * CentOS 5, 6
-* Backend
- * Node.js
- * Go
- * PHP 5
+The following distributions are supported:
+* Arch
+* Debian 6,7
+* Ubuntu 11.04+
+* Linux Mint 16+
+* CentOS 5, 6
+* openSUSE
