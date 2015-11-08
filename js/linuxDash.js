@@ -50,7 +50,7 @@
    * Service which gets data from server
    * via HTTP or Websocket (if supported)
    */
-  angular.module('linuxDash').service('server', ['$http', '$rootScope', '$q', function($http, $rootScope, $q) {
+  angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location', function($http, $rootScope, $location) {
 
     var websocket = {
       connection: null,
@@ -124,19 +124,21 @@
           // websocketSupport.server will equal true.
           websocketSupport.server = !!response.data["websocket_support"];
 
-        }).catch(function() {
+        }).catch(function websocketNotSupportedByServer() {
 
           websocketSupport.server = false;
+          $rootScope.$broadcast("start-linux-dash", {});
 
-        }).then(function() {
+        }).then(function finalDecisionOnWebsocket() {
 
           if (websocketSupport.browser && websocketSupport.server) {
 
             establishWebsocketConnection();
 
           } else {
-            $rootScope.$broadcast("start-linux-dash", {});
-            $rootScope.$apply();
+            // rootScope event not propogating from here.
+            // instead, we manually route to url
+            $location.path('/system-status');
           }
 
         });
@@ -322,7 +324,7 @@
   /**
    * Fetches and displays table data
    */
-  angular.module('linuxDash').directive('tableData', ['server', function(server) {
+  angular.module('linuxDash').directive('tableData', ['server', '$rootScope', function(server, $rootScope) {
     return {
       restrict: 'E',
       scope: {
@@ -392,7 +394,7 @@
               scope.emptyResult = true;
             }
 
-            if (!scope.$$phase) scope.$digest();
+            if (!scope.$$phase && !$rootScope.$$phase) scope.$digest();
           });
         };
 
@@ -404,7 +406,7 @@
   /**
    * Fetches and displays table data
    */
-  angular.module('linuxDash').directive('keyValueList', ['server', function(server) {
+  angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', function(server) {
     return {
       restrict: 'E',
       scope: {
@@ -426,7 +428,7 @@
               scope.emptyResult = true;
             }
 
-            if (!scope.$$phase) scope.$digest();
+            if (!scope.$$phase && !$rootScope.$$phase) scope.$digest();
           });
         };
 
