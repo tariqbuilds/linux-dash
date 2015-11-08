@@ -9,6 +9,20 @@
     function($routeProvider) {
 
       $routeProvider.
+      when('/loading', {
+        templateUrl: 'templates/app/loading.html',
+        controller: function appLoadController ($scope, $location, $rootScope) {
+
+          var loadUrl = localStorage.getItem('currentTab') || 'system-status';
+
+          var loadLinuxDash = function () {
+            $location.path(loadUrl);
+          };
+
+          $rootScope.$on('start-linux-dash', loadLinuxDash);
+
+        },
+      }).
       when('/system-status', {
         templateUrl: 'templates/sections/system-status.html',
       }).
@@ -25,7 +39,7 @@
         templateUrl: 'templates/sections/applications.html',
       }).
       otherwise({
-        redirectTo: '/system-status'
+        redirectTo: '/loading'
       });
 
     }
@@ -36,7 +50,7 @@
    * Service which gets data from server
    * via HTTP or Websocket (if supported)
    */
-  angular.module('linuxDash').service('server', ['$http', function($http) {
+  angular.module('linuxDash').service('server', ['$http', '$rootScope', '$q', function($http, $rootScope, $q) {
 
     var websocket = {
       connection: null,
@@ -58,6 +72,8 @@
         websocket.connection = new WebSocket(websocketUrl, 'linux-dash');
 
         websocket.connection.onopen = function() {
+          $rootScope.$broadcast("start-linux-dash", {});
+          $rootScope.$apply();
           console.info('Websocket connection is open');
         };
 
@@ -118,6 +134,9 @@
 
             establishWebsocketConnection();
 
+          } else {
+            $rootScope.$broadcast("start-linux-dash", {});
+            $rootScope.$apply();
           }
 
         });
@@ -174,8 +193,16 @@
   /**
    * Hook to run websocket support check.
    */
-  angular.module('linuxDash').run(function(server) {
+  angular.module('linuxDash').run(function(server, $location, $rootScope) {
+
     server.checkIfWebsocketsAreSupported();
+
+    var currentRoute = $location.path();
+    var currentTab = (currentRoute === '/loading')? 'system-status': currentRoute;
+    localStorage.setItem('currentTab', currentTab);
+
+    $location.path('/loading');
+
   });
 
   /**

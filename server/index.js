@@ -55,7 +55,6 @@ wsServer.on('request', function(request) {
     var shellFile  = getShellFilePath(moduleName);
 
     if (!shellPathAndModuleNameAreValid(shellFile, moduleName)) {
-      res.sendStatus(406);
       return;
     }
 
