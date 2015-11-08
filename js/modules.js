@@ -83,7 +83,6 @@
           name: 'Free',
           generate: function(serverResponseData) {
 
-            if (serverResponseData.free.toString().length > )
             return serverResponseData.free.toString() + ' KB of ' + serverResponseData.total + 'KB';
           }
         }];
