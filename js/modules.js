@@ -76,13 +76,15 @@
             var ratio = serverResponseData.used / serverResponseData.total;
             var percentage = parseInt(ratio * 100);
 
-            return serverResponseData.used + ' MB (' + percentage.toString() + '%)';
+            return serverResponseData.used + ' KB (' + percentage.toString() + '%)';
           }
         },
         {
           name: 'Free',
           generate: function(serverResponseData) {
-            return serverResponseData.free.toString() + ' MB of ' + serverResponseData.total + 'MB';
+
+            if (serverResponseData.free.toString().length > )
+            return serverResponseData.free.toString() + ' KB of ' + serverResponseData.total + 'KB';
           }
         }];
       }
