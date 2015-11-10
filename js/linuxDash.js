@@ -456,9 +456,7 @@
       templateUrl: 'templates/app/line-chart-plugin.html',
       link: function(scope, element) {
 
-        if (!scope.color) {
-          scope.color = '0, 255, 0';
-        }
+        if (!scope.color) scope.color = '0, 255, 0';
 
         var series;
 
@@ -488,21 +486,30 @@
         });
 
         // smoothieJS - set up canvas element for chart
-        canvas = element.find('canvas')[0],
-          series = new TimeSeries();
+        canvas = element.find('canvas')[0];
+        series = new TimeSeries();
+
         chart.addTimeSeries(series, {
           strokeStyle: 'rgba(' + scope.color + ', 1)',
           fillStyle: 'rgba(' + scope.color + ', 0.2)',
           lineWidth: 2
         });
+
         chart.streamTo(canvas, 1000);
+
+        var dataCallInProgress = false;
 
         // update data on chart
         scope.getData = function() {
 
+          if (dataCallInProgress) return;
+
+          dataCallInProgress = true;
+
           server.get(scope.moduleName, function(serverResponseData) {
 
-            scope.lastGet = new Date().getTime();
+            dataCallInProgress = false;
+            scope.lastGet      = new Date().getTime();
 
             // change graph colour depending on usage
             if (scope.maxValue / 4 * 3 < scope.getDisplayValue(serverResponseData)) {
@@ -596,8 +603,8 @@
         }];
 
         // smoothieJS - set up canvas element for chart
-        var canvas = element.find('canvas')[0];
-        scope.seriesArray = [];
+        var canvas         = element.find('canvas')[0];
+        scope.seriesArray  = [];
         scope.metricsArray = [];
 
         // get the data once to set up # of lines on chart
@@ -626,19 +633,26 @@
 
         chart.streamTo(canvas, delay);
 
+        var dataCallInProgress = false;
+
         // update data on chart
         scope.getData = function() {
 
+          if (dataCallInProgress) return;
+
           if (!scope.seriesArray.length) return;
 
+          dataCallInProgress = true;
+
           server.get(scope.moduleName, function(serverResponseData) {
+
+            dataCallInProgress = false;
             scope.lastGet = new Date().getTime();
             var keyCount = 0;
             var maxAvg = 100;
 
             // update chart with current response
             for (var key in serverResponseData) {
-
               scope.seriesArray[keyCount].append(scope.lastGet, serverResponseData[key]);
               keyCount++;
               maxAvg = Math.max(maxAvg, serverResponseData[key]);
