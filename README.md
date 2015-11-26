@@ -6,12 +6,13 @@
 </h6>
 
 <p align="center">
-  <strong><i>
-    <a href="http://linuxdash.afaqtariq.com">Demo</a> &nbsp;|&nbsp;
-    <a href="#features">Features</a> &nbsp;|&nbsp;
-    <a href="https://github.com/afaqurk/linux-dash/wiki/Install-Linux-Dash">Installation</a> &nbsp;|&nbsp;
-    <a href="#support">Support</a>
-  </i></strong>
+  <strong>
+    <a href="http://linuxdash.afaqtariq.com"><i>Demo</i></a> &nbsp;|&nbsp;
+    <a href="#features"><i>Features</i></a> &nbsp;|&nbsp;
+    <a href="https://github.com/afaqurk/linux-dash/wiki/Install-Linux-Dash">
+      <i>Installation</i></a> &nbsp;|&nbsp;
+    <a href="#support"><i>Support</i></a>
+  </strong>
 </p>
 
 <p align="center">
