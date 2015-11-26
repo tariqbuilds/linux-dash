@@ -1,10 +1,9 @@
 <br/>
 <h1 align="center"><i>Linux Dash</i></h1>
 
-<br/>
-<p align="center">
-  <i>A simple, low-overhead web dashboard for Linux.</i>
-</p>
+<h6 align="center">
+  <i>A simple, low-overhead web dashboard for Linux</i>
+</h6>
 
 <p align="center">
   <strong><i>
@@ -25,11 +24,15 @@
 
 <br/>
 <p align="center">
-  <img 
-    width="80%"
-    alt="Linux Dash screenshot" 
-    src="https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/system-status-full.png">
+  <a href="https://gitter.im/afaqurk/linux-dash">
+    <img 
+      width="80%"
+      alt="Linux Dash screenshot" 
+      src="http://i.imgur.com/tehGyrQ.gif">
+  </a>
 </p>
+
+<br/>
 
 ## Features
 * A beautiful, simple web-based dashboard for monitoring a linux server
