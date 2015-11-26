@@ -24,7 +24,7 @@
 
 <br/>
 <p align="center">
-  <a href="https://gitter.im/afaqurk/linux-dash">
+  <a href="http://linuxdash.afaqtariq.com">
     <img 
       width="80%"
       alt="Linux Dash screenshot" 
