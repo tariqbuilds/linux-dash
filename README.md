@@ -9,7 +9,7 @@
   <strong><i>
     <a href="http://linuxdash.afaqtariq.com">Demo</a> &nbsp;|&nbsp;
     <a href="#features">Features</a> &nbsp;|&nbsp;
-    <a href="#installation">Installation</a> &nbsp;|&nbsp;
+    <a href="https://github.com/afaqurk/linux-dash/wiki/Install-Linux-Dash">Installation</a> &nbsp;|&nbsp;
     <a href="#support">Support</a>
   </i></strong>
 </p>
@@ -39,74 +39,6 @@
 * Only ~1MB on disk! *(.git removed)*
 * Live graphs, refresh-able widgets, and a growing # of supported modules
 * Drop-in installation for PHP, Node.js, Python, and Go 
-
-## Installation
-
-### 1. Download Linux Dash
-
-Clone the git repo: 
-```shell
-git clone https://github.com/afaqurk/linux-dash.git
-```
-*Alternatives*: 
-- Install the [Composer](https://packagist.org/packages/afaqurk/linux-dash) package
-```bash
-composer create-project afaqurk/linux-dash -s dev
-```
-- Download the source at: https://github.com/afaqurk/linux-dash/archive/master.zip
-
-### 2. Secure Linux Dash
-*It is strongly recommended that all Linux Dash installations be password protected. Please add htaccess protection or another security measure of your choice.*
-
-
-### 3. Start Linux Dash
-
-While **Node.js** is the recommended platform, Linux Dash also supports PHP, Go, or Python.
-
-See the section for your preferred platform section. 
-
-#### PHP
-1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
-2. Restart your web server (Apache, nginx, etc.) 
-  - For PHP + Apache setup follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04).
-  - For help with nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov).
-
-#### Node.js
-Install NPM dependencies
-```
-npm install
-```
-Start Linux Dash 
-```
-node server/
-```
-  - Default port is 80. You may change this in [server/index.js on line 8](https://github.com/afaqurk/linux-dash/blob/master/server/index.js#L8)
-
-#### Go
-Go to the `linux-dash/server` folder and run 
-```
-go run index.go
-```
-
-To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
-
-## Goals for v2.0
-- [x] Backend ported to ~~Python~~ shell scripts & python from PHP
-- [x] Add config file
-- [x] Segregate core code-base and modules
-- [ ] ~~Each module in a separate directory with front-end template, back-end file, bash script~~ Doesn't make sense in implementation.
-- [x] Add angular element to show info section for a module
-- [ ] Angular tests
-- [ ] Back-end tests
-  - [ ] ~~for shell files~~
-  - [ ] for PHP, NodeJS, & Go
-- [ ] "Quick Guide to Contributing" Wiki page
-- Add project to package managers
-  - [ ] aur
-  - [ ] apt (ubuntu)
-- [x] Bonus: 
-  - [x] multiple server side languages supported
-  - [x] use websockets in ~~PHP~~ & NodeJS
 
 ## Support
 
