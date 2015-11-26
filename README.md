@@ -1,12 +1,35 @@
-# Linux Dash
+<br/>
+<h1 align="center"><i>Linux Dash</i></h1>
 
-[![Linux Dash Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/afaqurk/linux-dash)
+<br/>
+<p align="center">
+  <i>A simple, low-overhead web dashboard for Linux.</i>
+</p>
 
-A simple, low-overhead web dashboard for GNU / Linux. (~1MB)
+<p align="center">
+  <strong><i>
+    <a href="http://linuxdash.afaqtariq.com">Demo</a> &nbsp;|&nbsp;
+    <a href="#features">Features</a> &nbsp;|&nbsp;
+    <a href="#installation">Installation</a> &nbsp;|&nbsp;
+    <a href="#support">Support</a>
+  </i></strong>
+</p>
 
-[**DEMO**](http://linuxdash.afaqtariq.com) | [**Installation Instructions**](#installation) | [**Support**](#support)
+<p align="center">
+  <a href="https://gitter.im/afaqurk/linux-dash">
+    <img 
+      src="https://badges.gitter.im/gitterHQ/gitter.png" 
+      alt="Linux Dash Gitter chat">
+  </a>
+</p>
 
-![Linux Dash screenshot](https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/system-status-full.png)
+<br/>
+<p align="center">
+  <img 
+    width="80%"
+    alt="Linux Dash screenshot" 
+    src="https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/system-status-full.png">
+</p>
 
 ## Features
 * A beautiful, simple web-based dashboard for monitoring a linux server
