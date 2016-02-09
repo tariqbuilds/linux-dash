@@ -1,8 +1,17 @@
 #!/bin/bash
 
-result=$( pm2 list \
- 	| tail -n +4 | head -n +2 \
- 	| awk 	'{print "{"}\
+#get data
+command="pm2 list"
+data="$($command)"
+
+#only process data if variable has a length 
+#this should handle cases where pm2 is not installed
+if [ -n "$data" ]; then
+	
+	#start processing data on line 4
+	#don't process last 2 lines
+	json=$( echo "$data" | tail -n +4 | head -n +2 \
+	| awk 	'{print "{"}\
 		{print "\"appName\":\"" $2 "\","} \
 		{print "\"id\":\"" $4 "\","} \
 		{print "\"mode\":\"" $6 "\","} \
@@ -13,5 +22,11 @@ result=$( pm2 list \
 		{print "\"memory\":\"" $16 $17 "\","}\
 		{print "\"watching\":\"" $19 "\""}\
 		{print "},"}')
+	#make sure to remove last comma and print in array
+	echo "[" ${json%?} "]"
+else
+	#no data found
+	echo "{}"
+fi
 
-echo "[" ${result%?} "]" 
+
