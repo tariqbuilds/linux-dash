@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/afaqurk/linux-dash",
   "dependencies": {
-    "basic-auth": "^1.0.3",
     "basic-auth-connect": "^1.0.0",
     "express": "^4.11.1",
     "node-config": "0.0.2",
