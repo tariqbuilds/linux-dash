@@ -32,25 +32,21 @@ body {
   text-align: center;
 }
 .plugin ::-webkit-scrollbar {
-  width: 5px;
-}
-.plugin ::-webkit-scrollbar-button {
   width: 8px;
-  height:5px;
+  height: 8px;
 }
 .plugin ::-webkit-scrollbar-track {
-  background:#eee;
+  background: #eee;
   border: thin solid lightgray;
   box-shadow: 0px 0px 3px #dfdfdf inset;
-  border-radius:10px;
 }
 .plugin ::-webkit-scrollbar-thumb {
   background: #999;
   border: thin solid gray;
-  border-radius:10px;
+  border-radius: 0px;
 }
 .plugin ::-webkit-scrollbar-thumb:hover {
-  background:#7d7d7d;
+  background: #7d7d7d;
 }
 .centered {
     margin: 0 auto;
