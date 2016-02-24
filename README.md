@@ -75,7 +75,7 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
 - Add project to package managers
   - [x] npm
   - [x] composer
-  - [ ] aur
+  - [x] aur
   - [ ] apt
 - [x] Bonus: 
   - [x] multiple server side languages supported
