@@ -412,7 +412,6 @@ canvas {
   font-family: 'Helvetica',sans-serif;
   padding: 7px 10px;
   position: absolute;
-  left: -80px;
   width: 200px;
   z-index: 4;
 }
