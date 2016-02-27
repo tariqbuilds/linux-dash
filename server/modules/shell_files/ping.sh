@@ -12,7 +12,7 @@ sedCmd=`which sed`
 numOfLinesInConfig=`$sedCmd -n '$=' $CONFIG_PATH`
 result='['
 
-{ $catCmd $CONFIG_PATH; echo; } \
+$catCmd $CONFIG_PATH \
 |  while read output
 	do
 	   	singlePing=$($pingCmd -qc 2 $output \
@@ -20,7 +20,7 @@ result='['
 	    )
 	    numOfLinesInConfig=$(($numOfLinesInConfig-1))
 	    result=$result$singlePing
-		if [ $numOfLinesInConfig -eq 1 ]
+		if [ $numOfLinesInConfig -eq 0 ]
 			then
 				echo $result"]"
 		fi
