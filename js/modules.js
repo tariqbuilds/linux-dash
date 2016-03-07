@@ -27,7 +27,7 @@
 
         scope.getKB = function(stringSize) {
           var lastChar = stringSize.slice(-1),
-            size = parseInt(stringSize);
+            size = parseFloat(stringSize.replace(",", "."));
 
           switch (lastChar) {
             case 'M':
