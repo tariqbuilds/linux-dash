@@ -40,6 +40,6 @@ class MainHandler(BaseHTTPRequestHandler):
             self.send_error(404, 'File Not Found: %s' % self.path)
 
 if __name__ == '__main__':
-    server = ThreadedHTTPServer(('localhost', 8081), MainHandler)
+    server = ThreadedHTTPServer(('0.0.0.0', 8081), MainHandler)
     print 'Starting server, use <Ctrl-C> to stop'
     server.serve_forever()
