@@ -1,11 +1,11 @@
 <br/>
 <h1 align="center">
-  <img src="http://www166.lunapic.com/do-not-link-here-use-hosting-instead/14574748496569?241088382" align="center" />
+  <img src="https://camo.githubusercontent.com/0b39e0cc6c13a7fbba7820e64a131adec0cf4c25/687474703a2f2f7777773136362e6c756e617069632e636f6d2f646f2d6e6f742d6c696e6b2d686572652d7573652d686f7374696e672d696e73746561642f31343537343734383439363536393f323431303838333832" align="center" />
 </h1>
 
-<h6 align="center">
-  <i>A simple, low-overhead web dashboard for Linux</i>
-</h6>
+<p align="center">
+  A simple, low-overhead web dashboard for Linux
+</p>
 
 <p align="center">
   <strong>
