@@ -1,5 +1,7 @@
 <br/>
-<h1 align="center"><i>Linux Dash</i></h1>
+<h1 align="center">
+  <img src="http://www166.lunapic.com/do-not-link-here-use-hosting-instead/14574748496569?241088382" align="center" />
+</h1>
 
 <h6 align="center">
   <i>A simple, low-overhead web dashboard for Linux</i>
