@@ -9,6 +9,7 @@ sedCmd=`which sed`
 egrepCmd=`which egrep`
 echoCmd=`which echo`
 crontabCmd=`which crontab`
+trCmd=`which tr`
 
 # System-wide crontab file and cron job directory. Change these for your system.
 CRONTAB='/etc/crontab'
@@ -80,9 +81,11 @@ $catCmd "${temp}" \
                 " \"month\": \"" $4 "\", " \
                 " \"weekday\": \"" $5 "\", " \
                 " \"user\": \"" $6 "\", " \
-                " \"command\": \"" $7$8$9$10 "\" " \
+                " \"command\": \""} \
+                    {for(i=7;i<=NF;++i) printf("%s ", gensub("\"", "\\\\\"", "g", $i) ) } \
+                {print "\" " \
                 "}," } \
             END {print "]"}' \
-    | $sedCmd 'N;$s/,\n/\n/;P;D'
+    | $sedCmd 'N;$s/,\n//;P;D' | $trCmd -s '\n' ' '
 
 rm --force "${temp}"
