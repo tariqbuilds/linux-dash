@@ -65,7 +65,7 @@
      */
     var establishWebsocketConnection = function() {
 
-      var websocketUrl = 'ws://' + window.location.hostname + ':' + window.location.port;
+      var websocketUrl = (location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.hostname + ':' + window.location.port;
 
       if (websocket.connection === null) {
 
