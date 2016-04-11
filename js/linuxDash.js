@@ -440,7 +440,7 @@
   /**
    * Fetches and displays data as line chart at a certain refresh rate
    */
-  angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
+  angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile', 'server', '$window', function($interval, $compile, server, $window) {
     return {
       restrict: 'E',
       scope: {
@@ -458,7 +458,12 @@
 
         if (!scope.color) scope.color = '0, 255, 0';
 
-        var series;
+        var series, w, h, canvas;
+
+        angular.element($window).bind('resize', function() {
+          canvas.width = w;
+          canvas.height = h;
+        });
 
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
@@ -486,8 +491,10 @@
         });
 
         // smoothieJS - set up canvas element for chart
-        canvas = element.find('canvas')[0];
-        series = new TimeSeries();
+        canvas  = element.find('canvas')[0];
+        series  = new TimeSeries();
+        w       = canvas.width;
+        h       = canvas.height;
 
         chart.addTimeSeries(series, {
           strokeStyle: 'rgba(' + scope.color + ', 1)',
@@ -550,7 +557,7 @@
    * Fetches and displays data as line chart at a certain refresh rate
    *
    */
-  angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$compile', 'server', function($interval, $compile, server) {
+  angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$compile', 'server', '$window', function($interval, $compile, server, $window) {
     return {
       restrict: 'E',
       scope: {
@@ -563,6 +570,13 @@
       },
       templateUrl: 'templates/app/multi-line-chart-plugin.html',
       link: function(scope, element) {
+
+        var w, h, canvas;
+
+        angular.element($window).bind('resize', function() {
+          canvas.width = w;
+          canvas.height = h;
+        });
 
         // smoothieJS - Create new chart
         var chart = new SmoothieChart({
@@ -603,9 +617,11 @@
         }];
 
         // smoothieJS - set up canvas element for chart
-        var canvas         = element.find('canvas')[0];
-        scope.seriesArray  = [];
-        scope.metricsArray = [];
+        var canvas          = element.find('canvas')[0];
+        w                   = canvas.width;
+        h                   = canvas.height;
+        scope.seriesArray   = [];
+        scope.metricsArray  = [];
 
         // get the data once to set up # of lines on chart
         server.get(scope.moduleName, function(serverResponseData) {
