@@ -164,7 +164,7 @@ body {
 /***** Plugin ****/
 .plugin {
   vertical-align: text-top;
-  width: 450px;
+  width: 470px;
   display: inline-block;
   padding: 0;
   background-color: #FFFFFF;
@@ -304,9 +304,9 @@ refresh-btn button:active {
 /**** General Elements ****/
 table
 {
+  width: 100%;
   font-size: 10px;
   margin: 0;
-  min-width: 400px;
   border-collapse: collapse;
   text-align: left;
   table-layout:fixed;
