@@ -154,6 +154,7 @@ body {
 
 /***** Plugins Container ****/
 #plugins {
+  text-align: center;
   padding: 20px;
   padding-top: 0;
   margin-top: 0;
@@ -162,7 +163,9 @@ body {
 
 /***** Plugin ****/
 .plugin {
-  float: left;
+  vertical-align: text-top;
+  width: 470px;
+  display: inline-block;
   padding: 0;
   background-color: #FFFFFF;
   color: black;
@@ -172,7 +175,7 @@ body {
   margin-top: 10px;
   margin: 0 auto;
   margin-top: 20px;
-  margin-left: 50px;
+  margin-left: 20px;
   margin-bottom: 50px;
 }
 @media (max-width: 768px) { 
@@ -301,9 +304,9 @@ refresh-btn button:active {
 /**** General Elements ****/
 table
 {
+  width: 100%;
   font-size: 10px;
   margin: 0;
-  min-width: 400px;
   border-collapse: collapse;
   text-align: left;
   table-layout:fixed;
