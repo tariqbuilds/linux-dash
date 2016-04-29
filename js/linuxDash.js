@@ -330,7 +330,9 @@
       scope: {
         heading: '@',
         info: '@',
-        moduleName: '@'
+        moduleName: '@',
+        width: '@',
+        height: '@'
       },
       templateUrl: 'templates/app/table-data-plugin.html',
       link: function(scope, element) {
