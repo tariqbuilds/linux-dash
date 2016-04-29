@@ -190,6 +190,10 @@
       template: '<table-data heading="CPU Intensive Processes" module-name="cpu_intensive_processes" info="Processes which are using most CPU."></table-data>'
     },
     {
+      name: 'dockerProcesses',
+      template: '<table-data heading="Docker Processes" module-name="docker_processes" info="Processes in Docker Containers sorted by CPU."></table-data>'
+    },
+    {
       name: 'networkConnections',
       template: '<table-data heading="Network Connections" module-name="network_connections"></table-data>'
     },
