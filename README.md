@@ -1,15 +1,15 @@
 <br/>
 <h1 align="center">
-  Multi Linux Dash
+  linux-dash
 </h1>
 
 <p align="center">
-  A simple, low-overhead web dashboard for Linux that shows real time stats from multiple servers.
+  A simple, low-overhead web dashboard for Linux
 </p>
 
 <p align="center">
   <strong>
-    <a href="http://kylemaguire.com/dashboard"><i>Demo (not live yet)</i></a> &nbsp;|&nbsp;
+    <a href="http://linuxdash.afaqtariq.com"><i>Demo</i></a> &nbsp;|&nbsp;
     <a href="#features"><i>Features</i></a> &nbsp;|&nbsp;
     <a href="https://github.com/afaqurk/linux-dash/wiki/Install-Linux-Dash">
       <i>Installation</i></a> &nbsp;|&nbsp;
@@ -17,9 +17,17 @@
   </strong>
 </p>
 
+<p align="center">
+  <a href="https://gitter.im/afaqurk/linux-dash">
+    <img 
+      src="https://badges.gitter.im/gitterHQ/gitter.png" 
+      alt="Linux Dash Gitter chat">
+  </a>
+</p>
+
 <br/>
 <p align="center">
-  <a href="http://maguire.science/status">
+  <a href="http://linuxdash.afaqtariq.com">
     <img 
       width="80%"
       alt="Linux Dash screenshot" 
@@ -30,19 +38,14 @@
 <br/>
 
 ## Features
-* Features from the orginal linux-dash project
 * A beautiful, simple web-based dashboard for monitoring a linux server
 * Only ~1MB on disk! *(.git removed)*
 * Live graphs, refresh-able widgets, and a growing # of supported modules
 * Drop-in installation for PHP, Node.js, Python, and Go 
-* Goals for this project:
-* Connect mutiple servers to one server to show real time data across servers
-* Provide a public dashboard and a private (ie password protected) dashboard
-* Show if ports or online (ex: an indicator if port 80 is open/up)
-* More themes
+
 ## Support
 
-For help or questions, contact me on twitter: @itmightbekyle
+For help with general setup and configuration issues please use the [Linux Dash Gitter chat room](https://gitter.im/afaqurk/linux-dash).
 
 The following distributions are supported:
 * Arch
