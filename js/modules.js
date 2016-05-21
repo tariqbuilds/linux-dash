@@ -120,6 +120,29 @@
       }
     };
   }]);
+  angular.module('linuxDash').directive('cpuTemp', ['server', function(server) {
+    return {
+      restrict: 'E',
+      scope: {},
+      templateUrl: 'templates/modules/cpu-temp.html',
+      link: function(scope) {
+        scope.min = 0;
+        scope.max = 100;
+
+        scope.displayValue = function(serverResponseData) {
+          return serverResponseData;
+        };
+
+        scope.utilMetrics = [{
+          name: 'Temprature',
+          generate: function(serverResponseData) {
+            return serverResponseData + ' °C';
+          }
+        }];
+
+      }
+    };
+  }]);
 
   angular.module('linuxDash').directive('cpuUtilizationChart', ['server', function(server) {
     return {
@@ -229,6 +252,10 @@
       name: 'swapUsage',
       template: '<table-data heading="Swap Usage" module-name="swap"></table-data>'
     },
+    /*{
+      name: 'cpuTemp',
+      template: '<table-data heading="CPU Temp" module-name="cputemp"></table-data>'
+    },*/
     {
       name: 'internetSpeed',
       template: '<key-value-list heading="Internet Speed" module-name="internet_speed" info="Internet connection speed of server."></key-value-list>'
