@@ -458,6 +458,8 @@
       templateUrl: 'templates/app/line-chart-plugin.html',
       link: function(scope, element) {
 
+        scope.initializing = true
+
         if (!scope.color) scope.color = '0, 255, 0';
 
         var series, w, h, canvas;
@@ -511,11 +513,19 @@
         // update data on chart
         scope.getData = function() {
 
+          if(scope.initializing)
+            scope.initializing = false
+
           if (dataCallInProgress) return;
 
           dataCallInProgress = true;
 
           server.get(scope.moduleName, function(serverResponseData) {
+
+            if (serverResponseData.length < 1) {
+              scope.emptyResult = true
+              return
+            }
 
             dataCallInProgress = false;
             scope.lastGet      = new Date().getTime();

@@ -1,12 +1,12 @@
 <div class="plugin">
 
 	<top-bar heading="heading" last-updated="lastGet" no-refresh-btn></top-bar>
-	
+
 	<div class="plugin-body no-padding">
 
-		<canvas class="canvas" width="400" height="200"></canvas>
+		<canvas ng-show="!initializing && !emptyResult" class="canvas" width="400" height="200"></canvas>
 
-		<table border="0" class="metrics-table">
+		<table ng-show="!initializing && !emptyResult" border="0" class="metrics-table">
 			<tbody>
 				<tr ng-repeat="metric in metrics">
 					<td><strong>{{ metric.name }}</strong></td>
@@ -14,7 +14,8 @@
 				</tr>
 			</tbody>
 		</table>
-		
-	</div>
 
+		<no-data ng-show="emptyResult"></no-data>
+
+	</div>
 </plugin>
