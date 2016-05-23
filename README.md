@@ -45,7 +45,7 @@
 
 ## Installation
 
-#### Step 1: Download Linux Dash
+##### Step 1: Download Linux Dash
 
 Clone the git repo
 ```sh
@@ -54,22 +54,18 @@ git clone https://github.com/afaqurk/linux-dash.git
 
 Or download it **[here](https://github.com/afaqurk/linux-dash/archive/master.zip)**.
 
-<hr/>
-
-#### Step 2: Secure Linux Dash
+##### Step 2: Secure Linux Dash
 
 Linux Dash does not provide any security or authentication features.
 
 **It is strongly recommended** that all Linux Dash installations be protected via a security measure of your choice.
 
-<hr/>
-
-#### Step 3: Start Linux Dash
+##### Step 3: Start Linux Dash
 <h6 align="center">
 Linux Dash can be run in: <u>Node.js</u>, PHP, Go, or Python. 
 <br/>
 <sub>
-* Node.js is the recommended platform since it supports websockets.
+* Node.js is the recommended platform since it has native support for websockets and fast I/O.
 </sub>
 </h6>
 
