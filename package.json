@@ -25,6 +25,17 @@
   "homepage": "https://github.com/afaqurk/linux-dash",
   "dependencies": {
     "express": "^4.11.1",
-    "websocket": "^1.0.22"
+    "websocket": "^1.0.23"
+  },
+  "devDependencies": {
+    "angular": "1.3.4",
+    "angular-route": "1.3.4",
+    "babel-core": "^6.9.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "ngmin": "^0.5.0",
+    "ngmin-webpack-plugin": "^0.1.3",
+    "smoothie": "^1.27.0",
+    "webpack": "^1.13.1"
   }
 }

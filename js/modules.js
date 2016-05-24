@@ -1,6 +1,5 @@
-(function() {
-
-  "use strict";
+'use strict'
+require('angular')
 
   ///////////////////////////////////////////////////////////
   ////////////////// Module Directives /////////////////// //
@@ -271,7 +270,7 @@
     {
       name: 'pm2',
       template: '<table-data heading="P(rocess) M(anager) 2" module-name="pm2" info="pm2 read-out."></table-data>'
-    },    
+    },
     {
       name: 'memoryInfo',
       template: '<key-value-list heading="Memory Info" module-name="memory_info" info="/proc/meminfo read-out."></key-value-list>'
@@ -315,5 +314,3 @@
     }]);
 
   });
-
-}());
