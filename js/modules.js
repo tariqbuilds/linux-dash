@@ -9,44 +9,44 @@ angular.module('linuxDash').directive('diskSpace', ['server', function(server) {
     templateUrl: 'templates/modules/disk-space.html',
     link: function(scope) {
 
-      scope.heading = "Disk Partitions";
+      scope.heading = "Disk Partitions"
 
       scope.getData = function() {
         server.get('disk_partitions', function(serverResponseData) {
-          scope.diskSpaceData = serverResponseData;
-        });
+          scope.diskSpaceData = serverResponseData
+        })
 
-        scope.lastGet = new Date().getTime();
-      };
+        scope.lastGet = new Date().getTime()
+      }
 
-      scope.getData();
+      scope.getData()
 
       scope.getKB = function(stringSize) {
         var lastChar = stringSize.slice(-1),
-          size = parseFloat(stringSize.replace(",", "."));
+          size = parseFloat(stringSize.replace(",", "."))
 
         switch (lastChar) {
           case 'M':
-            return size * Math.pow(1024, 1);
+            return size * Math.pow(1024, 1)
           case 'G':
-            return size * Math.pow(1024, 2);
+            return size * Math.pow(1024, 2)
           case 'T':
-            return size * Math.pow(1024, 3);
+            return size * Math.pow(1024, 3)
           case 'P':
-            return size * Math.pow(1024, 4);
+            return size * Math.pow(1024, 4)
           case 'E':
-            return size * Math.pow(1024, 5);
+            return size * Math.pow(1024, 5)
           case 'Z':
-            return size * Math.pow(1024, 6);
+            return size * Math.pow(1024, 6)
           case 'Y':
-            return size * Math.pow(1024, 7);
+            return size * Math.pow(1024, 7)
           default:
-            return size;
+            return size
         }
-      };
+      }
     }
-  };
-}]);
+  }
+}])
 
 angular.module('linuxDash').directive('ramChart', ['server', function(server) {
   return {
@@ -58,53 +58,53 @@ angular.module('linuxDash').directive('ramChart', ['server', function(server) {
       // get max ram available on machine before we
       // can start charting
       server.get('current_ram', function(resp) {
-        scope.maxRam = resp.total;
-        scope.minRam = 0;
-      });
+        scope.maxRam = resp.total
+        scope.minRam = 0
+      })
 
       scope.ramToDisplay = function(serverResponseData) {
-        return serverResponseData.used;
-      };
+        return serverResponseData.used
+      }
 
       var humanizeRam = function (ramInMB) {
         var ram = {
           value: parseInt(ramInMB, 10),
           unit: 'MB',
-        };
+        }
 
         // if ram > 1,000 MB, use GB
         if (ram.value > 1000) {
           ram = {
             value: (ramInMB/1024).toFixed(2),
             unit: 'GB',
-          };
+          }
         }
 
-        return ram.value + ' ' + ram.unit;
-      };
+        return ram.value + ' ' + ram.unit
+      }
 
       scope.ramMetrics = [{
         name: 'Used',
         generate: function(serverResponseData) {
-          var ratio = serverResponseData.used / serverResponseData.total;
-          var percentage = parseInt(ratio * 100);
+          var ratio = serverResponseData.used / serverResponseData.total
+          var percentage = parseInt(ratio * 100)
 
-          var usedRam = humanizeRam(serverResponseData.used);
-          return usedRam + ' (' + percentage.toString() + '%)';
+          var usedRam = humanizeRam(serverResponseData.used)
+          return usedRam + ' (' + percentage.toString() + '%)'
         }
       },
       {
         name: 'Free',
         generate: function(serverResponseData) {
 
-          var freeRam = humanizeRam(serverResponseData.free);
-          var totalRam = humanizeRam(serverResponseData.total);
-          return  freeRam + ' of ' + totalRam;
+          var freeRam = humanizeRam(serverResponseData.free)
+          var totalRam = humanizeRam(serverResponseData.total)
+          return  freeRam + ' of ' + totalRam
         }
-      }];
+      }]
     }
-  };
-}]);
+  }
+}])
 
 angular.module('linuxDash').directive('cpuAvgLoadChart', ['server', function(server) {
   return {
@@ -112,33 +112,33 @@ angular.module('linuxDash').directive('cpuAvgLoadChart', ['server', function(ser
     scope: {},
     templateUrl: 'templates/modules/cpu-load.html',
     link: function(scope) {
-      scope.units = '%';
+      scope.units = '%'
     }
-  };
-}]);
+  }
+}])
 angular.module('linuxDash').directive('cpuTemp', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
     templateUrl: 'templates/modules/cpu-temp.html',
     link: function(scope) {
-      scope.min = 0;
-      scope.max = 100;
+      scope.min = 0
+      scope.max = 100
 
       scope.displayValue = function(serverResponseData) {
-        return serverResponseData;
-      };
+        return serverResponseData
+      }
 
       scope.utilMetrics = [{
         name: 'Temprature',
         generate: function(serverResponseData) {
-          return serverResponseData + ' °C';
+          return serverResponseData + ' °C'
         }
-      }];
+      }]
 
     }
-  };
-}]);
+  }
+}])
 
 angular.module('linuxDash').directive('cpuUtilizationChart', ['server', function(server) {
   return {
@@ -146,23 +146,23 @@ angular.module('linuxDash').directive('cpuUtilizationChart', ['server', function
     scope: {},
     templateUrl: 'templates/modules/cpu-utilization-chart.html',
     link: function(scope) {
-      scope.min = 0;
-      scope.max = 100;
+      scope.min = 0
+      scope.max = 100
 
       scope.displayValue = function(serverResponseData) {
-        return serverResponseData;
-      };
+        return serverResponseData
+      }
 
       scope.utilMetrics = [{
         name: 'Usage',
         generate: function(serverResponseData) {
-          return serverResponseData + ' %';
+          return serverResponseData + ' %'
         }
-      }];
+      }]
 
     }
-  };
-}]);
+  }
+}])
 
 angular.module('linuxDash').directive('uploadTransferRateChart', ['server', function(server) {
   return {
@@ -170,11 +170,11 @@ angular.module('linuxDash').directive('uploadTransferRateChart', ['server', func
     scope: {},
     templateUrl: 'templates/modules/upload-transfer-rate.html',
     link: function(scope) {
-      scope.delay = 2000;
-      scope.units = 'KB/s';
+      scope.delay = 2000
+      scope.units = 'KB/s'
     }
-  };
-}]);
+  }
+}])
 
 angular.module('linuxDash').directive('downloadTransferRateChart', ['server', function(server) {
   return {
@@ -182,11 +182,11 @@ angular.module('linuxDash').directive('downloadTransferRateChart', ['server', fu
     scope: {},
     templateUrl: 'templates/modules/download-transfer-rate.html',
     link: function(scope) {
-      scope.delay = 2000;
-      scope.units = 'KB/s';
+      scope.delay = 2000
+      scope.units = 'KB/s'
     }
-  };
-}]);
+  }
+}])
 
 //////////////////////////////////////////////////////////
 /////////////// Table Data Modules //////////////////// //
@@ -288,7 +288,7 @@ var simpleTableModules = [
     name: 'cronHistory',
     template: '<table-data heading="Cron Job History" module-name="cron_history" info="Crons which have run recently."></table-data>'
   }
-];
+]
 
 simpleTableModules.forEach(function(module, key) {
 
@@ -297,17 +297,17 @@ simpleTableModules.forEach(function(module, key) {
     var moduleDirective = {
       restrict: 'E',
       scope: {}
-    };
+    }
 
     if (module.templateUrl) {
       moduleDirective['templateUrl'] = 'templates/modules/' + module.templateUrl
     }
 
     if (module.template) {
-      moduleDirective['template'] = module.template;
+      moduleDirective['template'] = module.template
     }
 
-    return moduleDirective;
-  }]);
+    return moduleDirective
+  }])
 
-});
+})
