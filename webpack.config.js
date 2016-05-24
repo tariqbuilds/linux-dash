@@ -5,7 +5,7 @@ module.exports = {
   entry: "./js/index.js",
   output: {
     library: 'linuxDash',
-    filename: 'linuxDash.js',
+    filename: 'linuxDash.min.js',
     path: './',
   },
   devtool: 'source-map',

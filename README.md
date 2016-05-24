@@ -19,8 +19,8 @@
 
 <p align="center">
   <a href="https://gitter.im/afaqurk/linux-dash">
-    <img 
-      src="https://badges.gitter.im/gitterHQ/gitter.png" 
+    <img
+      src="https://badges.gitter.im/gitterHQ/gitter.png"
       alt="Linux Dash Gitter chat">
   </a>
 </p>
@@ -28,9 +28,9 @@
 <br/>
 <p align="center">
   <a href="http://linuxdash.afaqtariq.com">
-    <img 
+    <img
       width="80%"
-      alt="Linux Dash screenshot" 
+      alt="Linux Dash screenshot"
       src="http://i.imgur.com/tehGyrQ.gif">
   </a>
 </p>
@@ -41,7 +41,7 @@
 * A beautiful, simple web-based dashboard for monitoring a linux server
 * Only ~1MB on disk! *(.git removed)*
 * Live graphs, refresh-able widgets, and a growing # of supported modules
-* Drop-in installation for PHP, Node.js, Python, and Go 
+* Drop-in installation for PHP, Node.js, Python, and Go
 
 ## Installation
 
@@ -62,7 +62,7 @@ Linux Dash does not provide any security or authentication features.
 
 #### Step 3: Start Linux Dash
 <h6 align="center">
-Linux Dash can be run in: <u>Node.js</u>, PHP, Go, or Python. 
+Linux Dash can be run in: <u>Node.js</u>, PHP, Go, or Python.
 <br/>
 <sub>
 * Node.js is the recommended platform since it has native support for websockets and fast I/O.
@@ -77,10 +77,10 @@ Then, refer to the section for your preferred platform:
 
 Install NPM dependencies
 ```
-npm install
+npm install --production
 ```
 
-Start Linux Dash 
+Start Linux Dash
 ```
 node server/
 ```
@@ -90,13 +90,13 @@ Default port for Linux Dash is 80. You may change this in [server/index.js on li
 <br/>
 ##### PHP
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
-2. Restart your web server (Apache, nginx, etc.) 
+2. Restart your web server (Apache, nginx, etc.)
   - For PHP + Apache setup follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04).
   - For help with nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov).
 
 <br/>
 ##### Go
-Go to the `linux-dash/server` folder and run 
+Go to the `linux-dash/server` folder and run
 ```
 go run index.go
 ```
