@@ -8,8 +8,6 @@ html {
   padding-top: 0;
   border-top: 1px solid #4F8EF7;
 
-  background: url(../img/themes/crossword.png);
-
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
