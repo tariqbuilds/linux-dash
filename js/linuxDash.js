@@ -1,9 +1,12 @@
 'use strict'
+
 require('angular')
+
 var ngRoute = require('angular-route')
 var smoothie = require('smoothie')
 
-angular.module('linuxDash', ['ngRoute']);
+
+angular.module('linuxDash', ['ngRoute'])
 
 /**
  * Routes for different tabs on UI
