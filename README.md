@@ -49,7 +49,7 @@
 
 Clone the git repo
 ```sh
-git clone https://github.com/afaqurk/linux-dash.git
+git clone --depth 1 https://github.com/afaqurk/linux-dash.git
 ```
 
 Or download it **[here](https://github.com/afaqurk/linux-dash/archive/master.zip)**.
