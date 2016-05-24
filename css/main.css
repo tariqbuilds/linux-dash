@@ -7,7 +7,7 @@ html {
   margin-top: 0px;
   padding-top: 0;
   border-top: 1px solid #4F8EF7;
-  
+
   background: url(../img/themes/crossword.png);
 
   -webkit-transition: all 1s ease;
@@ -85,66 +85,14 @@ body {
 .hero nav-bar ul li a {
   display: inline;
 }
-#theme-switcher {
-  position: fixed;
-  top: 25px;
-  right: -371px;
-  border-radius: 5px 0px 0px 5px;
-  padding: 4px;
-  z-index: 999999;
-  cursor: pointer;
-  color: rgb(255, 255, 255);
-  background-color: #517fa4;
-
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-#theme-switcher .settings-icon{
-  font-size: 25px;
-  height: 100%;
-  margin-top: 5px;
-  float: left;
-  display: inline-block;
-}
-#theme-switcher .settings-icon:hover{
-  color: #243949;
-}
-#theme-switcher.open {
-  right: 0;
-}
-#theme-switcher .option {
-  margin: 5px;
-  border: 1px solid transparent;
-  display: inline-block;
-  padding: 5px;
-  color: black;
-  background-color: #ececec;
-  border-radius: 2px;
-   -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-#theme-switcher .option:hover,
-#theme-switcher .option.selected {
-  box-shadow: 0 5px 10px rgba(0,0,0,.53),0 3px 10px rgba(0,0,0,.16);
-  background-color: #FFF94C;
-}
-#theme-switcher .option.selected:hover {
-  background-color: lightgrey;
-}
-@media (min-width: 1080px) { 
+@media (min-width: 1080px) {
   #plugins {
     float: none;
     margin: 0 auto;
     clear: both;
   }
 }
-@media (max-width: 1079px) { 
+@media (max-width: 1079px) {
   #plugins {
     float: none;
     margin: 0 auto;
@@ -178,7 +126,7 @@ body {
   margin-left: 20px;
   margin-bottom: 50px;
 }
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
   .plugin {
     max-width: 80%;
     float: none;
@@ -261,7 +209,7 @@ refresh-btn button:active {
   height: 100%;
   width: 6px;
   display: inline-block;
-  
+
   -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
   animation: stretchdelay 1.2s infinite ease-in-out;
 }
@@ -287,15 +235,15 @@ refresh-btn button:active {
 }
 
 @-webkit-keyframes stretchdelay {
-  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
   20% { -webkit-transform: scaleY(1.0) }
 }
 
 @keyframes stretchdelay {
-  0%, 40%, 100% { 
+  0%, 40%, 100% {
     transform: scaleY(0.4);
     -webkit-transform: scaleY(0.4);
-  }  20% { 
+  }  20% {
     transform: scaleY(1.0);
     -webkit-transform: scaleY(1.0);
   }
@@ -311,7 +259,7 @@ table
   text-align: left;
   table-layout:fixed;
 }
-table th, 
+table th,
 table td {
   padding: 5px;
   max-width: 250px;
@@ -366,7 +314,7 @@ canvas {
   padding-bottom: 0;
   margin: 0;
 }
-.table-data-plugin .filter, 
+.table-data-plugin .filter,
 .table-data-plugin .filter:focus,
 .table-data-plugin .filter:active {
   height: 20px;
@@ -383,7 +331,7 @@ canvas {
 .table-data-plugin .filter:focus {
   border-bottom: 1px solid #ff5722;
 }
-.table-data-plugin thead tr th a, 
+.table-data-plugin thead tr th a,
 .table-data-plugin thead tr th a:visited {
   color: black;
   text-decoration: none;
@@ -393,7 +341,7 @@ canvas {
   color: #1EAEDB;
 }
 /*
- * Popover 
+ * Popover
  * http://codepen.io/derekpcollins/pen/JCLhG/
  */
 

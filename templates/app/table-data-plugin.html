@@ -1,13 +1,13 @@
-<plugin 
+<plugin
 	heading="{{ heading }}"
 	last-updated="lastGet"
 	on-refresh="getData()"
 	info="{{ info }}">
-    
+
 	<loader ng-if="!tableRows"></loader>
 
-	<div class="animate" ng-show="tableRows">
-		
+	<div ng-show="tableRows">
+
 		<table class="table-data-plugin" width="{{ width }}" height="{{ height }}">
 			<thead>
                 <tr class="table-data-filter-container" ng-show="tableRows.length">
@@ -33,7 +33,7 @@
 				</tr>
 			</tbody>
 		</table>
-		
+
 	</div>
 
 	<no-data ng-show="emptyResult"></no-data>

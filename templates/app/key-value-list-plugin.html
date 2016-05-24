@@ -1,12 +1,12 @@
-<plugin 
+<plugin
 	heading="{{ heading }}"
 	last-updated="lastGet"
 	on-refresh="getData()"
 	info="{{ info }}">
-    
+
 	<loader ng-if="!tableRows"></loader>
 
-	<div class="animate" ng-show="tableRows">
+	<div ng-show="tableRows">
 		<table class="key-value-list">
 			<tbody>
 				<tr ng-repeat="(name, value) in tableRows">
@@ -15,7 +15,7 @@
 				</tr>
 			</tbody>
 		</table>
-		
+
 	</div>
 
 	<no-data ng-show="emptyResult"></no-data>
