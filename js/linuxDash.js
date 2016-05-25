@@ -16,7 +16,12 @@ angular.module('linuxDash').config(['$routeProvider',
 
     $routeProvider.
     when('/loading', {
-      templateUrl: 'templates/app/loading.html',
+    template: `
+      <div class="lead" style="text-align: center;">
+        <loader></loader>
+        Loading...
+      </div>
+    `,
       controller: function appLoadController ($scope, $location, $rootScope) {
 
         var loadUrl = localStorage.getItem('currentTab') || 'system-status'
@@ -30,19 +35,54 @@ angular.module('linuxDash').config(['$routeProvider',
       },
     }).
     when('/system-status', {
-      templateUrl: 'templates/sections/system-status.html',
+      template: `
+        <ram-chart></ram-chart>
+        <cpu-avg-load-chart></cpu-avg-load-chart>
+        <cpu-utilization-chart></cpu-utilization-chart>
+        <ram-intensive-processes></ram-intensive-processes>
+        <cpu-intensive-processes></cpu-intensive-processes>
+        <docker-processes></docker-processes>
+        <swap-usage></swap-usage>
+        <disk-space></disk-space>
+        <cpu-temp></cpu-temp>
+      `,
     }).
     when('/basic-info', {
-      templateUrl: 'templates/sections/basic-info.html',
+      template: `
+        <machine-info></machine-info>
+        <memory-info></memory-info>
+        <cpu-info></cpu-info>
+        <scheduled-crons></scheduled-crons>
+        <cron-history></cron-history>
+        <io-stats></io-stats>
+      `,
     }).
     when('/network', {
-      templateUrl: 'templates/sections/network.html',
+      template: `
+        <upload-transfer-rate-chart></upload-transfer-rate-chart>
+        <download-transfer-rate-chart></download-transfer-rate-chart>
+        <ip-addresses></ip-addresses>
+        <network-connections></network-connections>
+        <arp-cache-table></arp-cache-table>
+        <ping-speeds></ping-speeds>
+        <bandwidth></bandwidth>
+        <internet-speed></internet-speed>
+      `,
     }).
     when('/accounts', {
-      templateUrl: 'templates/sections/accounts.html',
+      template: `
+        <server-accounts></server-accounts>
+        <logged-in-accounts></logged-in-accounts>
+        <recent-logins></recent-logins>
+      `,
     }).
     when('/apps', {
-      templateUrl: 'templates/sections/applications.html',
+      template: `
+        <common-applications></common-applications>
+        <memcached></memcached>
+        <redis></redis>
+        <pm2></pm2>
+      `,
     }).
     otherwise({
       redirectTo: '/loading'
@@ -219,7 +259,16 @@ angular.module('linuxDash').run(['server', '$location', '$rootScope', function(s
 angular.module('linuxDash').directive('navBar', ['$location', function($location) {
   return {
     restrict: 'E',
-    templateUrl: 'templates/app/navbar.html',
+    template: `
+      <br/>
+      <ul>
+          <li ng-class="{active: isActive(navItem) }" ng-repeat="navItem in items">
+              <a href="#/{{navItem}}">
+                  {{getNavItemName(navItem)}}
+              </a>
+          </li>
+      </ul>
+    `,
     link: function(scope) {
       scope.items = [
         'system-status',
@@ -276,7 +325,18 @@ angular.module('linuxDash').directive('topBar', function() {
       lastUpdated: '=',
       info: '=',
     },
-    templateUrl: 'templates/app/ui-elements/top-bar.html',
+    template: `
+      <div class="top-bar">
+        <last-update timestamp="lastUpdated"></last-update>
+        <span class="qs">
+          {{ heading }}
+          <span class="popover above" ng-if="info">
+            {{ info }}
+          </span>
+        </span>
+        <refresh-btn refresh="refresh()"></refresh-btn>
+      </div>
+    `,
     link: function(scope, element, attrs) {
       var $refreshBtn = element.find('refresh-btn').eq(0)
 
@@ -297,7 +357,7 @@ angular.module('linuxDash').directive('refreshBtn', function() {
     scope: {
       refresh: '&'
     },
-    template: '<button ng-click="refresh()">&olarr</button>'
+    template: `<button ng-click="refresh()">↺</button>`
   }
 })
 
@@ -320,7 +380,12 @@ angular.module('linuxDash').directive('lastUpdate', function() {
     scope: {
       timestamp: '='
     },
-    templateUrl: 'templates/app/ui-elements/last-update.html'
+    template: `
+      <span ng-hide="timestamp">Loading...</span>
+      <small alt="Last Update Timestamp">
+        <span ng-show="timestamp">{{ timestamp | date:'hh:mm:ss a' }}</span>
+      </small>
+    `
   }
 })
 
@@ -340,7 +405,48 @@ angular.module('linuxDash').directive('tableData', ['server', '$rootScope', func
       width: '@',
       height: '@'
     },
-    templateUrl: 'templates/app/table-data-plugin.html',
+    template: `
+      <plugin
+        heading="{{ heading }}"
+        last-updated="lastGet"
+        on-refresh="getData()"
+        info="{{ info }}">
+
+        <loader ng-if="!tableRows"></loader>
+
+        <div ng-show="tableRows">
+
+          <table class="table-data-plugin" width="{{ width }}" height="{{ height }}">
+            <thead>
+                      <tr class="table-data-filter-container" ng-show="tableRows.length">
+                          <th colspan="{{ tableHeaders.length }}" class="filter-container">
+                              <input class="filter" ng-model="keyword" placeholder="Search">
+                          </th>
+                      </tr>
+              <tr>
+                <th ng-repeat="header in tableHeaders track by $index">
+                  <a href="" ng-click="setSortColumn(header)">{{ header }}</a>
+                  <span class="column-sort-caret">
+                    {{ (header === sortByColumn && !sortReverse) ? '&#9650;': ''; }}
+                    {{ (header === sortByColumn && sortReverse) ? '&#9660;': ''; }}
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="row in tableRows | filter:keyword">
+                <td ng-repeat="header in tableHeaders track by $index">
+                  {{ row[header] }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <no-data ng-show="emptyResult"></no-data>
+      </plugin>
+    `,
     link: function(scope, element) {
 
       scope.sortByColumn = null
@@ -422,7 +528,30 @@ angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', f
       info: '@',
       moduleName: '@',
     },
-    templateUrl: 'templates/app/key-value-list-plugin.html',
+    template: `
+      <plugin
+        heading="{{ heading }}"
+        last-updated="lastGet"
+        on-refresh="getData()"
+        info="{{ info }}">
+
+        <loader ng-if="!tableRows"></loader>
+
+        <div ng-show="tableRows">
+          <table class="key-value-list">
+            <tbody>
+              <tr ng-repeat="(name, value) in tableRows">
+                <td><strong>{{ name }}</strong></td>
+                <td>{{ value }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+        <no-data ng-show="emptyResult"></no-data>
+      </plugin>
+    `,
     link: function(scope, element) {
 
       scope.getData = function() {
@@ -461,7 +590,29 @@ angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile
       metrics: '=',
       color: '@'
     },
-    templateUrl: 'templates/app/line-chart-plugin.html',
+    template: `
+      <div class="plugin">
+
+        <top-bar heading="heading" last-updated="lastGet" no-refresh-btn></top-bar>
+
+        <div class="plugin-body no-padding">
+
+          <canvas ng-show="!initializing && !emptyResult" class="canvas" width="400" height="200"></canvas>
+
+          <table ng-show="!initializing && !emptyResult" border="0" class="metrics-table">
+            <tbody>
+              <tr ng-repeat="metric in metrics">
+                <td><strong>{{ metric.name }}</strong></td>
+                <td>{{ metric.data }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <no-data ng-show="emptyResult"></no-data>
+
+        </div>
+      </plugin>
+    `,
     link: function(scope, element) {
 
       scope.initializing = true
@@ -586,7 +737,31 @@ angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$co
       units: '=',
       delay: '='
     },
-    templateUrl: 'templates/app/multi-line-chart-plugin.html',
+    template: `
+      <div class="plugin">
+        <top-bar heading="heading" last-updated="lastGet" no-refresh-btn></top-bar>
+
+        <div class="plugin-body no-padding">
+
+          <canvas class="canvas" width="400" height="200"></canvas>
+
+          <table class="metrics-table" border="0">
+            <tbody>
+              <tr ng-repeat="metric in metricsArray">
+                <td>
+                  <div
+                    class="metric-square"
+                    style="display: inline-block; border: 1px solid {{metric.color}}; width: 8px; height: 8px; background: {{metric.color}}">
+                  </div>
+                </td>
+                <td>{{ metric.name }}</td>
+                <td>{{ metric.data }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </plugin>
+    `,
     link: function(scope, element) {
 
       var w, h, canvas
@@ -724,7 +899,18 @@ angular.module('linuxDash').directive('plugin', function() {
   return {
     restrict: 'E',
     transclude: true,
-    templateUrl: 'templates/app/base-plugin.html'
+    template: `
+      <div class="plugin">
+        <top-bar
+          heading="heading"
+          last-updated="lastGet"
+          info="info"
+          refresh="getData()">
+        </top-bar>
+
+        <div class="plugin-body" ng-transclude></div>
+      </div>
+    `
   }
 })
 
@@ -741,6 +927,12 @@ angular.module('linuxDash').directive('progressBarPlugin', function() {
       value: '@',
       max: '@'
     },
-    templateUrl: 'templates/app/progress-bar-plugin.html'
+    template: `
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width:{{width}};">
+          <div style="width: {{ (value/max) * 100 }}%;"></div>
+        </div>
+      </div>
+    `
   }
 })

@@ -6,8 +6,58 @@ angular.module('linuxDash').directive('diskSpace', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: 'templates/modules/disk-space.html',
+    template: `
+      <plugin
+        heading="Disk Partitions"
+        last-updated="lastGet"
+        on-refresh="getData()">
+
+        <loader ng-hide="diskSpaceData"></loader>
+
+        <table ng-show="diskSpaceData">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th></th>
+              <th>Stats</th>
+              <th>Used</th>
+              <th>Mount Path</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  ng-repeat="partition in diskSpaceData">
+              <td>{{partition['file_system']}}</td>
+              <td>
+                <progress-bar-plugin
+                    width="70px"
+                    value="{{ getKB(partition['used']) }}"
+                    max="{{ getKB(partition['size']) }}">
+                </progress-bar-plugin>
+              </td>
+              <td>
+                {{ partition['used'] }} / {{ partition['size'] }}
+              </td>
+              <td>
+                {{ partition['used%'] }}
+              </td>
+              <td>{{ partition['mounted'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </plugin>
+    `,
     link: function(scope) {
+
+      let kbDictionary = {
+        'M':size => size * Math.pow(1024, 1),
+        'G':size => size * Math.pow(1024, 2),
+        'T':size => size * Math.pow(1024, 3),
+        'P':size => size * Math.pow(1024, 4),
+        'E':size => size * Math.pow(1024, 5),
+        'Z':size => size * Math.pow(1024, 6),
+        'Y':size => size * Math.pow(1024, 7),
+      }
 
       scope.heading = "Disk Partitions"
 
@@ -22,27 +72,14 @@ angular.module('linuxDash').directive('diskSpace', ['server', function(server) {
       scope.getData()
 
       scope.getKB = function(stringSize) {
-        var lastChar = stringSize.slice(-1),
-          size = parseFloat(stringSize.replace(",", "."))
+        let lastChar = stringSize.slice(-1)
+        let size = parseFloat(stringSize.replace(",", "."))
 
-        switch (lastChar) {
-          case 'M':
-            return size * Math.pow(1024, 1)
-          case 'G':
-            return size * Math.pow(1024, 2)
-          case 'T':
-            return size * Math.pow(1024, 3)
-          case 'P':
-            return size * Math.pow(1024, 4)
-          case 'E':
-            return size * Math.pow(1024, 5)
-          case 'Z':
-            return size * Math.pow(1024, 6)
-          case 'Y':
-            return size * Math.pow(1024, 7)
-          default:
+          try{
+            return kbDictionary[lastChar](size)
+          } catch(err) {
             return size
-        }
+          }
       }
     }
   }
@@ -52,7 +89,22 @@ angular.module('linuxDash').directive('ramChart', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: 'templates/modules/ram-chart.html',
+    template: `
+      <line-chart-plugin
+          ng-if="maxRam"
+
+          heading="RAM Usage"
+          module-name="current_ram"
+          color="0,255,0"
+
+          max-value="maxRam"
+          min-value="minRam"
+          refresh-rate="1000"
+
+          get-display-value="ramToDisplay"
+          metrics="ramMetrics">
+      </line-chart-plugin>
+    `,
     link: function(scope) {
 
       // get max ram available on machine before we
@@ -110,17 +162,38 @@ angular.module('linuxDash').directive('cpuAvgLoadChart', ['server', function(ser
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: 'templates/modules/cpu-load.html',
+    template: `
+      <multi-line-chart-plugin
+          heading="CPU Avg Load"
+          module-name="load_avg"
+          units="units">
+      </multi-line-chart-plugin>
+    `,
     link: function(scope) {
       scope.units = '%'
     }
   }
 }])
+
 angular.module('linuxDash').directive('cpuTemp', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: 'templates/modules/cpu-temp.html',
+    template: `
+      <line-chart-plugin
+
+          heading="CPU temp"
+          module-name="cpu_temp"
+          color="0,255,0"
+
+          max-value="max"
+          min-value="min"
+          refresh-rate="1500"
+
+          get-display-value="displayValue"
+          metrics="utilMetrics">
+      </line-chart-plugin>
+    `,
     link: function(scope) {
       scope.min = 0
       scope.max = 100
@@ -144,7 +217,21 @@ angular.module('linuxDash').directive('cpuUtilizationChart', ['server', function
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: 'templates/modules/cpu-utilization-chart.html',
+    template: `
+      <line-chart-plugin
+
+          heading="CPU Utilization"
+          module-name="cpu_utilization"
+          color="0,255,0"
+
+          max-value="max"
+          min-value="min"
+          refresh-rate="1500"
+
+          get-display-value="displayValue"
+          metrics="utilMetrics">
+      </line-chart-plugin>
+    `,
     link: function(scope) {
       scope.min = 0
       scope.max = 100
@@ -168,7 +255,13 @@ angular.module('linuxDash').directive('uploadTransferRateChart', ['server', func
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: 'templates/modules/upload-transfer-rate.html',
+    template: `
+      <multi-line-chart-plugin
+          heading="Upload Transfer Rate"
+          module-name="upload_transfer_rate"
+          units="units">
+      </multi-line-chart-plugin>
+    `,
     link: function(scope) {
       scope.delay = 2000
       scope.units = 'KB/s'
@@ -180,7 +273,13 @@ angular.module('linuxDash').directive('downloadTransferRateChart', ['server', fu
   return {
     restrict: 'E',
     scope: {},
-    templateUrl: 'templates/modules/download-transfer-rate.html',
+    template: `
+      <multi-line-chart-plugin
+        heading="Download Transfer Rate"
+        module-name="download_transfer_rate"
+        units="units">
+      </multi-line-chart-plugin>
+    `,
     link: function(scope) {
       scope.delay = 2000
       scope.units = 'KB/s'
@@ -248,10 +347,6 @@ var simpleTableModules = [
     name: 'swapUsage',
     template: '<table-data heading="Swap Usage" module-name="swap"></table-data>'
   },
-  /*{
-    name: 'cpuTemp',
-    template: '<table-data heading="CPU Temp" module-name="cputemp"></table-data>'
-  },*/
   {
     name: 'internetSpeed',
     template: '<key-value-list heading="Internet Speed" module-name="internet_speed" info="Internet connection speed of server."></key-value-list>'
