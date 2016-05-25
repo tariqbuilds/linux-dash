@@ -2,8 +2,8 @@
 
 require('angular')
 
-var ngRoute = require('angular-route')
-var smoothie = require('smoothie')
+const ngRoute = require('angular-route')
+const smoothie = require('smoothie')
 
 
 angular.module('linuxDash', ['ngRoute'])
@@ -11,11 +11,9 @@ angular.module('linuxDash', ['ngRoute'])
 /**
  * Routes for different tabs on UI
  */
-angular.module('linuxDash').config(['$routeProvider',
-  function($routeProvider) {
+angular.module('linuxDash').config(['$routeProvider', function($routeProvider) {
 
-    $routeProvider.
-    when('/loading', {
+    $routeProvider.when('/loading', {
     template: `
       <div class="lead" style="text-align: center;">
         <loader></loader>
@@ -24,12 +22,8 @@ angular.module('linuxDash').config(['$routeProvider',
     `,
       controller: function appLoadController ($scope, $location, $rootScope) {
 
-        var loadUrl = localStorage.getItem('currentTab') || 'system-status'
-
-        var loadLinuxDash = function () {
-          $location.path(loadUrl)
-        }
-
+        let loadUrl = localStorage.getItem('currentTab') || 'system-status'
+        let loadLinuxDash = () =>$location.path(loadUrl)
         $rootScope.$on('start-linux-dash', loadLinuxDash)
 
       },
@@ -96,11 +90,19 @@ angular.module('linuxDash').config(['$routeProvider',
  * Service which gets data from server
  * via HTTP or Websocket (if supported)
  */
-angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location', function($http, $rootScope, $location) {
+angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location', class serverService {
 
-  var websocket = {
-    connection: null,
-    onMessageEventHandlers: {}
+  constructor($http, $rootScope, $location) {
+
+    this.websocket = {
+      connection: null,
+      onMessageEventHandlers: {}
+    }
+
+    this.$http = $http
+    this.$rootScope = $rootScope
+    this.$location = $location
+
   }
 
   /**
@@ -109,36 +111,37 @@ angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location
    *
    * @return Null
    */
-  var establishWebsocketConnection = function() {
+  establishWebsocketConnection() {
 
-    var websocketUrl = (location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.hostname + ':' + window.location.port
+    let server = this
+    let websocketUrl = (location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.hostname + ':' + window.location.port
 
-    if (websocket.connection === null) {
+    if (server.websocket.connection === null) {
 
-      websocket.connection = new WebSocket(websocketUrl, 'linux-dash')
+      server.websocket.connection = new WebSocket(websocketUrl, 'linux-dash')
 
-      websocket.connection.onopen = function() {
-        $rootScope.$broadcast("start-linux-dash", {})
-        $rootScope.$apply()
+      server.websocket.connection.onopen = function() {
+        server.$rootScope.$broadcast("start-linux-dash", {})
+        server.$rootScope.$apply()
         console.info('Websocket connection is open')
       }
 
-      websocket.connection.onmessage = function(event) {
+      server.websocket.connection.onmessage = function(event) {
 
         var response = JSON.parse(event.data)
         var moduleName = response.moduleName
         var moduleData = JSON.parse(response.output)
 
-        if (!!websocket.onMessageEventHandlers[moduleName]) {
-          websocket.onMessageEventHandlers[moduleName](moduleData)
+        if (!!server.websocket.onMessageEventHandlers[moduleName]) {
+          server.websocket.onMessageEventHandlers[moduleName](moduleData)
         } else {
-          console.info("Websocket could not find module", moduleName, "in:", websocket.onMessageEventHandlers)
+          console.info("Websocket could not find module", moduleName, "in:", server.websocket.onMessageEventHandlers)
         }
 
       }
 
-      websocket.connection.onclose = function() {
-        websocket.connection = null
+      server.websocket.connection.onclose = function() {
+        server.websocket.connection = null
       }
     }
 
@@ -151,7 +154,9 @@ angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location
    *
    * @return Null
    */
-  this.checkIfWebsocketsAreSupported = function() {
+  checkIfWebsocketsAreSupported() {
+
+    let server = this
 
     var websocketSupport = {
       browser: null,
@@ -164,7 +169,7 @@ angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location
       websocketSupport.browser = true
 
       // does backend support websockets?
-      $http.get("/websocket").then(function(response) {
+      server.$http.get("/websocket").then(function(response) {
 
         // if websocket_support property exists and is trurthy
         // websocketSupport.server will equal true.
@@ -173,18 +178,18 @@ angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location
       }).catch(function websocketNotSupportedByServer() {
 
         websocketSupport.server = false
-        $rootScope.$broadcast("start-linux-dash", {})
+        server.$rootScope.$broadcast("start-linux-dash", {})
 
       }).then(function finalDecisionOnWebsocket() {
 
         if (websocketSupport.browser && websocketSupport.server) {
 
-          establishWebsocketConnection()
+          server.establishWebsocketConnection()
 
         } else {
           // rootScope event not propogating from here.
           // instead, we manually route to url
-          $location.path('/system-status')
+          server.$location.path('/system-status')
         }
 
       })
@@ -200,23 +205,25 @@ angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location
    * @param  {Function} callback
    * @return {[ Null || callback(server response) ]}
    */
-  this.get = function(moduleName, callback) {
+  get(moduleName, callback) {
+
+    let server = this
 
     // if we have a websocket connection
-    if (websocket.connection) {
+    if (server.websocket.connection) {
 
       // and the connection is ready
-      if (websocket.connection.readyState === 1) {
+      if (server.websocket.connection.readyState === 1) {
 
         // set the callback as the event handler
         // for server response.
         //
         // Callback instance needs to be overwritten
         // each time for this to work. Not sure why.
-        websocket.onMessageEventHandlers[moduleName] = callback
+        server.websocket.onMessageEventHandlers[moduleName] = callback
 
         //
-        websocket.connection.send(moduleName)
+        server.websocket.connection.send(moduleName)
 
       } else {
         console.log("Websocket not ready yet.", moduleName)
@@ -228,7 +235,7 @@ angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location
 
       var moduleAddress = 'server/?module=' + moduleName
 
-      return $http.get(moduleAddress).then(function(response) {
+      return this.$http.get(moduleAddress).then(function(response) {
         return callback(response.data)
       })
 
