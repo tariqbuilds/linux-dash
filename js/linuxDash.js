@@ -60,7 +60,6 @@ angular.module('linuxDash').config(['$routeProvider', function($routeProvider) {
         <arp-cache-table></arp-cache-table>
         <ping-speeds></ping-speeds>
         <bandwidth></bandwidth>
-        <internet-speed></internet-speed>
       `,
     }).
     when('/accounts', {
