@@ -6,7 +6,7 @@ module.exports = {
   output: {
     library: 'linuxDash',
     filename: 'linuxDash.min.js',
-    path: './web-app',
+    path: './webapp',
   },
   devtool: 'source-map',
 
