@@ -33,12 +33,12 @@ angular.module('linuxDash').config(['$routeProvider', function($routeProvider) {
         <ram-chart></ram-chart>
         <cpu-avg-load-chart></cpu-avg-load-chart>
         <cpu-utilization-chart></cpu-utilization-chart>
+        <cpu-temp></cpu-temp>
         <ram-intensive-processes></ram-intensive-processes>
         <cpu-intensive-processes></cpu-intensive-processes>
-        <docker-processes></docker-processes>
-        <swap-usage></swap-usage>
         <disk-space></disk-space>
-        <cpu-temp></cpu-temp>
+        <swap-usage></swap-usage>
+        <docker-processes></docker-processes>
       `,
     }).
     when('/basic-info', {
@@ -297,10 +297,6 @@ angular.module('linuxDash').directive('navBar', ['$location', function($location
 
 }])
 
-//////////////////////////////////////////////////////////////
-////////////////// UI Element Directives ////////////////// //
-//////////////////////////////////////////////////////////////
-
 /**
  * Shows loader
  */
@@ -310,13 +306,15 @@ angular.module('linuxDash').directive('loader', function() {
     scope: {
       width: '@'
     },
-    template: '<div class="spinner">' +
-      ' <div class="rect1"></div>' +
-      ' <div class="rect2"></div>' +
-      ' <div class="rect3"></div>' +
-      ' <div class="rect4"></div>' +
-      ' <div class="rect5"></div>' +
-      '</div>'
+    template: `
+      <div class="spinner">
+       <div class="rect1"></div>
+       <div class="rect2"></div>
+       <div class="rect3"></div>
+       <div class="rect4"></div>
+       <div class="rect5"></div>
+      </div>
+    `
   }
 })
 

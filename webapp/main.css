@@ -184,8 +184,6 @@ refresh-btn button {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-
-  box-shadow: 0 1px 6px rgba(0,0,0,.12),0 1px 6px rgba(0,0,0,.5);
 }
 refresh-btn button:hover {
   background-color: #ffeb3b;
