@@ -6,7 +6,7 @@ import subprocess
 from SocketServer import ThreadingMixIn
 
 modulesSubPath = '/server/modules/shell_files/'
-serverDirPath = os.path.dirname(os.path.realpath(__file__))
+webappSubPath = '/webapp/'
 appRootPath = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
@@ -27,7 +27,7 @@ class MainHandler(BaseHTTPRequestHandler):
             else:
                 if self.path == '/':
                     self.path = 'index.html'
-                f = open(appRootPath + os.sep + self.path)
+                f = open(appRootPath + webappSubPath + self.path)
                 data = f.read()
                 if self.path.startswith('/main.css'):
                     contentType = 'text/css'
