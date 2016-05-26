@@ -4,7 +4,7 @@
   "description": "A simple, low overhead web dashboard for linux.",
   "main": "server/index.js",
   "scripts": {
-    "develop": "webpack --progress --watch"
+    "develop": "node ./server/ & webpack --progress --watch"
   },
   "repository": {
     "type": "git",
