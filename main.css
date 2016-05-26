@@ -261,6 +261,7 @@ table
 }
 table th,
 table td {
+  padding: 2px;
   max-width: 250px;
   word-wrap: break-word;
 }

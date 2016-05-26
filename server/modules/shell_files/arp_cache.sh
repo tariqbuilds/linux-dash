@@ -1,12 +1,11 @@
 #!/bin/bash
 
-arpCommand=$(command -v arp) 
+arpCommand=$(command -v arp)
 
 result=$($arpCommand | awk 'BEGIN {print "["} NR>1 \
-						{print "{ \"address\": \"" $1 "\", " \
+						{print "{ \"addr\": \"" $1 "\", " \
 									"\"hw_type\": \"" $2 "\", " \
-									"\"hw_address\": \"" $3 "\", " \
-									"\"flags\": \"" $4 "\", " \
+									"\"hw_addr.\": \"" $3 "\", " \
 									"\"mask\": \"" $5 "\" }, " \
 									} \
 					END {print "]"}' \
@@ -14,4 +13,4 @@ result=$($arpCommand | awk 'BEGIN {print "["} NR>1 \
 
 if [ -z "$result" ];  then echo {}
 else echo $result
-fi 
+fi

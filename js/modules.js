@@ -2,7 +2,9 @@
 
 require('angular')
 
-angular.module('linuxDash').directive('diskSpace', ['server', function(server) {
+let directive = angular.module('linuxDash').directive
+
+directive('diskSpace', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
@@ -21,7 +23,7 @@ angular.module('linuxDash').directive('diskSpace', ['server', function(server) {
               <th></th>
               <th>Stats</th>
               <th>Used</th>
-              <th>Mount Path</th>
+              <th>Mount</th>
             </tr>
           </thead>
           <tbody>
@@ -85,7 +87,7 @@ angular.module('linuxDash').directive('diskSpace', ['server', function(server) {
   }
 }])
 
-angular.module('linuxDash').directive('ramChart', ['server', function(server) {
+directive('ramChart', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
@@ -157,7 +159,7 @@ angular.module('linuxDash').directive('ramChart', ['server', function(server) {
   }
 }])
 
-angular.module('linuxDash').directive('cpuAvgLoadChart', ['server', function(server) {
+directive('cpuAvgLoadChart', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
@@ -174,7 +176,7 @@ angular.module('linuxDash').directive('cpuAvgLoadChart', ['server', function(ser
   }
 }])
 
-angular.module('linuxDash').directive('cpuTemp', ['server', function(server) {
+directive('cpuTemp', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
@@ -212,7 +214,7 @@ angular.module('linuxDash').directive('cpuTemp', ['server', function(server) {
   }
 }])
 
-angular.module('linuxDash').directive('cpuUtilizationChart', ['server', function(server) {
+directive('cpuUtilizationChart', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
@@ -250,7 +252,7 @@ angular.module('linuxDash').directive('cpuUtilizationChart', ['server', function
   }
 }])
 
-angular.module('linuxDash').directive('uploadTransferRateChart', ['server', function(server) {
+directive('uploadTransferRateChart', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
@@ -268,7 +270,7 @@ angular.module('linuxDash').directive('uploadTransferRateChart', ['server', func
   }
 }])
 
-angular.module('linuxDash').directive('downloadTransferRateChart', ['server', function(server) {
+directive('downloadTransferRateChart', ['server', function(server) {
   return {
     restrict: 'E',
     scope: {},
@@ -386,7 +388,7 @@ var simpleTableModules = [
 
 simpleTableModules.forEach(function(module, key) {
 
-  angular.module('linuxDash').directive(module.name, ['server', function(server) {
+  directive(module.name, ['server', function(server) {
 
     var moduleDirective = {
       restrict: 'E',
