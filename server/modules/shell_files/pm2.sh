@@ -4,10 +4,10 @@
 command="pm2 list"
 data="$($command)"
 
-#only process data if variable has a length 
+#only process data if variable has a length
 #this should handle cases where pm2 is not installed
 if [ -n "$data" ]; then
-	
+
 	#start processing data on line 4
 	#don't process last 2 lines
 	json=$( echo "$data" | tail -n +4 | head -n +2 \
@@ -26,7 +26,7 @@ if [ -n "$data" ]; then
 	echo "[" ${json%?} "]"
 else
 	#no data found
-	echo "{}"
+	echo "[]"
 fi
 
 
