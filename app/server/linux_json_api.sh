@@ -27,7 +27,6 @@ bandwidth() {
   | /bin/sed 'N;$s/,\n/\n/;P;D'
 }
 
-
 common_applications() {
   result=$(whereis php node mysql mongo vim python ruby java apache2 nginx openssl vsftpd make \
   | awk -F: '{if(length($2)==0) { installed="false"; } else { installed="true"; } \
@@ -41,7 +40,6 @@ common_applications() {
   echo "[" ${result%?} "]"
 }
 
-
 cpu_info() {
 
   result=$(/usr/bin/lscpu \
@@ -50,7 +48,6 @@ cpu_info() {
 
   echo "{" ${result%?} "}"
 }
-
 
 cpu_intensive_processes() {
 
@@ -67,7 +64,6 @@ cpu_intensive_processes() {
   echo "[" ${result%?} "]"
 }
 
-
 cpu_temp() {
 
   if [ `which sensors` ]; then
@@ -83,11 +79,9 @@ cpu_temp() {
   else
     echo "[]"
   fi
-
 }
 
 # by Paul Colby (http://colby.id.au), no rights reserved ;)
-
 cpu_utilization() {
 
   PREV_TOTAL=0
@@ -122,7 +116,6 @@ cpu_utilization() {
   echo -en "$DIFF_USAGE"
 }
 
-
 cron_history() {
 
   grepCmd=$(which grep)
@@ -143,7 +136,6 @@ cron_history() {
   echo [${result%?}]
 }
 
-
 current_ram() {
 
   awkCmd=`which awk`
@@ -160,14 +152,12 @@ current_ram() {
   echo $memInfo | $awkCmd '{print "{ \"total\": " ($2/1024) ", \"used\": " ( ($2-($5+$8+$11))/1024 ) ", \"free\": " (($5+$8+$11)/1024) " }"  }'
 }
 
-
 disk_partitions() {
 
   result=$(/bin/df -Ph | awk 'NR>1 {print "{\"file_system\": \"" $1 "\", \"size\": \"" $2 "\", \"used\": \"" $3 "\", \"avail\": \"" $4 "\", \"used%\": \"" $5 "\", \"mounted\": \"" $6 "\"},"}')
 
   echo [ ${result%?} ]
 }
-
 
 docker_processes() {
 
@@ -187,7 +177,6 @@ docker_processes() {
 
   echo "[" ${result%?} "]"
 }
-
 
 download_transfer_rate() {
 
@@ -231,7 +220,6 @@ download_transfer_rate() {
 	echo "$json_output}"
 }
 
-
 general_info() {
 
   function displaytime {
@@ -262,7 +250,6 @@ general_info() {
     }
 }
 
-
 io_stats() {
 
   result=$(/bin/cat /proc/diskstats | /usr/bin/awk \
@@ -272,7 +259,6 @@ io_stats() {
 
   echo [ ${result%?} ]
 }
-
 
 ip_addresses() {
 
@@ -295,7 +281,6 @@ ip_addresses() {
   echo "{ \"interface\": \"external\", \"ip\": \"$externalIp\" } ]"
 }
 
-
 load_avg() {
 
   grepCmd=`which grep`
@@ -313,14 +298,12 @@ load_avg() {
   echo ${result%?}
 }
 
-
 logged_in_users() {
 
   result=$(COLUMNS=300 /usr/bin/w -h | /usr/bin/awk '{print "{\"user\": \"" $1 "\", \"from\": \"" $3 "\", \"when\": \"" $4 "\"},"}')
 
   echo [ ${result%?} ]
 }
-
 
 memcached() {
   echo "stats" \
@@ -331,14 +314,12 @@ memcached() {
     | /bin/sed 'N;$s/,\n/\n/;P;D'
 }
 
-
 memory_info() {
 
   /bin/cat /proc/meminfo \
     | /usr/bin/awk -F: 'BEGIN {print "{"} {print "\"" $1 "\": \"" $2 "\"," } END {print "}"}' \
     | /bin/sed 'N;$s/,\n/\n/;P;D'
 }
-
 
 network_connections() {
 
@@ -356,7 +337,6 @@ network_connections() {
   | $sedCmd 'N;$s/},/}/;P;D'
 }
 
-
 number_of_cpu_cores() {
 
   numberOfCPUCores=$(/bin/grep -c 'model name' /proc/cpuinfo)
@@ -367,7 +347,6 @@ number_of_cpu_cores() {
 }
 
 # http://askubuntu.com/questions/413367/ping-multiple-ips-using-bash
-
 ping() {
 
 	# get absolute path to config file
@@ -396,7 +375,6 @@ ping() {
 		done \
 	| $sedCmd 's/\},]/}]/g'
 }
-
 
 pm2() {
 
@@ -430,9 +408,6 @@ pm2() {
 	fi
 }
 
-
-
-
 ram_intensive_processes() {
 
   result=$(/bin/ps axo pid,user,pmem,rss,vsz,comm --sort -pmem,-rss,-vsz \
@@ -448,7 +423,6 @@ ram_intensive_processes() {
   echo [ ${result%?} ]
 }
 
-
 recent_account_logins() {
 
   result=$(/usr/bin/lastlog -t 365 \
@@ -461,7 +435,6 @@ recent_account_logins() {
       )
   echo [ ${result%?} ]
 }
-
 
 redis() {
 
@@ -482,7 +455,6 @@ redis() {
       )
   echo { ${result%?} }
 }
-
 
 scheduled_crons() {
 
@@ -578,7 +550,6 @@ scheduled_crons() {
     rm --force "${temp}"
 }
 
-
 swap() {
 
   catCmd=`which cat`;
@@ -599,7 +570,6 @@ swap() {
     echo []
   fi
 }
-
 
 upload_transfer_rate() {
 
@@ -642,7 +612,6 @@ upload_transfer_rate() {
 	# close the JSON object & print to screen
 	echo "$json_output}"
 }
-
 
 user_accounts() {
 
