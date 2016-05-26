@@ -28,7 +28,7 @@ wsServer = new ws({
 });
 
 function getShellFilePath(moduleName) {
-  return __dirname + '/modules/shell_files/' + moduleName + '.sh';
+  return __dirname + '/linux_json_api.sh';
 }
 
 function shellPathAndModuleNameAreValid(shellFilePath, moduleName) {
@@ -58,7 +58,7 @@ wsServer.on('request', function(request) {
       return;
     }
 
-		var command = spawn(shellFile, [ wsReq.color || '' ]);
+		var command = spawn(shellFile, [ moduleName, wsReq.color || '' ]);
 		var output  = [];
 
 		command.stdout.on('data', function(chunk) {
