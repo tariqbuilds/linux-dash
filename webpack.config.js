@@ -8,8 +8,6 @@ module.exports = {
     filename: 'linuxDash.min.js',
     path: './app',
   },
-  devtool: 'eval',
-
   module: {
     loaders: [
       {
@@ -34,7 +32,6 @@ module.exports = {
 
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
-      exclude: /(angular|smoothie)/,
     }),
 
     new webpack.optimize.DedupePlugin()
