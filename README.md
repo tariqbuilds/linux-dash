@@ -34,10 +34,10 @@
 <br/>
 
 ## Features
-* A beautiful, simple web-based dashboard for monitoring a linux server
-* Only ~500KB on disk! *(you can cut that in 1/2 by removing `.git/`)*
-* Live graphs, refresh-able widgets, and a growing # of supported modules
-* Drop-in installation for PHP, Node.js, Python, and Go
+* **Simple** --- Web-based dashboard for monitoring a linux server
+* **Small** ----- Only ~500KB on disk! *(you can cut that in 1/2 by removing `.git/`)*
+* **Easy** ------ Drop-in installation for PHP, Node.js, Python, and Go
+* **Live** ------- Streaming graphs and refresh-able plugins
 
 ## Installation
 
