@@ -110,7 +110,7 @@ body {
 /***** Plugin ****/
 .plugin {
   vertical-align: text-top;
-  width: 470px;
+  width: 400px;
   display: inline-block;
   padding: 0;
   background-color: #FFFFFF;
@@ -123,6 +123,8 @@ body {
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 50px;
+  max-height: 400px;
+  overflow: hidden;
 }
 @media (max-width: 768px) {
   .plugin {
@@ -259,7 +261,6 @@ table
 }
 table th,
 table td {
-  padding: 5px;
   max-width: 250px;
   word-wrap: break-word;
 }
@@ -271,10 +272,8 @@ table th
 }
 table td {
   border-bottom: 1px solid #f1f1f1;
-  padding: 9px 8px;
   font-family: Arial, sans-serif;
-  font-size: 11px;
-  letter-spacing: .1em;
+  font-size: 10px;
   color: rgba(0,0,0,.65);
 }
 table tbody tr:hover td
@@ -295,7 +294,7 @@ canvas {
 *********************************************/
 .progress-bar {
   background-color: #eec;
-  border-radius: 10px; /* (height of inner div) / 2 + padding */
+  border-radius: 10px;
   padding: 0px;
   clear: both;
   display: inline-block;
