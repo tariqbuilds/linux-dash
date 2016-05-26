@@ -372,7 +372,7 @@ ping() {
 
 	# get absolute path to config file
 	SCRIPTPATH=`dirname $(readlink -f $0)`
-	CONFIG_PATH=$SCRIPTPATH"/../config/ping_hosts"
+	CONFIG_PATH=$SCRIPTPATH"./config/ping_hosts"
 
 	catCmd=`which cat`
 	pingCmd=`which ping`
