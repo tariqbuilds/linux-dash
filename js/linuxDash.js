@@ -604,7 +604,14 @@ angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile
 
         <div class="plugin-body no-padding">
 
-          <canvas ng-show="!initializing && !emptyResult" class="canvas" width="400" height="200"></canvas>
+          <loader ng-if="!maxValue || initializing"></loader>
+
+          <canvas
+            ng-show="!initializing && !emptyResult"
+            class="canvas"
+            width="400"
+            height="200">
+          </canvas>
 
           <table ng-show="!initializing && !emptyResult" border="0" class="metrics-table">
             <tbody>
@@ -624,107 +631,122 @@ angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile
 
       scope.initializing = true
 
-      if (!scope.color) scope.color = '0, 255, 0'
+      // wrap the entire plugin into an initializing function
+      let start_rendering_line_chart = function () {
 
-      var series, w, h, canvas
+        if (!scope.color)
+          scope.color = '0, 255, 0'
 
-      angular.element($window).bind('resize', function() {
-        canvas.width = w
-        canvas.height = h
-      })
+        var series, w, h, canvas
 
-      // smoothieJS - Create new chart
-      var chart = new smoothie.SmoothieChart({
-        borderVisible: false,
-        sharpLines: true,
-        grid: {
-          fillStyle: '#ffffff',
-          strokeStyle: 'rgba(232,230,230,0.93)',
-          sharpLines: true,
-          millisPerLine: 3000,
-          borderVisible: false
-        },
-        labels: {
-          fontSize: 11,
-          precision: 0,
-          fillStyle: '#0f0e0e'
-        },
-        maxValue: parseInt(scope.maxValue),
-        minValue: parseInt(scope.minValue),
-        horizontalLines: [{
-          value: 5,
-          color: '#eff',
-          lineWidth: 1
-        }]
-      })
-
-      // smoothieJS - set up canvas element for chart
-      canvas  = element.find('canvas')[0]
-      series  = new smoothie.TimeSeries()
-      w       = canvas.width
-      h       = canvas.height
-
-      chart.addTimeSeries(series, {
-        strokeStyle: 'rgba(' + scope.color + ', 1)',
-        fillStyle: 'rgba(' + scope.color + ', 0.2)',
-        lineWidth: 2
-      })
-
-      chart.streamTo(canvas, 1000)
-
-      var dataCallInProgress = false
-
-      // update data on chart
-      scope.getData = function() {
-
-        if(scope.initializing)
-          scope.initializing = false
-
-        if (dataCallInProgress) return
-
-        dataCallInProgress = true
-
-        server.get(scope.moduleName, function(serverResponseData) {
-
-          if (serverResponseData.length < 1) {
-            scope.emptyResult = true
-            return
-          }
-
-          dataCallInProgress = false
-          scope.lastGet      = new Date().getTime()
-
-          // change graph colour depending on usage
-          if (scope.maxValue / 4 * 3 < scope.getDisplayValue(serverResponseData)) {
-            chart.seriesSet[0].options.strokeStyle = 'rgba(255, 89, 0, 1)'
-            chart.seriesSet[0].options.fillStyle = 'rgba(255, 89, 0, 0.2)'
-          } else if (scope.maxValue / 3 < scope.getDisplayValue(serverResponseData)) {
-            chart.seriesSet[0].options.strokeStyle = 'rgba(255, 238, 0, 1)'
-            chart.seriesSet[0].options.fillStyle = 'rgba(255, 238, 0, 0.2)'
-          } else {
-            chart.seriesSet[0].options.strokeStyle = 'rgba(' + scope.color + ', 1)'
-            chart.seriesSet[0].options.fillStyle = 'rgba(' + scope.color + ', 0.2)'
-          }
-
-          // update chart with this response
-          series.append(scope.lastGet, scope.getDisplayValue(serverResponseData))
-
-          // update the metrics for this chart
-          scope.metrics.forEach(function(metricObj) {
-            metricObj.data = metricObj.generate(serverResponseData)
-          })
-
+        angular.element($window).bind('resize', function() {
+          canvas.width = w
+          canvas.height = h
         })
+
+        // smoothieJS - Create new chart
+        var chart = new smoothie.SmoothieChart({
+          borderVisible: false,
+          sharpLines: true,
+          grid: {
+            fillStyle: '#ffffff',
+            strokeStyle: 'rgba(232,230,230,0.93)',
+            sharpLines: true,
+            millisPerLine: 3000,
+            borderVisible: false
+          },
+          labels: {
+            fontSize: 11,
+            precision: 0,
+            fillStyle: '#0f0e0e'
+          },
+          maxValue: parseInt(scope.maxValue),
+          minValue: parseInt(scope.minValue),
+          horizontalLines: [{
+            value: 5,
+            color: '#eff',
+            lineWidth: 1
+          }]
+        })
+
+        // smoothieJS - set up canvas element for chart
+        canvas  = element.find('canvas')[0]
+        series  = new smoothie.TimeSeries()
+        w       = canvas.width
+        h       = canvas.height
+
+        chart.addTimeSeries(series, {
+          strokeStyle: 'rgba(' + scope.color + ', 1)',
+          fillStyle: 'rgba(' + scope.color + ', 0.2)',
+          lineWidth: 2
+        })
+
+        chart.streamTo(canvas, 1000)
+
+        var dataCallInProgress = false
+
+        // update data on chart
+        scope.getData = function() {
+
+          if(scope.initializing)
+            scope.initializing = false
+
+          if (dataCallInProgress) return
+
+          dataCallInProgress = true
+
+          server.get(scope.moduleName, function(serverResponseData) {
+
+            if (serverResponseData.length < 1) {
+              scope.emptyResult = true
+              return
+            }
+
+            dataCallInProgress = false
+            scope.lastGet      = new Date().getTime()
+
+            // change graph colour depending on usage
+            if (scope.maxValue / 4 * 3 < scope.getDisplayValue(serverResponseData)) {
+              chart.seriesSet[0].options.strokeStyle = 'rgba(255, 89, 0, 1)'
+              chart.seriesSet[0].options.fillStyle = 'rgba(255, 89, 0, 0.2)'
+            } else if (scope.maxValue / 3 < scope.getDisplayValue(serverResponseData)) {
+              chart.seriesSet[0].options.strokeStyle = 'rgba(255, 238, 0, 1)'
+              chart.seriesSet[0].options.fillStyle = 'rgba(255, 238, 0, 0.2)'
+            } else {
+              chart.seriesSet[0].options.strokeStyle = 'rgba(' + scope.color + ', 1)'
+              chart.seriesSet[0].options.fillStyle = 'rgba(' + scope.color + ', 0.2)'
+            }
+
+            // update chart with this response
+            series.append(scope.lastGet, scope.getDisplayValue(serverResponseData))
+
+            // update the metrics for this chart
+            scope.metrics.forEach(function(metricObj) {
+              metricObj.data = metricObj.generate(serverResponseData)
+            })
+
+          })
+        }
+
+        // set the directive-provided interval
+        // at which to run the chart update
+        var intervalRef = $interval(scope.getData, scope.refreshRate)
+        var removeInterval = function() {
+          $interval.cancel(intervalRef)
+        }
+
+        element.on("$destroy", removeInterval)
       }
 
-      // set the directive-provided interval
-      // at which to run the chart update
-      var intervalRef = $interval(scope.getData, scope.refreshRate)
-      var removeInterval = function() {
-        $interval.cancel(intervalRef)
-      }
+      // only start rendering plugin when we know the scale of max/min for the canvas chart (smoothie)
+      let stopWatching = scope.$watch('maxValue', function (n, o) {
+        if (n) {
+          start_rendering_line_chart()
+          stopWatching()
+        }
+      })
 
-      element.on("$destroy", removeInterval)
+
     }
   }
 }])

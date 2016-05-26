@@ -91,7 +91,6 @@ angular.module('linuxDash').directive('ramChart', ['server', function(server) {
     scope: {},
     template: `
       <line-chart-plugin
-          ng-if="maxRam"
 
           heading="RAM Usage"
           module-name="current_ram"
@@ -182,16 +181,16 @@ angular.module('linuxDash').directive('cpuTemp', ['server', function(server) {
     template: `
       <line-chart-plugin
 
-          heading="CPU temp"
-          module-name="cpu_temp"
-          color="0,255,0"
+        heading="CPU temp"
+        module-name="cpu_temp"
+        color="0,255,0"
 
-          max-value="max"
-          min-value="min"
-          refresh-rate="1500"
+        max-value="max"
+        min-value="min"
+        refresh-rate="1500"
 
-          get-display-value="displayValue"
-          metrics="utilMetrics">
+        get-display-value="displayValue"
+        metrics="utilMetrics">
       </line-chart-plugin>
     `,
     link: function(scope) {
