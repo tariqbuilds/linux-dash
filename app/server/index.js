@@ -9,10 +9,10 @@ var ws      = require('websocket').server;
 server.listen(80);
 console.log('Linux Dash Server Started!');
 
-app.use(express.static(path.resolve(__dirname + '/../webapp/')));
+app.use(express.static(path.resolve(__dirname + '/../')));
 
 app.get('/', function (req, res) {
-	res.sendFile(path.resolve(__dirname + '/../webapp/index.html'));
+	res.sendFile(path.resolve(__dirname + '/../index.html'));
 });
 
 app.get('/websocket', function (req, res) {

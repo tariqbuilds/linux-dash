@@ -1,14 +1,14 @@
-/***** Template ****/
 * {
   font-family: 'Merriweather', Arial, sans-serif;
   letter-spacing: .1rem;
 }
+
 html {
   margin-top: 0px;
   padding-top: 0;
   border-top: 1px solid #4F8EF7;
 
-  background-color: rgba(0,0,0, 0.03);
+  background-color: rgba(0,0,0, 0.02);
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
