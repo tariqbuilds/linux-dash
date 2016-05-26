@@ -66,13 +66,14 @@ Pick the platform to run linux-dash on:
 * [PHP](#php)
 * C++ (_coming soon_)
 
+<br/>
 #### Node.js
 
 ```sh
-## Install NPM dependencies
+## install NPM dependencies
 npm install --production
 
-## Start linux-dash (on port 80 by default)
+## start linux-dash (on port 80 by default)
 node index.js
 ```
 
