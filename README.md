@@ -3,15 +3,17 @@
 </h4>
 
 <p align="center">
-  <small>A simple, low-overhead web dashboard for Linux</small>
+  <small>A simple & low-overhead web dashboard for linux systems</small>
 </p>
 
 <p align="center">
-  <a href="http://linuxdash.afaqtariq.com"><i>Demo</i></a> &nbsp;|&nbsp;
-  <a href="#features"><i>Features</i></a> &nbsp;|&nbsp;
+<small>
+  <a href="http://linuxdash.afaqtariq.com">Demo</a> &nbsp;|&nbsp;
+  <a href="#features">Features</a> &nbsp;|&nbsp;
   <a href="#installation">
-    <i>Installation</i></a> &nbsp;|&nbsp;
-  <a href="#support"><i>Support</i></a>
+    Installation</a> &nbsp;|&nbsp;
+  <a href="#support">Support</a>
+</small>
 </p>
 
 <p align="center">
@@ -43,17 +45,18 @@
 
 ```sh
 
-## clone the repo
+## 1. clone the repo
 git clone --depth 1 https://github.com/afaqurk/linux-dash.git
 
-## go to the cloned directory
+## 2. go to the cloned directory
 cd linux-dash/app/server
 
 ## OR
 
-## alternatively, you can download the .zip
+## 1. alternatively, you can download the .zip
 curl -LOk https://github.com/afaqurk/linux-dash/archive/master.zip && unzip master.zip
 
+## 2. navigate to downloaded & unzipped dir
 cd linux-dash-master/app/server
 
 ```
@@ -70,17 +73,18 @@ Pick the platform to run linux-dash on:
 #### Node.js
 
 ```sh
-## install NPM dependencies
+## install dependencies
 npm install --production
 
 ## start linux-dash (on port 80 by default)
 node index.js
+
 ```
 
 <br/>
 #### Go
 ```sh
-## start the server
+## start the server (on port 80 by default)
 go run index.go
 ```
 
@@ -96,6 +100,8 @@ python index.py
 
 <br/>
 #### PHP
+(TODO: Update PHP instructions with snippets for nginx & apache configs)
+
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
 2. Point your web server to `app/` directory under `linux-dash`
 2. Restart your web server (Apache, nginx, etc.)
