@@ -2,31 +2,31 @@
 
 require('angular')
 
-const ngRoute = require('angular-route')
-const smoothie = require('smoothie')
-
-
 angular.module('linuxDash', ['ngRoute'])
 
-/**
- * Routes for different tabs on UI
- */
-angular.module('linuxDash').config(['$routeProvider', function($routeProvider) {
+const ngRoute   = require('angular-route')
+const smoothie  = require('smoothie')
+const linuxDash = angular.module('linuxDash')
+const directive = angular.module('linuxDash').directive
 
-    $routeProvider.when('/loading', {
+linuxDash.config(['$routeProvider', function($routeProvider) {
+
+  $routeProvider.when('/loading', {
     template: `
       <div class="lead" style="text-align: center;">
         <loader></loader>
         Loading...
       </div>
     `,
-      controller: function appLoadController ($scope, $location, $rootScope) {
+      controller: [
+        '$scope', '$location', '$rootScope',
+        function appLoadController($scope, $location, $rootScope) {
 
-        let loadUrl = localStorage.getItem('currentTab') || 'system-status'
-        let loadLinuxDash = () =>$location.path(loadUrl)
-        $rootScope.$on('start-linux-dash', loadLinuxDash)
+          let loadUrl = localStorage.getItem('currentTab') || 'system-status'
+          let loadLinuxDash = () =>$location.path(loadUrl)
+          $rootScope.$on('start-linux-dash', loadLinuxDash)
 
-      },
+        }],
     }).
     when('/system-status', {
       template: `
@@ -80,199 +80,168 @@ angular.module('linuxDash').config(['$routeProvider', function($routeProvider) {
     otherwise({
       redirectTo: '/loading'
     })
-
-  }
-])
-
+}])
 
 /**
  * Service which gets data from server
  * via HTTP or Websocket (if supported)
  */
-angular.module('linuxDash').service('server', ['$http', '$rootScope', '$location', class serverService {
+linuxDash.service('server', [
+  '$http', '$rootScope', '$location',
+  class serverService {
 
-  constructor($http, $rootScope, $location) {
-
-    this.websocket = {
-      connection: null,
-      onMessageEventHandlers: {}
-    }
-
-    this.$http = $http
-    this.$rootScope = $rootScope
-    this.$location = $location
-
-  }
-
-  /**
-   * @description:
-   *   Establish a websocket connection with server
-   *
-   * @return Null
-   */
-  establishWebsocketConnection() {
-
-    let server = this
-    let websocketUrl = (location.protocol === 'https:' ? 'wss://' : 'ws://') + window.location.hostname + ':' + window.location.port
-
-    if (server.websocket.connection === null) {
-
-      server.websocket.connection = new WebSocket(websocketUrl, 'linux-dash')
-
-      server.websocket.connection.onopen = function() {
-        server.$rootScope.$broadcast("start-linux-dash", {})
-        server.$rootScope.$apply()
-        console.info('Websocket connection is open')
+    constructor($http, $rootScope, $location) {
+      this.websocket = {
+        connection: null,
+        onMessageEventHandlers: {}
       }
 
-      server.websocket.connection.onmessage = function(event) {
+      this.$http      = $http
+      this.$rootScope = $rootScope
+      this.$location  = $location
+    }
 
-        var response = JSON.parse(event.data)
-        var moduleName = response.moduleName
-        var moduleData = JSON.parse(response.output)
+    establishWebsocketConnection() {
 
-        if (!!server.websocket.onMessageEventHandlers[moduleName]) {
-          server.websocket.onMessageEventHandlers[moduleName](moduleData)
+      let server = this
+      let protocol = (window.location.protocol === 'https:' ? 'wss://' : 'ws://')
+      let websocketUrl = protocol + window.location.hostname + ':' + window.location.port
+
+      if (server.websocket.connection === null) {
+
+        server.websocket.connection = new WebSocket(websocketUrl, 'linux-dash')
+
+        server.websocket.connection.onopen = function() {
+          server.$rootScope.$broadcast("start-linux-dash", {})
+          server.$rootScope.$apply()
+          console.info('Websocket connection is open')
+        }
+
+        server.websocket.connection.onmessage = function(event) {
+
+          let response = JSON.parse(event.data)
+          let moduleName = response.moduleName
+          let moduleData = JSON.parse(response.output)
+
+          if (!!server.websocket.onMessageEventHandlers[moduleName]) {
+            server.websocket.onMessageEventHandlers[moduleName](moduleData)
+          } else {
+            console.info("Websocket could not find module", moduleName, "in:", server.websocket.onMessageEventHandlers)
+          }
+
+        }
+
+        server.websocket.connection.onclose = function() {
+          server.websocket.connection = null
+        }
+      }
+    }
+
+    checkIfWebsocketsAreSupported() {
+
+      let server = this
+
+      let websocketSupport = {
+        browser: null,
+        server: null,
+      }
+
+      // does browser support websockets?
+      if (window.WebSocket) {
+
+        websocketSupport.browser = true
+
+        // does backend support websockets?
+        server.$http.get("/websocket").then(function(response) {
+
+          // if websocket_support property exists and is trurthy
+          // websocketSupport.server will equal true.
+          websocketSupport.server = !!response.data["websocket_support"]
+
+        }).catch(function websocketNotSupportedByServer() {
+
+          websocketSupport.server = false
+          server.$rootScope.$broadcast("start-linux-dash", {})
+
+        }).then(function finalDecisionOnWebsocket() {
+
+          if (websocketSupport.browser && websocketSupport.server) {
+
+            server.establishWebsocketConnection()
+
+          } else {
+            // rootScope event not propogating from here.
+            // instead, we manually route to url
+            server.$location.path('/system-status')
+          }
+
+        })
+
+      }
+    }
+
+    get(moduleName, callback) {
+
+      let server = this
+
+      // if we have a websocket connection
+      if (server.websocket.connection) {
+
+        // and the connection is ready
+        if (server.websocket.connection.readyState === 1) {
+
+          // set the callback as the event handler
+          // for server response.
+          //
+          // Callback instance needs to be overwritten
+          // each time for this to work. Not sure why.
+          server.websocket.onMessageEventHandlers[moduleName] = callback
+
+          //
+          server.websocket.connection.send(moduleName)
+
         } else {
-          console.info("Websocket could not find module", moduleName, "in:", server.websocket.onMessageEventHandlers)
+          console.log("Websocket not ready yet.", moduleName)
         }
 
       }
+      // otherwise
+      else {
 
-      server.websocket.connection.onclose = function() {
-        server.websocket.connection = null
+        let moduleAddress = 'server/?module=' + moduleName
+
+        return this.$http.get(moduleAddress).then(function(response) {
+          return callback(response.data)
+        })
+
       }
     }
-
   }
+])
 
-  /**
-   * @description:
-   *   Check if websockets are supported
-   *   If so, call establishWebsocketConnection()
-   *
-   * @return Null
-   */
-  checkIfWebsocketsAreSupported() {
+linuxDash.run([
+  'server', '$location', '$rootScope',
+  (server, $location, $rootScope) => {
 
-    let server = this
+    server.checkIfWebsocketsAreSupported()
 
-    var websocketSupport = {
-      browser: null,
-      server: null,
-    }
+    let currentRoute = $location.path()
+    let currentTab = (currentRoute === '/loading')? 'system-status': currentRoute
+    localStorage.setItem('currentTab', currentTab)
 
-    // does browser support websockets?
-    if (window.WebSocket) {
-
-      websocketSupport.browser = true
-
-      // does backend support websockets?
-      server.$http.get("/websocket").then(function(response) {
-
-        // if websocket_support property exists and is trurthy
-        // websocketSupport.server will equal true.
-        websocketSupport.server = !!response.data["websocket_support"]
-
-      }).catch(function websocketNotSupportedByServer() {
-
-        websocketSupport.server = false
-        server.$rootScope.$broadcast("start-linux-dash", {})
-
-      }).then(function finalDecisionOnWebsocket() {
-
-        if (websocketSupport.browser && websocketSupport.server) {
-
-          server.establishWebsocketConnection()
-
-        } else {
-          // rootScope event not propogating from here.
-          // instead, we manually route to url
-          server.$location.path('/system-status')
-        }
-
-      })
-
-    }
-
+    $location.path('/loading')
   }
+])
 
-  /**
-   * Handles requests from modules for data from server
-   *
-   * @param  {String}   moduleName
-   * @param  {Function} callback
-   * @return {[ Null || callback(server response) ]}
-   */
-  get(moduleName, callback) {
-
-    let server = this
-
-    // if we have a websocket connection
-    if (server.websocket.connection) {
-
-      // and the connection is ready
-      if (server.websocket.connection.readyState === 1) {
-
-        // set the callback as the event handler
-        // for server response.
-        //
-        // Callback instance needs to be overwritten
-        // each time for this to work. Not sure why.
-        server.websocket.onMessageEventHandlers[moduleName] = callback
-
-        //
-        server.websocket.connection.send(moduleName)
-
-      } else {
-        console.log("Websocket not ready yet.", moduleName)
-      }
-
-    }
-    // otherwise
-    else {
-
-      var moduleAddress = 'server/?module=' + moduleName
-
-      return this.$http.get(moduleAddress).then(function(response) {
-        return callback(response.data)
-      })
-
-    }
-
-  }
-
-}])
-
-/**
- * Hook to run websocket support check.
- */
-angular.module('linuxDash').run(['server', '$location', '$rootScope', function(server, $location, $rootScope) {
-
-  server.checkIfWebsocketsAreSupported()
-
-  var currentRoute = $location.path()
-  var currentTab = (currentRoute === '/loading')? 'system-status': currentRoute
-  localStorage.setItem('currentTab', currentTab)
-
-  $location.path('/loading')
-
-}])
-
-/**
- * Sidebar for SPA
- */
-angular.module('linuxDash').directive('navBar', ['$location', function($location) {
+directive('navBar', ['$location', function($location) {
   return {
-    restrict: 'E',
     template: `
-      <br/>
       <ul>
-          <li ng-class="{active: isActive(navItem) }" ng-repeat="navItem in items">
-              <a href="#/{{navItem}}">
-                  {{getNavItemName(navItem)}}
-              </a>
-          </li>
+        <li ng-class="{active: isActive(navItem) }" ng-repeat="navItem in items">
+          <a href="#/{{navItem}}">
+              {{getNavItemName(navItem)}}
+          </a>
+        </li>
       </ul>
     `,
     link: function(scope) {
@@ -296,12 +265,8 @@ angular.module('linuxDash').directive('navBar', ['$location', function($location
 
 }])
 
-/**
- * Shows loader
- */
-angular.module('linuxDash').directive('loader', function() {
+directive('loader', function() {
   return {
-    restrict: 'E',
     scope: {
       width: '@'
     },
@@ -317,12 +282,8 @@ angular.module('linuxDash').directive('loader', function() {
   }
 })
 
-/**
- * Top Bar for widget
- */
-angular.module('linuxDash').directive('topBar', function() {
+directive('topBar', function() {
   return {
-    restrict: 'E',
     scope: {
       heading: '=',
       refresh: '&',
@@ -342,7 +303,7 @@ angular.module('linuxDash').directive('topBar', function() {
       </div>
     `,
     link: function(scope, element, attrs) {
-      var $refreshBtn = element.find('refresh-btn').eq(0)
+      let $refreshBtn = element.find('refresh-btn').eq(0)
 
       if (typeof attrs.noRefreshBtn !== 'undefined') {
         $refreshBtn.remove()
@@ -351,36 +312,19 @@ angular.module('linuxDash').directive('topBar', function() {
   }
 })
 
-/**
- * Shows refresh button and calls
- * provided expression on-click
- */
-angular.module('linuxDash').directive('refreshBtn', function() {
-  return {
-    restrict: 'E',
+directive('refreshBtn', () => (
+  {
     scope: {
       refresh: '&'
     },
     template: `<button ng-click="refresh()">↺</button>`
   }
-})
+))
 
-/**
- * Message shown when no data is found from server
- */
-angular.module('linuxDash').directive('noData', function() {
-  return {
-    restrict: 'E',
-    template: 'No Data'
-  }
-})
+directive('noData', () => ({ template: 'No Data' }))
 
-/**
- * Displays last updated timestamp for widget
- */
-angular.module('linuxDash').directive('lastUpdate', function() {
-  return {
-    restrict: 'E',
+directive('lastUpdate', () =>
+  ({
     scope: {
       timestamp: '='
     },
@@ -390,18 +334,11 @@ angular.module('linuxDash').directive('lastUpdate', function() {
         <span ng-show="timestamp">{{ timestamp | date:'hh:mm:ss a' }}</span>
       </small>
     `
-  }
-})
+  })
+)
 
-
-////////////////// Plugin Directives //////////////////
-
-/**
- * Fetches and displays table data
- */
-angular.module('linuxDash').directive('tableData', ['server', '$rootScope', function(server, $rootScope) {
-  return {
-    restrict: 'E',
+directive('tableData', ['server', '$rootScope', (server, $rootScope) =>
+  ({
     scope: {
       heading: '@',
       info: '@',
@@ -473,7 +410,7 @@ angular.module('linuxDash').directive('tableData', ['server', '$rootScope', func
       scope.sortTableRows = function() {
         scope.tableRows.sort(function(currentRow, nextRow) {
 
-          var sortResult = 0
+          let sortResult = 0
 
           if (currentRow[scope.sortByColumn] < nextRow[scope.sortByColumn]) {
             sortResult = -1
@@ -518,15 +455,11 @@ angular.module('linuxDash').directive('tableData', ['server', '$rootScope', func
 
       scope.getData()
     }
-  }
-}])
+  })
+])
 
-/**
- * Fetches and displays table data
- */
-angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', function(server, $rootScope) {
-  return {
-    restrict: 'E',
+directive('keyValueList', ['server', '$rootScope', (server, $rootScope) => (
+  {
     scope: {
       heading: '@',
       info: '@',
@@ -576,14 +509,10 @@ angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', f
       scope.getData()
     }
   }
-}])
+)])
 
-/**
- * Fetches and displays data as line chart at a certain refresh rate
- */
-angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile', 'server', '$window', function($interval, $compile, server, $window) {
-  return {
-    restrict: 'E',
+directive('lineChartPlugin', ['$interval', '$compile', 'server', '$window', ($interval, $compile, server, $window) => (
+  {
     scope: {
       heading: '@',
       moduleName: '@',
@@ -634,7 +563,7 @@ angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile
         if (!scope.color)
           scope.color = '0, 255, 0'
 
-        var series, w, h, canvas
+        let series, w, h, canvas
 
         angular.element($window).bind('resize', function() {
           canvas.width = w
@@ -642,7 +571,7 @@ angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile
         })
 
         // smoothieJS - Create new chart
-        var chart = new smoothie.SmoothieChart({
+        let chart = new smoothie.SmoothieChart({
           borderVisible: false,
           sharpLines: true,
           grid: {
@@ -680,7 +609,7 @@ angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile
 
         chart.streamTo(canvas, 1000)
 
-        var dataCallInProgress = false
+        let dataCallInProgress = false
 
         // update data on chart
         scope.getData = function() {
@@ -727,8 +656,8 @@ angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile
 
         // set the directive-provided interval
         // at which to run the chart update
-        var intervalRef = $interval(scope.getData, scope.refreshRate)
-        var removeInterval = function() {
+        let intervalRef = $interval(scope.getData, scope.refreshRate)
+        let removeInterval = function() {
           $interval.cancel(intervalRef)
         }
 
@@ -746,15 +675,10 @@ angular.module('linuxDash').directive('lineChartPlugin', ['$interval', '$compile
 
     }
   }
-}])
+)])
 
-/**
- * Fetches and displays data as line chart at a certain refresh rate
- *
- */
-angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$compile', 'server', '$window', function($interval, $compile, server, $window) {
-  return {
-    restrict: 'E',
+directive('multiLineChartPlugin', ['$interval', '$compile', 'server', '$window', ($interval, $compile, server, $window) => (
+  {
     scope: {
       heading: '@',
       moduleName: '@',
@@ -790,7 +714,7 @@ angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$co
     `,
     link: function(scope, element) {
 
-      var w, h, canvas
+      let w, h, canvas
 
       angular.element($window).bind('resize', function() {
         canvas.width = w
@@ -798,7 +722,7 @@ angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$co
       })
 
       // smoothieJS - Create new chart
-      var chart = new smoothie.SmoothieChart({
+      let chart = new smoothie.SmoothieChart({
         borderVisible: false,
         sharpLines: true,
         grid: {
@@ -821,35 +745,40 @@ angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$co
         }]
       })
 
-      var seriesOptions = [{
-        strokeStyle: 'rgba(255, 0, 0, 1)',
-        lineWidth: 2
-      }, {
-        strokeStyle: 'rgba(0, 255, 0, 1)',
-        lineWidth: 2
-      }, {
-        strokeStyle: 'rgba(0, 0, 255, 1)',
-        lineWidth: 2
-      }, {
-        strokeStyle: 'rgba(255, 255, 0, 1)',
-        lineWidth: 1
-      }]
+      let seriesOptions = [
+        {
+          strokeStyle: 'rgba(255, 0, 0, 1)',
+          lineWidth: 2
+        },
+        {
+          strokeStyle: 'rgba(0, 255, 0, 1)',
+          lineWidth: 2
+        },
+        {
+          strokeStyle: 'rgba(0, 0, 255, 1)',
+          lineWidth: 2
+        },
+        {
+          strokeStyle: 'rgba(255, 255, 0, 1)',
+          lineWidth: 1
+        }
+      ]
 
       // smoothieJS - set up canvas element for chart
-      var canvas          = element.find('canvas')[0]
-      w                   = canvas.width
-      h                   = canvas.height
-      scope.seriesArray   = []
-      scope.metricsArray  = []
+      canvas             = element.find('canvas')[0]
+      w                  = canvas.width
+      h                  = canvas.height
+      scope.seriesArray  = []
+      scope.metricsArray = []
 
       // get the data once to set up # of lines on chart
       server.get(scope.moduleName, function(serverResponseData) {
 
-        var numberOfLines = Object.keys(serverResponseData).length
+        let numberOfLines = Object.keys(serverResponseData).length
 
-        for (var x = 0; x < numberOfLines; x++) {
+        for (let x = 0; x < numberOfLines; x++) {
 
-          var keyForThisLine = Object.keys(serverResponseData)[x];
+          let keyForThisLine = Object.keys(serverResponseData)[x];
 
           scope.seriesArray[x] = new smoothie.TimeSeries();
           chart.addTimeSeries(scope.seriesArray[x], seriesOptions[x]);
@@ -861,14 +790,14 @@ angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$co
 
       })
 
-      var delay = 1000
+      let delay = 1000
 
       if (angular.isDefined(scope.delay))
         delay = scope.delay
 
       chart.streamTo(canvas, delay)
 
-      var dataCallInProgress = false
+      let dataCallInProgress = false
 
       // update data on chart
       scope.getData = function() {
@@ -883,11 +812,11 @@ angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$co
 
           dataCallInProgress = false
           scope.lastGet = new Date().getTime()
-          var keyCount = 0
-          var maxAvg = 100
+          let keyCount = 0
+          let maxAvg = 100
 
           // update chart with current response
-          for (var key in serverResponseData) {
+          for (let key in serverResponseData) {
             scope.seriesArray[keyCount].append(scope.lastGet, serverResponseData[key])
             keyCount++
             maxAvg = Math.max(maxAvg, serverResponseData[key])
@@ -899,31 +828,27 @@ angular.module('linuxDash').directive('multiLineChartPlugin', ['$interval', '$co
           })
 
           // round up the average and set the maximum scale
-          var len = parseInt(Math.log(maxAvg) / Math.log(10))
-          var div = Math.pow(10, len)
+          let len = parseInt(Math.log(maxAvg) / Math.log(10))
+          let div = Math.pow(10, len)
           chart.options.maxValue = Math.ceil(maxAvg / div) * div
 
         })
 
       }
 
-      var refreshRate = (angular.isDefined(scope.refreshRate)) ? scope.refreshRate : 1000
-      var intervalRef = $interval(scope.getData, refreshRate)
-      var removeInterval = function() {
+      let refreshRate = (angular.isDefined(scope.refreshRate)) ? scope.refreshRate : 1000
+      let intervalRef = $interval(scope.getData, refreshRate)
+      let removeInterval = function() {
         $interval.cancel(intervalRef)
       }
 
       element.on("$destroy", removeInterval)
     }
   }
-}])
+)])
 
-/**
- * Base plugin structure
- */
-angular.module('linuxDash').directive('plugin', function() {
+directive('plugin', function() {
   return {
-    restrict: 'E',
     transclude: true,
     template: `
       <div class="plugin">
@@ -940,12 +865,8 @@ angular.module('linuxDash').directive('plugin', function() {
   }
 })
 
-/**
- * Progress bar element
- */
-angular.module('linuxDash').directive('progressBarPlugin', function() {
+directive('progressBarPlugin', function() {
   return {
-    restrict: 'E',
     scope: {
       width: '@',
       moduleName: '@',
