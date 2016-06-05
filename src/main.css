@@ -18,7 +18,7 @@ html {
 body {
   padding: 0;
 }
-.title {
+#hero .title {
   color: rgb(34, 34, 34);
   display: block;
   font-size: 30px;
@@ -28,7 +28,6 @@ body {
   line-height: 52.5px;
   margin-bottom: 20px;
   margin-top: 0px;
-  text-align: center;
 }
 .plugin ::-webkit-scrollbar {
   width: 8px;
@@ -50,20 +49,17 @@ body {
 .centered {
     margin: 0 auto;
 }
-.hero {
-  padding: 10px 0 20px 0;
+#hero nav-bar {
+  display: block;
   text-align: center;
 }
-.hero nav-bar {
-  display: block;
-}
-.hero nav-bar ul {
+#hero nav-bar ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
   display: inline;
 }
-.hero nav-bar ul li a {
+#hero nav-bar ul li a {
   font-size: 11px;
   text-transform: uppercase;
   font-weight: 600;
@@ -73,15 +69,15 @@ body {
   line-height: 2.3rem;
   color: #222;
 }
-.hero nav-bar ul li.active a,
-.hero nav-bar ul li a:hover {
+#hero nav-bar ul li.active a,
+#hero nav-bar ul li a:hover {
   color: #1EAEDB;
 }
-.hero nav-bar ul li {
+#hero nav-bar ul li {
   margin-left: 20px;
   display: inline;
 }
-.hero nav-bar ul li a {
+#hero nav-bar ul li a {
   display: inline;
 }
 @media (min-width: 1080px) {

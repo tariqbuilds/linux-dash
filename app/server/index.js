@@ -47,7 +47,7 @@ function shellPathAndModuleNameAreValid(shellFilePath, moduleName) {
 
 wsServer.on('request', function(request) {
 
-	var wsClient = request.accept('linux-dash', request.origin);
+	var wsClient = request.accept('', request.origin);
 
   wsClient.on('message', function(wsReq) {
 

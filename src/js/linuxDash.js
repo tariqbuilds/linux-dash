@@ -109,7 +109,7 @@ linuxDash.service('server', [
 
       if (server.websocket.connection === null) {
 
-        server.websocket.connection = new WebSocket(websocketUrl, 'linux-dash')
+        server.websocket.connection = new WebSocket(websocketUrl)
 
         server.websocket.connection.onopen = function() {
           server.$rootScope.$broadcast("start-linux-dash", {})
@@ -535,8 +535,8 @@ directive('lineChartPlugin', ['$interval', '$compile', 'server', '$window', ($in
           <canvas
             ng-show="!initializing && !emptyResult"
             class="canvas"
-            width="400"
-            height="200">
+            width="350"
+            height="150">
           </canvas>
 
           <table ng-show="!initializing && !emptyResult" border="0" class="metrics-table">
