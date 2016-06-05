@@ -28,6 +28,7 @@ body {
   line-height: 52.5px;
   margin-bottom: 20px;
   margin-top: 0px;
+  text-align: center;
 }
 .plugin ::-webkit-scrollbar {
   width: 8px;
