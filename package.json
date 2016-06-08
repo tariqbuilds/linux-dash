@@ -1,11 +1,8 @@
 {
   "name": "linux-dash",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "description": "A simple, low overhead web dashboard for linux.",
   "main": "app/server/index.js",
-  "scripts": {
-    "develop": "node ./app/server/ & webpack --progress --watch --profile"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/afaqurk/linux-dash.git"
@@ -38,6 +35,6 @@
     "gulp-ng-annotate": "^2.0.0",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
-    "smoothie": "^1.27.0",
+    "smoothie": "^1.27.0"
   }
 }
