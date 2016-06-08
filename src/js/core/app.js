@@ -1,0 +1,1 @@
+angular.module('linuxDash', ['ngRoute'])
