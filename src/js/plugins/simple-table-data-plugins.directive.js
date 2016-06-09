@@ -69,7 +69,7 @@ var simpleTableModules = [
   },
   {
     name: 'pm2',
-    template: '<table-data heading="PM2" module-name="pm2" info="pm2 read-out."></table-data>'
+    template: '<table-data heading="PM2" module-name="pm2_stats" info="Process Manager 2 (PM2) Node Module stats"></table-data>'
   },
   {
     name: 'memoryInfo',
