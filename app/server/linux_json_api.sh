@@ -1,7 +1,12 @@
 #!/bin/bash
 
-arp_cache() {
+_parseAndPrint() {
+  while read data; do
+    echo -n "$data" | sed -r "s/\"/\\\\\"/g" | tr -d "\n";
+  done;
+}
 
+arp_cache() {
   arpCommand=$(command -v arp)
 
   result=$($arpCommand | awk 'BEGIN {print "["} NR>1 \
@@ -14,7 +19,7 @@ arp_cache() {
         | /bin/sed 'N;$s/},/}/;P;D')
 
   if [ -z "$result" ];  then echo {}
-  else echo $result
+  else echo $result | _parseAndPrint
   fi
 }
 
@@ -24,7 +29,8 @@ bandwidth() {
   | awk 'BEGIN {print "["} NR>2 {print "{ \"interface\": \"" $1 "\"," \
             " \"tx\": " $2 "," \
             " \"rx\": " $10 " }," } END {print "]"}' \
-  | /bin/sed 'N;$s/,\n/\n/;P;D'
+  | /bin/sed 'N;$s/,\n/\n/;P;D' \
+  | _parseAndPrint
 }
 
 common_applications() {
@@ -37,7 +43,7 @@ common_applications() {
           \"installed\": "installed" \
         },"}')
 
-  echo "[" ${result%?} "]"
+  echo "[" ${result%?} "]" | _parseAndPrint
 }
 
 cpu_info() {
@@ -46,7 +52,7 @@ cpu_info() {
       | /usr/bin/awk -F: '{print "\""$1"\": \""$2"\"," }  '\
       )
 
-  echo "{" ${result%?} "}"
+  echo "{" ${result%?} "}" | _parseAndPrint
 }
 
 cpu_intensive_processes() {
@@ -61,7 +67,7 @@ cpu_intensive_processes() {
                 ", \"cmd\": \"" $6 "\"" "},"\
               }')
 
-  echo "[" ${result%?} "]"
+  echo "[" ${result%?} "]" | _parseAndPrint
 }
 
 cpu_temp() {
@@ -74,10 +80,10 @@ cpu_temp() {
     #intel
     elif [[ "${returnString/"core"}" != "${returnString}" ]] ; then
       fromcore=${returnString##*"coretemp"}
-      echo ${fromcore##*Physical}  | cut -d ' ' -f 3 |  cut -c 2-5
+      echo ${fromcore##*Physical}  | cut -d ' ' -f 3 |  cut -c 2-5 | _parseAndPrint
     fi
   else
-    echo "[]"
+    echo "[]" | _parseAndPrint
   fi
 }
 
@@ -133,7 +139,7 @@ cron_history() {
         }'
     )
 
-  echo [${result%?}]
+  echo [${result%?}] | _parseAndPrint
 }
 
 current_ram() {
@@ -149,14 +155,14 @@ current_ram() {
 
   memInfo=`$catCmd $memInfoFile | $grepCmd 'MemTotal\|MemFree\|Buffers\|Cached'`
 
-  echo $memInfo | $awkCmd '{print "{ \"total\": " ($2/1024) ", \"used\": " ( ($2-($5+$8+$11))/1024 ) ", \"free\": " (($5+$8+$11)/1024) " }"  }'
+  echo $memInfo | $awkCmd '{print "{ \"total\": " ($2/1024) ", \"used\": " ( ($2-($5+$8+$11))/1024 ) ", \"free\": " (($5+$8+$11)/1024) " }"  }' | _parseAndPrint
 }
 
 disk_partitions() {
 
   result=$(/bin/df -Ph | awk 'NR>1 {print "{\"file_system\": \"" $1 "\", \"size\": \"" $2 "\", \"used\": \"" $3 "\", \"avail\": \"" $4 "\", \"used%\": \"" $5 "\", \"mounted\": \"" $6 "\"},"}')
 
-  echo [ ${result%?} ]
+  echo [ ${result%?} ] | _parseAndPrint
 }
 
 docker_processes() {
@@ -175,7 +181,7 @@ docker_processes() {
               }')"
   done
 
-  echo "[" ${result%?} "]"
+  echo "[" ${result%?} "]" | _parseAndPrint
 }
 
 download_transfer_rate() {
@@ -217,7 +223,7 @@ download_transfer_rate() {
 	done
 
 	# close the JSON object & print to screen
-	echo "$json_output}"
+	echo "$json_output}" | _parseAndPrint
 }
 
 general_info() {
@@ -242,12 +248,7 @@ general_info() {
   uptime_seconds=$(/bin/cat /proc/uptime | awk '{print $1}')
   server_time=$(date)
 
-  echo { \
-      \"OS\": \"$os\", \
-      \"Hostname\": \"$hostname\", \
-      \"Uptime\": \" $(displaytime ${uptime_seconds%.*}) \", \
-      \"Server Time\": \"$server_time\" \
-    }
+  echo "{ \"OS\": \"$os\", \"Hostname\": \"$hostname\", \"Uptime\": \" $(displaytime ${uptime_seconds%.*}) \", \"Server Time\": \"$server_time\" }" | _parseAndPrint
 }
 
 io_stats() {
@@ -257,7 +258,7 @@ io_stats() {
           {print "{ \"device\": \"" $3 "\", \"reads\": \""$4"\", \"writes\": \"" $8 "\", \"in_prog.\": \"" $12 "\", \"time\": \"" $13 "\"},"}'
       )
 
-  echo [ ${result%?} ]
+  echo [ ${result%?} ] | _parseAndPrint
 }
 
 ip_addresses() {
@@ -278,7 +279,7 @@ ip_addresses() {
       echo -n "{\"interface\" : \""$item"\", \"ip\" : \"$( $ifconfigCmd $item | $grepCmd "inet" | $awkCmd '{match($0,"inet (addr:)?([0-9.]*)",a)}END{ if (NR != 0){print a[2]; exit}{print "none"}}')\"}, "
   done
 
-  echo "{ \"interface\": \"external\", \"ip\": \"$externalIp\" } ]"
+  echo "{ \"interface\": \"external\", \"ip\": \"$externalIp\" } ]" | _parseAndPrint
 }
 
 load_avg() {
@@ -295,14 +296,14 @@ load_avg() {
 
   result=$($catCmd /proc/loadavg | $awkCmd '{print "{ \"1_min_avg\": " ($1*100)/'$numberOfCores' ", \"5_min_avg\": " ($2*100)/'$numberOfCores' ", \"15_min_avg\": " ($3*100)/'$numberOfCores' "}," }')
 
-  echo ${result%?}
+  echo ${result%?} | _parseAndPrint
 }
 
 logged_in_users() {
 
   result=$(COLUMNS=300 /usr/bin/w -h | /usr/bin/awk '{print "{\"user\": \"" $1 "\", \"from\": \"" $3 "\", \"when\": \"" $4 "\"},"}')
 
-  echo [ ${result%?} ]
+  echo [ ${result%?} ] | _parseAndPrint
 }
 
 memcached() {
@@ -311,14 +312,16 @@ memcached() {
     | /bin/grep 'bytes' \
     | /usr/bin/awk 'BEGIN {print "{"} {print "\"" $2 "\": " $3 } END {print "}"}' \
     | /usr/bin/tr '\r' ',' \
-    | /bin/sed 'N;$s/,\n/\n/;P;D'
+    | /bin/sed 'N;$s/,\n/\n/;P;D' \
+    | _parseAndPrint
 }
 
 memory_info() {
 
   /bin/cat /proc/meminfo \
     | /usr/bin/awk -F: 'BEGIN {print "{"} {print "\"" $1 "\": \"" $2 "\"," } END {print "}"}' \
-    | /bin/sed 'N;$s/,\n/\n/;P;D'
+    | /bin/sed 'N;$s/,\n/\n/;P;D' \
+    | _parseAndPrint
 }
 
 network_connections() {
@@ -334,7 +337,8 @@ network_connections() {
   | $sortCmd \
   | $uniqCmd -c \
   | $awkCmd 'BEGIN {print "["} {print "{ \"connections\": " $1 ", \"address\": \"" $2 "\" }," } END {print "]"}' \
-  | $sedCmd 'N;$s/},/}/;P;D'
+  | $sedCmd 'N;$s/},/}/;P;D' \
+  | _parseAndPrint
 }
 
 number_of_cpu_cores() {
@@ -351,7 +355,7 @@ ping() {
 
 	# get absolute path to config file
 	SCRIPTPATH=`dirname $(readlink -f $0)`
-	CONFIG_PATH=$SCRIPTPATH"./config/ping_hosts"
+	CONFIG_PATH=$SCRIPTPATH"/config/ping_hosts"
 
 	catCmd=`which cat`
 	pingCmd=`which ping`
@@ -373,10 +377,11 @@ ping() {
 					echo $result"]"
 			fi
 		done \
-	| $sedCmd 's/\},]/}]/g'
+	| $sedCmd 's/\},]/}]/g' \
+  | _parseAndPrint
 }
 
-pm2() {
+pm2_stats() {
 
 	#get data
 	command="pm2 list"
@@ -401,10 +406,10 @@ pm2() {
 			{print "\"watching\":\"" $19 "\""}\
 			{print "},"}')
 		#make sure to remove last comma and print in array
-		echo "[" ${json%?} "]"
+		echo "[" ${json%?} "]" | _parseAndPrint
 	else
 		#no data found
-		echo "[]"
+		echo "[]" | _parseAndPrint
 	fi
 }
 
@@ -420,7 +425,7 @@ ram_intensive_processes() {
                       ", \"cmd\": \"" $6 \
                       "\"},"}')
 
-  echo [ ${result%?} ]
+  echo [ ${result%?} ] | _parseAndPrint
 }
 
 recent_account_logins() {
@@ -433,7 +438,7 @@ recent_account_logins() {
             \"date\": \"" $5" "$6" "$7" "$8" "$9 "\"},"
           }'
       )
-  echo [ ${result%?} ]
+  echo [ ${result%?} ] | _parseAndPrint
 }
 
 redis() {
@@ -453,7 +458,7 @@ redis() {
         | awk -F: '{print "\"" $1 "\":" "\"" $2 }' \
         | tr '\r' '"' | tr '\n' ','
       )
-  echo { ${result%?} }
+  echo { ${result%?} } | _parseAndPrint
 }
 
 scheduled_crons() {
@@ -545,7 +550,8 @@ scheduled_crons() {
                     {print "\" " \
                     "}," } \
                 END {print "]"}' \
-        | $sedCmd 'N;$s/,\n//;P;D' | $trCmd -s '\n' ' '
+        | $sedCmd 'N;$s/,\n//;P;D' \
+        | _parseAndPrint
 
     rm --force "${temp}"
 }
@@ -564,10 +570,10 @@ swap() {
         | $awkCmd 'NR>1 {print "{ \"filename\": \"" $1"\", \"type\": \""$2"\", \"size\": \""$3"\", \"used\": \""$4"\", \"priority\": \""$5"\"}," }'
       )
 
-    echo [ ${result%?} ]
+    echo [ ${result%?} ] | _parseAndPrint
 
   else
-    echo []
+    echo [] | _parseAndPrint
   fi
 }
 
@@ -610,7 +616,7 @@ upload_transfer_rate() {
 	done
 
 	# close the JSON object & print to screen
-	echo "$json_output}"
+	echo "$json_output}" | _parseAndPrint
 }
 
 user_accounts() {
@@ -627,7 +633,7 @@ user_accounts() {
     result=$(getent passwd | /usr/bin/awk -F: '{ if ($3<=499){userType="system";} else {userType="user";} print "{ \"type\": \"" userType "\"" ", \"user\": \"" $1 "\", \"home\": \"" $6 "\" }," }')
   fi
 
-  echo [ ${result%?} ]
+  echo [ ${result%?} ] | _parseAndPrint
 }
 
 fnCalled="$1"
