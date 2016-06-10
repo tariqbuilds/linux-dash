@@ -66,8 +66,8 @@ Pick the platform to run linux-dash on:
 * [Node.js](#nodejs) (recommended)
 * [Go](#go)
 * [Python](#python)
+* [C](#c)
 * [PHP](#php)
-* C++ (_coming soon_)
 
 <br/>
 #### Node.js
@@ -96,6 +96,20 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
 ```sh
 # Start the server (on port 80 by default).
 python index.py
+```
+
+<br/>
+#### C
+
+```sh
+# extract the c server source files
+tar -jxvf c_server.tar.bz2 -C ./
+
+# compile the binary
+cd c_server && make
+
+# Start the server (on port 80 by default).
+./index
 ```
 
 <br/>
