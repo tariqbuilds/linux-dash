@@ -36,10 +36,9 @@
 <br/>
 
 ## Features
-* **Simple** --- Web-based dashboard for monitoring a linux server
-* **Small** ----- Only ~500KB on disk! *(you can cut that in 1/2 by removing `.git/`)*
-* **Easy** ------ Drop-in installation for PHP, Node.js, Python, and Go
-* **Live** ------- Streaming graphs and refresh-able plugins
+* **Simple** --- Web dashboard for monitoring linux
+* **Small** ----- Only ~500KB on disk!
+* **Easy** ------ Drop-in installation for Node.js, Go, C, Python, and PHP
 
 ## Installation
 
@@ -76,7 +75,7 @@ Pick the platform to run linux-dash on:
 ## install dependencies
 npm install --production
 
-## start linux-dash (on port 80 by default)
+## start linux-dash (on port 80 by default; may require sudo)
 node index.js
 
 ```
@@ -84,7 +83,7 @@ node index.js
 <br/>
 #### Go
 ```sh
-## start the server (on port 80 by default)
+## start the server (on port 80 by default; may require sudo)
 go run index.go
 ```
 
@@ -94,7 +93,7 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
 #### Python
 
 ```sh
-# Start the server (on port 80 by default).
+# Start the server (on port 80 by default; may require sudo).
 python index.py
 ```
 
@@ -108,7 +107,7 @@ tar -jxvf c_server.tar.bz2 -C ./
 # compile the binary
 cd c_server && make
 
-# Start the server (on port 80 by default).
+# Start the server (on port 80 by default; may require sudo)
 ./index
 ```
 
