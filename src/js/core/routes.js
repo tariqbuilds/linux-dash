@@ -1,35 +1,82 @@
-angular.module('linuxDash').config(['$routeProvider', function($routeProvider) {
+function appLoadController($scope, $location, $rootScope) {
+  var loadUrl = localStorage.getItem('currentTab') || 'system-status'
+  var loadLinuxDash = function () {
+    $location.path(loadUrl)
+  }
 
-  $routeProvider.when('/loading', {
-    templateUrl: 'src/js/templates/pages/loading.html',
-      controller: [
-        '$scope', '$location', '$rootScope',
-        function appLoadController($scope, $location, $rootScope) {
+  $rootScope.$on('start-linux-dash', loadLinuxDash)
+}
 
-          var loadUrl = localStorage.getItem('currentTab') || 'system-status'
-          var loadLinuxDash = function () {
-            $location.path(loadUrl)
-          }
+function routesFn($routeProvider) {
 
-          $rootScope.$on('start-linux-dash', loadLinuxDash)
-        }],
-    }).
-    when('/system-status', {
-      templateUrl: 'src/js/templates/pages/system-status.html',
-    }).
-    when('/basic-info', {
-      templateUrl: 'src/js/templates/pages/basic-info.html',
-    }).
-    when('/network', {
-      templateUrl: 'src/js/templates/pages/network.html',
-    }).
-    when('/accounts', {
-      templateUrl: 'src/js/templates/pages/accounts.html',
-    }).
-    when('/apps', {
-      templateUrl: 'src/js/templates/pages/apps.html',
-    }).
-    otherwise({
+  $routeProvider
+
+    .when('/loading', {
+      template: [
+        '<div class="lead" style="text-align: center;">',
+          '<loader></loader>',
+          'Loading...',
+        '</div>',
+      ].join(''),
+      controller: ['$scope', '$location', '$rootScope', appLoadController],
+    })
+
+    .when('/system-status', {
+      template: [
+        '<ram-chart></ram-chart> ',
+        '<cpu-avg-load-chart></cpu-avg-load-chart> ',
+        '<cpu-utilization-chart></cpu-utilization-chart> ',
+        '<cpu-temp></cpu-temp> ',
+        '<ram-intensive-processes></ram-intensive-processes> ',
+        '<cpu-intensive-processes></cpu-intensive-processes> ',
+        '<disk-space></disk-space> ',
+        '<swap-usage></swap-usage> ',
+        '<docker-processes></docker-processes> ',
+      ].join(''),
+    })
+
+    .when('/basic-info', {
+      template: [
+        '<machine-info></machine-info>',
+        '<memory-info></memory-info>',
+        '<cpu-info></cpu-info>',
+        '<scheduled-crons></scheduled-crons>',
+        '<cron-history></cron-history>',
+        '<io-stats></io-stats>',
+      ].join(''),
+    })
+
+    .when('/network', {
+      template: [
+        '<upload-transfer-rate-chart></upload-transfer-rate-chart> ',
+        '<download-transfer-rate-chart></download-transfer-rate-chart> ',
+        '<ip-addresses></ip-addresses> ',
+        '<network-connections></network-connections> ',
+        '<arp-cache-table></arp-cache-table> ',
+        '<ping-speeds></ping-speeds> ',
+        '<bandwidth></bandwidth> ',
+      ].join(''),
+    })
+
+    .when('/accounts', {
+      template: [
+        '<server-accounts></server-accounts> ',
+        '<logged-in-accounts></logged-in-accounts> ',
+        '<recent-logins></recent-logins> ',
+      ].join(''),
+    })
+
+    .when('/apps', {
+      template: [
+        '<common-applications></common-applications>',
+        '<memcached></memcached>',
+        '<redis></redis>',
+        '<pm2></pm2>',
+      ].join(''),
+    })
+    .otherwise({
       redirectTo: '/loading'
     })
-}])
+}
+
+angular.module('linuxDash').config(['$routeProvider', routesFn])
