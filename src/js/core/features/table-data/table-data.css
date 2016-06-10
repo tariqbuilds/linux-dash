@@ -1,0 +1,34 @@
+.table-data-plugin .filter-container {
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.table-data-plugin .filter,
+.table-data-plugin .filter:focus,
+.table-data-plugin .filter:active {
+  height: 20px;
+  padding: 5px;
+  margin: 5px;
+  border: none;
+  outline-color: transparent;
+  background: transparent;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+}
+
+.table-data-plugin .filter:focus {
+  border-bottom: 1px solid #ff5722;
+}
+
+.table-data-plugin thead tr th a,
+.table-data-plugin thead tr th a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.table-data-plugin .column-sort-caret {
+  font-size: 10px;
+  color: #1EAEDB;
+}

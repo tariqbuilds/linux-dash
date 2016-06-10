@@ -1,0 +1,15 @@
+@media (min-width: 1080px) {
+  #plugins {
+    float: none;
+    margin: 0 auto;
+    clear: both;
+  }
+}
+
+@media (max-width: 1079px) {
+  #plugins {
+    float: none;
+    margin: 0 auto;
+    clear: both;
+  }
+}

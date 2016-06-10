@@ -1,0 +1,89 @@
+#plugins {
+  text-align: center;
+  padding: 20px;
+  padding-top: 0;
+  margin-top: 0;
+  border: 1px;
+}
+
+.plugin {
+  vertical-align: text-top;
+  width: 400px;
+  display: inline-block;
+  padding: 0;
+  background-color: #FFFFFF;
+  color: black;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow: 0 5px 10px rgba(0,0,0,.53),0 3px 10px rgba(0,0,0,.16);
+  margin-top: 10px;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 50px;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .plugin {
+    max-width: 80%;
+    float: none;
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+
+  .plugin-body {
+    max-height: 400px;
+  }
+
+}
+
+.plugin .top-bar {
+  height: 25px;
+  max-width: 100%;
+  padding: 20px;
+  letter-spacing: .1rem;
+  line-height: 1.3rem;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #009587;
+  text-align: center;
+}
+
+.plugin .no-padding {
+  padding: 0px;
+}
+
+.plugin-body {
+  height: 400px;
+  font-size: 12px;
+  padding: 10px;
+  line-height: 30px;
+  overflow: auto;
+  border-top: 1px solid #ececec;
+}
+
+.plugin last-update{
+  font-size: 11px;
+  float: left;
+}
+
+.plugin ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.plugin ::-webkit-scrollbar-track {
+  background: #eee;
+  border: thin solid lightgray;
+  box-shadow: 0px 0px 3px #dfdfdf inset;
+}
+.plugin ::-webkit-scrollbar-thumb {
+  background: #999;
+  border: thin solid gray;
+  border-radius: 0px;
+}
+.plugin ::-webkit-scrollbar-thumb:hover {
+  background: #7d7d7d;
+}

@@ -32,7 +32,7 @@ g.task('generate-js-dist', ['template-cache'], function () {
 })
 
 g.task('generate-css-dist', function () {
-  return g.src([ 'src/main.css' ])
+  return g.src([ 'src/**/*.css' ])
     .pipe(cssmin())
     .pipe(concat('linuxDash.min.css'))
     .pipe(g.dest('app/'))

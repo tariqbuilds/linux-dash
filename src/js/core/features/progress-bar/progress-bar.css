@@ -1,0 +1,16 @@
+.progress-bar {
+  background-color: #eec;
+  border-radius: 10px;
+  padding: 0px;
+  clear: both;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.progress-bar > div {
+  background-color: #1EAEDB;
+  width: 0%;
+  height: 5px;
+  border-radius: 5px;
+}

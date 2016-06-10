@@ -1,0 +1,26 @@
+refresh-btn button {
+  background-color: #009587;
+  border: 0;
+  float: right;
+  font-size: 15px;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+refresh-btn button:hover {
+  background-color: #ffeb3b;
+  color: black;
+}
+
+refresh-btn button:active {
+  background-color: #0f9d58;
+}
