@@ -42,3 +42,10 @@ g.task('build', [
   'generate-js-dist',
   'generate-css-dist'
 ])
+
+g.task('watch', function () {
+  g.watch('src/**/*.css', ['generate-css-dist'])
+  g.watch(['src/**/*.js', 'src/**/*.html'], ['generate-js-dist'])
+})
+
+g.task('default', ['build', 'watch'])
