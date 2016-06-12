@@ -4,16 +4,13 @@ angular.module('linuxDash').directive('topBar', function() {
       heading: '=',
       refresh: '&',
       lastUpdated: '=',
-      info: '=',
+      info: '=', // not used currently, need a ui solution
     },
     template: '\
       <div class="top-bar">\
         <last-update timestamp="lastUpdated"></last-update>\
         <span class="qs">\
           {{ heading }}\
-          <span class="popover above" ng-if="info">\
-            {{ info }}\
-          </span>\
         </span>\
         <refresh-btn refresh="refresh()"></refresh-btn>\
       </div>\

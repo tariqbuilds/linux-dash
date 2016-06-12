@@ -1,0 +1,9 @@
+.add-new-server-input {
+  height: 26px;
+  padding: 5px;
+  width: 80%;
+  border: none;
+  font-size: 15px;
+  border-radius: 1px;
+  text-align: center;
+}
