@@ -3,7 +3,8 @@ angular.module('linuxDash').directive('navBar', ['$location', function($location
     template: '\
       <ul> \
         <li ng-class="{active: isActive(navItem) }" ng-repeat="navItem in items"> \
-          <a href="#/{{navItem}}" ng-bind="getNavItemName(navItem)"> \
+          <a href="#/{{navItem}}"> \
+              {{ getNavItemName(navItem) }} \
           </a> \
         </li> \
       </ul> \

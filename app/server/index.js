@@ -62,14 +62,18 @@ wsServer.on('request', function(request) {
 		var output  = []
 
 		command.stdout.on('data', function(chunk) {
+      if (moduleName === 'memory_info') console.log(chunk.toString())
 			output.push(chunk.toString())
 		})
 
 		command.on('close', function(code) {
+
 			if (code === 0) {
+
         var wsResponse = '{ "moduleName": "' + moduleName + '", "output": "'+ output.join('') +'" }'
 				wsClient.sendUTF(wsResponse)
 			}
+
 		})
 
   })

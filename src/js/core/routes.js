@@ -23,15 +23,15 @@ function routesFn($routeProvider) {
 
     .when('/system-status', {
       template: [
-        // '<ram-chart></ram-chart> ',
-        // '<cpu-avg-load-chart></cpu-avg-load-chart> ',
-        // '<cpu-utilization-chart></cpu-utilization-chart> ',
-        // '<cpu-temp></cpu-temp> ',
-        // '<ram-intensive-processes></ram-intensive-processes> ',
-        // '<cpu-intensive-processes></cpu-intensive-processes> ',
+        '<ram-chart></ram-chart> ',
+        '<cpu-avg-load-chart></cpu-avg-load-chart> ',
+        '<cpu-utilization-chart></cpu-utilization-chart> ',
+        '<cpu-temp></cpu-temp> ',
+        '<ram-intensive-processes></ram-intensive-processes> ',
+        '<cpu-intensive-processes></cpu-intensive-processes> ',
         '<disk-space></disk-space> ',
-        // '<swap-usage></swap-usage> ',
-        // '<docker-processes></docker-processes> ',
+        '<swap-usage></swap-usage> ',
+        '<docker-processes></docker-processes> ',
       ].join(''),
     })
 
