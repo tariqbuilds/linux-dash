@@ -539,13 +539,13 @@ scheduled_crons() {
 
     $catCmd "${temp}" \
         | awk 'BEGIN {print "["} \
-                    {print "{ \"min(s)\": \"" $1 \
-                    "\", \"hours(s)\": \"" $2 "\", " \
-                    " \"day(s)\": \"" $3 "\", " \
+                    {print "{ \"min\": \"" $1 \
+                    "\", \"hrs\": \"" $2 "\", " \
+                    " \"day\": \"" $3 "\", " \
                     " \"month\": \"" $4 "\", " \
-                    " \"weekday\": \"" $5 "\", " \
+                    " \"wkday\": \"" $5 "\", " \
                     " \"user\": \"" $6 "\", " \
-                    " \"command\": \""} \
+                    " \"CMD\": \""} \
                         {for(i=7;i<=NF;++i) printf("%s ", gensub("\"", "\\\\\"", "g", $i) ) } \
                     {print "\" " \
                     "}," } \
