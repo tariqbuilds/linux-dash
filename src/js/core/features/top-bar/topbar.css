@@ -6,7 +6,10 @@
   font-size: 13px;
   text-transform: capitalize;
   color: #009587;
-  cursor: move;
+
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
 
   background-color: #f6f8f8;
 }

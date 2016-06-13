@@ -10,11 +10,11 @@
 
     <table class="table-data-plugin" width="{{ width }}" height="{{ height }}">
       <thead>
-                <tr class="table-data-filter-container" ng-show="tableRows.length">
-                    <th colspan="{{ tableHeaders.length }}" class="filter-container">
-                        <input class="filter" ng-model="keyword" placeholder="Search">
-                    </th>
-                </tr>
+        <tr class="table-data-filter-container" ng-show="tableRows.length">
+          <th colspan="{{ tableHeaders.length }}" class="filter-container">
+            <input class="filter" ng-model="keyword" placeholder="Search">
+          </th>
+        </tr>
         <tr>
           <th ng-repeat="header in tableHeaders track by $index">
             <a href="" ng-click="setSortColumn(header)">{{ header }}</a>

@@ -23,59 +23,59 @@ function routesFn($routeProvider) {
 
     .when('/system-status', {
       template: [
-        '<ram-chart></ram-chart> ',
-        '<cpu-avg-load-chart></cpu-avg-load-chart> ',
-        '<cpu-utilization-chart></cpu-utilization-chart> ',
-        '<cpu-temp></cpu-temp> ',
-        '<ram-intensive-processes></ram-intensive-processes> ',
-        '<cpu-intensive-processes></cpu-intensive-processes> ',
-        '<disk-space></disk-space> ',
-        '<swap-usage></swap-usage> ',
-        '<docker-processes></docker-processes> ',
+        '<ram-chart sortablejs-id="ram-chart"></ram-chart> ',
+        '<cpu-avg-load-chart sortablejs-id="cpu-avg-load-chart"></cpu-avg-load-chart> ',
+        '<cpu-utilization-chart sortablejs-id="cpu-util-chart"></cpu-utilization-chart> ',
+        '<cpu-temp sortablejs-id="cpu-temp"></cpu-temp> ',
+        '<ram-intensive-processes sortablejs-id="ram-intensive-processes"></ram-intensive-processes> ',
+        '<cpu-intensive-processes sortablejs-id="cpu-intensive-processes"></cpu-intensive-processes> ',
+        '<disk-space sortablejs-id="disk-space"></disk-space> ',
+        '<swap-usage sortablejs-id="swap-usage"></swap-usage> ',
+        '<docker-processes sortablejs-id="docker"></docker-processes> ',
         '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
     .when('/basic-info', {
       template: [
-        '<machine-info></machine-info>',
-        '<memory-info></memory-info>',
-        '<cpu-info></cpu-info>',
-        '<scheduled-crons></scheduled-crons>',
-        '<cron-history></cron-history>',
-        '<io-stats></io-stats>',
+        '<machine-info sortablejs-id="machine-info"></machine-info>',
+        '<memory-info sortablejs-id="memory-info"></memory-info>',
+        '<cpu-info sortablejs-id="cpu-info"></cpu-info>',
+        '<scheduled-crons sortablejs-id="scheduled-crons"></scheduled-crons>',
+        '<cron-history sortablejs-id="cron-history"></cron-history>',
+        '<io-stats sortablejs-id="io-stats"></io-stats>',
         '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
     .when('/network', {
     template: [
-        '<upload-transfer-rate-chart></upload-transfer-rate-chart> ',
-        '<download-transfer-rate-chart></download-transfer-rate-chart> ',
-        '<ip-addresses></ip-addresses> ',
-        '<network-connections></network-connections> ',
-        '<arp-cache-table></arp-cache-table> ',
-        '<ping-speeds></ping-speeds> ',
-        '<bandwidth></bandwidth> ',
+        '<upload-transfer-rate-chart sortablejs-id="upload"></upload-transfer-rate-chart> ',
+        '<download-transfer-rate-chart sortablejs-id="download"></download-transfer-rate-chart> ',
+        '<ip-addresses sortablejs-id="ip-addresses"></ip-addresses> ',
+        '<network-connections sortablejs-id="net-cons"></network-connections> ',
+        '<arp-cache-table sortablejs-id="arp"></arp-cache-table> ',
+        '<ping-speeds sortablejs-id="ping"></ping-speeds> ',
+        '<bandwidth sortablejs-id="bandwidth"></bandwidth> ',
         '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
     .when('/accounts', {
       template: [
-        '<server-accounts></server-accounts> ',
-        '<logged-in-accounts></logged-in-accounts> ',
-        '<recent-logins></recent-logins> ',
+        '<server-accounts sortablejs-id="server-accounts"></server-accounts> ',
+        '<logged-in-accounts sortablejs-id="logged-in"></logged-in-accounts> ',
+        '<recent-logins sortablejs-id="recent"></recent-logins> ',
         '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
     .when('/apps', {
       template: [
-        '<common-applications></common-applications>',
-        '<memcached></memcached>',
-        '<redis></redis>',
-        '<pm2></pm2>',
+        '<common-applications sortablejs-id="common-applications"></common-applications>',
+        '<memcached sortablejs-id="memcached"></memcached>',
+        '<redis sortablejs-id="redis"></redis>',
+        '<pm2 sortablejs-id="pm2"></pm2>',
         '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
