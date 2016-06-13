@@ -7,7 +7,6 @@ angular
 
         if (el) {
           var sortable = Sortable.create(el, {
-            group: 'plugins',
             handle: '.top-bar',
             ghostClass: 'ld-ghost',
             chosenClass: 'ld-chosen',
