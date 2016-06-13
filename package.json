@@ -35,6 +35,7 @@
     "gulp-ng-annotate": "^2.0.0",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
-    "smoothie": "^1.27.0"
+    "smoothie": "^1.27.0",
+    "sortablejs": "^1.4.2"
   }
 }

@@ -32,6 +32,7 @@ function routesFn($routeProvider) {
         '<disk-space></disk-space> ',
         '<swap-usage></swap-usage> ',
         '<docker-processes></docker-processes> ',
+        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
@@ -43,11 +44,12 @@ function routesFn($routeProvider) {
         '<scheduled-crons></scheduled-crons>',
         '<cron-history></cron-history>',
         '<io-stats></io-stats>',
+        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
     .when('/network', {
-      template: [
+    template: [
         '<upload-transfer-rate-chart></upload-transfer-rate-chart> ',
         '<download-transfer-rate-chart></download-transfer-rate-chart> ',
         '<ip-addresses></ip-addresses> ',
@@ -55,6 +57,7 @@ function routesFn($routeProvider) {
         '<arp-cache-table></arp-cache-table> ',
         '<ping-speeds></ping-speeds> ',
         '<bandwidth></bandwidth> ',
+        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
@@ -63,6 +66,7 @@ function routesFn($routeProvider) {
         '<server-accounts></server-accounts> ',
         '<logged-in-accounts></logged-in-accounts> ',
         '<recent-logins></recent-logins> ',
+        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
@@ -72,6 +76,7 @@ function routesFn($routeProvider) {
         '<memcached></memcached>',
         '<redis></redis>',
         '<pm2></pm2>',
+        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
     .otherwise({

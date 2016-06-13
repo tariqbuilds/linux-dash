@@ -23,3 +23,13 @@ body {
 .centered {
   margin: 0 auto;
 }
+
+.ld-ghost {
+  opacity: 0.2;
+  background: transparent;
+}
+
+.ld-chosen {
+  opacity: 0.5;
+  background: transparent;
+}

@@ -21,6 +21,7 @@ g.task('generate-js-dist', ['template-cache'], function () {
     'node_modules/angular/angular.min.js',
     'node_modules/angular-route/angular-route.min.js',
     'node_modules/smoothie/smoothie.js',
+    'node_modules/sortablejs/Sortable.min.js',
     'src/js/**/*.js',
     'temp/templates.js'
   ])

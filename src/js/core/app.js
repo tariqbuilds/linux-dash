@@ -9,7 +9,6 @@ function runFn(server, $location, $rootScope) {
   $location.path('/loading')
 }
 
-
 angular
   .module('linuxDash', ['ngRoute'])
   .run([ 'server', '$location', '$rootScope', runFn])
