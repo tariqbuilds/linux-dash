@@ -12,3 +12,6 @@ function runFn(server, $location, $rootScope) {
 angular
   .module('linuxDash', ['ngRoute'])
   .run([ 'server', '$location', '$rootScope', runFn])
+  .config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.debugInfoEnabled(false)
+  }])

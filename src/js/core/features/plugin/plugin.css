@@ -7,22 +7,33 @@
 }
 
 .plugin {
+  transition: all .1s linear;
+
   vertical-align: text-top;
   width: 400px;
   display: inline-block;
   padding: 0;
-  background-color: #FFFFFF;
   color: black;
   text-align: center;
   border-radius: 2px;
-  box-shadow: 0 5px 10px rgba(0,0,0,.53),0 3px 10px rgba(0,0,0,.16);
+  box-shadow: 0 1px 10px rgba(0,0,0,.13),0px 5px 10px rgba(0,0,0,.16);
   margin-top: 10px;
   margin: 0 auto;
   margin-top: 20px;
-  margin-left: 20px;
-  margin-bottom: 50px;
+  margin-left: 15px;
+  margin-bottom: 20px;
   max-height: 400px;
   overflow: hidden;
+
+  resize: both;
+  padding-bottom: 15px;
+  background-color: rgba(0,0,0,0.015);
+}
+
+.plugin-no-resize {
+  resize: none;
+  padding-bottom: 0;
+
 }
 
 @media (max-width: 768px) {
@@ -34,7 +45,7 @@
   }
 
   .plugin-body {
-    max-height: 400px;
+    max-height: 323px;
   }
 
 }
@@ -44,12 +55,17 @@
 }
 
 .plugin-body {
-  height: 400px;
+  background-color: #fff;
+  height: 323px;
   font-size: 12px;
   padding: 10px;
   line-height: 30px;
   overflow: auto;
   border-top: 1px solid #ececec;
+}
+
+.plugin-body-short {
+  height: 263px;
 }
 
 .plugin last-update{
@@ -67,10 +83,10 @@
   box-shadow: 0px 0px 3px #dfdfdf inset;
 }
 .plugin ::-webkit-scrollbar-thumb {
-  background: #999;
-  border: thin solid gray;
-  border-radius: 0px;
+  background: rgba(0,0,0,0.1);
+  border: thin solid rgba(0,0,0,0.1);
+  border-radius: 0;
 }
 .plugin ::-webkit-scrollbar-thumb:hover {
-  background: #7d7d7d;
+  background: rgba(0,0,0,0.2);
 }
