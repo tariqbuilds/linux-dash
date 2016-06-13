@@ -3,6 +3,6 @@ angular.module('linuxDash').directive('refreshBtn', function () {
     scope: {
       refresh: '&'
     },
-    template: '<button ng-click="refresh()">↺</button>'
+    template: '<button class="ld-refresh-btn" ng-click="refresh()">↺</button>'
   }
 })

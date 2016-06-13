@@ -1,3 +1,17 @@
 .top-bar {
+
+  height: 15px;
+  padding: 15px;
+
+  font-size: 13px;
+  text-transform: capitalize;
+  color: #009587;
   cursor: move;
+
+  background-color: #f6f8f8;
+}
+
+.top-bar .heading {
+  float: left;
+  cursor: default;
 }

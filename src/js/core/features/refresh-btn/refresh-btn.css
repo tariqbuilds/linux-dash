@@ -1,13 +1,14 @@
-refresh-btn button {
+.ld-refresh-btn {
+
   background-color: #009587;
   border: 0;
   float: right;
   font-size: 15px;
-  color: white;
+  color: #fff;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  padding: 5px;
+  width: 25px;
+  height: 25px;
+  margin-top: -5px;
 
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
@@ -16,11 +17,11 @@ refresh-btn button {
   transition: all 0.5s ease;
 }
 
-refresh-btn button:hover {
+.ld-refresh-btn:hover {
   background-color: #ffeb3b;
   color: black;
 }
 
-refresh-btn button:active {
+.ld-refresh-btn:active {
   background-color: #0f9d58;
 }

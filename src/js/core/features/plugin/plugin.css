@@ -39,19 +39,6 @@
 
 }
 
-.plugin .top-bar {
-  height: 25px;
-  max-width: 100%;
-  padding: 20px;
-  letter-spacing: .1rem;
-  line-height: 1.3rem;
-  font-size: 11px;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #009587;
-  text-align: center;
-}
-
 .plugin .no-padding {
   padding: 0px;
 }

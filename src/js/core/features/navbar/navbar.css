@@ -11,11 +11,8 @@ nav-bar ul {
 }
 
 nav-bar ul li a {
-  font-size: 11px;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: .2rem;
-  margin-right: 35px;
+  font-size: 12px;
+  text-transform: capitalize;
   text-decoration: none;
   line-height: 2.3rem;
   color: #222;
@@ -24,13 +21,10 @@ nav-bar ul li a {
 nav-bar ul li.active a,
 nav-bar ul li a:hover {
   color: #009587;
+  text-decoration: underline;
 }
 
 nav-bar ul li {
   margin-left: 20px;
-  display: inline;
-}
-
-nav-bar ul li a {
   display: inline;
 }

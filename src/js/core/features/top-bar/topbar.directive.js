@@ -9,7 +9,7 @@ angular.module('linuxDash').directive('topBar', function() {
         // <last-update timestamp="lastUpdated"></last-update> \
     template: '\
       <div class="top-bar"> \
-        <span ng-bind="heading"></span> \
+        <span ng-bind="heading" class="heading"></span> \
         <refresh-btn refresh="refresh()"></refresh-btn> \
       </div> \
     ',
