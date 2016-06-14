@@ -1,8 +1,11 @@
 angular
   .module('linuxDash')
-  .directive('makePluginsDraggable', ['$location', function makePluginsDraggable($location) {
-    return {
-      link: function () {
+  .run(['$rootScope', '$location', function ($rootScope, $location) {
+
+    $rootScope.$on('$routeChangeSuccess', function () {
+
+      var intervalId = setInterval(function () {
+
         var el = document.getElementById('plugins')
 
         if (el) {
@@ -26,8 +29,9 @@ angular
             }
           })
 
+          clearInterval(intervalId)
         }
-      }
-    }
+      })
+    })
 
   }])

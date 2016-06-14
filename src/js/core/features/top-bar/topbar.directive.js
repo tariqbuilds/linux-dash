@@ -9,6 +9,7 @@ angular.module('linuxDash').directive('topBar', function() {
     template: '\
       <div class="top-bar"> \
         <span class="heading"> &#9776; {{ heading }}</span> \
+        <button ng-click="pluginsCtrl.hidePlugin(1)" style="float:right">x</button> \
         <refresh-btn refresh="refresh()"></refresh-btn> \
       </div> \
     ',

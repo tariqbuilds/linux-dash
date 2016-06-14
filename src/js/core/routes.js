@@ -32,7 +32,6 @@ function routesFn($routeProvider) {
         '<disk-space sortablejs-id="disk-space"></disk-space> ',
         '<swap-usage sortablejs-id="swap-usage"></swap-usage> ',
         '<docker-processes sortablejs-id="docker"></docker-processes> ',
-        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
@@ -44,7 +43,6 @@ function routesFn($routeProvider) {
         '<scheduled-crons sortablejs-id="scheduled-crons"></scheduled-crons>',
         '<cron-history sortablejs-id="cron-history"></cron-history>',
         '<io-stats sortablejs-id="io-stats"></io-stats>',
-        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
@@ -57,7 +55,6 @@ function routesFn($routeProvider) {
         '<arp-cache-table sortablejs-id="arp"></arp-cache-table> ',
         '<ping-speeds sortablejs-id="ping"></ping-speeds> ',
         '<bandwidth sortablejs-id="bandwidth"></bandwidth> ',
-        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
@@ -66,7 +63,6 @@ function routesFn($routeProvider) {
         '<server-accounts sortablejs-id="server-accounts"></server-accounts> ',
         '<logged-in-accounts sortablejs-id="logged-in"></logged-in-accounts> ',
         '<recent-logins sortablejs-id="recent"></recent-logins> ',
-        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
 
@@ -76,7 +72,6 @@ function routesFn($routeProvider) {
         '<memcached sortablejs-id="memcached"></memcached>',
         '<redis sortablejs-id="redis"></redis>',
         '<pm2 sortablejs-id="pm2"></pm2>',
-        '<make-plugins-draggable></make-plugins-draggable>',
       ].join(''),
     })
     .otherwise({
