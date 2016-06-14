@@ -6,10 +6,9 @@ angular.module('linuxDash').directive('topBar', function() {
       lastUpdated: '=',
       info: '=', // not being used; needs a good ui solution
     },
-        // <last-update timestamp="lastUpdated"></last-update> \
     template: '\
       <div class="top-bar"> \
-        <span ng-bind="heading" class="heading"></span> \
+        <span class="heading"> &#9776; {{ heading }}</span> \
         <refresh-btn refresh="refresh()"></refresh-btn> \
       </div> \
     ',

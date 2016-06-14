@@ -1,8 +1,3 @@
-* {
-  font-family: 'Merriweather', Arial, sans-serif;
-  letter-spacing: .1rem;
-}
-
 html {
   margin-top: 0px;
   padding-top: 0;
@@ -15,7 +10,10 @@ html {
 }
 
 body {
+  letter-spacing: .1rem;
+  font-family: 'Merriweather', Arial, sans-serif;
   padding: 0;
+  margin: 0;
 }
 
 .centered {

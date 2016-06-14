@@ -1,25 +1,31 @@
 nav-bar {
   display: block;
-  text-align: center;
+  background-color: #f6f8f8;
+  height: 50px;
+  padding-left: 25px;
+  padding-top: 10px;
 }
 
 nav-bar ul {
-  margin: 0;
+  margin-left: 40px;
   padding: 0;
   list-style-type: none;
   display: inline;
 }
 
 nav-bar ul li a {
-  font-size: 12px;
+  font-size: 16px;
   text-transform: capitalize;
   text-decoration: none;
   line-height: 2.3rem;
-  color: #222;
+  color: grey;
 }
 
-nav-bar ul li.active a,
 nav-bar ul li a:hover {
+  color: rgb(0,0,0);
+}
+
+nav-bar ul li.active a {
   color: #009587;
   text-decoration: underline;
 }
@@ -27,4 +33,12 @@ nav-bar ul li a:hover {
 nav-bar ul li {
   margin-left: 20px;
   display: inline;
+}
+
+nav-bar .title {
+  color: rgb(34, 34, 34);
+  font-weight: 300;
+  font-size: 25px;
+  letter-spacing: .1rem;
+  float: left;
 }

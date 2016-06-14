@@ -1,13 +1,16 @@
 .ld-refresh-btn {
 
-  background-color: #009587;
-  border: 0;
   float: right;
-  font-size: 15px;
-  color: #fff;
+  font-size: 17px;
+
+  color: #009587;
+  background: #fff;
+
+  border: 1px solid #eee;
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+
+  width: 30px;
+  height: 30px;
   margin-top: -5px;
 
   -webkit-transition: all 0.5s ease;
