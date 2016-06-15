@@ -1,28 +1,23 @@
-<div class="plugin plugin-no-resize">
+<plugin chart-plugin>
 
-  <top-bar heading="heading" last-updated="lastGet" no-refresh-btn></top-bar>
+  <loader ng-if="!maxValue || initializing"></loader>
 
-  <div class="plugin-body plugin-body-short no-padding">
+  <canvas
+    ng-show="!initializing && !emptyResult"
+    class="canvas"
+    width="400"
+    height="150">
+  </canvas>
 
-    <loader ng-if="!maxValue || initializing"></loader>
+  <table ng-show="!initializing && !emptyResult" border="0" class="metrics-table">
+    <tbody>
+      <tr ng-repeat="metric in metrics">
+        <td><strong>{{ metric.name }}</strong></td>
+        <td>{{ metric.data }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-    <canvas
-      ng-show="!initializing && !emptyResult"
-      class="canvas"
-      width="400"
-      height="150">
-    </canvas>
+  <no-data ng-show="emptyResult"></no-data>
 
-    <table ng-show="!initializing && !emptyResult" border="0" class="metrics-table">
-      <tbody>
-        <tr ng-repeat="metric in metrics">
-          <td><strong>{{ metric.name }}</strong></td>
-          <td>{{ metric.data }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <no-data ng-show="emptyResult"></no-data>
-
-  </div>
 </plugin>

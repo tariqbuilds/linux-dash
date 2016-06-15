@@ -55,19 +55,36 @@ angular.module('linuxDash').directive('lineChartPlugin', [
             }]
           })
 
-          // smoothieJS - set up canvas element for chart
-          canvas  = element.find('canvas')[0]
-          series  = new TimeSeries()
-          w       = canvas.width
-          h       = canvas.height
+          var initializeChart = function () {
+            // smoothieJS - set up canvas element for chart
+            var checkForCanvasReadyState = $interval(function () {
+              if (element.find('canvas')[0]) {
+                canvas  = element.find('canvas')[0]
+                series  = series || new TimeSeries()
+                w       = canvas.width
+                h       = canvas.height
 
-          chart.addTimeSeries(series, {
-            strokeStyle: 'rgba(' + scope.color + ', 1)',
-            fillStyle: 'rgba(' + scope.color + ', 0.2)',
-            lineWidth: 2
-          })
+                if (chart.seriesSet.length > 0)
+                  chart.removeTimeSeries(chart.seriesSet[0].timeSeries)
 
-          chart.streamTo(canvas, 1000)
+                chart.addTimeSeries(series, {
+                  strokeStyle: 'rgba(' + scope.color + ', 1)',
+                  fillStyle: 'rgba(' + scope.color + ', 0.2)',
+                  lineWidth: 2
+                })
+
+                chart.streamTo(canvas, 1000)
+                $interval.cancel(checkForCanvasReadyState)
+              }
+            }, 100)
+          }
+
+          scope.reInitializeChart = function () {
+            initializeChart()
+          }
+
+          if (!scope.isHidden)
+            initializeChart()
 
           var dataCallInProgress = false
 
@@ -77,7 +94,7 @@ angular.module('linuxDash').directive('lineChartPlugin', [
             if(scope.initializing)
               scope.initializing = false
 
-            if (dataCallInProgress) return
+            if (dataCallInProgress || !element.find('canvas')[0]) return
 
             dataCallInProgress = true
 
@@ -103,8 +120,10 @@ angular.module('linuxDash').directive('lineChartPlugin', [
                 chart.seriesSet[0].options.fillStyle = 'rgba(' + scope.color + ', 0.2)'
               }
 
+              scope.newData = scope.getDisplayValue(serverResponseData)
+
               // update chart with this response
-              series.append(scope.lastGet, scope.getDisplayValue(serverResponseData))
+              series.append(scope.lastGet, scope.newData)
 
               // update the metrics for this chart
               scope.metrics.forEach(function(metricObj) {

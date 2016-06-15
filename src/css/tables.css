@@ -34,3 +34,7 @@ table tbody tr:hover td {
 table.metrics-table {
   text-align: center;
 }
+
+table.metrics-table tr:last-child td {
+  border: none;
+}

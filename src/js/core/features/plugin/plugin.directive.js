@@ -2,7 +2,10 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
   return {
     transclude: true,
     templateUrl: 'src/js/core/features/plugin/plugin.html',
-    link: function (s) {
+    link: function (s, el, attr) {
+
+      if (attr.hasOwnProperty('chartPlugin'))
+        s.isChartPlugin = true
 
       if ($rootScope.hiddenPlugins.indexOf(s.moduleName) > -1)
         s.isHidden = true
@@ -14,10 +17,13 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
       s.toggleVisibility = function () {
         s.isHidden = !s.isHidden
 
-        if (s.isHidden)
+        if (s.isHidden) {
           $rootScope.$emit('hide-plugin', s.moduleName)
-        else
+        } else {
           $rootScope.$emit('show-plugin', s.moduleName)
+          console.log('re-initing')
+          if (s.isChartPlugin) s.reInitializeChart()
+        }
       }
 
     }

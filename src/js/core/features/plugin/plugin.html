@@ -1,4 +1,12 @@
-<div class="plugin" ng-class="{ 'plugin-hidden': isHidden, 'plugin-enlarged': enlarged }">
+<div
+  class="plugin"
+  ng-class="{
+    'plugin-hidden': isHidden,
+    'plugin-enlarged': enlarged,
+    'chart-plugin': isChartPlugin,
+  }"
+  >
+
   <top-bar
     heading="heading"
     last-updated="lastGet"
@@ -6,12 +14,14 @@
     toggle-visibility="toggleVisibility()"
     is-hidden="isHidden"
     toggle-width="toggleWidth()"
-    refresh="getData()">
+    refresh="getData()"
+    is-chart="isChartPlugin">
   </top-bar>
 
   <div
-    class="plugin-body"
     ng-if="!isHidden"
+    class="plugin-body"
+    ng-class="{ 'plugin-body-short no-padding chart-plugin': isChartPlugin, }"
     ng-transclude>
   </div>
 

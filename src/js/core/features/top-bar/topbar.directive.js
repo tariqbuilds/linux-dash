@@ -7,6 +7,7 @@ angular.module('linuxDash').directive('topBar', ['$rootScope', function($rootSco
       toggleVisibility: '&',
       isHidden: '=',
       toggleWidth: '&',
+      isChart: '=',
       info: '=', // not being used; needs a good ui solution
     },
     template: '\
@@ -19,8 +20,8 @@ angular.module('linuxDash').directive('topBar', ['$rootScope', function($rootSco
           ng-class="{ active: isHidden }">-</button> \
         \
         \
-        <button class="ld-top-bar-btn" ng-if="toggleWidth" ng-click="toggleWidth()">&harr;</button> \
-        <button ng-if="refresh && !isHidden" class="ld-top-bar-btn" ng-click="refresh()">↺</button> \
+        <button class="ld-top-bar-btn" ng-if="toggleWidth && !isChart" ng-click="toggleWidth()">&harr;</button> \
+        <button ng-if="!isChart && !isHidden" class="ld-top-bar-btn" ng-click="refresh()">↺</button> \
       </div> \
     ',
     link: function(scope, element, attrs) {

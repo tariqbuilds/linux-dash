@@ -64,37 +64,57 @@ angular.module('linuxDash').directive('multiLineChartPlugin', [
         ]
 
         // smoothieJS - set up canvas element for chart
-        canvas             = element.find('canvas')[0]
-        w                  = canvas.width
-        h                  = canvas.height
         scope.seriesArray  = []
         scope.metricsArray = []
-
-        // get the data once to set up # of lines on chart
-        server.get(scope.moduleName, function(serverResponseData) {
-
-          var numberOfLines = Object.keys(serverResponseData).length
-
-          for (var x = 0; x < numberOfLines; x++) {
-
-            var keyForThisLine = Object.keys(serverResponseData)[x];
-
-            scope.seriesArray[x] = new TimeSeries();
-            chart.addTimeSeries(scope.seriesArray[x], seriesOptions[x]);
-            scope.metricsArray[x] = {
-              name: keyForThisLine,
-              color: seriesOptions[x].strokeStyle,
-            }
-          }
-
-        })
 
         var delay = 1000
 
         if (angular.isDefined(scope.delay))
           delay = scope.delay
 
-        chart.streamTo(canvas, delay)
+        var initializeChart = function () {
+          // smoothieJS - set up canvas element for chart
+          var checkForCanvasReadyState = $interval(function () {
+            if (element.find('canvas')[0]) {
+              canvas  = element.find('canvas')[0]
+              w       = canvas.width
+              h       = canvas.height
+
+              // get the data once to set up # of lines on chart
+              server.get(scope.moduleName, function(serverResponseData) {
+
+                var numberOfLines = Object.keys(serverResponseData).length
+
+                for (var x = 0; x < numberOfLines; x++) {
+
+                  var keyForThisLine = Object.keys(serverResponseData)[x];
+
+                  scope.seriesArray[x] = new TimeSeries();
+                  chart.addTimeSeries(scope.seriesArray[x], seriesOptions[x]);
+                  scope.metricsArray[x] = {
+                    name: keyForThisLine,
+                    color: seriesOptions[x].strokeStyle,
+                  }
+                }
+
+              })
+
+              chart.streamTo(canvas, delay)
+              $interval.cancel(checkForCanvasReadyState)
+            }
+          }, 100)
+        }
+
+        scope.reInitializeChart = function () {
+          chart.seriesSet.forEach(function (ts) {
+            chart.removeTimeSeries(ts.timeSeries)
+          })
+
+          initializeChart()
+        }
+
+        if (!scope.isHidden)
+          initializeChart()
 
         var dataCallInProgress = false
 

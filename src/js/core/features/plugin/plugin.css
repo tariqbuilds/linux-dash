@@ -38,12 +38,6 @@
   width: 50%;
 }
 
-.plugin-no-resize {
-  resize: none;
-  padding-bottom: 0;
-
-}
-
 @media (max-width: 768px) {
   .plugin {
     max-width: 80%;
@@ -58,8 +52,10 @@
 
 }
 
-.plugin .no-padding {
+.plugin.chart-plugin {
   padding: 0px;
+  resize: none;
+  padding-bottom: 0;
 }
 
 .plugin-body {
@@ -70,6 +66,11 @@
   line-height: 30px;
   overflow: auto;
   border-top: 1px solid #ececec;
+}
+
+.plugin.chart-plugin,
+.plugin.chart-plugin .plugin-body {
+  overflow: hidden;
 }
 
 .plugin-body-short {
