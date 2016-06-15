@@ -30,6 +30,10 @@
   background-color: rgba(0,0,0,0.015);
 }
 
+.plugin-hidden {
+  width: 250px;
+}
+
 .plugin-no-resize {
   resize: none;
   padding-bottom: 0;

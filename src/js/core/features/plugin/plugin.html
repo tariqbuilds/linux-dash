@@ -1,10 +1,17 @@
-<div class="plugin">
+<div class="plugin" ng-class="{ 'plugin-hidden': isHidden }">
   <top-bar
     heading="heading"
     last-updated="lastGet"
     info="info"
+    toggle-visibility="toggleVisibility()"
+    is-hidden="isHidden"
     refresh="getData()">
   </top-bar>
 
-  <div class="plugin-body" ng-transclude></div>
+  <div
+    class="plugin-body"
+    ng-if="!isHidden"
+    ng-transclude>
+  </div>
+
 </div>

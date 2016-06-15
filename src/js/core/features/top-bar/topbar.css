@@ -17,3 +17,41 @@
 .top-bar .heading {
   float: left;
 }
+
+.ld-top-bar-btn {
+
+  float: right;
+  font-size: 17px;
+
+  color: #009587;
+  background: #fff;
+
+  border: 1px solid #eee;
+  border-radius: 50%;
+
+  width: 30px;
+  height: 30px;
+  margin-top: -5px;
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.minimize-btn {
+  font-size: 19px;
+}
+
+.minimize-btn.active {
+}
+
+.ld-refresh-btn:hover {
+  background-color: #ffeb3b;
+  color: black;
+}
+
+.ld-refresh-btn:active {
+  background-color: #0f9d58;
+}

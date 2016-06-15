@@ -22,9 +22,10 @@ angular.module('linuxDash').directive('diskSpace', ['server', function(server) {
       }
 
       scope.heading = "Disk Partitions"
+      scope.moduleName = 'disk_partitions'
 
       scope.getData = function() {
-        server.get('disk_partitions', function(serverResponseData) {
+        server.get(scope.moduleName, function(serverResponseData) {
           scope.diskSpaceData = serverResponseData
         })
 
