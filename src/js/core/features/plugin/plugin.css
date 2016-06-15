@@ -34,6 +34,10 @@
   width: 250px;
 }
 
+.plugin-enlarged {
+  width: 50%;
+}
+
 .plugin-no-resize {
   resize: none;
   padding-bottom: 0;

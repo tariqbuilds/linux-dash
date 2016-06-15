@@ -7,6 +7,11 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
       if ($rootScope.hiddenPlugins.indexOf(s.moduleName) > -1)
         s.isHidden = true
 
+      s.toggleWidth = function () {
+        s.enlarged = !s.enlarged
+        console.log('toggled', s.enlarged)
+      }
+
       s.toggleVisibility = function () {
         s.isHidden = !s.isHidden
 

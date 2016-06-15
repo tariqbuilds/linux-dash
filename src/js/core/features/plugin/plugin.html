@@ -1,10 +1,11 @@
-<div class="plugin" ng-class="{ 'plugin-hidden': isHidden }">
+<div class="plugin" ng-class="{ 'plugin-hidden': isHidden, 'plugin-enlarged': enlarged }">
   <top-bar
     heading="heading"
     last-updated="lastGet"
     info="info"
     toggle-visibility="toggleVisibility()"
     is-hidden="isHidden"
+    toggle-width="toggleWidth()"
     refresh="getData()">
   </top-bar>
 
