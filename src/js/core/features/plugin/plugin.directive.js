@@ -21,7 +21,6 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
           $rootScope.$emit('hide-plugin', s.moduleName)
         } else {
           $rootScope.$emit('show-plugin', s.moduleName)
-          console.log('re-initing')
           if (s.isChartPlugin) s.reInitializeChart()
         }
       }

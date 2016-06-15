@@ -7,15 +7,15 @@
   text-transform: capitalize;
   color: #009587;
 
-  cursor: grab;
-  cursor: -moz-grab;
-  cursor: -webkit-grab;
-
   background-color: #f6f8f8;
 }
 
 .top-bar .heading {
   float: left;
+
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
 }
 
 .ld-top-bar-btn {
@@ -37,6 +37,8 @@
   -moz-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
+
+  cursor: pointer;
   transition: all 0.5s ease;
 }
 

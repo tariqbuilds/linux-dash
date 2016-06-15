@@ -11,12 +11,12 @@ angular
         if (el) {
 
           var sortable = Sortable.create(el, {
-            group: 'plugins-on-' + $location.path().replace('/', ''),
-            handle: '.top-bar',
+            group: 'plugin-order-' + $location.path().replace('/', ''),
+            handle: '.heading',
             ghostClass: 'ld-ghost',
             chosenClass: 'ld-chosen',
             dataIdAttr: 'sortablejs-id',
-            animation: 350,
+            animation: 1050,
             store: {
               get: function (sortable) {
                 var order = localStorage.getItem(sortable.options.group.name);
