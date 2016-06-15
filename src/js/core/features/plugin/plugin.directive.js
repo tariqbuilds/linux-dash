@@ -9,7 +9,6 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
 
       s.toggleWidth = function () {
         s.enlarged = !s.enlarged
-        console.log('toggled', s.enlarged)
       }
 
       s.toggleVisibility = function () {

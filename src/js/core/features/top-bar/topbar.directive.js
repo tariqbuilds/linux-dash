@@ -13,14 +13,14 @@ angular.module('linuxDash').directive('topBar', ['$rootScope', function($rootSco
       <div class="top-bar"> \
         <span class="heading"> &#9776; {{ heading }}</span> \
         \
-        <button class="ld-top-bar-btn" ng-click="toggleWidth()">&harr;</button> \
-        \
         <button \
           class="ld-top-bar-btn minimize-btn" \
           ng-click="toggleVisibility()" \
           ng-class="{ active: isHidden }">-</button> \
         \
-        <button ng-if="!isHidden" class="ld-top-bar-btn" ng-click="refresh()">↺</button> \
+        \
+        <button class="ld-top-bar-btn" ng-if="toggleWidth" ng-click="toggleWidth()">&harr;</button> \
+        <button ng-if="refresh && !isHidden" class="ld-top-bar-btn" ng-click="refresh()">↺</button> \
       </div> \
     ',
     link: function(scope, element, attrs) {
