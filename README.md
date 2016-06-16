@@ -1,6 +1,6 @@
-<h4 align="center">
-  linux-dash
-</h4>
+<h2 align="center">
+  Linux Dash
+</h2>
 
 <p align="center">
   <small>A simple & low-overhead web dashboard for linux systems</small>
@@ -36,26 +36,27 @@
 <br/>
 
 ## Features
-* **Simple** --- Web dashboard for monitoring linux
-* **Small** ----- Only ~500KB on disk!
-* **Easy** ------ Drop-in installation for Node.js, Go, C, Python, and PHP
+* **Simple** --- Beautiful, minimalist web dashboard for monitoring linux
+* **Small** ----- Under 400KB on disk!
+* **Easy** ------ Simple installation
+* **Versatile** - Choose your stack: Node.js || Go || C || Python || PHP
 
 ## Installation
 
 ```sh
 
-## 1. clone the repo
+## A-1. clone the repo
 git clone --depth 1 https://github.com/afaqurk/linux-dash.git
 
-## 2. go to the cloned directory
+## A-2. go to the cloned directory
 cd linux-dash/app/server
 
 ## OR
 
-## 1. alternatively, you can download the .zip
+## B-1. alternatively, you can download the .zip
 curl -LOk https://github.com/afaqurk/linux-dash/archive/master.zip && unzip master.zip
 
-## 2. navigate to downloaded & unzipped dir
+## B-2. navigate to downloaded & unzipped dir
 cd linux-dash-master/app/server
 
 ```
