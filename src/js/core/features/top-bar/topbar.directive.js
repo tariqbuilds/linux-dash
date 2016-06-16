@@ -20,16 +20,9 @@ angular.module('linuxDash').directive('topBar', ['$rootScope', function($rootSco
           ng-class="{ active: isHidden }">-</button> \
         \
         \
-        <button class="ld-top-bar-btn" ng-if="toggleWidth && !isChart" ng-click="toggleWidth()">&harr;</button> \
-        <button ng-if="!isChart && !isHidden" class="ld-top-bar-btn" ng-click="refresh()">↺</button> \
+        <button class="ld-top-bar-btn width-toggle-btn" ng-if="toggleWidth && !isChart" ng-click="toggleWidth()">&harr;</button> \
+        <button ng-if="!isChart && !isHidden" class="ld-top-bar-btn refresh-btn" ng-click="refresh()">↺</button> \
       </div> \
     ',
-    link: function(scope, element, attrs) {
-      var $refreshBtn = element.find('refresh-btn').eq(0)
-
-      if (typeof attrs.noRefreshBtn !== 'undefined') {
-        $refreshBtn.remove()
-      }
-    }
   }
 }])

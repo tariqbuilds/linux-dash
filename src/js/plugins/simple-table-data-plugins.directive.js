@@ -9,11 +9,11 @@ var simpleTableModules = [
   },
   {
     name: 'ramIntensiveProcesses',
-    template: '<table-data heading="RAM Intensive Processes" module-name="ram_intensive_processes" info="Processes which are using most RAM."></table-data>'
+    template: '<table-data heading="RAM Processes" module-name="ram_intensive_processes" info="Processes which are using most RAM."></table-data>'
   },
   {
     name: 'cpuIntensiveProcesses',
-    template: '<table-data heading="CPU Intensive Processes" module-name="cpu_intensive_processes" info="Processes which are using most CPU."></table-data>'
+    template: '<table-data heading="CPU Processes" module-name="cpu_intensive_processes" info="Processes which are using most CPU."></table-data>'
   },
   {
     name: 'dockerProcesses',

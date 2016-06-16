@@ -57,3 +57,13 @@
 .ld-refresh-btn:active {
   background-color: #0f9d58;
 }
+
+.plugin-hidden .width-toggle-btn {
+  display: none;
+}
+
+.plugin-hidden .minimize-btn,
+.plugin-enlarged .width-toggle-btn {
+  background: #eee;
+  color: #000;
+}
