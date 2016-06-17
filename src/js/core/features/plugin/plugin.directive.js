@@ -11,6 +11,7 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
         s.isHidden = true
 
       s.toggleWidth = function () {
+        el.find('div')[0].removeAttribute('style')
         s.enlarged = !s.enlarged
       }
 

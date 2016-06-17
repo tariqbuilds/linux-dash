@@ -43,6 +43,15 @@
     max-height: 323px;
   }
 
+  .plugin-enlarged {
+    width: 80%;
+  }
+}
+
+@media (max-width: 950px) {
+  .plugin-enlarged {
+    width: 90%;
+  }
 }
 
 .plugin.chart-plugin {
