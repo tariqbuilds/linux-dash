@@ -15,21 +15,27 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
         s.enlarged = !s.enlarged
       }
 
-      s.toggleVisibility = function () {
-        s.isHidden = !s.isHidden
+      var setPluginVisibility = function (shouldShow) {
+        s.isHidden = !shouldShow
 
-        if (s.isHidden) {
-          $rootScope.$emit('hide-plugin', s.moduleName)
-        } else {
+        if (shouldShow) {
           $rootScope.$emit('show-plugin', s.moduleName)
           if (s.isChartPlugin) s.reInitializeChart()
+        } else {
+          $rootScope.$emit('hide-plugin', s.moduleName)
         }
       }
 
-      if (s.emptyResult) {
-        console.log(s.moduleName, 'empty?', s.emptyResult)
-        s.toggleVisibility()
+      s.toggleVisibility = function () {
+        setPluginVisibility(!s.isHidden)
       }
+
+
+      s.$watch('emptyResult', function (n, o) {
+        if (n) {
+          setPluginVisibility(false)
+        }
+      })
     }
   }
 }])
