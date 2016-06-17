@@ -27,22 +27,19 @@ wsServer = new ws({
 	httpServer: server
 })
 
-function getShellFilePath(moduleName) {
-  return __dirname + '/linux_json_api.sh'
-}
+var nixJsonAPIScript = __dirname + '/linux_json_api.sh'
 
-function shellPathAndModuleNameAreValid(shellFilePath, moduleName) {
+function getPluginData(pluginName, callback) {
+  var command = spawn(nixJsonAPIScript, [ pluginName, '' ])
+  var output  = []
 
-  var moduleInvalidName = moduleName.indexOf('.') > -1
-  var moduleNameEmpty   = !moduleName
-  var moduleNotFound    = !fs.existsSync(shellFilePath)
-  var isValid = true
+  command.stdout.on('data', function(chunk) {
+    output.push(chunk.toString())
+  })
 
-  if (moduleInvalidName || moduleNameEmpty || moduleNotFound) {
-    isValid = false
-  }
-
-  return isValid
+  command.on('close', function (code) {
+    callback(code, output)
+  })
 }
 
 wsServer.on('request', function(request) {
@@ -52,29 +49,14 @@ wsServer.on('request', function(request) {
   wsClient.on('message', function(wsReq) {
 
     var moduleName = wsReq.utf8Data
-    var shellFile  = getShellFilePath(moduleName)
-
-    if (!shellPathAndModuleNameAreValid(shellFile, moduleName)) {
-      return
+    var sendDataToClient = function(code, output) {
+      if (code === 0) {
+        var wsResponse = '{ "moduleName": "' + moduleName + '", "output": "'+ output.join('') +'" }'
+        wsClient.sendUTF(wsResponse)
+      }
     }
 
-		var command = spawn(shellFile, [ moduleName, wsReq.color || '' ])
-		var output  = []
-
-		command.stdout.on('data', function(chunk) {
-      if (moduleName === 'memory_info') console.log(chunk.toString())
-			output.push(chunk.toString())
-		})
-
-		command.on('close', function(code) {
-
-			if (code === 0) {
-
-        var wsResponse = '{ "moduleName": "' + moduleName + '", "output": "'+ output.join('') +'" }'
-				wsClient.sendUTF(wsResponse)
-			}
-
-		})
+    getPluginData(moduleName, sendDataToClient)
 
   })
 
@@ -82,23 +64,10 @@ wsServer.on('request', function(request) {
 
 app.get('/server/', function (req, res) {
 
-	var shellFile = getShellFilePath(req.query.module)
-
-	if (!shellPathAndModuleNameAreValid(shellFile, req.query.module)) {
-    res.sendStatus(406)
-    return
-  }
-
-	var command = spawn(shellFile, [ req.query.color || '' ])
-	var output  = []
-
-	command.stdout.on('data', function(chunk) {
-		output.push(chunk)
-	})
-
-	command.on('close', function(code) {
+	var respondWithData = function(code, output) {
 		if (code === 0) res.send(output.toString())
 		else res.sendStatus(500)
-	})
+	}
 
+  getPluginData(req.query.module, respondWithData)
 })
