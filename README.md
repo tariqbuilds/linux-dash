@@ -1,5 +1,7 @@
 <h2 align="center">
-  Linux Dash
+  ALPHA - NOT READY FOR USE
+  <br/>
+  <a href="https://linux-dash.github.io/">Linux Dash</a>
 </h2>
 
 <p align="center">
@@ -38,7 +40,7 @@
 ## Features
 * **Simple** --- Beautiful, minimalist web dashboard for monitoring linux
 * **Small** ----- Under 400KB on disk!
-* **Easy** ------ Simple installation
+* **Easy** ------ Drop-in installation
 * **Versatile** - Choose your stack: Node.js || Go || C || Python || PHP
 
 ## Installation
@@ -51,19 +53,11 @@ git clone --depth 1 https://github.com/afaqurk/linux-dash.git
 ## A-2. go to the cloned directory
 cd linux-dash/app/server
 
-## OR
-
-## B-1. alternatively, you can download the .zip
-curl -LOk https://github.com/afaqurk/linux-dash/archive/master.zip && unzip master.zip
-
-## B-2. navigate to downloaded & unzipped dir
-cd linux-dash-master/app/server
-
 ```
 
-Pick the platform to run linux-dash on:
+See instructions for stack you prefer to run linux-dash on:
 
-* [Node.js](#nodejs) (recommended)
+* [Node.js](#nodejs) _(recommended)_
 * [Go](#go)
 * [Python](#python)
 * [C](#c)
