@@ -26,6 +26,10 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
         }
       }
 
+      if (s.emptyResult) {
+        console.log(s.moduleName, 'empty?', s.emptyResult)
+        s.toggleVisibility()
+      }
     }
   }
 }])
