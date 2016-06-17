@@ -42,3 +42,18 @@ nav-bar .title {
   letter-spacing: .1rem;
   float: left;
 }
+
+nav-bar .right-content {
+  float: right;
+}
+
+nav-bar .right-content,
+nav-bar .right-content a {
+  font-size: 11px;
+  color: grey;
+  padding-top: 10px;
+}
+
+nav-bar .right-content a:hover {
+  color: #000;
+}

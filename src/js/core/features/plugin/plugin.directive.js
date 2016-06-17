@@ -27,7 +27,7 @@ angular.module('linuxDash').directive('plugin', ['$rootScope', function($rootSco
       }
 
       s.toggleVisibility = function () {
-        setPluginVisibility(!s.isHidden)
+        setPluginVisibility(s.isHidden)
       }
 
 

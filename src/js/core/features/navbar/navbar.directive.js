@@ -9,6 +9,12 @@ angular.module('linuxDash').directive('navBar', ['$location', function($location
           <a href="#/{{navItem}}" ng-bind="getNavItemName(navItem)"></a> \
         </li> \
       </ul> \
+      <span class="right-content">\
+        Resources:\
+        <a target="_blank" href="https://github.com/linux-dash/linux-dash">GitHub</a> | \
+        <a target="_blank" href="https://gitter.im/afaqurk/linux-dash">Gitter Chat Room</a> | \
+        <a target="_blank" href="https://linux-dash.github.io">Docs</a> \
+      </span>\
     ',
     link: function(scope) {
       scope.items = [
