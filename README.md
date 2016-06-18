@@ -32,13 +32,12 @@
 <br/>
 
 ## Features
-* **Small** ----- Under 400KB on disk!
-* **Simple** --- A minimalist's web dashboard for monitoring linux
+* **Small** ----- Under 400KB on disk _(with .git removed)!
+* **Simple** --- A minimalist, beautiful dashboard
 * **Easy** ------ Drop-in installation
-* **Versatile** - Choose your stack: Node.js, Go, C, Python, PHP
+* **Versatile** - _Choose your stack:_ Node.js, Go, C, Python, PHP, Binary
 
 ## Installation
-
 
 ### Step 1
 ```sh
