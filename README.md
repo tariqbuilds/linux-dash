@@ -26,15 +26,6 @@
   </a>
 </p>
 
-<p align="center">
-  <a href="http://linuxdash.afaqtariq.com">
-    <img
-      width="80%"
-      alt="linux-dash screenshot"
-      src="http://i.imgur.com/tehGyrQ.gif">
-  </a>
-</p>
-
 <br/>
 
 ## Features
@@ -48,7 +39,7 @@
 ```sh
 
 ## A-1. clone the repo
-git clone --depth 1 https://github.com/afaqurk/linux-dash.git
+git clone --depth 1 https://github.com/linux-dash/linux-dash.git
 
 ## A-2. go to the cloned directory
 cd linux-dash/app/server
