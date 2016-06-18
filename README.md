@@ -1,22 +1,25 @@
 <h2 align="center">
   ALPHA - NOT READY FOR USE
   <br/>
-  <a href="https://linux-dash.github.io/">Linux Dash</a>
+  <a href="https://linux-dash.github.io">Linux Dash</a>
 </h2>
 
 <p align="center">
   <small>A simple & low-overhead web dashboard for linux systems</small>
 </p>
 
+<h4 align="center"><a href="https://linux-dash.github.io">linux-dash.github.io</a></h4>
+
 <p align="center">
-<small>
-  <a href="http://linuxdash.afaqtariq.com">Demo</a> &nbsp;|&nbsp;
-  <a href="#features">Features</a> &nbsp;|&nbsp;
-  <a href="#installation">
-    Installation</a> &nbsp;|&nbsp;
-  <a href="#support">Support</a>
-</small>
+  <small>
+    <a href="https://linux-dash.github.io/demo">Demo</a> &nbsp;|&nbsp;
+    <a href="https://linux-dash.github.io">Features</a> &nbsp;|&nbsp;
+    <a href="https://linux-dash.github.io/docs#installation">
+      Installation
+    </a>
+  </small>
 </p>
+
 
 <p align="center">
   <a href="https://gitter.im/afaqurk/linux-dash">
@@ -36,23 +39,28 @@
 
 ## Installation
 
-```sh
 
+### Step 1
+```sh
 ## 1. clone the repo
 git clone --depth 1 https://github.com/linux-dash/linux-dash.git
 
 ## 2. go to the cloned directory
 cd linux-dash/app/server
 
-## OR, if you prefer to download without git: ##
+```
+OR, if you prefer to download manually:
 
-## 1. alternatively, you can download the .zip
+```sh
+## 1. Download the .zip
 curl -LOk https://github.com/afaqurk/linux-dash/archive/master.zip && unzip master.zip
 
 ## 2. navigate to downloaded & unzipped dir
-cd linux-dash-master/app/server     cd linux-dash-master/app/server
+cd linux-dash-master/app/server
 
 ```
+
+### Step 2
 
 See instructions for stack you prefer to run linux-dash on:
 
@@ -63,7 +71,7 @@ See instructions for stack you prefer to run linux-dash on:
 * [PHP](#php)
 
 <br/>
-#### Node.js
+#### Step 2: Node.js
 
 ```sh
 ## install dependencies
@@ -75,7 +83,7 @@ node index.js
 ```
 
 <br/>
-#### Go
+#### Step 2: Go
 ```sh
 ## start the server (on port 80 by default; may require sudo)
 go run index.go
@@ -84,7 +92,7 @@ go run index.go
 To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
 <br/>
-#### Python
+#### Step 2: Python
 
 ```sh
 # Start the server (on port 80 by default; may require sudo).
@@ -92,7 +100,7 @@ python index.py
 ```
 
 <br/>
-#### C
+#### Step 2: C
 
 ```sh
 # extract the c server source files
@@ -106,7 +114,7 @@ cd c_server && make
 ```
 
 <br/>
-#### PHP
+#### Step 2: PHP
 (TODO: Update PHP instructions with snippets for nginx & apache configs)
 
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
