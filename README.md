@@ -1,7 +1,5 @@
 <h2 align="center">
-  ALPHA - NOT READY FOR USE
-  <br/>
-  <a href="https://linux-dash.github.io">Linux Dash</a>
+  <a href="https://linux-dash.github.io">Linux Dash (v2.0 Beta)</a>
 </h2>
 
 <p align="center">
