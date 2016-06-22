@@ -155,7 +155,7 @@ current_ram() {
 
   memInfo=`$catCmd $memInfoFile | $grepCmd 'MemTotal\|MemFree\|Buffers\|Cached'`
 
-  echo $memInfo | $awkCmd '{print "{ \"total\": " ($2/1024) ", \"used\": " ( ($2-($5+$8+$11))/1024 ) ", \"free\": " (($5+$8+$11)/1024) " }"  }' | _parseAndPrint
+  echo $memInfo | $awkCmd '{print "{ \"total\": " ($2/1024) ", \"used\": " ( ($2-($5+$8+$11))/1024 ) ", \"available\": " (($5+$8+$11)/1024) " }"  }' | _parseAndPrint
 }
 
 disk_partitions() {

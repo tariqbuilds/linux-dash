@@ -58,12 +58,12 @@ angular.module('linuxDash').directive('ramChart', ['server', function (server) {
         }
       },
       {
-        name: 'Free',
+        name: 'Available',
         generate: function(serverResponseData) {
 
-          var freeRam = humanizeRam(serverResponseData.free)
+          var availableRam = humanizeRam(serverResponseData.available)
           var totalRam = humanizeRam(serverResponseData.total)
-          return  freeRam + ' of ' + totalRam
+          return  availableRam + ' of ' + totalRam
         }
       }]
     }

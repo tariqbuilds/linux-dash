@@ -78,6 +78,7 @@
 .plugin.chart-plugin,
 .plugin.chart-plugin .plugin-body {
   overflow: hidden;
+  padding: 0;
 }
 
 .plugin-body-short {
