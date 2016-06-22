@@ -1,8 +1,8 @@
-<h2 align="center">
-  ALPHA - NOT READY FOR USE
-  <br/>
-  <a href="https://linux-dash.github.io">Linux Dash</a>
-</h2>
+<h1 align="center">
+  <a href="https://linux-dash.github.io">
+    <img src="https://avatars2.githubusercontent.com/u/14918238"/>
+  </a>
+</h1>
 
 <p align="center">
   <small>A simple & low-overhead web dashboard for linux systems</small>
