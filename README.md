@@ -62,11 +62,11 @@ cd linux-dash-master/app/server
 
 See instructions for stack you prefer to run linux-dash on:
 
-* [Node.js](#nodejs) _(recommended)_
-* [Go](#go)
-* [Python](#python)
-* [C](#c)
-* [PHP](#php)
+* [Node.js](#if-using-nodejs) _(recommended)_
+* [Go](#if-using-go)
+* [Python](#if-using-python)
+* [C](#if-using-c)
+* [PHP](#if-using-php)
 
 <br/>
 #### If Using Node.js
