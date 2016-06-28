@@ -69,8 +69,7 @@ See instructions for stack you prefer to run linux-dash on:
 * [PHP](#php)
 
 <br/>
-#### Step 2: Node.js
-
+#### If Using Node.js
 ```sh
 ## install dependencies
 npm install --production
@@ -81,7 +80,7 @@ node index.js
 ```
 
 <br/>
-#### Step 2: Go
+#### If Using Go
 ```sh
 ## start the server (on port 80 by default; may require sudo)
 go run index.go
@@ -90,16 +89,14 @@ go run index.go
 To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
 <br/>
-#### Step 2: Python
-
+#### If Using Python
 ```sh
 # Start the server (on port 80 by default; may require sudo).
 python index.py
 ```
 
 <br/>
-#### Step 2: C
-
+#### If Using C
 ```sh
 # extract the c server source files
 tar -jxvf c_server.tar.bz2 -C ./
@@ -112,7 +109,7 @@ cd c_server && make
 ```
 
 <br/>
-#### Step 2: PHP
+#### If Using PHP
 (TODO: Update PHP instructions with snippets for nginx & apache configs)
 
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
