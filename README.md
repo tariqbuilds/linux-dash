@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://linux-dash.github.io">
-    <img src="https://avatars2.githubusercontent.com/u/14918238"/>
+    <img src="https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/v2.0-logo.png"/>
   </a>
 </h1>
 
