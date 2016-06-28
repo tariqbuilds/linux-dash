@@ -34,7 +34,7 @@
 * **Small** ----- Under 400KB on disk _(with .git removed)!
 * **Simple** --- A minimalist, beautiful dashboard
 * **Easy** ------ Drop-in installation
-* **Versatile** - _Choose your stack:_ Node.js, Go, C, Python, PHP, Binary
+* **Versatile** - Choose your stack from Node.js, Go, C, Python, PHP, or Binary
 
 ## Installation
 
