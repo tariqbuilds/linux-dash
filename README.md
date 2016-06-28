@@ -13,9 +13,8 @@
 <p align="center">
   <small>
     <a href="https://linux-dash.github.io/demo">Demo</a> &nbsp;|&nbsp;
-    <a href="https://linux-dash.github.io">Features</a> &nbsp;|&nbsp;
-    <a href="https://linux-dash.github.io/docs#installation">
-      Installation
+    <a href="https://linux-dash.github.io/docs">
+      Docs
     </a>
   </small>
 </p>
