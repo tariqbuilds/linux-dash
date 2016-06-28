@@ -60,7 +60,7 @@ cd linux-dash-master/app/server
 
 ### Step 2
 
-See instructions for stack you prefer to run linux-dash on:
+See instructions for preferred server linux-dash server _(all included)_:
 
 * [Node.js](#if-using-nodejs) _(recommended)_
 * [Go](#if-using-go)
