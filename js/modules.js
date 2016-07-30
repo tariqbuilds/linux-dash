@@ -10,7 +10,7 @@
     return {
       restrict: 'E',
       scope: {},
-      templateUrl: 'templates/modules/disk-space.html',
+      templateUrl: '../templates/modules/disk-space.html',
       link: function(scope) {
 
         scope.heading = "Disk Partitions";
@@ -56,7 +56,7 @@
     return {
       restrict: 'E',
       scope: {},
-      templateUrl: 'templates/modules/ram-chart.html',
+      templateUrl: '../templates/modules/ram-chart.html',
       link: function(scope) {
 
         // get max ram available on machine before we
@@ -114,7 +114,7 @@
     return {
       restrict: 'E',
       scope: {},
-      templateUrl: 'templates/modules/cpu-load.html',
+      templateUrl: '../templates/modules/cpu-load.html',
       link: function(scope) {
         scope.units = '%';
       }
@@ -124,7 +124,7 @@
     return {
       restrict: 'E',
       scope: {},
-      templateUrl: 'templates/modules/cpu-temp.html',
+      templateUrl: '../templates/modules/cpu-temp.html',
       link: function(scope) {
         scope.min = 0;
         scope.max = 100;
@@ -148,7 +148,7 @@
     return {
       restrict: 'E',
       scope: {},
-      templateUrl: 'templates/modules/cpu-utilization-chart.html',
+      templateUrl: '../templates/modules/cpu-utilization-chart.html',
       link: function(scope) {
         scope.min = 0;
         scope.max = 100;
@@ -172,7 +172,7 @@
     return {
       restrict: 'E',
       scope: {},
-      templateUrl: 'templates/modules/upload-transfer-rate.html',
+      templateUrl: '../templates/modules/upload-transfer-rate.html',
       link: function(scope) {
         scope.delay = 2000;
         scope.units = 'KB/s';
@@ -184,7 +184,7 @@
     return {
       restrict: 'E',
       scope: {},
-      templateUrl: 'templates/modules/download-transfer-rate.html',
+      templateUrl: '../templates/modules/download-transfer-rate.html',
       link: function(scope) {
         scope.delay = 2000;
         scope.units = 'KB/s';
@@ -304,7 +304,7 @@
       };
 
       if (module.templateUrl) {
-        moduleDirective['templateUrl'] = 'templates/modules/' + module.templateUrl
+        moduleDirective['templateUrl'] = '../templates/modules/' + module.templateUrl
       }
 
       if (module.template) {

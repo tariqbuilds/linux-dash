@@ -10,7 +10,7 @@
 
       $routeProvider.
       when('/loading', {
-        templateUrl: 'templates/app/loading.html',
+        templateUrl: '../templates/app/loading.html',
         controller: function appLoadController ($scope, $location, $rootScope) {
 
           var loadUrl = localStorage.getItem('currentTab') || 'system-status';
@@ -24,19 +24,19 @@
         },
       }).
       when('/system-status', {
-        templateUrl: 'templates/sections/system-status.html',
+        templateUrl: '../templates/sections/system-status.html',
       }).
       when('/basic-info', {
-        templateUrl: 'templates/sections/basic-info.html',
+        templateUrl: '../templates/sections/basic-info.html',
       }).
       when('/network', {
-        templateUrl: 'templates/sections/network.html',
+        templateUrl: '../templates/sections/network.html',
       }).
       when('/accounts', {
-        templateUrl: 'templates/sections/accounts.html',
+        templateUrl: '../templates/sections/accounts.html',
       }).
       when('/apps', {
-        templateUrl: 'templates/sections/applications.html',
+        templateUrl: '../templates/sections/applications.html',
       }).
       otherwise({
         redirectTo: '/loading'
