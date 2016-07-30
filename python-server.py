@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import argparse
 import os
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
 import subprocess
@@ -40,6 +41,12 @@ class MainHandler(BaseHTTPRequestHandler):
             self.send_error(404, 'File Not Found: %s' % self.path)
 
 if __name__ == '__main__':
-    server = ThreadedHTTPServer(('0.0.0.0', 80), MainHandler)
+    parser = argparse.ArgumentParser(description='Run linux dash')
+    parser.add_argument('--host', dest='host', default='0.0.0.0',
+                    help='interface to listen on')
+    parser.add_argument('--port', dest='port', type=int, default=80,
+                    help='port to listen on')
+    args = parser.parse_args()
+    server = ThreadedHTTPServer((args.host, args.port), MainHandler)
     print 'Starting server, use <Ctrl-C> to stop'
     server.serve_forever()
