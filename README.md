@@ -108,7 +108,9 @@ go run index.go
 To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
 ##### Python
-Run `./python-server.py` will run a server on port 80.
+1. Install pip dependencies `pip install -r requirements.txt`
+2. Run `./python-server.py` will run a server on port 80.
+3. To daemonize the process, you can use: `./python-server.py --deamonize`. Other options should be available like `--host` and `--port` so that you can control the port and interface it'll listen on.
 
 ## Support
 
