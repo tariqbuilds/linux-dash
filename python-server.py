@@ -1,9 +1,17 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
 import os
+import sys
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
 import subprocess
 from SocketServer import ThreadingMixIn
+import argparse
+
+
+parser = argparse.ArgumentParser(description='Simple Threaded HTTP server to run linux-dash.')
+parser.add_argument('--port', metavar='PORT', type=int, nargs='?', default=80,
+                    help='Port to run the server on.')
 
 modulesSubPath = '/server/modules/shell_files/'
 serverPath = os.path.dirname(os.path.realpath(__file__))
@@ -40,6 +48,7 @@ class MainHandler(BaseHTTPRequestHandler):
             self.send_error(404, 'File Not Found: %s' % self.path)
 
 if __name__ == '__main__':
-    server = ThreadedHTTPServer(('0.0.0.0', 80), MainHandler)
-    print 'Starting server, use <Ctrl-C> to stop'
+    args = parser.parse_args()
+    server = ThreadedHTTPServer(('0.0.0.0', args.port), MainHandler)
+    print('Starting server, use <Ctrl-C> to stop')
     server.serve_forever()
