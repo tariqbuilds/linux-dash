@@ -89,7 +89,7 @@ Start Linux Dash
 node server/
 ```
 
-Default port for Linux Dash is 80. You may change this with the `PORT` environment variable (eg. `PORT=8080 node server`) or editing the [server/index.js on line 9](https://github.com/afaqurk/linux-dash/blob/master/server/index.js#L9)
+Default port for Linux Dash is 80. You may change this with the `LINUX_DASH_SERVER_PORT` environment variable (eg. `LINUX_DASH_SERVER_PORT=8080 node server`) or editing the [server/index.js on line 9](https://github.com/afaqurk/linux-dash/blob/master/server/index.js#L9)
 
 <br/>
 ##### PHP
