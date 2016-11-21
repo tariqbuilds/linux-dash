@@ -1,3 +1,4 @@
+var config 	= require('config');
 var express = require('express');
 var app     = require('express')();
 var server  = require('http').Server(app);
@@ -6,8 +7,27 @@ var spawn   = require('child_process').spawn;
 var fs      = require('fs');
 var ws      = require('websocket').server;
 
-server.listen(80);
-console.log('Linux Dash Server Started!');
+server.listen(config.port, config.host, function () {
+	console.log('Linux Dash Server Started on http://%s:%d', config.host, config.port);
+});
+
+// if you want to authenticate users... ----------------------------------------
+// look at the documentation
+var auth = require('./auth');
+var customAuthSync = function (user, password) {
+	return user === 'admin' && password === 'th3Sup3rAdm1nPa55w0rd';
+};
+/*var customAuthAsync = function (user, password, cbk) {
+	process.nextTick(function () { // DB async request simulation...
+		if (!customAuthSync(user, password)) cbk('Invalid user');
+		else {
+			var dbUser = {}; // from a DB!
+			cbk(null, dbUser);
+		}
+	});
+};*/
+app.use(auth.connect(customAuthSync, {type: auth.TYPE_FUNCTION}));
+// -------------------------------------------------------------------- end auth
 
 app.use(express.static(path.resolve(__dirname + '/../')));
 
