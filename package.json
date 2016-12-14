@@ -26,6 +26,8 @@
   "homepage": "https://github.com/afaqurk/linux-dash",
   "dependencies": {
     "express": "^4.11.1",
+    "forever": "^0.15.3",
+    "forever-monitor": "^1.7.1",
     "websocket": "^1.0.22"
   }
 }
