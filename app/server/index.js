@@ -6,7 +6,7 @@ var spawn   = require('child_process').spawn
 var fs      = require('fs')
 var ws      = require('websocket').server
 
-server.listen(80)
+server.listen(process.env.PORT || 80)
 console.log('Linux Dash Server Started!')
 
 app.use(express.static(path.resolve(__dirname + '/../')))
