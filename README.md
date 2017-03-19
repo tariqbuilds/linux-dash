@@ -68,7 +68,6 @@ See instructions for preferred server linux-dash server _(all included)_:
 * [C](#if-using-c)
 * [PHP](#if-using-php)
 
-<br/>
 #### If Using Node.js
 ```sh
 ## install dependencies
@@ -79,7 +78,6 @@ node index.js
 
 ```
 
-<br/>
 #### If Using Go
 ```sh
 ## start the server (on port 80 by default; may require sudo)
@@ -88,14 +86,12 @@ go run index.go
 
 To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
-<br/>
 #### If Using Python
 ```sh
 # Start the server (on port 80 by default; may require sudo).
 python index.py
 ```
 
-<br/>
 #### If Using C
 ```sh
 # extract the c server source files
