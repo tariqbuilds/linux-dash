@@ -134,7 +134,7 @@
         };
 
         scope.utilMetrics = [{
-          name: 'Temprature',
+          name: 'Temperature',
           generate: function(serverResponseData) {
             return serverResponseData + ' °C';
           }
