@@ -107,8 +107,8 @@ go run index.go
 
 To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
-##### Python
-Run `./python-server.py` will run a server on port 80 which is the default. You can change this in [python-server.py on line 43](https://github.com/afaqurk/linux-dash/blob/master/python-server.py#L43)
+##### Python 2
+Run `./python-server.py` will run a server on port 80 which is the default. You can provide a specific port via the `--port` flag.
 
 ## Support
 
