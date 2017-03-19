@@ -8,10 +8,6 @@
 </p>
 
 <p align="center">
-<small>Check out what's coming in <a href="https://linux-dash.github.io/docs/#getting-started">Linux Dash v2.0</a>: in Fall 2016.</small>
-</p>
-
-<p align="center">
   <strong>
     <a href="http://linuxdash.afaqtariq.com"><i>Demo</i></a> &nbsp;|&nbsp;
     <a href="#features"><i>Features</i></a> &nbsp;|&nbsp;
