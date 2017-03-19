@@ -7,7 +7,7 @@ if [ `which sensors` ]; then
   #intel
   elif [[ "${returnString/"core"}" != "${returnString}" ]] ; then
     fromcore=${returnString##*"coretemp"}
-    echo ${fromcore##*Physical}  | cut -d ' ' -f 3 |  cut -c 2-5
+    echo ${fromcore##*Core}  | cut -d ' ' -f 2 |  cut -c 2-5
   fi
 else
   echo "[]"
