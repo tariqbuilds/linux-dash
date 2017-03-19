@@ -91,15 +91,12 @@ node server/
 
 <small>Default port for Linux Dash is 80. You may change this with the `LINUX_DASH_SERVER_PORT` environment variable (eg. `LINUX_DASH_SERVER_PORT=8080 node server`) or editing the [server/index.js on line 9](https://github.com/afaqurk/linux-dash/blob/master/server/index.js#L9)</small>
 
-<br/>
-
 ##### PHP
 1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
 2. Restart your web server (Apache, nginx, etc.) 
   - For PHP + Apache setup follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04).
   - For help with nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov).
 
-<br/>
 ##### Go
 Go to the `linux-dash/server` folder and run 
 ```
