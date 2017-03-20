@@ -104,7 +104,6 @@ cd c_server && make
 ./index
 ```
 
-<br/>
 #### If Using PHP
 (TODO: Update PHP instructions with snippets for nginx & apache configs)
 
