@@ -31,7 +31,7 @@
 <br/>
 
 ## Features
-* **Small** ----- Under 400KB on disk _(with .git removed)!
+* **Small** ----- Under 400KB on disk _(with .git removed)!_
 * **Simple** --- A minimalist, beautiful dashboard
 * **Easy** ------ Drop-in installation
 * **Versatile** - Choose your stack from Node.js, Go, C, Python, PHP, or Binary
