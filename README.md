@@ -74,6 +74,7 @@ See instructions for preferred server linux-dash server _(all included)_:
 npm install --production
 
 ## start linux-dash (on port 80 by default; may require sudo)
+## You may change this with the `LINUX_DASH_SERVER_PORT` environment variable (eg. `LINUX_DASH_SERVER_PORT=8080 node server`)
 node index.js
 
 ```
