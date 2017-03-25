@@ -65,7 +65,6 @@ See instructions for preferred server linux-dash server _(all included)_:
 * [Node.js](#if-using-nodejs) _(recommended)_
 * [Go](#if-using-go)
 * [Python](#if-using-python)
-* [C](#if-using-c)
 * [PHP](#if-using-php)
 
 #### If Using Node.js
@@ -91,18 +90,6 @@ To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github
 ```sh
 # Start the server (on port 80 by default; may require sudo).
 python index.py
-```
-
-#### If Using C
-```sh
-# extract the c server source files
-tar -jxvf c_server.tar.bz2 -C ./
-
-# compile the binary
-cd c_server && make
-
-# Start the server (on port 80 by default; may require sudo)
-./index
 ```
 
 #### If Using PHP
