@@ -108,4 +108,16 @@ $httpBackend.whenGET('/websocket').respond(false)
       return [200, [ { 'addr': '192.168.0.1', 'hw_type': 'ether', 'hw_addr.': '15:db:45:eb:4d:6a', 'mask': 'wlp3s0' } ]]
     })
 
+    $httpBackend.whenGET('server/?module=logged_in_users').respond(function () {
+      return [200, [ {'user': 'user1', 'from': ':0', 'when': 'Fri23'}, {'user': 'user1', 'from': 'webserver-prod-983742', 'when': 'Fri23'}, {'user': 'user1', 'from': 'webserver-prod-983742', 'when': 'Fri23'}, {'user': 'user1', 'from': 'webserver-prod-983742', 'when': '01:19'} ]]
+    })
+
+    $httpBackend.whenGET('server/?module=user_accounts').respond(function () {
+      return [200, [ {"type":"system", "user":"root", "home":"/root"}, {"type":"system", "user":"daemon", "home":"/usr/sbin"}, {"type":"system", "user":"bin", "home":"/bin"}, {"type":"system", "user":"sys", "home":"/dev"}, {"type":"system", "user":"sync", "home":"/bin"}, {"type":"system", "user":"games", "home":"/usr/games"}, {"type":"system", "user":"man", "home":"/var/cache/man"}, {"type":"system", "user":"lp", "home":"/var/spool/lpd"}, {"type":"system", "user":"mail", "home":"/var/mail"}, {"type":"system", "user":"news", "home":"/var/spool/news"}, {"type":"system", "user":"uucp", "home":"/var/spool/uucp"}, {"type":"system", "user":"proxy", "home":"/bin"}, {"type":"system", "user":"www-data", "home":"/var/www"}, {"type":"system", "user":"backup", "home":"/var/backups"}, {"type":"system", "user":"list", "home":"/var/list"}, {"type":"system", "user":"irc", "home":"/var/run/ircd"}, {"type":"system", "user":"gnats", "home":"/var/lib/gnats"}, {"type":"user", "user":"nobody", "home":"/nonexistent"}, {"type":"system", "user":"systemd-timesync", "home":"/run/systemd"} ]]
+    })
+
+    $httpBackend.whenGET('server/?module=recent_account_logins').respond(function () {
+      return [200, []]
+    })
+
   })
