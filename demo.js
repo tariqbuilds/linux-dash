@@ -71,4 +71,41 @@ $httpBackend.whenGET('/websocket').respond(false)
       return [200, { 'OS': 'Ubuntu 16.04.2 LTS 4.4.0-77-generic', 'Hostname': 'webserver-prod-983742', 'Uptime': '5 hours and 32 minutes and 27 seconds ', 'Server Time': 'Sat May 13 00:11:39 EST 2017' }]
     })
 
+    $httpBackend.whenGET('server/?module=download_transfer_rate').respond(function () {
+      return [200, { "lo": 0, "wlp3s0": 0 }]
+    })
+
+    $httpBackend.whenGET('server/?module=upload_transfer_rate').respond(function () {
+      return [200, { "lo": 6, "wlp3s0": 3 }]
+    })
+
+    $httpBackend.whenGET('server/?module=bandwidth').respond(function () {
+      return [200, [{ 'interface': 'wlp3s0:', 'tx': 226076758, 'rx': 9037438 },{ 'interface': 'lo:', 'tx': 12016995, 'rx': 12016995 }]]
+    })
+
+    $httpBackend.whenGET('server/?module=ping').respond(function () {
+      return [200, [{'host': 'google.com', 'ping': 23.234 },{'host': 'yahoo.com', 'ping': 67.412 },{'host': 'twitter.com', 'ping': 34.560 }]]
+    })
+
+    $httpBackend.whenGET('server/?module=ip_addresses').respond(function () {
+      return [200, [{ 'interface': 'external', 'ip': '70.113.122.2' } ]]
+    })
+
+    $httpBackend.whenGET('server/?module=network_connections').respond(function () {
+      return [200, [{ 'connections': 1, 'address': '127.0.0.1:48562' }
+        ,{ 'connections': 1, 'address': '127.0.0.1:48564' }
+        ,{ 'connections': 1, 'address': '127.0.0.1:48708' }
+        ,{ 'connections': 3, 'address': '127.0.0.1:8080' }
+        ,{ 'connections': 1, 'address': '192.241.178.140:443' }
+        ,{ 'connections': 2, 'address': '2657:f9b0:9000:802::443' }
+        ,{ 'connections': 1, 'address': '2657:f9b0:0000:80c::443' }
+        ,{ 'connections': 1, 'address': '2657:f9b0:0000:80f:::80' }
+        ,{ 'connections': 2, 'address': '2657:f9b0:0000:816:::80' }
+        ,{ 'connections': 1, 'address': '2657:f9b0:0003:c09:5228' }]]
+    })
+
+    $httpBackend.whenGET('server/?module=arp_cache').respond(function () {
+      return [200, [ { 'addr': '192.168.0.1', 'hw_type': 'ether', 'hw_addr.': '15:db:45:eb:4d:6a', 'mask': 'wlp3s0' } ]]
+    })
+
   })
