@@ -56,7 +56,7 @@ $httpBackend.whenGET('/websocket').respond(false)
     })
 
     $httpBackend.whenGET('server/?module=cpu_info').respond(function () {
-      return [200, [ { 'device': 'sda', 'reads': '75406', 'writes': '119939', 'in_prog.': '0', 'time': '816604'}, { 'device': 'sda1', 'reads': '74587', 'writes': '81983', 'in_prog.': '0', 'time': '796964'}, { 'device': 'sda2', 'reads': '6', 'writes': '0', 'in_prog.': '0', 'time': '304'}, { 'device': 'sda5', 'reads': '73', 'writes': '0', 'in_prog.': '0', 'time': '3344'}, { 'device': 'sdb', 'reads': '276', 'writes': '0', 'in_prog.': '0', 'time': '72'}, { 'device': 'sdb1', 'reads': '234', 'writes': '0', 'in_prog.': '0', 'time': '64'} ]]
+      return [200, { "Architecture": " x86_64", "CPU op-mode(s)": " 32-bit, 64-bit", "Byte Order": " Little Endian", "CPU(s)": " 4", "On-line CPU(s) list": " 0-3", "Thread(s) per core": " 2", "Core(s) per socket": " 2", "Socket(s)": " 1", "NUMA node(s)": " 1", "Vendor ID": " GenuineIntel", "CPU family": " 6", "Model": " 69", "Model name": " Intel(R) Core(TM) i5-4200U CPU @ 1.60GHz", "Stepping": " 1", "CPU MHz": " 1402.101", "CPU max MHz": " 2600.0000", "CPU min MHz": " 800.0000", "BogoMIPS": " 4589.14", "Virtualization": " VT-x", "L1d cache": " 32K", "L1i cache": " 32K", "L2 cache": " 256K", "L3 cache": " 3072K", "NUMA node0 CPU(s)": " 0-3", "Flags": " fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm epb tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts" }]
     })
 
     $httpBackend.whenGET('server/?module=scheduled_crons').respond(function () {
@@ -71,12 +71,13 @@ $httpBackend.whenGET('/websocket').respond(false)
       return [200, { 'OS': 'Ubuntu 16.04.2 LTS 4.4.0-77-generic', 'Hostname': 'webserver-prod-983742', 'Uptime': '5 hours and 32 minutes and 27 seconds ', 'Server Time': 'Sat May 13 00:11:39 EST 2017' }]
     })
 
+  /** Network **/
     $httpBackend.whenGET('server/?module=download_transfer_rate').respond(function () {
-      return [200, { "lo": 0, "wlp3s0": 0 }]
+      return [200, { "lo": 2048, "wlp3s0": 1024 }]
     })
 
     $httpBackend.whenGET('server/?module=upload_transfer_rate').respond(function () {
-      return [200, { "lo": 6, "wlp3s0": 3 }]
+      return [200, { "lo": 1024, "wlp3s0": 512 }]
     })
 
     $httpBackend.whenGET('server/?module=bandwidth').respond(function () {
@@ -117,7 +118,16 @@ $httpBackend.whenGET('/websocket').respond(false)
     })
 
     $httpBackend.whenGET('server/?module=recent_account_logins').respond(function () {
-      return [200, []]
+      return [200, [ {"type":"system", "user":"root", "home":"/root"}, {"type":"system", "user":"daemon", "home":"/usr/sbin"}, {"type":"system", "user":"bin", "home":"/bin"}, {"type":"system", "user":"sys", "home":"/dev"}, {"type":"system", "user":"sync", "home":"/bin"}, {"type":"system", "user":"games", "home":"/usr/games"}, {"type":"system", "user":"man", "home":"/var/cache/man"}, {"type":"system", "user":"lp", "home":"/var/spool/lpd"}, {"type":"system", "user":"mail", "home":"/var/mail"}, {"type":"system", "user":"news", "home":"/var/spool/news"}, {"type":"system", "user":"uucp", "home":"/var/spool/uucp"}, {"type":"system", "user":"proxy", "home":"/bin"}, {"type":"system", "user":"www-data", "home":"/var/www"}, {"type":"system", "user":"backup", "home":"/var/backups"}, {"type":"system", "user":"list", "home":"/var/list"}, {"type":"system", "user":"irc", "home":"/var/run/ircd"}, {"type":"system", "user":"gnats", "home":"/var/lib/gnats"}, {"type":"user", "user":"nobody", "home":"/nonexistent"}, {"type":"system", "user":"systemd-timesync", "home":"/run/systemd"} ]]
     })
+
+  /** Applications **/
+    $httpBackend.whenGET('server/?module=common_applications').respond(function () {
+      return [200, [ { "binary": "php", "location": "", "installed": "installed" }, { "binary": "node", "location": " /usr/bin/node /usr/include/node /usr/share/man/man1/node.1.gz", "installed": "installed" }, { "binary": "mysql", "location": "", "installed": "installed" }, { "binary": "mongo", "location": "", "installed": "installed" }, { "binary": "vim", "location": " /usr/bin/vim.basic /usr/bin/vim /usr/bin/vim.tiny /etc/vim /usr/share/vim /usr/share/man/man1/vim.1.gz", "installed": "installed" }, { "binary": "python", "location": " /usr/bin/python3.5 /usr/bin/python /usr/bin/python2.7-config /usr/bin/python3.5m /usr/bin/python2.7 /usr/lib/python3.5 /usr/lib/python2.7 /etc/python3.5 /etc/python /etc/python2.7 /usr/local/lib/python3.5 /usr/local/lib/python2.7 /usr/include/python3.5m /usr/include/python2.7 /usr/share/python /usr/share/man/man1/python.1.gz", "installed": "installed" }, { "binary": "ruby", "location": "", "installed": "installed" }, { "binary": "java", "location": " /usr/share/java", "installed": "installed" }, { "binary": "apache2", "location": "", "installed": "installed" }, { "binary": "nginx", "location": "", "installed": "installed" }, { "binary": "openssl", "location": " /usr/bin/openssl /usr/share/man/man1/openssl.1ssl.gz", "installed": "installed" }, { "binary": "vsftpd", "location": "", "installed": "installed" }, { "binary": "make", "location": " /usr/bin/make /usr/share/man/man1/make.1.gz", "installed": "installed" } ]]
+    })
+
+    $httpBackend.whenGET('server/?module=memcached').respond(function () { return [200, {}] })
+    $httpBackend.whenGET('server/?module=redis').respond(function () { return [200, {}] })
+    $httpBackend.whenGET('server/?module=pm2_stats').respond(function () { return [200, []] })
 
   })
