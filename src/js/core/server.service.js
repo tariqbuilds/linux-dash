@@ -88,9 +88,7 @@ angular
               establishWebsocketConnection();
 
             } else {
-              // rootScope event not propogating from here.
-              // instead, we manually route to url
-              $location.path('/system-status');
+              $rootScope.$broadcast("start-linux-dash", {});
             }
 
           });

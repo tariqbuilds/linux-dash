@@ -27,7 +27,7 @@ g.task('generate-js-dist', ['template-cache'], function () {
   ])
   .pipe(concat('linuxDash.min.js'))
   .pipe(ngAnnotate())
-  .pipe(uglify())
+  // .pipe(uglify())
   .on('error', gutil.log)
   .pipe(g.dest('app/'))
 })

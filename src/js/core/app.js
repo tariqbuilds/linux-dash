@@ -1,10 +1,12 @@
 function runFn(server, $location, $rootScope) {
-
   server.checkIfWebsocketsAreSupported()
 
-  var currentRoute = $location.path()
-  var currentTab = (currentRoute === '/loading')? 'system-status': currentRoute
-  localStorage.setItem('currentTab', currentTab)
+  $rootScope.$on("$locationChangeSuccess", function(event, next, current) {
+    var nextRoute = next.split('#')[1]
+    if (nextRoute !== '/loading') {
+      localStorage.setItem('currentTab', nextRoute)
+    }
+  });
 
   $location.path('/loading')
 }
