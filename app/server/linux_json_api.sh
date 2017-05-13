@@ -455,8 +455,9 @@ redis() {
 
   result=$($redisCommand INFO \
         | grep 'redis_version\|connected_clients\|connected_slaves\|used_memory_human\|total_connections_received\|total_commands_processed' \
-        | awk -F: '{print "'" $1 "':'" $2 "'" }' \
-        | tr '\r' '"' | tr '\n' ','
+        | awk -F: '{print "'" $1 "':" "'" $2 "'" }' \
+        | tr '\r' '"'
+        | tr '\n' ','
       )
   echo { ${result%?} } | _parseAndPrint
 }
@@ -620,18 +621,18 @@ upload_transfer_rate() {
 }
 
 user_accounts() {
-
+## print "{ 'type':" "'" userType "'" ", 'user':" "'" $1 "', 'home': '" $6 "' }," }'
   result=$(/usr/bin/awk -F: '{ \
           if ($3<=499){userType="system";} \
           else {userType="user";} \
-          print "{ 'type': '" userType "'" ", 'user': '" $1 "', 'home': '" $6 "' }," }' < /etc/passwd
+          print "{\"type\":\"" userType "\", \"user\":\"" $1 "\", \"home\":\"" $6 "\"},\n" }' < /etc/passwd
       )
 
   length=$(echo ${#result})
 
-  if [ $length -eq 0 ]; then
-    result=$(getent passwd | /usr/bin/awk -F: '{ if ($3<=499){userType="system";} else {userType="user";} print "{ 'type': '" userType "'" ", 'user': '" $1 "', 'home': '" $6 "' }," }')
-  fi
+  # if [ $length -eq 0 ]; then
+    result=$(getent passwd | /usr/bin/awk -F: '{ if ($3<=499){userType="system";} else {userType="user";} print "{\"type\":\"" userType "\", \"user\":\"" $1 "\", \"home\":\"" $6 "\"},\n" }')
+  # fi
 
   echo [ ${result%?} ] | _parseAndPrint
 }
