@@ -1,0 +1,21 @@
+html {
+  margin-top: 0px;
+  padding-top: 0;
+
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+body {
+  letter-spacing: .1rem;
+  font-family: 'Merriweather', Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.centered {
+  margin: 0 auto;
+}

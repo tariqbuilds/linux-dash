@@ -1,0 +1,40 @@
+table {
+  width: 100%;
+  font-size: 10px;
+  margin: 0;
+  border-collapse: collapse;
+  text-align: left;
+  table-layout:fixed;
+}
+
+table th,
+table td {
+  padding: 2px;
+  max-width: 250px;
+  word-wrap: break-word;
+}
+
+table th{
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+table td {
+  border-bottom: 1px solid #f1f1f1;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  color: rgba(0,0,0,.65);
+}
+
+table tbody tr:hover td {
+  background-color: #fafafa;
+}
+
+table.metrics-table {
+  text-align: center;
+}
+
+table.metrics-table tr:last-child td {
+  border: none;
+}

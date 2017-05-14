@@ -1,0 +1,23 @@
+<plugin chart-plugin>
+
+  <loader ng-if="!maxValue || initializing"></loader>
+
+  <canvas
+    ng-show="!initializing && !emptyResult"
+    class="canvas"
+    width="400"
+    height="150">
+  </canvas>
+
+  <table ng-show="!initializing && !emptyResult" border="0" class="metrics-table">
+    <tbody>
+      <tr ng-repeat="metric in metrics">
+        <td><strong>{{ metric.name }}</strong></td>
+        <td>{{ metric.data }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <span ng-show="emptyResult">No data</span>
+
+</plugin>

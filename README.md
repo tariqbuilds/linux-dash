@@ -1,117 +1,110 @@
-<br/>
 <h1 align="center">
-  linux-dash
+  <a href="https://afaqurk.github.io/linux-dash">
+    <img src="https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/v2.0-logo.png"/>
+  </a>
 </h1>
 
 <p align="center">
-  A simple, low-overhead web dashboard for Linux
+  <small>A simple & low-overhead web dashboard for linux systems</small>
 </p>
 
 <p align="center">
-  <strong>
-    <a href="http://linuxdash.afaqtariq.com"><i>Demo</i></a> &nbsp;|&nbsp;
-    <a href="#features"><i>Features</i></a> &nbsp;|&nbsp;
-    <a href="#installation">
-      <i>Installation</i></a> &nbsp;|&nbsp;
-    <a href="#support"><i>Support</i></a>
-  </strong>
+  <small>
+    <a href="https://afaqurk.github.io/linux-dash">Demo</a> &nbsp;|&nbsp;
+    <a href="https://github.com/afaqurk/linux-dash/wiki">
+      Docs
+    </a>
+  </small>
 </p>
+
 
 <p align="center">
   <a href="https://gitter.im/afaqurk/linux-dash">
-    <img 
-      src="https://badges.gitter.im/gitterHQ/gitter.png" 
-      alt="Linux Dash Gitter chat">
-  </a>
-</p>
-
-<br/>
-<p align="center">
-  <a href="http://linuxdash.afaqtariq.com">
-    <img 
-      width="80%"
-      alt="Linux Dash screenshot" 
-      src="http://i.imgur.com/tehGyrQ.gif">
+    <img
+      src="https://badges.gitter.im/gitterHQ/gitter.png"
+      alt="linux-dash Gitter chat">
   </a>
 </p>
 
 <br/>
 
 ## Features
-* A beautiful, simple web-based dashboard for monitoring a linux server
-* Only ~1MB on disk! *(.git removed)*
-* Live graphs, refresh-able widgets, and a growing # of supported modules
-* Drop-in installation for PHP, Node.js, Python, and Go 
+* **Small** ----- Under 400KB on disk _(with .git removed)!_
+* **Simple** ---- A minimalist, beautiful dashboard
+* **Easy** ------ Drop-in installation
+* **Versatile** -- Choose your stack from Node.js, Go, Python, PHP
 
 ## Installation
 
-#### Step 1: Download Linux Dash
-
-Clone the git repo
+### Step 1
 ```sh
-git clone https://github.com/afaqurk/linux-dash.git
+## 1. clone the repo
+git clone --depth 1 https://github.com/afaqurk/linux-dash.git
+
+## 2. go to the cloned directory
+cd linux-dash/app/server
+
+```
+OR, if you prefer to download manually:
+
+```sh
+## 1. Download the .zip
+curl -LOk https://github.com/afaqurk/linux-dash/archive/master.zip && unzip master.zip
+
+## 2. navigate to downloaded & unzipped dir
+cd linux-dash-master/app/server
+
 ```
 
-Or download it **[here](https://github.com/afaqurk/linux-dash/archive/master.zip)**.
+### Step 2
 
-#### Step 2: Secure Linux Dash
+See instructions for preferred server linux-dash server _(all included)_:
 
-Linux Dash does not provide any security or authentication features.
+* [Node.js](#if-using-nodejs) _(recommended)_
+* [Go](#if-using-go)
+* [Python](#if-using-python)
+* [PHP](#if-using-php)
 
-**It is strongly recommended** that all Linux Dash installations be protected via a security measure of your choice.
+#### If Using Node.js
+```sh
+## install dependencies
+npm install --production
 
-#### Step 3: Start Linux Dash
-<h6 align="center">
-Linux Dash can be run in: <u>Node.js</u>, PHP, Go, or Python. 
-<br/>
-<sub>
-* Node.js is the recommended platform since it has native support for websockets and fast I/O.
-</sub>
-</h6>
+## start linux-dash (on port 80 by default; may require sudo)
+## You may change this with the `LINUX_DASH_SERVER_PORT` environment variable (eg. `LINUX_DASH_SERVER_PORT=8080 node server`)
+## or provide a --port flag to the command below
+node index.js
 
-First, navigate to the `linux-dash` folder you downloaded or cloned.
-
-Then, refer to the section for your preferred platform:
-
-##### Node.js
-
-Install NPM dependencies
-```
-npm install
 ```
 
-Start Linux Dash 
-```
-node server/
-```
-
-<small>Default port for Linux Dash is 80. You may change this with the `LINUX_DASH_SERVER_PORT` environment variable (eg. `LINUX_DASH_SERVER_PORT=8080 node server`) or editing the [server/index.js on line 9](https://github.com/afaqurk/linux-dash/blob/master/server/index.js#L9)</small>
-
-##### PHP
-1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
-2. Restart your web server (Apache, nginx, etc.) 
-  - For PHP + Apache setup follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04).
-  - For help with nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov).
-
-##### Go
-Go to the `linux-dash/server` folder and run 
-```
+#### If Using Go
+```sh
+## start the server (on port 80 by default; may require sudo)
 go run index.go
 ```
 
 To build a binary, run `go build && ./server -h`. See [@tehbilly](https://github.com/sergeifilippov)'s notes [here](https://github.com/afaqurk/linux-dash/pull/281) for binary usage options
 
-##### Python 2
-Run `./python-server.py` will run a server on port 80 which is the default. You can provide a specific port via the `--port` flag.
+#### If Using Python
+```sh
+# Start the server (on port 80 by default; may require sudo).
+python index.py
+```
+
+#### If Using PHP
+
+1. Make sure you have the `exec`, `shell_exec`, and `escapeshellarg` functions enabled
+2. Point your web server to `app/` directory under `linux-dash`
+2. Restart your web server (Apache, nginx, etc.)
+  - For PHP + Apache setup follow the [Digital Ocean tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-linux-dash-on-ubuntu-14-04).
+  - For help with nginx setup, see [this gist](https://gist.github.com/sergeifilippov/8909839) by [@sergeifilippov](https://github.com/sergeifilippov).
 
 ## Support
 
-For help with general setup and configuration issues please use the [Linux Dash Gitter chat room](https://gitter.im/afaqurk/linux-dash).
+For general help, please use the [Gitter chat room](https://gitter.im/afaqurk/linux-dash).
 
-The following distributions are supported:
-* Arch
-* Debian 6,7
-* Ubuntu 11.04+
-* Linux Mint 16+
-* CentOS 5, 6
-* openSUSE
+## Security
+
+**It is strongly recommended** that all linux-dash installations be protected via a security measure of your choice.
+
+linux-dash does not provide any security or authentication features.

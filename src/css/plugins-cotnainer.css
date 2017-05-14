@@ -1,0 +1,23 @@
+#plugins {
+  text-align: center;
+  padding: 20px;
+  padding-top: 0;
+  margin-top: 0;
+  border: 1px;
+}
+
+@media (min-width: 1080px) {
+  #plugins {
+    float: none;
+    margin: 0 auto;
+    clear: both;
+  }
+}
+
+@media (max-width: 1079px) {
+  #plugins {
+    float: none;
+    margin: 0 auto;
+    clear: both;
+  }
+}

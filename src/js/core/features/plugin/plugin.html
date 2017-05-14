@@ -1,0 +1,28 @@
+<div
+  class="plugin"
+  ng-class="{
+    'plugin-hidden': isHidden,
+    'plugin-enlarged': enlarged,
+    'chart-plugin': isChartPlugin,
+  }"
+  >
+
+  <top-bar
+    heading="heading"
+    last-updated="lastGet"
+    info="info"
+    toggle-visibility="toggleVisibility()"
+    is-hidden="isHidden"
+    toggle-width="toggleWidth()"
+    refresh="getData()"
+    is-chart="isChartPlugin">
+  </top-bar>
+
+  <div
+    ng-if="!isHidden"
+    class="plugin-body"
+    ng-class="{ 'plugin-body-short no-padding chart-plugin': isChartPlugin, }"
+    ng-transclude>
+  </div>
+
+</div>

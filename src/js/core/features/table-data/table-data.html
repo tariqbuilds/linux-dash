@@ -1,0 +1,40 @@
+<plugin
+  heading="{{ heading }}"
+  last-updated="lastGet"
+  on-refresh="getData()"
+  info="{{ info }}">
+
+  <loader ng-if="!tableRows"></loader>
+
+  <div ng-show="tableRows">
+
+    <table class="table-data-plugin" width="{{ width }}" height="{{ height }}">
+      <thead>
+        <tr class="table-data-filter-container" ng-show="tableRows.length">
+          <th colspan="{{ tableHeaders.length }}" class="filter-container">
+            <input class="filter" ng-model="keyword" placeholder="Search">
+          </th>
+        </tr>
+        <tr>
+          <th ng-repeat="header in tableHeaders track by $index">
+            <a href="" ng-click="setSortColumn(header)">{{ header }}</a>
+            <span class="column-sort-caret">
+              {{ (header === sortByColumn && !sortReverse) ? '&#9650;': ''; }}
+              {{ (header === sortByColumn && sortReverse) ? '&#9660;': ''; }}
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="row in tableRows | filter:keyword">
+          <td ng-repeat="header in tableHeaders track by $index">
+            {{ row[header] }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <span ng-show="emptyResult">No data</span>
+</plugin>

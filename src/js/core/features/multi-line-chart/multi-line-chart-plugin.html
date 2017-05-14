@@ -1,0 +1,20 @@
+<plugin chart-plugin>
+
+  <canvas class="canvas" width="400" height="145"></canvas>
+
+  <table class="metrics-table" border="0">
+    <tbody>
+      <tr ng-repeat="metric in metricsArray">
+        <td>
+          <div
+            class="metric-square"
+            style="display: inline-block; border: 1px solid {{metric.color}}; width: 8px; height: 8px; background: {{metric.color}}">
+          </div>
+        </td>
+        <td>{{ metric.name }}</td>
+        <td>{{ metric.data }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</plugin>
