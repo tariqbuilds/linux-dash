@@ -5,6 +5,7 @@
 </h1>
 
 <p align="center">
+  <sub>v2.0</sub><br/>
   <small>A simple & low-overhead web dashboard for linux systems</small>
 </p>
 
@@ -107,4 +108,4 @@ For general help, please use the [Gitter chat room](https://gitter.im/afaqurk/li
 
 **It is strongly recommended** that all linux-dash installations be protected via a security measure of your choice.
 
-linux-dash does not provide any security or authentication features.
+Linux Dash does not provide any security or authentication features.
