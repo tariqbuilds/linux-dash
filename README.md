@@ -8,8 +8,6 @@
   <small>A simple & low-overhead web dashboard for linux systems</small>
 </p>
 
-<h4 align="center"><a href="https://afaqurk.github.io/linux-dash">afaqurk.github.io/linux-dash</a></h4>
-
 <p align="center">
   <small>
     <a href="https://afaqurk.github.io/linux-dash">Demo</a> &nbsp;|&nbsp;
@@ -34,7 +32,7 @@
 * **Small** ----- Under 400KB on disk _(with .git removed)!_
 * **Simple** ---- A minimalist, beautiful dashboard
 * **Easy** ------ Drop-in installation
-* **Versatile** -- Choose your stack from Node.js, Go, C, Python, PHP, or Binary
+* **Versatile** -- Choose your stack from Node.js, Go, Python, PHP, or Binary
 
 ## Installation
 
@@ -74,6 +72,7 @@ npm install --production
 
 ## start linux-dash (on port 80 by default; may require sudo)
 ## You may change this with the `LINUX_DASH_SERVER_PORT` environment variable (eg. `LINUX_DASH_SERVER_PORT=8080 node server`)
+## or provide a --port flag to the command below
 node index.js
 
 ```
@@ -108,6 +107,5 @@ For general help, please use the [Gitter chat room](https://gitter.im/afaqurk/li
 ## Security
 
 **It is strongly recommended** that all linux-dash installations be protected via a security measure of your choice.
-
 
 linux-dash does not provide any security or authentication features.
