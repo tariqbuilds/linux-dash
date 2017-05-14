@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://linux-dash.github.io">
+  <a href="https://afaqurk.github.io/linux-dash">
     <img src="https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/v2.0-logo.png"/>
   </a>
 </h1>
@@ -8,12 +8,12 @@
   <small>A simple & low-overhead web dashboard for linux systems</small>
 </p>
 
-<h4 align="center"><a href="https://linux-dash.github.io">linux-dash.github.io</a></h4>
+<h4 align="center"><a href="https://afaqurk.github.io/linux-dash">afaqurk.github.io/linux-dash</a></h4>
 
 <p align="center">
   <small>
-    <a href="https://linux-dash.github.io/demo">Demo</a> &nbsp;|&nbsp;
-    <a href="https://linux-dash.github.io/docs">
+    <a href="https://afaqurk.github.io/linux-dash">Demo</a> &nbsp;|&nbsp;
+    <a href="https://github.com/afaqurk/linux-dash/wiki">
       Docs
     </a>
   </small>
@@ -41,7 +41,7 @@
 ### Step 1
 ```sh
 ## 1. clone the repo
-git clone --depth 1 https://github.com/linux-dash/linux-dash.git
+git clone --depth 1 https://github.com/afaqurk/linux-dash.git
 
 ## 2. go to the cloned directory
 cd linux-dash/app/server
