@@ -20,6 +20,9 @@
   "bugs": {
     "url": "https://github.com/afaqurk/linux-dash/issues"
   },
+  "scripts": {
+    "start": "gulp"
+  },
   "homepage": "https://github.com/afaqurk/linux-dash",
   "dependencies": {
     "express": "^4.11.1",
