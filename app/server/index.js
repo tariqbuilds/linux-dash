@@ -6,7 +6,7 @@ var spawn   = require('child_process').spawn
 var fs      = require('fs')
 var ws      = require('websocket').server
 var args    = require('yargs').argv
-var port    = args.port || process.env.LINUX_DASH_SERVER_PORT || 80
+var port    = args.port || process.env.LINUX_DASH_SERVER_PORT || 8081
 
 server.listen(port, function() {
   console.log('Linux Dash Server Started on port ' + port + '!');
