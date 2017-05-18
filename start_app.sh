@@ -1,7 +1,7 @@
 #!/bin/bash
-apt-get update && apt-get install git
+apt-get update
 
-cd /server/app
+cd app/server
 
 npm install --production
 
