@@ -1,41 +1,53 @@
 #!/bin/bash
 
+ECHO=$(type -P echo)
+SED=$(type -P sed)
+GREP=$(type -P grep)
+TR=$(type -P tr)
+AWK=$(type -P awk)
+CAT=$(type -P cat)
+HEAD=$(type -P head)
+CUT=$(type -P cut)
+PS=$(type -P ps)
+
 _parseAndPrint() {
   while read data; do
-    echo -n "$data" | sed -r "s/\"/\\\\\"/g" | tr -d "\n";
+    $ECHO -n "$data" | $SED -r "s/\"/\\\\\"/g" | $TR -d "\n";
   done;
 }
 
 arp_cache() {
-  arpCommand=$(command -v arp)
+  local arpCommand=$(type -P arp)
 
-  result=$($arpCommand | awk 'BEGIN {print "["} NR>1 \
+  result=$($arpCommand | $AWK 'BEGIN {print "["} NR>1 \
               {print "{ \"addr\": \"" $1 "\", " \
                     "\"hw_type\": \"" $2 "\", " \
                     "\"hw_addr.\": \"" $3 "\", " \
                     "\"mask\": \"" $5 "\" }, " \
                     } \
             END {print "]"}' \
-        | /bin/sed 'N;$s/},/}/;P;D')
+        | $SED 'N;$s/},/}/;P;D')
 
-  if [ -z "$result" ];  then echo {}
-  else echo $result | _parseAndPrint
+  if [ -z "$result" ]; then
+    $ECHO {}
+  else
+    $ECHO $result | _parseAndPrint
   fi
 }
 
 bandwidth() {
 
-  /bin/cat /proc/net/dev \
-  | awk 'BEGIN {print "["} NR>2 {print "{ \"interface\": \"" $1 "\"," \
+  $CAT /proc/net/dev \
+  | $AWK 'BEGIN {print "["} NR>2 {print "{ \"interface\": \"" $1 "\"," \
             " \"tx\": " $2 "," \
             " \"rx\": " $10 " }," } END {print "]"}' \
-  | /bin/sed 'N;$s/,\n/\n/;P;D' \
+  | $SED 'N;$s/,\n/\n/;P;D' \
   | _parseAndPrint
 }
 
 common_applications() {
   result=$(whereis php node mysql mongo vim python ruby java apache2 nginx openssl vsftpd make \
-  | awk -F: '{if(length($2)==0) { installed="false"; } else { installed="true"; } \
+  | $AWK -F: '{if(length($2)==0) { installed="false"; } else { installed="true"; } \
         print \
         "{ \
           \"binary\": \""$1"\", \
@@ -43,23 +55,24 @@ common_applications() {
           \"installed\": "installed" \
         },"}')
 
-  echo "[" ${result%?} "]" | _parseAndPrint
+  $ECHO "[" ${result%?} "]" | _parseAndPrint
 }
 
 cpu_info() {
+  local lscpuCommand=$(type -P lscpu)
 
-  result=$(/usr/bin/lscpu \
-      | /usr/bin/awk -F: '{print "\""$1"\": \""$2"\"," }  '\
+  result=$($lscpuCommand \
+      | $AWK -F: '{print "\""$1"\": \""$2"\"," }  '\
       )
 
-  echo "{" ${result%?} "}" | _parseAndPrint
+  $ECHO "{" ${result%?} "}" | _parseAndPrint
 }
 
 cpu_intensive_processes() {
 
-  result=$(/bin/ps axo pid,user,pcpu,rss,vsz,comm --sort -pcpu,-rss,-vsz \
-        | head -n 15 \
-        | /usr/bin/awk 'BEGIN{OFS=":"} NR>1 {print "{ \"pid\": " $1 \
+  result=$($PS axo pid,user,pcpu,rss,vsz,comm --sort -pcpu,-rss,-vsz \
+        | $HEAD -n 15 \
+        | $AWK 'BEGIN{OFS=":"} NR>1 {print "{ \"pid\": " $1 \
                 ", \"user\": \"" $2 "\"" \
                 ", \"cpu%\": " $3 \
                 ", \"rss\": " $4 \
@@ -67,23 +80,23 @@ cpu_intensive_processes() {
                 ", \"cmd\": \"" $6 "\"" "},"\
               }')
 
-  echo "[" ${result%?} "]" | _parseAndPrint
+  $ECHO "[" ${result%?} "]" | _parseAndPrint
 }
 
 cpu_temp() {
 
-  if [ `which sensors` ]; then
+  if type -P sensors 2>/dev/null; then
     returnString=`sensors`
     #amd
     if [[ "${returnString/"k10"}" != "${returnString}" ]] ; then
-      echo ${returnString##*k10} | cut -d ' ' -f 6 | cut -c 2- | cut -c 1-4
+      $ECHO ${returnString##*k10} | $CUT -d ' ' -f 6 | $CUT -c 2- | $CUT -c 1-4
     #intel
     elif [[ "${returnString/"core"}" != "${returnString}" ]] ; then
       fromcore=${returnString##*"coretemp"}
-      echo ${fromcore##*Physical}  | cut -d ' ' -f 3 |  cut -c 2-5 | _parseAndPrint
+      $ECHO ${fromcore##*Physical}  | $CUT -d ' ' -f 3 | $CUT -c 2-5 | _parseAndPrint
     fi
   else
-    echo "[]" | _parseAndPrint
+    $ECHO "[]" | _parseAndPrint
   fi
 }
 
@@ -96,7 +109,7 @@ cpu_utilization() {
 
   while [[ iteration -lt 2 ]]; do
     # Get the total CPU statistics, discarding the 'cpu ' prefix.
-    CPU=(`sed -n 's/^cpu\s//p' /proc/stat`)
+    CPU=(`$SED -n 's/^cpu\s//p' /proc/stat`)
     IDLE=${CPU[3]} # Just the idle CPU time.
 
     # Calculate the total CPU time.
@@ -119,19 +132,18 @@ cpu_utilization() {
     sleep 1
     iteration="$iteration+1"
   done
-  echo -en "$DIFF_USAGE"
+  $ECHO -en "$DIFF_USAGE"
 }
 
 cron_history() {
 
-  grepCmd=$(which grep)
-  cronLog='/var/log/syslog'
-  numberOfLines='50'
+  local cronLog='/var/log/syslog'
+  local numberOfLines='50'
 
   # Month, Day, Time, Hostname, tag, user,
 
-  result=$($grepCmd -m$numberOfLines CRON $cronLog \
-    | awk '{ s = ""; for (i = 6; i <= NF; i++) s = s $i " "; \
+  result=$($GREP -m $numberOfLines CRON $cronLog \
+    | $AWK '{ s = ""; for (i = 6; i <= NF; i++) s = s $i " "; \
         print "{\"time\" : \"" $1" "$2" "$3 "\"," \
             "\"user\" : \"" $6 "\"," \
             "\"message\" : \"" $5" "gensub("\"", "\\\\\"", "g", s) "\"" \
@@ -139,40 +151,40 @@ cron_history() {
         }'
     )
 
-  echo [${result%?}] | _parseAndPrint
+  $ECHO [${result%?}] | _parseAndPrint
 }
 
 current_ram() {
 
-  awkCmd=`which awk`
-  catCmd=`which cat`
-  grepCmd=`which grep`
-  memInfoFile="/proc/meminfo"
+  local memInfoFile="/proc/meminfo"
 
   # References:
   #   Calculations: http://zcentric.com/2012/05/29/mapping-procmeminfo-to-output-of-free-command/
   #   Fields: https://www.kernel.org/doc/Documentation/filesystems/proc.txt
 
-  memInfo=`$catCmd $memInfoFile | $grepCmd 'MemTotal\|MemFree\|Buffers\|Cached'`
+  memInfo=$($CAT $memInfoFile | $GREP 'MemTotal\|MemFree\|Buffers\|Cached')
 
-  echo $memInfo | $awkCmd '{print "{ \"total\": " ($2/1024) ", \"used\": " ( ($2-($5+$8+$11))/1024 ) ", \"available\": " (($5+$8+$11)/1024) " }"  }' | _parseAndPrint
+  $ECHO $memInfo | $AWK '{print "{ \"total\": " ($2/1024) ", \"used\": " ( ($2-($5+$8+$11))/1024 ) ", \"available\": " (($5+$8+$11)/1024) " }"  }' | _parseAndPrint
 }
 
 disk_partitions() {
+  local dfCommand=$(type -P df)
 
-  result=$(/bin/df -Ph | awk 'NR>1 {print "{\"file_system\": \"" $1 "\", \"size\": \"" $2 "\", \"used\": \"" $3 "\", \"avail\": \"" $4 "\", \"used%\": \"" $5 "\", \"mounted\": \"" $6 "\"},"}')
+  result=$($dfCommand -Ph | $AWK 'NR>1 {print "{\"file_system\": \"" $1 "\", \"size\": \"" $2 "\", \"used\": \"" $3 "\", \"avail\": \"" $4 "\", \"used%\": \"" $5 "\", \"mounted\": \"" $6 "\"},"}')
 
-  echo [ ${result%?} ] | _parseAndPrint
+  $ECHO [ ${result%?} ] | _parseAndPrint
 }
 
 docker_processes() {
 
-  result=""
-  containers="$(docker ps | awk '{if(NR>1) print $NF}')"
+  local result=""
+  local dockerCommand=$(type -P docker)
+  local containers="$($dockerCommand ps | $AWK '{if(NR>1) print $NF}')"
+
   for i in $containers; do
-  result="$result $(/usr/bin/docker top $i axo pid,user,pcpu,pmem,comm --sort -pcpu,-pmem \
-        | head -n 15 \
-        | /usr/bin/awk -v cnt="$i" 'BEGIN{OFS=":"} NR>1 {print "{ \"cname\": \"" cnt \
+  result="$result $($dockerCommand top $i axo pid,user,pcpu,pmem,comm --sort -pcpu,-pmem \
+        | $HEAD -n 15 \
+        | $AWK -v cnt="$i" 'BEGIN{OFS=":"} NR>1 {print "{ \"cname\": \"" cnt \
                 "\", \"pid\": " $1 \
                 ", \"user\": \"" $2 "\"" \
                 ", \"cpu%\": " $3 \
@@ -181,29 +193,29 @@ docker_processes() {
               }')"
   done
 
-  echo "[" ${result%?} "]" | _parseAndPrint
+  $ECHO "[" ${result%?} "]" | _parseAndPrint
 }
 
 download_transfer_rate() {
 
-	files=(/sys/class/net/*)
-	pos=$(( ${#files[*]} - 1 ))
-	last=${files[$pos]}
+	local files=(/sys/class/net/*)
+	local pos=$(( ${#files[*]} - 1 ))
+	local last=${files[$pos]}
 
-	json_output="{"
+	local json_output="{"
 
 	for interface in "${files[@]}"
 	do
 		basename=$(basename "$interface")
 
 		# find the number of bytes transfered for this interface
-		in1=$(cat /sys/class/net/"$basename"/statistics/rx_bytes)
+		in1=$($CAT /sys/class/net/"$basename"/statistics/rx_bytes)
 
 		# wait a second
 		sleep 1
 
 		# check same interface again
-		in2=$(cat /sys/class/net/"$basename"/statistics/rx_bytes)
+		in2=$($CAT /sys/class/net/"$basename"/statistics/rx_bytes)
 
 		# get the difference (transfer rate)
 		in_bytes=$((in2 - in1))
@@ -223,10 +235,13 @@ download_transfer_rate() {
 	done
 
 	# close the JSON object & print to screen
-	echo "$json_output}" | _parseAndPrint
+	$ECHO "$json_output}" | _parseAndPrint
 }
 
 general_info() {
+  local lsbRelease=$(type -P lsb_release)
+  local uName=$(type -P uname)
+  local hostName=$(type -P hostname)
 
   function displaytime {
     local T=$1
@@ -241,111 +256,104 @@ general_info() {
     printf '%d seconds\n' $S
   }
 
-  lsbRelease=$(/usr/bin/lsb_release -ds | sed -e 's/^"//'  -e 's/"$//')
-  uname=$(/bin/uname -r | sed -e 's/^"//'  -e 's/"$//')
-  os=`echo $lsbRelease $uname`
-  hostname=$(/bin/hostname)
-  uptime_seconds=$(/bin/cat /proc/uptime | awk '{print $1}')
-  server_time=$(date)
+  local lsbRelease=$($lsbRelease -ds | $SED -e 's/^"//'  -e 's/"$//')
+  local uname=$($uName -r | $SED -e 's/^"//'  -e 's/"$//')
+  local os=$($ECHO $lsbRelease $uname)
+  local hostname=$($hostName)
+  local uptime_seconds=$($CAT /proc/uptime | awk '{print $1}')
+  local server_time=$(date)
 
-  echo "{ \"OS\": \"$os\", \"Hostname\": \"$hostname\", \"Uptime\": \" $(displaytime ${uptime_seconds%.*}) \", \"Server Time\": \"$server_time\" }" | _parseAndPrint
+  $ECHO "{ \"OS\": \"$os\", \"Hostname\": \"$hostname\", \"Uptime\": \" $(displaytime ${uptime_seconds%.*}) \", \"Server Time\": \"$server_time\" }" | _parseAndPrint
 }
 
 io_stats() {
 
-  result=$(/bin/cat /proc/diskstats | /usr/bin/awk \
+  result=$($CAT /proc/diskstats | $AWK \
           '{ if($4==0 && $8==0 && $12==0 && $13==0) next } \
           {print "{ \"device\": \"" $3 "\", \"reads\": \""$4"\", \"writes\": \"" $8 "\", \"in_prog.\": \"" $12 "\", \"time\": \"" $13 "\"},"}'
       )
 
-  echo [ ${result%?} ] | _parseAndPrint
+  $ECHO [ ${result%?} ] | _parseAndPrint
 }
 
 ip_addresses() {
 
-  awkCmd=`which awk`
-  grepCmd=`which grep`
-  sedCmd=`which sed`
-  ifconfigCmd=`which ifconfig`
-  trCmd=`which tr`
-  digCmd=`which dig`
+  local ifconfigCmd=$(type -P ifconfig)
+  local digCmd=$(type -P dig)
 
-  externalIp=`$digCmd +short myip.opendns.com @resolver1.opendns.com`
+  externalIp=$($digCmd +short myip.opendns.com @resolver1.opendns.com)
 
-  echo -n "["
+  $ECHO -n "["
 
-  for item in $($ifconfigCmd | $grepCmd -oP "^[a-zA-Z0-9:]*(?=:)")
+  for item in $($ifconfigCmd | $GREP -oP "^[a-zA-Z0-9:]*(?=:)")
   do
-      echo -n "{\"interface\" : \""$item"\", \"ip\" : \"$( $ifconfigCmd $item | $grepCmd "inet" | $awkCmd '{match($0,"inet (addr:)?([0-9.]*)",a)}END{ if (NR != 0){print a[2]; exit}{print "none"}}')\"}, "
+      $ECHO -n "{\"interface\" : \""$item"\", \"ip\" : \"$( $ifconfigCmd $item | $GREP "inet" | $AWK '{match($0,"inet (addr:)?([0-9.]*)",a)}END{ if (NR != 0){print a[2]; exit}{print "none"}}')\"}, "
   done
 
-  echo "{ \"interface\": \"external\", \"ip\": \"$externalIp\" } ]" | _parseAndPrint
+  $ECHO "{ \"interface\": \"external\", \"ip\": \"$externalIp\" } ]" | _parseAndPrint
 }
 
 load_avg() {
 
-  grepCmd=`which grep`
-  awkCmd=`which awk`
-  catCmd=`which cat`
-
-  numberOfCores=$($grepCmd -c 'processor' /proc/cpuinfo)
+  local numberOfCores=$($GREP -c 'processor' /proc/cpuinfo)
 
   if [ $numberOfCores -eq 0 ]; then
     numberOfCores=1
   fi
 
-  result=$($catCmd /proc/loadavg | $awkCmd '{print "{ \"1_min_avg\": " ($1*100)/'$numberOfCores' ", \"5_min_avg\": " ($2*100)/'$numberOfCores' ", \"15_min_avg\": " ($3*100)/'$numberOfCores' "}," }')
+  result=$($CAT /proc/loadavg | $AWK '{print "{ \"1_min_avg\": " ($1*100)/'$numberOfCores' ", \"5_min_avg\": " ($2*100)/'$numberOfCores' ", \"15_min_avg\": " ($3*100)/'$numberOfCores' "}," }')
 
-  echo ${result%?} | _parseAndPrint
+  $ECHO ${result%?} | _parseAndPrint
 }
 
 logged_in_users() {
+  local whoCommand=$(type -P w)
 
-  result=$(COLUMNS=300 /usr/bin/w -h | /usr/bin/awk '{print "{\"user\": \"" $1 "\", \"from\": \"" $3 "\", \"when\": \"" $4 "\"},"}')
+  result=$(COLUMNS=300 $whoCommand -h | $AWK '{print "{\"user\": \"" $1 "\", \"from\": \"" $3 "\", \"when\": \"" $4 "\"},"}')
 
-  echo [ ${result%?} ] | _parseAndPrint
+  $ECHO [ ${result%?} ] | _parseAndPrint
 }
 
 memcached() {
-  echo "stats" \
-    | /bin/nc -w 1 127.0.0.1 11211 \
-    | /bin/grep 'bytes' \
-    | /usr/bin/awk 'BEGIN {print "{"} {print "\"" $2 "\": " $3 } END {print "}"}' \
-    | /usr/bin/tr '\r' ',' \
-    | /bin/sed 'N;$s/,\n/\n/;P;D' \
+  local ncCommand=$(type -P nc)
+
+  $ECHO "stats" \
+    | $ncCommand -w 1 127.0.0.1 11211 \
+    | $GREP 'bytes' \
+    | $AWK 'BEGIN {print "{"} {print "\"" $2 "\": " $3 } END {print "}"}' \
+    | $TR '\r' ',' \
+    | $SED 'N;$s/,\n/\n/;P;D' \
     | _parseAndPrint
 }
 
 memory_info() {
 
-  /bin/cat /proc/meminfo \
-    | /usr/bin/awk -F: 'BEGIN {print "{"} {print "\"" $1 "\": \"" $2 "\"," } END {print "}"}' \
-    | /bin/sed 'N;$s/,\n/\n/;P;D' \
+  $CAT /proc/meminfo \
+    | $AWK -F: 'BEGIN {print "{"} {print "\"" $1 "\": \"" $2 "\"," } END {print "}"}' \
+    | $SED 'N;$s/,\n/\n/;P;D' \
     | _parseAndPrint
 }
 
 network_connections() {
 
-  netstatCmd=`which netstat`
-  awkCmd=`which awk`
-  sortCmd=`which sort`
-  uniqCmd=`which uniq`
-  sedCmd=`which sed`
+  local netstatCmd=$(type -P netstat)
+  local sortCmd=$(type -P sort)
+  local uniqCmd=$(type -P uniq)
 
   $netstatCmd -ntu \
-  | $awkCmd 'NR>2 {print $5}' \
+  | $AWK 'NR>2 {print $5}' \
   | $sortCmd \
   | $uniqCmd -c \
-  | $awkCmd 'BEGIN {print "["} {print "{ \"connections\": " $1 ", \"address\": \"" $2 "\" }," } END {print "]"}' \
-  | $sedCmd 'N;$s/},/}/;P;D' \
+  | $AWK 'BEGIN {print "["} {print "{ \"connections\": " $1 ", \"address\": \"" $2 "\" }," } END {print "]"}' \
+  | $SED 'N;$s/},/}/;P;D' \
   | _parseAndPrint
 }
 
 number_of_cpu_cores() {
 
-  numberOfCPUCores=$(/bin/grep -c 'model name' /proc/cpuinfo)
+  local numberOfCPUCores=$($GREP -c 'model name' /proc/cpuinfo)
 
-  if [ length $numberOfCPUCores ]; then
+  if [ -z $numberOfCPUCores ]; then
     echo "cannnot be found";
   fi
 }
@@ -354,38 +362,35 @@ number_of_cpu_cores() {
 ping() {
 
 	# get absolute path to config file
-	SCRIPTPATH=`dirname $(readlink -f $0)`
-	CONFIG_PATH=$SCRIPTPATH"/config/ping_hosts"
+    local SCRIPTPATH=$(dirname $(readlink -f $0))
+	local CONFIG_PATH=$SCRIPTPATH"/config/ping_hosts"
 
-	catCmd=`which cat`
-	pingCmd=`which ping`
-	awkCmd=`which awk`
-	sedCmd=`which sed`
-	numOfLinesInConfig=`$sedCmd -n '$=' $CONFIG_PATH`
-	result='['
+    local pingCmd=$(type -P ping)
+    local numOfLinesInConfig=$($SED -n '$=' $CONFIG_PATH)
+	local result='['
 
-	$catCmd $CONFIG_PATH \
+	$CAT $CONFIG_PATH \
 	|  while read output
 		do
 		   	singlePing=$($pingCmd -qc 2 $output \
-		    | $awkCmd -F/ 'BEGIN { endLine="}," } /^rtt/ { if ('$numOfLinesInConfig'==1){endLine="}"} print "{" "\"host\": \"'$output'\", \"ping\": " $5 " " endLine }' \
+		    | $AWK -F/ 'BEGIN { endLine="}," } /^rtt/ { if ('$numOfLinesInConfig'==1){endLine="}"} print "{" "\"host\": \"'$output'\", \"ping\": " $5 " " endLine }' \
 		    )
 		    numOfLinesInConfig=$(($numOfLinesInConfig-1))
 		    result=$result$singlePing
 			if [ $numOfLinesInConfig -eq 0 ]
 				then
-					echo $result"]"
+					$ECHO $result"]"
 			fi
 		done \
-	| $sedCmd 's/\},]/}]/g' \
+	| $SED 's/\},]/}]/g' \
   | _parseAndPrint
 }
 
 pm2_stats() {
 
 	#get data
-	command="pm2 list"
-	data="$($command)"
+	local data="$(pm2 list)"
+    local tailCommand=$(type -P tail)
 
 	#only process data if variable has a length
 	#this should handle cases where pm2 is not installed
@@ -393,8 +398,8 @@ pm2_stats() {
 
 		#start processing data on line 4
 		#don't process last 2 lines
-		json=$( echo "$data" | tail -n +4 | head -n +2 \
-		| awk 	'{print "{"}\
+		json=$( $ECHO "$data" | $tailCommand -n +4 | $HEAD -n +2 \
+		| $AWK 	'{print "{"}\
 			{print "\"appName\":\"" $2 "\","} \
 			{print "\"id\":\"" $4 "\","} \
 			{print "\"mode\":\"" $6 "\","} \
@@ -406,18 +411,20 @@ pm2_stats() {
 			{print "\"watching\":\"" $19 "\""}\
 			{print "},"}')
 		#make sure to remove last comma and print in array
-		echo "[" ${json%?} "]" | _parseAndPrint
+		$ECHO "[" ${json%?} "]" | _parseAndPrint
 	else
 		#no data found
-		echo "[]" | _parseAndPrint
+		$ECHO "[]" | _parseAndPrint
 	fi
 }
 
 ram_intensive_processes() {
 
-  result=$(/bin/ps axo pid,user,pmem,rss,vsz,comm --sort -pmem,-rss,-vsz \
-        | head -n 15 \
-        | /usr/bin/awk 'NR>1 {print "{ \"pid\": " $1 \
+  local psCommand=$(type -P ps)
+
+  result=$($psCommand axo pid,user,pmem,rss,vsz,comm --sort -pmem,-rss,-vsz \
+        | $HEAD -n 15 \
+        | $AWK 'NR>1 {print "{ \"pid\": " $1 \
                       ", \"user\": \"" $2 \
                       "\", \"mem%\": " $3 \
                       ", \"rss\": " $4 \
@@ -425,40 +432,42 @@ ram_intensive_processes() {
                       ", \"cmd\": \"" $6 \
                       "\"},"}')
 
-  echo [ ${result%?} ] | _parseAndPrint
+  $ECHO [ ${result%?} ] | _parseAndPrint
 }
 
 recent_account_logins() {
 
-  result=$(/usr/bin/lastlog -t 365 \
-        | /usr/bin/awk 'NR>1 {\
+  local lastLogCommand=$(type -p lastlog)
+
+  result=$($lastLogCommand -t 365 \
+        | $AWK 'NR>1 {\
           print "{ \
             \"user\": \"" $1 "\", \
             \"ip\": \"" $3 "\","" \
             \"date\": \"" $5" "$6" "$7" "$8" "$9 "\"},"
           }'
       )
-  echo [ ${result%?} ] | _parseAndPrint
+  $ECHO [ ${result%?} ] | _parseAndPrint
 }
 
 redis() {
 
   ########### Enter Your Redis Password  HERE #########
-  redisPassword=''
+  local redisPassword=''
   ########### Enter Your Redis Password  HERE #########
 
-  redisCommand=$(which redis-cli);
+  local redisCommand=$(type -P redis-cli);
 
   if [ -n "$redisPassword" ]; then
     redisCommand="$redisCommand -a $redisPassword"
   fi
 
   result=$($redisCommand INFO \
-        | grep 'redis_version\|connected_clients\|connected_slaves\|used_memory_human\|total_connections_received\|total_commands_processed' \
-        | awk -F: '{print "\"" $1 "\":" "\"" $2 }' \
-        | tr '\r' '"' | tr '\n' ','
+        | $GREP 'redis_version\|connected_clients\|connected_slaves\|used_memory_human\|total_connections_received\|total_commands_processed' \
+        | $AWK -F: '{print "\"" $1 "\":" "\"" $2 }' \
+        | $TR '\r' '"' | $TR '\n' ','
       )
-  echo { ${result%?} } | _parseAndPrint
+  $ECHO { ${result%?} } | _parseAndPrint
 }
 
 scheduled_crons() {
@@ -467,30 +476,25 @@ scheduled_crons() {
     # Credit: http://stackoverflow.com/questions/134906/how-do-i-list-all-cron-jobs-for-all-users#answer-137173
     ######
 
-    catCmd=`which cat`
-    awkCmd=`which awk`
-    sedCmd=`which sed`
-    egrepCmd=`which egrep`
-    echoCmd=`which echo`
-    crontabCmd=`which crontab`
-    trCmd=`which tr`
+    local egrepCmd=$(type -P egrep)
+    local crontabCmd=$(type -P crontab)
 
     # System-wide crontab file and cron job directory. Change these for your system.
     CRONTAB='/etc/crontab'
     CRONDIR='/etc/cron.d'
 
     # Single tab character. Annoyingly necessary.
-    tab=$(echo -en "\t")
+    tab=$($ECHO -en "\t")
 
     # Given a stream of crontab lines, exclude non-cron job lines, replace
     # whitespace characters with a single space, and remove any spaces from the
     # beginning of each line.
     function clean_cron_lines() {
         while read line ; do
-            $echoCmd "${line}" |
+            $ECHO "${line}" |
                 $egrepCmd --invert-match '^($|\s*#|\s*[[:alnum:]_]+=)' |
-                $sedCmd --regexp-extended "s/\s+/ /g" |
-                $sedCmd --regexp-extended "s/^ //"
+                $SED --regexp-extended "s/\s+/ /g" |
+                $SED --regexp-extended "s/^ //"
         done;
     }
 
@@ -499,17 +503,17 @@ scheduled_crons() {
     # directory as if it were scheduled explicitly.
     function lookup_run_parts() {
         while read line ; do
-            match=$($echoCmd "${line}" | $egrepCmd -o 'run-parts (-{1,2}\S+ )*\S+')
+            match=$($ECHO "${line}" | $egrepCmd -o 'run-parts (-{1,2}\S+ )*\S+')
 
             if [[ -z "${match}" ]] ; then
                 $echoCmd "${line}"
             else
-                cron_fields=$($echoCmd "${line}" | cut -f1-6 -d' ')
-                cron_job_dir=$($echoCmd  "${match}" | awk '{print $NF}')
+                cron_fields=$($ECHO "${line}" | $CUT -f1-6 -d' ')
+                cron_job_dir=$($ECHO  "${match}" | $AWK '{print $NF}')
 
                 if [[ -d "${cron_job_dir}" ]] ; then
                     for cron_job_file in "${cron_job_dir}"/* ; do  # */ <not a comment>
-                        [[ -f "${cron_job_file}" ]] && $echoCmd "${cron_fields} ${cron_job_file}"
+                        [[ -f "${cron_job_file}" ]] && $ECHO "${cron_fields} ${cron_job_file}"
                     done
                 fi
             fi
@@ -520,25 +524,25 @@ scheduled_crons() {
     temp=$(mktemp) || exit 1
 
     # Add all of the jobs from the system-wide crontab file.
-    $catCmd "${CRONTAB}" | clean_cron_lines | lookup_run_parts >"${temp}"
+    $CAT "${CRONTAB}" | clean_cron_lines | lookup_run_parts >"${temp}"
 
     # Add all of the jobs from the system-wide cron directory.
-    $catCmd "${CRONDIR}"/* | clean_cron_lines >>"${temp}"  # */ <not a comment>
+    $CAT "${CRONDIR}"/* | clean_cron_lines >>"${temp}"  # */ <not a comment>
 
     # Add each user's crontab (if it exists). Insert the user's name between the
     # five time fields and the command.
     while read user ; do
         $crontabCmd -l -u "${user}" 2>/dev/null |
             clean_cron_lines |
-            $sedCmd --regexp-extended "s/^((\S+ +){5})(.+)$/\1${user} \3/" >>"${temp}"
-    done < <(cut --fields=1 --delimiter=: /etc/passwd)
+            $SED --regexp-extended "s/^((\S+ +){5})(.+)$/\1${user} \3/" >>"${temp}"
+    done < <($CUT --fields=1 --delimiter=: /etc/passwd)
 
     # Output the collected crontab lines.
 
     ## Changes: Parses output into JSON
 
-    $catCmd "${temp}" \
-        | awk 'BEGIN {print "["} \
+    $CAT "${temp}" \
+        | $AWK 'BEGIN {print "["} \
                     {print "{ \"min\": \"" $1 \
                     "\", \"hrs\": \"" $2 "\", " \
                     " \"day\": \"" $3 "\", " \
@@ -550,7 +554,7 @@ scheduled_crons() {
                     {print "\" " \
                     "}," } \
                 END {print "]"}' \
-        | $sedCmd 'N;$s/,\n//;P;D' \
+        | $SED 'N;$s/,\n//;P;D' \
         | _parseAndPrint
 
     rm --force "${temp}"
@@ -558,45 +562,43 @@ scheduled_crons() {
 
 swap() {
 
-  catCmd=`which cat`;
-  wcCmd=`which wc`;
-  awkCmd=`which awk`
+  local wcCmd=$(which wc)
 
-  swapLineCount=$($catCmd /proc/swaps | $wcCmd -l)
+  local swapLineCount=$($CAT /proc/swaps | $wcCmd -l)
 
   if [ "$swapLineCount" -gt 1 ]; then
 
-    result=$($catCmd /proc/swaps \
-        | $awkCmd 'NR>1 {print "{ \"filename\": \"" $1"\", \"type\": \""$2"\", \"size\": \""$3"\", \"used\": \""$4"\", \"priority\": \""$5"\"}," }'
+    result=$($CAT /proc/swaps \
+        | $AWK 'NR>1 {print "{ \"filename\": \"" $1"\", \"type\": \""$2"\", \"size\": \""$3"\", \"used\": \""$4"\", \"priority\": \""$5"\"}," }'
       )
 
-    echo [ ${result%?} ] | _parseAndPrint
+    $ECHO [ ${result%?} ] | _parseAndPrint
 
   else
-    echo [] | _parseAndPrint
+    $ECHO [] | _parseAndPrint
   fi
 }
 
 upload_transfer_rate() {
 
-	files=(/sys/class/net/*)
-	pos=$(( ${#files[*]} - 1 ))
-	last=${files[$pos]}
+	local files=(/sys/class/net/*)
+	local pos=$(( ${#files[*]} - 1 ))
+	local last=${files[$pos]}
 
-	json_output="{"
+	local json_output="{"
 
 	for interface in "${files[@]}"
 	do
 		basename=$(basename "$interface")
 
 		# find the number of bytes transfered for this interface
-		out1=$(cat /sys/class/net/"$basename"/statistics/tx_bytes)
+		out1=$($CAT /sys/class/net/"$basename"/statistics/tx_bytes)
 
 		# wait a second
 		sleep 1
 
 		# check same interface again
-		out2=$(cat /sys/class/net/"$basename"/statistics/tx_bytes)
+		out2=$($CAT /sys/class/net/"$basename"/statistics/tx_bytes)
 
 		# get the difference (transfer rate)
 		out_bytes=$((out2 - out1))
@@ -616,24 +618,24 @@ upload_transfer_rate() {
 	done
 
 	# close the JSON object & print to screen
-	echo "$json_output}" | _parseAndPrint
+	$ECHO "$json_output}" | _parseAndPrint
 }
 
 user_accounts() {
 
-  result=$(/usr/bin/awk -F: '{ \
+  result=$($AWK -F: '{ \
           if ($3<=499){userType="system";} \
           else {userType="user";} \
           print "{ \"type\": \"" userType "\"" ", \"user\": \"" $1 "\", \"home\": \"" $6 "\" }," }' < /etc/passwd
       )
 
-  length=$(echo ${#result})
+  length=$($ECHO ${#result})
 
   if [ $length -eq 0 ]; then
-    result=$(getent passwd | /usr/bin/awk -F: '{ if ($3<=499){userType="system";} else {userType="user";} print "{ \"type\": \"" userType "\"" ", \"user\": \"" $1 "\", \"home\": \"" $6 "\" }," }')
+    result=$(getent passwd | $AWK -F: '{ if ($3<=499){userType="system";} else {userType="user";} print "{ \"type\": \"" userType "\"" ", \"user\": \"" $1 "\", \"home\": \"" $6 "\" }," }')
   fi
 
-  echo [ ${result%?} ] | _parseAndPrint
+  $ECHO [ ${result%?} ] | _parseAndPrint
 }
 
 fnCalled="$1"
