@@ -2,7 +2,7 @@ angular.module('linuxDash').directive('navBar', ['$location', function($location
   return {
     template: '\
       \
-      <span class="title">Linux Dash (Demo)</span>\
+      <span class="title">Linux Dash</span>\
       \
       <ul> \
         <li ng-class="{active: isActive(navItem) }" ng-repeat="navItem in items"> \
