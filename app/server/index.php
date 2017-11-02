@@ -5,4 +5,4 @@
 	$shell_file = dirname(__FILE__) . '/linux_json_api.sh';
 	$module = escapeshellcmd($_GET['module']);
 
-	echo shell_exec( $shell_file . " " . $module );
+	echo stripcslashes(shell_exec( $shell_file . " " . $module ));
