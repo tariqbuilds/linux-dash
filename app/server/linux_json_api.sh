@@ -640,10 +640,9 @@ user_accounts() {
 fnCalled="$1"
 
 # Check if the function call is indeed a function.
-if [ -n "$(type -t $fnCalled)" ] && [ "$(type -t $fnCalled)" = function ];
-then
+if [ -n "$(type -t $fnCalled)" ] && [ "$(type -t $fnCalled)" = function ]; then
     ${fnCalled}
 else
-    echo '{"success":false,"status":"Invalid module"}'
+    echo '{\"success\":false,\"status\":\"Invalid module\"}'
 fi
 
