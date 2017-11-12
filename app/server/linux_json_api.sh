@@ -622,7 +622,6 @@ upload_transfer_rate() {
 }
 
 user_accounts() {
-
   result=$($AWK -F: '{ \
           if ($3<=499){userType="system";} \
           else {userType="user";} \
@@ -640,4 +639,10 @@ user_accounts() {
 
 fnCalled="$1"
 
-${fnCalled}
+# Check if the function call is indeed a function.
+if [ -n "$(type -t $fnCalled)" ] && [ "$(type -t $fnCalled)" = function ]; then
+    ${fnCalled}
+else
+    echo '{\"success\":false,\"status\":\"Invalid module\"}'
+fi
+
