@@ -10,21 +10,13 @@
   text-align: center;
   border-radius: 2px;
   box-shadow: 0 1px 10px rgba(0,0,0,.13),0px 5px 10px rgba(0,0,0,.16);
-  margin-top: 10px;
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-left: 15px;
-  margin-bottom: 20px;
+  margin: 30px 15px 0 0;
   max-height: 400px;
   overflow: hidden;
 
   resize: both;
   padding-bottom: 15px;
   background-color: rgba(0,0,0,0.015);
-}
-
-.plugin-hidden {
-  width: 250px;
 }
 
 .plugin-hidden .top-bar .heading {
@@ -54,6 +46,9 @@
 }
 
 @media (max-width: 950px) {
+  .plugin {
+    margin: 15px 10px 0 0;
+  }
   .plugin-enlarged {
     width: 90%;
   }

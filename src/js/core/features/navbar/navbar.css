@@ -2,8 +2,9 @@ nav-bar {
   display: block;
   background-color: #f6f8f8;
   height: 40px;
-  padding-left: 25px;
+  padding-left: 10%;
   padding-top: 3px;
+  padding-right: 5%;
 }
 
 nav-bar ul {
