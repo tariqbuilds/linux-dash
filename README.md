@@ -74,6 +74,9 @@ npm install --production
 ## start linux-dash (on port 80 by default; may require sudo)
 ## You may change this with the `LINUX_DASH_SERVER_PORT` environment variable (eg. `LINUX_DASH_SERVER_PORT=8080 node server`)
 ## or provide a --port flag to the command below
+## Additionally, the server will listen on every network interface (`0.0.0.0`).
+## You may change this with the `LINUX_DASH_SERVER_HOST` environment variable (eg. `LINUX_DASH_SERVER_HOST=127.0.0.1 node server`)
+## or provide a --host flag to the command below
 node index.js
 
 ```
