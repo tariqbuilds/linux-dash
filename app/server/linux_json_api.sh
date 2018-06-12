@@ -100,7 +100,15 @@ cpu_temp() {
         #intel
         elif [[ "${returnString/"core"}" != "${returnString}" ]] ; then
           fromcore=${returnString##*"coretemp"}
-          $ECHO ${fromcore##*Physical}  | $CUT -d ' ' -f 3 | $CUT -c 2-5 | _parseAndPrint
+          if [[ ${fromcore##*Physical} != ${fromcore} ]]; then
+            $ECHO ${fromcore##*Physical}  | $CUT -d ' ' -f 3 | $CUT -c 2-5 | _parseAndPrint
+          else
+            while IFS='' read -r line ; do
+              if [[ "$line" == Core* ]]; then
+                $ECHO $line | $CUT -d ' ' -f 3 | $CUT -c 2-5
+              fi
+            done <<< "${fromcore}" | $AWK '{ sum += $1; n++ } END { if (n > 0) print sum / n; }' | _parseAndPrint
+          fi
         fi
       else
         $ECHO "[]" | _parseAndPrint
