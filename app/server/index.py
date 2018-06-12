@@ -7,22 +7,26 @@ import subprocess
 import argparse
 
 if sys.version_info[0] == 2:
-    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
+    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+    from BaseHTTPServer import test as _test
     from SocketServer import ThreadingMixIn
 else:
     from http.server import BaseHTTPRequestHandler, HTTPServer, test as _test
     from socketserver import ThreadingMixIn
 
 
-parser = argparse.ArgumentParser(description='Simple Threaded HTTP server to run linux-dash.')
+parser = argparse.ArgumentParser(description=('Simple Threaded HTTP server '
+                                              'to run linux-dash.'))
 parser.add_argument('--port', metavar='PORT', type=int, nargs='?', default=80,
                     help='Port to run the server on.')
 
 modulesSubPath = '/server/linux_json_api.sh'
 appRootPath = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
+
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
     pass
+
 
 class MainHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -33,8 +37,8 @@ class MainHandler(BaseHTTPRequestHandler):
                 module = self.path.split('=')[1]
                 output = subprocess.Popen(
                     appRootPath + modulesSubPath + " " + module,
-                    shell = True,
-                    stdout = subprocess.PIPE)
+                    shell=True,
+                    stdout=subprocess.PIPE)
                 data = output.communicate()[0]
             else:
                 if self.path == '/':
@@ -51,6 +55,7 @@ class MainHandler(BaseHTTPRequestHandler):
 
         except IOError:
             self.send_error(404, 'File Not Found: %s' % self.path)
+
 
 if __name__ == '__main__':
     args = parser.parse_args()
