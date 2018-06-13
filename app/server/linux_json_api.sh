@@ -92,7 +92,7 @@ cpu_temp() {
       echo "$((cpu/1000))" | _parseAndPrint
     ;;
     *)
-      if type -P sensors 2>/dev/null; then
+      if type -P sensors 1>/dev/null 2>/dev/null; then
         returnString=`sensors`
         #amd
         if [[ "${returnString/"k10"}" != "${returnString}" ]] ; then
