@@ -31,6 +31,7 @@ class MainHandler(BaseHTTPRequestHandler):
                     shell = True,
                     stdout = subprocess.PIPE)
                 data = output.communicate()[0]
+                data = re.sub(r"[(\\)( )]","",data)
             else:
                 if self.path == '/':
                     self.path = 'index.html'
