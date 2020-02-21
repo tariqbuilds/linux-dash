@@ -74,6 +74,17 @@ function routesFn($routeProvider) {
         '<pm2 sortablejs-id="pm2"></pm2>',
       ].join(''),
     })
+
+
+    .when('/gpu', {
+      template: [
+        '<gpu-info sortablejs-id="gpu-info"></gpu-info>',
+        '<gpu-temp sortablejs-id="cpu-temp"></gpu-temp> ',
+        '<gpu-ram-chart sortablejs-id="gpu-ram-chart"></gpu-ram-chart> ',
+        '<gpu-fan-speed-chart sortablejs-id="gpu-fan-speed-chart"></gpu-fan-speed-chart> ',
+      ].join(''),
+    })
+
     .otherwise({
       redirectTo: '/loading'
     })

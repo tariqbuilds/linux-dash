@@ -90,6 +90,10 @@ var simpleTableModules = [
   {
     name: 'cronHistory',
     template: '<table-data heading="Cron Job History" module-name="cron_history" info="Crons which have run recently."></table-data>'
+  },
+  {
+    name: 'gpuInfo',
+    template: '<key-value-list heading="GPU Info" module-name="gpu_info" info="/usr/bin/nvidia-smi read-out."></key-value-list>'
   }
 ]
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#set -x
 ECHO=$(type -P echo)
 SED=$(type -P sed)
 GREP=$(type -P grep)
@@ -10,6 +10,7 @@ HEAD=$(type -P head)
 CUT=$(type -P cut)
 PS=$(type -P ps)
 TAIL=$(type -P tail)
+NVSMI=$(type -P nvidia-smi)
 
 _parseAndPrint() {
   while read data; do
@@ -101,7 +102,7 @@ cpu_temp() {
         #intel
         elif [[ "${returnString/"core"}" != "${returnString}" ]] ; then
           fromcore=${returnString##*"coretemp"}
-          $ECHO ${fromcore##*Physical}  | $CUT -d ' ' -f 3 | $CUT -c 2-5 | _parseAndPrint
+          $ECHO ${fromcore##*Physical}  | $CUT -d ' ' -f 3 #| $CUT -c 2-5 #| _parseAndPrint
         fi
       else
         $ECHO "[]" | _parseAndPrint
@@ -658,6 +659,50 @@ user_accounts() {
 
   $ECHO [ ${result%?} ] | _parseAndPrint
 }
+
+
+
+# For list of available properties
+# nvidia-smi --help-query-gpu
+gpu_temp() {
+  result=$($NVSMI --query-gpu=temperature.gpu --format=csv \
+          | $TAIL -n 1 \
+          )
+  $ECHO $result | _parseAndPrint
+}
+
+gpu_current_mem() {
+  result=$($NVSMI --query-gpu=memory.total,memory.used,memory.free --format=csv \
+          | $TAIL -n 1 \
+          | $AWK '{print "{ \"total\": " ($1) ", \"used\": " ($3) ", \"available\": " ($5) " }"  }' \
+          )
+  $ECHO $result | _parseAndPrint
+}
+
+gpu_info () {  
+  result=$($NVSMI --query-gpu=gpu_name,driver_version,vbios_version,gpu_uuid,gpu_serial,gpu_bus_id,pci.device,pcie.link.gen.current,memory.total --format=csv \
+          | $TAIL -n 1 \
+          | $AWK -F ','  'BEGIN{OFS=","} {print "{ \"GPU Model\": \"" $1 "\"" \
+                                              ", \"Driver Version\": \"" $2 "\"" \
+                                              ", \"Bios Version\": \"" $3 "\"" \
+                                              ", \"UUID\": \"" $4 "\"" \
+                                              ", \"Serial\": \"" $5 "\"" \
+                                              ", \"Bus Id\": \"" $6 "\"" \
+                                              ", \"PCI Link Gen\": \"" $7 "\"" \
+                                              ", \"PCI Device\": \"" $8 "\"" \
+                                              ", \"Total Memory\": \"" $9 "\"" " }"\
+        }')
+  $ECHO $result | _parseAndPrint
+}
+
+gpu_fan_speed() {
+  result=$($NVSMI --query-gpu=fan.speed --format=csv \
+          | tail -n 1 \
+          | cut -d' ' -f1 \
+          )
+  $ECHO $result | _parseAndPrint
+}
+
 
 fnCalled="$1"
 
