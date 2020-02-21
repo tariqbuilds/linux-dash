@@ -9,10 +9,11 @@ CAT=$(type -P cat)
 HEAD=$(type -P head)
 CUT=$(type -P cut)
 PS=$(type -P ps)
+TAIL=$(type -P tail)
 
 _parseAndPrint() {
   while read data; do
-    $ECHO -n "$data" | $SED -r "s/\"/\\\\\"/g" | $TR -d "\n";
+    $ECHO -n "$data" | $SED -r 's/\\//g' | $TR -d "\n";  
   done;
 }
 
@@ -107,6 +108,18 @@ cpu_temp() {
       fi
     ;;
   esac
+}
+
+# Explore sensors -u -j flags for easy output processs
+cpu_multi_temp () {
+  result=$(sensors | grep 'Core' \
+      | $SED 's/  */ /g' \
+      | $CUT -d' ' -f1-3 \
+      | $TR -d '+'  \
+      | $SED "s/°C//g" \
+      | $AWK -F: '{print "\""$1"\": \""$2"\"," }  ' \
+      )
+  $ECHO "{" ${result%?} "}" | _parseAndPrint
 }
 
 # by Paul Colby (http://colby.id.au), no rights reserved ;)
