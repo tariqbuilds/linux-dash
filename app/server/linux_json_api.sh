@@ -363,7 +363,7 @@ number_of_cpu_cores() {
   local numberOfCPUCores=$($GREP -c 'model name' /proc/cpuinfo)
 
   if [ -z $numberOfCPUCores ]; then
-    echo "cannnot be found";
+    echo "cannot be found";
   fi
 }
 
