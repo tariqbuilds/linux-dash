@@ -21,8 +21,8 @@ _parseAndPrint() {
 }
 
 rt_iostat() {
-    num=$($CAT /proc/diskstats  | $GREP -E "vd|sd|dm|hd" | $WC -l)
-    data=$($IOSTAT  -dxm 1 2 | $GREP -E "sd|dm|hd|vd" | $TAIL -n ${num} | $AWK '{printf $0"\n"}')
+    num=$($CAT /proc/diskstats  | $GREP -E "vd. |sd. |dm|hd. " | $WC -l)
+    data=$($IOSTAT  -dxm 1 2 | $GREP -E "sd. |dm|hd. |vd. " | $TAIL -n ${num} | $AWK '{printf $0"\n"}')
     IFSOLD=$IFS
     IFS=$'\n'
 
@@ -32,18 +32,11 @@ rt_iostat() {
         $ECHO $line | $AWK '{print \
     "{ \
 \"Device\": \""$1"\", \
-\"rrqms\": "$2", \
-\"wrqms\": "$3", \
-\"rs\": "$4", \
-\"ws\": "$5", \
-\"rMBs\": "$6", \
-\"wMBs\": "$7", \
-\"avgrq-sz\": "$8", \
-\"avgqu-sz\": "$9", \
+\"r/s\": "$4", \
+\"w/s\": "$5", \
+\"rMB/s\": "$6", \
+\"wMB/s\": "$7", \
 \"await\": "$10", \
-\"r_await\": "$11", \
-\"w_await\": "$12", \
-\"svctm\": "$13", \
 \"util\": "$14" \
  },"}'
     done
