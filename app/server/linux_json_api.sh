@@ -9,11 +9,49 @@ CAT=$(type -P cat)
 HEAD=$(type -P head)
 CUT=$(type -P cut)
 PS=$(type -P ps)
+IOSTAT=$(type -p iostat)
+WC=$(type -p wc)
+TAIL=$(type -p tail)
 
 _parseAndPrint() {
   while read data; do
-    $ECHO -n "$data" | $SED -r "s/\"/\\\\\"/g" | $TR -d "\n";
+    #$ECHO -n "$data" | $SED -r "s/\"/\\\\\"/g" | $TR -d "\n";
+    $ECHO -n "$data" | $SED -r 's/\\//g' | $TR -d "\n";
   done;
+}
+
+rt_iostat() {
+    num=$($CAT /proc/diskstats  | $GREP -E "vd|sd|dm|hd" | $WC -l)
+    data=$($IOSTAT  -dxm 1 2 | $GREP -E "sd|dm|hd|vd" | $TAIL -n ${num} | $AWK '{printf $0"\n"}')
+    IFSOLD=$IFS
+    IFS=$'\n'
+
+    result=$(
+    for  line in ${data}
+    do
+        $ECHO $line | $AWK '{print \
+    "{ \
+\"Device\": \""$1"\", \
+\"rrqms\": "$2", \
+\"wrqms\": "$3", \
+\"rs\": "$4", \
+\"ws\": "$5", \
+\"rMBs\": "$6", \
+\"wMBs\": "$7", \
+\"avgrq-sz\": "$8", \
+\"avgqu-sz\": "$9", \
+\"await\": "$10", \
+\"r_await\": "$11", \
+\"w_await\": "$12", \
+\"svctm\": "$13", \
+\"util\": "$14" \
+ },"}'
+    done
+)
+
+IFS=$IFSOLD
+
+$ECHO -e  "[\n""${result}""\n]" | $SED 'N;$s/,\n/\n/;P;D' |  _parseAndPrint
 }
 
 arp_cache() {
