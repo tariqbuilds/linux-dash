@@ -90,7 +90,12 @@ var simpleTableModules = [
   {
     name: 'cronHistory',
     template: '<table-data heading="Cron Job History" module-name="cron_history" info="Crons which have run recently."></table-data>'
-  }
+  },
+  {
+    name: 'rtIostat',
+    template: '<table-data heading="Disk realTime iostat" module-name="rt_iostat" info="real time iostat value."></table-data>'
+  },
+
 ]
 
 simpleTableModules.forEach(function(module, key) {

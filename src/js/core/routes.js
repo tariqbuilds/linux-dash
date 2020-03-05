@@ -32,6 +32,7 @@ function routesFn($routeProvider) {
         '<disk-space sortablejs-id="disk-space"></disk-space> ',
         '<swap-usage sortablejs-id="swap-usage"></swap-usage> ',
         '<docker-processes sortablejs-id="docker"></docker-processes> ',
+        '<rt-iostat sortablejs-id="rt-iostat"></rt-iostat> ',
       ].join(''),
     })
 
