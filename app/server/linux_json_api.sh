@@ -15,7 +15,6 @@ TAIL=$(type -p tail)
 
 _parseAndPrint() {
   while read data; do
-    #$ECHO -n "$data" | $SED -r "s/\"/\\\\\"/g" | $TR -d "\n";
     $ECHO -n "$data" | $SED -r 's/\\//g' | $TR -d "\n";
   done;
 }
@@ -394,7 +393,7 @@ number_of_cpu_cores() {
   local numberOfCPUCores=$($GREP -c 'model name' /proc/cpuinfo)
 
   if [ -z $numberOfCPUCores ]; then
-    echo "cannnot be found";
+    echo "cannot be found";
   fi
 }
 
