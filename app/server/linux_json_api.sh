@@ -9,11 +9,41 @@ CAT=$(type -P cat)
 HEAD=$(type -P head)
 CUT=$(type -P cut)
 PS=$(type -P ps)
+IOSTAT=$(type -p iostat)
+WC=$(type -p wc)
+TAIL=$(type -p tail)
 
 _parseAndPrint() {
   while read data; do
     $ECHO -n "$data" | $SED -r 's/\\//g' | $TR -d "\n";
   done;
+}
+
+rt_iostat() {
+    num=$($CAT /proc/diskstats  | $GREP -E "vd. |sd. |dm|hd. " | $WC -l)
+    data=$($IOSTAT  -dxm 1 2 | $GREP -E "sd. |dm|hd. |vd. " | $TAIL -n ${num} | $AWK '{printf $0"\n"}')
+    IFSOLD=$IFS
+    IFS=$'\n'
+
+    result=$(
+    for  line in ${data}
+    do
+        $ECHO $line | $AWK '{print \
+    "{ \
+\"Device\": \""$1"\", \
+\"r/s\": "$4", \
+\"w/s\": "$5", \
+\"rMB/s\": "$6", \
+\"wMB/s\": "$7", \
+\"await\": "$10", \
+\"%util\": "$14" \
+ },"}'
+    done
+)
+
+IFS=$IFSOLD
+
+$ECHO -e  "[\n""${result}""\n]" | $SED 'N;$s/,\n/\n/;P;D' |  _parseAndPrint
 }
 
 arp_cache() {

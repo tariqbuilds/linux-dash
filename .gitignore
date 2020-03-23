@@ -2,3 +2,4 @@ node_modules
 *.log
 */linuxDash.min.js.map
 temp
+package-lock.json
