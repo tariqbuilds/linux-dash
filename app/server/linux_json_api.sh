@@ -39,8 +39,8 @@ bandwidth() {
 
   $CAT /proc/net/dev \
   | $AWK 'BEGIN {print "["} NR>2 {print "{ \"interface\": \"" $1 "\"," \
-            " \"tx\": " $2 "," \
-            " \"rx\": " $10 " }," } END {print "]"}' \
+            " \"rx\": " $2 "," \
+            " \"tx\": " $10 " }," } END {print "]"}' \
   | $SED 'N;$s/,\n/\n/;P;D' \
   | _parseAndPrint
 }
