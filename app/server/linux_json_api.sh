@@ -337,13 +337,9 @@ memcached() {
 
 memory_info() {
 
-#live version of linux dash puts a ',' at the end of json so it won't load correctly.
-#this workaround puts another value after the last ','
-#tested this updated code and it now works correctly running python
-
   $CAT /proc/meminfo \
-    | $AWK -F: 'BEGIN {print "{"} {print "\"" $1 "\": \"" $2 "\"," } END {print "\""$1"\":\"" $2 "\"}" }' \
-    | $SED 'N;$s/\n/\n/;P;D' \
+    | $AWK -F: 'BEGIN {print "{"} {print "\"" $1 "\": \"" $2 "\"," } END {print "}"}' \
+    | $SED 'N;$s/,\n/\n/;P;D' \
     | _parseAndPrint
 }
 

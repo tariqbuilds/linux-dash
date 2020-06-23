@@ -29,13 +29,6 @@
 
 <br/>
 
-
-## Dark mode support
-
-This fork adds a toggle to the navbar so you can switch to dark mode or light mode.
-
-It's still in an early stage and needs some cleaning.
-
 ## Features
 * **Small** ----- Under 400KB on disk _(with .git removed)!_
 * **Simple** ---- A minimalist, beautiful dashboard
