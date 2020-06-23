@@ -28,7 +28,7 @@
 </p>
 
 <br/>
-## Dark mode support
+### Dark mode support
 
 
 This fork adds a toggle to the navbar so you can switch to dark mode or light mode.
