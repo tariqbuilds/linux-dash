@@ -19,7 +19,9 @@ angular.module('linuxDash').directive('keyValueList', ['server', '$rootScope', f
             scope.emptyResult = true
           }
 
-          if (!scope.$$phase && !$rootScope.$$phase) scope.$digest()
+          if (!scope.$$phase && !$rootScope.$$phase) {
+            scope.$digest();
+          }
         })
       }
 

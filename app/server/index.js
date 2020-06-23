@@ -69,8 +69,11 @@ wsServer.on('request', function(request) {
 app.get('/server/', function (req, res) {
 
 	var respondWithData = function(code, output) {
-		if (code === 0) res.send(output.toString())
-		else res.sendStatus(500)
+		if (code === 0) {
+          res.send(output.toString());
+        } else {
+          res.sendStatus(500);
+        }
 	}
 
   getPluginData(req.query.module, respondWithData)

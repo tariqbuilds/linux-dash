@@ -16,8 +16,9 @@ angular
     $rootScope.$on('hide-plugin', function (e, m) {
       var hiddenPlugins = getHiddenPlugins()
 
-      if(hiddenPlugins.indexOf(m) < 0)
-        hiddenPlugins.push(m)
+      if (hiddenPlugins.indexOf(m) < 0) {
+        hiddenPlugins.push(m);
+      }
 
       updateHiddenPlugins(hiddenPlugins)
     })
@@ -26,8 +27,9 @@ angular
       var hiddenPlugins = getHiddenPlugins()
       var indexOfPlugin = hiddenPlugins.indexOf(m)
 
-      if(indexOfPlugin > -1)
-        hiddenPlugins.splice(indexOfPlugin, 1)
+      if (indexOfPlugin > -1) {
+        hiddenPlugins.splice(indexOfPlugin, 1);
+      }
 
       updateHiddenPlugins(hiddenPlugins)
     })

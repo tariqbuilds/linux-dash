@@ -20,8 +20,9 @@ angular.module('linuxDash').directive('lineChartPlugin', [
         // wrap the entire plugin into an initializing function
         var start_rendering_line_chart = function () {
 
-          if (!scope.color)
-            scope.color = '0, 255, 0'
+          if (!scope.color) {
+            scope.color = '0, 255, 0';
+          }
 
           var series, w, h, canvas
 
@@ -46,8 +47,8 @@ angular.module('linuxDash').directive('lineChartPlugin', [
               precision: 0,
               fillStyle: '#0f0e0e'
             },
-            maxValue: parseInt(scope.maxValue),
-            minValue: parseInt(scope.minValue),
+            maxValue: parseInt(scope.maxValue, 10),
+            minValue: parseInt(scope.minValue, 10),
             horizontalLines: [{
               value: 5,
               color: '#eff',
@@ -64,8 +65,9 @@ angular.module('linuxDash').directive('lineChartPlugin', [
                 w       = canvas.width
                 h       = canvas.height
 
-                if (chart.seriesSet.length > 0)
-                  chart.removeTimeSeries(chart.seriesSet[0].timeSeries)
+                if (chart.seriesSet.length > 0) {
+                  chart.removeTimeSeries(chart.seriesSet[0].timeSeries);
+                }
 
                 chart.addTimeSeries(series, {
                   strokeStyle: 'rgba(' + scope.color + ', 1)',
@@ -83,18 +85,22 @@ angular.module('linuxDash').directive('lineChartPlugin', [
             initializeChart()
           }
 
-          if (!scope.isHidden)
-            initializeChart()
+          if (!scope.isHidden) {
+            initializeChart();
+          }
 
           var dataCallInProgress = false
 
           // update data on chart
           scope.getData = function() {
 
-            if(scope.initializing)
-              scope.initializing = false
+            if (scope.initializing) {
+              scope.initializing = false;
+            }
 
-            if (dataCallInProgress || !element.find('canvas')[0]) return
+            if (dataCallInProgress || !element.find('canvas')[0]) {
+              return;
+            }
 
             dataCallInProgress = true
 

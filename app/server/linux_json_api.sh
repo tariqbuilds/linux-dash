@@ -654,4 +654,3 @@ if [ -n "$(type -t $fnCalled)" ] && [ "$(type -t $fnCalled)" = function ]; then
 else
     echo '{\"success\":false,\"status\":\"Invalid module\"}'
 fi
-

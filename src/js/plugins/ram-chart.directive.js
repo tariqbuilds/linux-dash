@@ -51,7 +51,7 @@ angular.module('linuxDash').directive('ramChart', ['server', function (server) {
         name: 'Used',
         generate: function(serverResponseData) {
           var ratio = serverResponseData.used / serverResponseData.total
-          var percentage = parseInt(ratio * 100)
+          var percentage = parseInt(ratio * 100, 10)
 
           var usedRam = humanizeRam(serverResponseData.used)
           return usedRam + ' (' + percentage.toString() + '%)'

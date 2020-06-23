@@ -1,0 +1,25 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.1.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+
+-   repo: https://github.com/psf/black
+    rev: 19.10b0
+    hooks:
+    -   id: black
+
+-   repo: https://github.com/pre-commit/mirrors-fixmyjs
+    rev: v2.0.0  # Use the sha / tag you want to point at
+    hooks:
+    -   id: fixmyjs
+        args: ['-l', '-c', '.jshintrc']
+
+-   repo: https://github.com/awebdeveloper/pre-commit-prettier
+    rev: v0.0.1  # Use the sha or tag you want to point at
+    hooks:
+    -   id: prettier
+        args: [] #list of args like '--single-quote', '--jsx-bracket-same-line', '--print-width 120', '--no-bracket-spacing'
+        additional_dependencies: ['prettier@1.1.0']

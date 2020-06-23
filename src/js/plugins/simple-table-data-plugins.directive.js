@@ -102,7 +102,7 @@ simpleTableModules.forEach(function(module, key) {
       scope: {}
     }
 
-    moduleDirective['template'] = module.template
+    moduleDirective.template = module.template
 
     return moduleDirective
   }])

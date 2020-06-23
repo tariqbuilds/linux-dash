@@ -15,4 +15,3 @@ All plugins rendered on a page are inside of this element.
 Base table element styling.
 
 Also contains styling for the `metrics-table` class, which is used to display the tabular data underneath the line and multiline charts.
-

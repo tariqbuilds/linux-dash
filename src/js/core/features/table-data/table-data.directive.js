@@ -69,7 +69,9 @@ angular.module('linuxDash').directive('tableData', ['server', '$rootScope', func
             scope.emptyResult = true
           }
 
-          if (!scope.$$phase && !$rootScope.$$phase) scope.$digest()
+          if (!scope.$$phase && !$rootScope.$$phase) {
+            scope.$digest();
+          }
         })
       }
 

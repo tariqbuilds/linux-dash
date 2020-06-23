@@ -69,8 +69,9 @@ angular.module('linuxDash').directive('multiLineChartPlugin', [
 
         var delay = 1000
 
-        if (angular.isDefined(scope.delay))
-          delay = scope.delay
+        if (angular.isDefined(scope.delay)) {
+          delay = scope.delay;
+        }
 
         var initializeChart = function () {
           // smoothieJS - set up canvas element for chart
@@ -85,7 +86,7 @@ angular.module('linuxDash').directive('multiLineChartPlugin', [
 
                 var numberOfLines = Object.keys(serverResponseData).length
 
-                for (var x = 0; x < numberOfLines; x++) {
+                for (var x = 0; x < numberOfLines; x += 1) {
 
                   var keyForThisLine = Object.keys(serverResponseData)[x];
 
@@ -113,17 +114,22 @@ angular.module('linuxDash').directive('multiLineChartPlugin', [
           initializeChart()
         }
 
-        if (!scope.isHidden)
-          initializeChart()
+        if (!scope.isHidden) {
+          initializeChart();
+        }
 
         var dataCallInProgress = false
 
         // update data on chart
         scope.getData = function() {
 
-          if (dataCallInProgress) return
+          if (dataCallInProgress) {
+            return;
+          }
 
-          if (!scope.seriesArray.length) return
+          if (!scope.seriesArray.length) {
+            return;
+          }
 
           dataCallInProgress = true
 
@@ -137,7 +143,7 @@ angular.module('linuxDash').directive('multiLineChartPlugin', [
             // update chart with current response
             for (var key in serverResponseData) {
               scope.seriesArray[keyCount].append(scope.lastGet, serverResponseData[key])
-              keyCount++
+              keyCount += 1
               maxAvg = Math.max(maxAvg, serverResponseData[key])
             }
 
@@ -147,7 +153,7 @@ angular.module('linuxDash').directive('multiLineChartPlugin', [
             })
 
             // round up the average and set the maximum scale
-            var len = parseInt(Math.log(maxAvg) / Math.log(10))
+            var len = parseInt(Math.log(maxAvg) / Math.log(10), 10)
             var div = Math.pow(10, len)
             chart.options.maxValue = Math.ceil(maxAvg / div) * div
 

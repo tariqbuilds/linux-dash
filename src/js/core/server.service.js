@@ -74,7 +74,7 @@ angular
 
             // if websocket_support property exists and is trurthy
             // websocketSupport.server will equal true.
-            websocketSupport.server = !!response.data["websocket_support"];
+            websocketSupport.server = !!response.data.websocket_support;
 
           }).catch(function websocketNotSupportedByServer() {
 
