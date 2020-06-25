@@ -6,8 +6,11 @@
 e
 <p align="center">
 <small>Dark mode version with toggle/small>
-  <sub>v2.0</sub><br/>z
-  <small>A simple & low-overhead web dashboard for linux systems</small>
+<sub>This is still under development so bugs might pop up.</sub><br/>
+
+<sub>v2.0</sub><br/> <small>A simple & low-overhead web dashboard for linux
+systems</small>
+
 </p>
 
 <p align="center">
