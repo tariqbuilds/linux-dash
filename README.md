@@ -3,9 +3,9 @@
     <img src="https://raw.githubusercontent.com/afaqurk/screenshots/master/linux-dash/v2.0-logo.png"/>
   </a>
 </h1>
-
+e
 <p align="center">
-  <sub>v2.0</sub><br/>
+  <sub>v2.0</sub><br/>z
   <small>A simple & low-overhead web dashboard for linux systems</small>
 </p>
 
