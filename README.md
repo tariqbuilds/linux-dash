@@ -8,6 +8,7 @@
 <small>Dark mode version with toggle</small><br/> 
 <small>This is still under development so bugs might pop up.</small><br/>
 </p>
+<p align="center">
 <sub>v2.0</sub><br/> <small>A simple & low-overhead web dashboard for linux
 systems</small>
 </p>
