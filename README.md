@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-<small>Dark mode version with toggle</small>
+<small>Dark mode version with toggle</small><br/> 
 <sub>This is still under development so bugs might pop up.</sub><br/>
 
 <sub>v2.0</sub><br/> <small>A simple & low-overhead web dashboard for linux
