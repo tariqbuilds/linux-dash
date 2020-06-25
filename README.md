@@ -6,11 +6,11 @@
 
 <p align="center">
 <small>Dark mode version with toggle</small><br/> 
-<sub>This is still under development so bugs might pop up.</sub><br/>
-
+<small>This is still under development so bugs might pop up.</small><br/>
+</p>
 <sub>v2.0</sub><br/> <small>A simple & low-overhead web dashboard for linux
 systems</small>
-
+</p>
 </p>
 
 <p align="center">
