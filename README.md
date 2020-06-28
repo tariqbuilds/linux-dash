@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://afaqurk.github.io/linux-dash">
-    <img src="https://athe.moe/images/v2.0-logo-dark.png"/>
+    <img src="https://athe.moe/rsc/img/v2.0-logo-dark.png"/>
   </a>
 </h1>
 
