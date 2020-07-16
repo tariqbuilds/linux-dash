@@ -185,22 +185,23 @@ disk_partitions() {
 }
 
 docker_processes() {
-
   local result=""
   local dockerCommand=$(type -P docker)
   local containers="$($dockerCommand ps | $AWK '{if(NR>1) print $NF}')"
 
-  for i in $containers; do
-  result="$result $($dockerCommand top $i axo pid,user,pcpu,pmem,comm --sort -pcpu,-pmem \
-        | $HEAD -n 15 \
-        | $AWK -v cnt="$i" 'BEGIN{OFS=":"} NR>1 {print "{ \"cname\": \"" cnt \
-                "\", \"pid\": " $1 \
-                ", \"user\": \"" $2 "\"" \
-                ", \"cpu%\": " $3 \
-                ", \"mem%\": " $4 \
-                ", \"cmd\": \"" $5 "\"" "},"\
-              }')"
-  done
+  if [ -x "$(command -v docker)" ]; then
+    for i in $containers; do
+    result="$result $($dockerCommand top $i axo pid,user,pcpu,pmem,comm --sort -pcpu,-pmem \
+          | $HEAD -n 15 \
+          | $AWK -v cnt="$i" 'BEGIN{OFS=":"} NR>1 {print "{ \"cname\": \"" cnt \
+                  "\", \"pid\": " $1 \
+                  ", \"user\": \"" $2 "\"" \
+                  ", \"cpu%\": " $3 \
+                  ", \"mem%\": " $4 \
+                  ", \"cmd\": \"" $5 "\"" "},"\
+                }')"
+    done
+  fi
 
   $ECHO "[" ${result%?} "]" | _parseAndPrint
 }
@@ -654,4 +655,3 @@ if [ -n "$(type -t $fnCalled)" ] && [ "$(type -t $fnCalled)" = function ]; then
 else
     echo '{\"success\":false,\"status\":\"Invalid module\"}'
 fi
-
