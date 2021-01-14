@@ -3,9 +3,13 @@
 from __future__ import print_function
 import os
 import sys
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
+if sys.version_info[0] < 3:
+    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
+    from SocketServer import ThreadingMixIn
+else:
+    from http.server import BaseHTTPRequestHandler, HTTPServer, test as _test
+    from socketserver import ThreadingMixIn
 import subprocess
-from SocketServer import ThreadingMixIn
 import argparse
 
 
