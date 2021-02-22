@@ -1,7 +1,7 @@
 var simpleTableModules = [
   {
     name: 'machineInfo',
-    template: '<key-value-list heading="General Info." module-name="general_info" info="System Information"></key-value-list>'
+    template: '<key-value-list heading="General Info" module-name="general_info" info="System Information"></key-value-list>'
   },
   {
     name: 'ipAddresses',
