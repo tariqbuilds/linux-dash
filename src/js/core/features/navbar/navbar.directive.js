@@ -2,19 +2,13 @@ angular.module('linuxDash').directive('navBar', ['$location', function($location
   return {
     template: '\
       \
-      <span class="title">Linux Dash</span>\
+      <span class="title">Linux Dashboard</span>\
       \
       <ul> \
         <li ng-class="{active: isActive(navItem) }" ng-repeat="navItem in items"> \
           <a href="#/{{navItem}}" ng-bind="getNavItemName(navItem)"></a> \
         </li> \
       </ul> \
-      <span class="right-content">\
-        Resources:\
-        <a target="_blank" href="https://github.com/afaqurk/linux-dash">GitHub</a> | \
-        <a target="_blank" href="https://gitter.im/afaqurk/linux-dash">Gitter Chat Room</a> | \
-        <a target="_blank" href="https://github.com/afaqurk/linux-dash/wiki">Docs</a> \
-      </span>\
     ',
     link: function(scope) {
       scope.items = [

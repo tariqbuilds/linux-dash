@@ -10,13 +10,11 @@ HEAD=$(type -P head)
 CUT=$(type -P cut)
 PS=$(type -P ps)
 
-_parseAndPrint() {
-  while read data; do
-#  $ECHO -n "$data" | $SED -r "s/\"/\\\\\"/g" | $TR -d "\n"; 
-$ECHO -n "$data" | $SED -r 's/\\//g' | $TR -d "\n";
-#echo $data
-  done;
-}
+ _parseAndPrint() {
+   while read data; do
+   $ECHO -n "$data" | $SED -r "s/\"/\\\\\"/g" | $TR -d "\n";
+   done;
+ }
 
 arp_cache() {
   local arpCommand=$(type -P arp)
