@@ -3,11 +3,14 @@
 from __future__ import print_function
 import os
 import sys
-from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
 import subprocess
-from SocketServer import ThreadingMixIn
 import argparse
-
+if sys.version_info[0] < 3:
+    from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer, test as _test
+    from SocketServer import ThreadingMixIn
+else:
+    from http.server import BaseHTTPRequestHandler, HTTPServer, test as _test
+    from socketserver import ThreadingMixIn
 
 parser = argparse.ArgumentParser(description='Simple Threaded HTTP server to run linux-dash.')
 parser.add_argument('--port', metavar='PORT', type=int, nargs='?', default=80,
@@ -34,8 +37,10 @@ class MainHandler(BaseHTTPRequestHandler):
             else:
                 if self.path == '/':
                     self.path = 'index.html'
-                f = open(appRootPath + os.sep + self.path)
-                data = f.read()
+                with open(appRootPath + os.sep + self.path, 'rb') as f:
+                    data = f.read()
+                    if self.path.startswith('/linuxDash.min.css'):
+                        contentType = 'text/css'
                 if self.path.startswith('/linuxDash.min.css'):
                     contentType = 'text/css'
                 f.close()
