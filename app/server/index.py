@@ -41,6 +41,8 @@ class MainHandler(BaseHTTPRequestHandler):
                 f.close()
             self.send_response(200)
             self.send_header('Content-type', contentType)
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Access-Control-Allow-Methods', 'GET')
             self.end_headers()
             self.wfile.write(data)
 
